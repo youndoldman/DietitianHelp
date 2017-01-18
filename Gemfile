@@ -6,7 +6,7 @@ gem 'devise'
 gem 'rails', '= 5.0.0'
 # Use sqlite3 as the database for Active Record
 # Use Puma as the app server
-gem 'puma'
+gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -38,7 +38,7 @@ group :development, :test do
 end
  group :production do
  gem 'rails_12factor'
- gem 'puma'
+ gem 'puma', '~> 3.0'
  end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
