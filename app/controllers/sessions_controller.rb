@@ -1,4 +1,4 @@
-module Devise 
+module Users 
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
 
