@@ -1,0 +1,1 @@
+(function(){$("form#sign_up_user").bind("ajax:success",function(t,e){return e.success?($("#sign_up").modal("hide"),$("#sign_up_button").hide(),$("#submit_comment").slideToggle(1e3,"easeOutBack")):alert("failure!")})}).call(this);
