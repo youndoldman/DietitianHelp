@@ -1,4 +1,5 @@
-class Devise::SessionsController < Devise::SessionsController
+module Devise 
+class Users::SessionsController < Devise::SessionsController
   respond_to :json
 
 prepend_before_action :require_no_authentication, only: [:new, :create]
@@ -34,4 +35,5 @@ prepend_before_action :require_no_authentication, only: [:new, :create]
   def configure_sign_in_params
    devise_parameter_sanitizer.permit(:sign_in, keys: [:username])
   end
+end
 end
