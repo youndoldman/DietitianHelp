@@ -1,0 +1,2 @@
+class Ajaxget < ApplicationRecord
+end

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="msapplication-tap-highlight" content="no" />
+
+
+  <title>DIETITIAN.HELP | Login</title>
+
+ <%= stylesheet_link_tag 'bootstrap.min' %>
+ <%= stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons' %>
+ <%= stylesheet_link_tag 'waves.min' %>
+ <%= stylesheet_link_tag 'style' %>
+ <%= favicon_link_tag 'favicon.ico' %>
+
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+  <!--[if lt IE 9]>
+      <script src="html5shiv.min.js"></script>
+      <script src="respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+  <div class="table-wrapper">
+    <div class="table-row">
+      <div class="table-cell text-center">
+        <div class="login i-block">
+          <div class="content-box">
+            <div class="light-blue-bg biggest-box">
+
+              <h1 class="zero-m text-uppercase">Welcome</h1>
+
+            </div>
+
+            <div class="big-box text-left login-form">
+              <div class="form-group"><h2>Sign up</h2>
+
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:id => "sign_up_user"},
+           :format => :json,
+           :remote => true ) do |f| %>
+                <%= devise_error_messages! %>
+               <p> </br> 
+                  <%= f.text_field :username, class: "form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%> 
+                  </br> 
+                  <%= f.password_field :password, class: "form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>  
+                  <br/>
+    <%= f.password_field :password_confirmation, class: "form-control material", placeholder: "Password", id: "password", autocomplete: "off" %>
+              </p>
+ <div class="btn btn-block btn-info text-uppercase waves">
+    <%= f.submit "Sign up" %>
+  </div>
+                  <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%= javascript_include_tag 'waves.min' %>
+  <script>
+    //Waves effect on buttons      
+    Waves.attach('.waves', ['waves-float']);
+    Waves.init();
+  </script>
+
+</body>
+
+</html>

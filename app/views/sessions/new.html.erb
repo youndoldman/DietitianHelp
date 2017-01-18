@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="msapplication-tap-highlight" content="no" />
+
+  <title>DIETITIAN.HELP | Login</title>
+
+ <%= stylesheet_link_tag 'bootstrap.min' %>
+ <%= stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons' %>
+ <%= stylesheet_link_tag 'waves.min' %>
+ <%= stylesheet_link_tag 'style' %>
+ <%= favicon_link_tag 'favicon.ico' %>
+
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+  <!--[if lt IE 9]>
+      <script src="html5shiv.min.js"></script>
+      <script src="respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <div class="table-wrapper">
+    <div class="table-row">
+      <div class="table-cell text-center">
+        <div class="login i-block">
+          <div class="content-box">
+            <div class="light-blue-bg biggest-box">
+
+              <h1 class="zero-m text-uppercase">kjnlk</h1>
+
+            </div>
+            <div class="big-box text-left login-form">
+              <div class="form-group">
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <%= devise_error_messages! %>
+               <p> </br> 
+                  <%= f.text_field :username, class: "form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%> 
+                  </br> 
+                  <%= f.password_field :password, class: "form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%> 
+                </div> </p>
+                   <div class="btn btn-block btn-info text-uppercase waves">
+    <%= f.submit "Sign in", name:"submit", style:"border:none;background:transparent;text-transform:uppercase"%>
+  </div>
+                  <% end %>
+
+              <a href="#" class="green i-block">Forgot password?</a>
+              <p>Do not have an account?</p>
+              <%= button_tag 'Create Account', onclick: "location.href='/users/sign_up';", class: "btn btn-block btn-warning text-uppercase waves waves-button" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%= javascript_include_tag 'waves.min' %>
+  <script>
+    //Waves effect on buttons      
+    Waves.attach('.waves', ['waves-float']);
+    Waves.init();
+  </script>
+
+</body>
+
+</html>

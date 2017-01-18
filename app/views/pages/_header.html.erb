@@ -1,0 +1,187 @@
+    <ul id="gn-menu" class="gn-menu-main">
+      <li class="gn-trigger">
+        <a id="menu-toggle" class="menu-toggle gn-icon gn-icon-menu">
+          <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="cross">
+            <span></span>
+            <span></span>
+          </div>
+        </a>
+        <nav class="gn-menu-wrapper">
+          <div class="gn-scroller">
+            <ul class="gn-menu metismenu">
+              <li class="gn-search-item">
+                <input placeholder="Search" type="search" class="gn-search">
+                <a class="search-icon"><i class="fa fa-search"></i><span>Search</span></a>
+              </li>
+               <li>
+                <span class="label label-danger pull-right">16</span>
+                <a href="#" aria-expanded="false"><i class="fa fa-edit"></i>Assessment<span class="fa arrow"></span></a>
+              </li>
+              <li>
+                <a href="#" aria-expanded="false"><i class="fa fa-briefcase"></i>UI Kits<span class="fa arrow"></span></a>
+                <ul class="gn-submenu collapse" aria-expanded="false">
+                  <li><a href="colors.html">Colors</a></li>
+                  <li><a href="animations.html">Animations</a></li>
+                  <li><a href="icons.html">Icons</a></li>
+                  <li><a href="form-elements.html">Forms</a></li>
+                  <li><a href="sliders.html">Sliders</a></li>
+                  <li><a href="buttons.html">Buttons</a></li>
+                  <li><a href="breadcrumbs.html">Breadcrumbs</a></li>
+                  <li><a href="nav-buttons.html">Nav buttons</a></li>
+                  <li><a href="notifications.html">Notifications</a></li>
+                  <li><a href="panels.html">Panels</a></li>
+                  <li><a href="tabs.html">Tabs</a></li>
+                  <li><a href="media.html">Media</a></li>
+                  <li><a href="components.html">Other components</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <a href="#" aria-expanded="false"><i class="fa fa-file"></i>Other pages<span class="fa arrow"></span></a>
+                <ul class="gn-submenu collapse" aria-expanded="false">
+                  <li><a href="todo_list.html">Todo list</a></li>
+                  <li><a href="timeline.html">Timeline</a></li>
+                  <li><a href="contacts.html">Contacts</a></li>
+                  <li><a href="profile.html">Profile</a></li>
+                  <li><a href="chat.html">Chat</a></li>
+                  <li><a href="projects.html">Projects</a></li>
+                  <li><a href="wizard.html">Wizard</a></li>
+                  <li><a href="login.html">Login</a></li>
+                  <li><a href="registration.html">Registration</a></li>
+                  <li><a href="404.html">404</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="http://phpoll.com/register" class="dropdown-toggle" data-toggle="dropdown">Register <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
+                            <div class="col-lg-12">
+                                <div class="text-center"><h3><b>Register</b></h3></div>
+                <form id="ajax-register-form" action="http://phpoll.com/register/process" method="post" role="form" autocomplete="off">
+                  <div class="form-group">
+                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                  </div>
+                  <div class="form-group">
+                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-6 col-xs-offset-3">
+                        <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-info" value="Register Now">
+                      </div>
+                    </div>
+                  </div>
+                                    <input type="hidden" class="hide" name="token" id="token" value="7c6f19960d63f53fcd05c3e0cbc434c0">
+                </form>
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="http://phpoll.com/login" class="dropdown-toggle" data-toggle="dropdown">Log In <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+                            <div class="col-lg-12">
+                                <div class="text-center"><h3><b>Log In</b></h3></div>
+                                <form id="ajax-login-form" action="http://phpoll.com/login/process" method="post" role="form" autocomplete="off">
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" autocomplete="off">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" autocomplete="off">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-xs-7">
+                                                <input type="checkbox" tabindex="3" name="remember" id="remember">
+                                                <label for="remember"> Remember Me</label>
+                                            </div>
+                                            <div class="col-xs-5 pull-right">
+                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-success" value="Log In">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="text-center">
+                                                    <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" class="hide" name="token" id="token" value="a465a2791ae0bae853cf4bf485dbe1b6">
+                                </form>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+          </div>
+          <!-- /gn-scroller -->
+          <div id='assessment'class="bottom-bnts">
+            <a class="profile" href="#"><i class="mdi mdi-account"></i></a>
+            <a class="fix-nav" href="#"><i class="mdi mdi-pin"></i></a>
+            <a class="logout" href="#"><i class="mdi mdi-power"></i></a>
+          </div>
+        </nav>
+      </li>
+      <li class="pull-left">
+        <a href="" class="logo">DIETITIAN.HELP<i class="fa fa-heartbeat"></i></a>
+      </li>
+      <span id="bmispanhead" class="w-amount">39.2</span>
+      <li class="top-clock">
+        <span class="current-time"></span>
+      </li>
+      <li class="dropdown notifications">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+              <i type="button" onclick="setTimeout(rchart0, 500)", class="fa fa-edit fa-2x" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"></i> <span class="label label-warning"></span>
+            </a>
+          </li>
+      <li class="dropdown notifications">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-area-chart fa-2x"></i> <span class="label label-warning"></span>
+            </a>
+          </li>
+      <li class="pull-right">
+        <ul class="nav navbar-right right-menu">
+          <li class="">
+            <a href='users/sign_out' class='logo' rel="nofollow" data-method="delete" data-confirm="Are you sure?">
+              <i class="fa fa-toggle-on"></i>
+            </a>
+            </a>
+          </li>
+          <li class="lang">
+            <select class="cs-select cs-skin-elastic">
+              <option value="english" data-class="cs-selected" selected>English</option>
+              <option value="german" data-class="">German</option>
+              <option value="french" data-class="">French</option>
+            </select>
+          </li>
+          <li class="dropdown notifications">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-edit"></i> <span class="label label-warning"></span>
+            </a>
+          </li>
+          <li class="dropdown some-btn">
+            <a class="fullscreen">
+              <i class="mdi mdi-fullscreen"></i>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>

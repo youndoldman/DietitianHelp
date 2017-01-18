@@ -1,0 +1,1 @@
+json.array! @ajaxgets, partial: 'ajaxgets/ajaxget', as: :ajaxget
