@@ -22,7 +22,7 @@ div.cs-skin-border {
 	content: '\f078';
 }
 
-div.cs-select .cs-skin-border .1 .disabled 
+div.cs-select .cs-skin-border .disabled 
 {border: 1px solid #999; color: #333; opacity: 0.5;}
 
 .disabled option {color: #000; opacity: 1;}​
