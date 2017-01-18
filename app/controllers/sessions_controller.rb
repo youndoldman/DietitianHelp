@@ -1,4 +1,4 @@
-class Users::SessionsController < Devise::SessionsController
+class Devise::SessionsController < Devise::SessionsController
   respond_to :json
 
 prepend_before_action :require_no_authentication, only: [:new, :create]
