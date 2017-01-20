@@ -1126,7 +1126,7 @@ body {
   background: #fff;
   -webkit-border-radius: 3px;
           border-radius: 3px;
-  margin-bottom: 30px;
+  margin: 10px;
   overflow: hidden;
   -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
           box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);

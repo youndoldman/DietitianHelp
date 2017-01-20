@@ -1007,36 +1007,15 @@
             if (typeof field.getBoundingClientRect === 'function') {
                 clientRect = field.getBoundingClientRect();
                 left = clientRect.left + window.pageXOffset;
-                top = clientRect.bottom + window.pageYOffset;
+                top = clientRect.bottom;
             } else {
                 left = pEl.offsetLeft;
                 top  = pEl.offsetTop + pEl.offsetHeight;
-                while((pEl = pEl.offsetParent)) {
-                    left += pEl.offsetLeft;
-                    top  += pEl.offsetTop;
-                }
             }
 
             // default position is bottom & left
-            if ((this._o.reposition && left + width > viewportWidth) ||
-                (
-                    this._o.position.indexOf('right') > -1 &&
-                    left - width + field.offsetWidth > 0
-                )
-            ) {
-                left = left - width + field.offsetWidth;
-            }
-            if ((this._o.reposition && top + height > viewportHeight + scrollTop) ||
-                (
-                    this._o.position.indexOf('top') > -1 &&
-                    top - height - field.offsetHeight > 0
-                )
-            ) {
-                top = top - height - field.offsetHeight;
-            }
-
             this.el.style.left = left + 'px';
-            this.el.style.top = top + 'px';
+            this.el.style.top = top * .64 + 'px';
         },
 
         /**

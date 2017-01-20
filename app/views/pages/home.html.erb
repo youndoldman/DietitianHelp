@@ -557,10 +557,10 @@
 
 
 
-    <!--Custom Scripts-->
+    <!--Custom Scriptssasa-->
 
 <%= javascript_include_tag 'common' %>
-<%= javascript_include_tag 'pickaday' %>
+<%= javascript_include_tag 'pikaday' %>
 <%= javascript_include_tag 'pikaday.jquery' %>
 <%= javascript_include_tag 'example' %>
 
@@ -767,19 +767,13 @@ function run() {
 
 
 $('#dobin').pikaday({
-        field: document.getElementById('date0'),
+        field: document.getElementById('dobin'),
         format: 'YYYY-MM-DD',
         defaultDate: '1/23/2014',
-        onStart: function ()
-            {
-                console.log(this.getMoment().format('YYYY, M, D'))
-            },
     });
 $('#date0').pikaday({
         field: document.getElementById('date0'),
-        position: 'top',
         format: 'M/D/YYYY',
-        reposition: 'top',
         defaultDate: '1/23/2014',
         onStart: function ()
             {
@@ -789,7 +783,6 @@ $('#date0').pikaday({
     });
 $('#date1').pikaday({
         field: document.getElementById('date1'),
-        position: 'top',
         format: 'M/D/YYYY',
         onSelect: function() {
             console.log(this.getMoment().format('YYYY, M, D'));
@@ -797,7 +790,6 @@ $('#date1').pikaday({
     });
 $('#date2').pikaday({
         field: document.getElementById('date2'),
-        position: 'top',
         format: 'M/D/YYYY',
         onSelect: function() {
             console.log(this.getMoment().format('Do MMMM YYYY'));
@@ -805,7 +797,6 @@ $('#date2').pikaday({
     });
 $('#date3').pikaday({
         field: document.getElementById('date3'),
-        position: 'top',
         format: 'M/D/YYYY',
         onSelect: function() {
             console.log(this.getMoment().format('Do MMMM YYYY'));
