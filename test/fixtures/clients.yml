@@ -1,0 +1,57 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  firstname: MyString
+  lastname: MyString
+  allergies: MyString
+  cdiet: MyString
+  dx: MyString
+  ht: 1
+  cbw: 1
+  date0: MyString
+  thirtywt: 1
+  ninetywt: 1
+  oneeightywt: 1
+  date1: MyString
+  date2: MyString
+  date3: MyString
+  intakefrom: 1
+  intaketo: 1
+  bmi: 9.99
+  ibw: 1
+  calreq: 1
+  proreq: 1
+  flreq: 1
+  fassess: MyString
+  fpes: MyString
+  pes0: MyString
+  pes1: MyString
+  pes2: MyString
+
+two:
+  firstname: MyString
+  lastname: MyString
+  allergies: MyString
+  cdiet: MyString
+  dx: MyString
+  ht: 1
+  cbw: 1
+  date0: MyString
+  thirtywt: 1
+  ninetywt: 1
+  oneeightywt: 1
+  date1: MyString
+  date2: MyString
+  date3: MyString
+  intakefrom: 1
+  intaketo: 1
+  bmi: 9.99
+  ibw: 1
+  calreq: 1
+  proreq: 1
+  flreq: 1
+  fassess: MyString
+  fpes: MyString
+  pes0: MyString
+  pes1: MyString
+  pes2: MyString

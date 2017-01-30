@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :ajaxgets
-  devise_for :views
-    devise_for :users, :controllers => {registrations: 'registrations'}
-root 'pages#home';
+  resources :clients
+  devise_for :users, :controllers => {registrations: 'registrations'}
+	root 'pages#home';
 
 
  

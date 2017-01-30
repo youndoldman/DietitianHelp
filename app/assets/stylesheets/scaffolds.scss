@@ -1,17 +1,17 @@
 body {
   background-color: #fff;
   color: #333;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
   margin: 33px;
 }
 
-p, ol, td {
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
-  line-height: 27px;
-  margin: -2px;
+  line-height: 18px;
+  margin: 33px;
 }
 
 pre {
@@ -87,5 +87,3 @@ div {
 label {
   display: block;
 }
-
-

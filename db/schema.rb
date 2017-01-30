@@ -10,7 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161012181702) do
+ActiveRecord::Schema.define(version: 20170129230014) do
+
+  create_table "clients", force: :cascade do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "dob"
+    t.string   "allergies"
+    t.string   "cdiet"
+    t.string   "dx"
+    t.integer  "ht"
+    t.integer  "cbw"
+    t.string   "date0"
+    t.integer  "thirtywt"
+    t.integer  "ninetywt"
+    t.integer  "oneeightywt"
+    t.string   "date1"
+    t.string   "date2"
+    t.string   "date3"
+    t.integer  "intakefrom"
+    t.integer  "intaketo"
+    t.decimal  "bmi"
+    t.integer  "ibw"
+    t.integer  "calreq"
+    t.integer  "proreq"
+    t.integer  "flreq"
+    t.string   "fassess"
+    t.string   "fpes"
+    t.string   "pes0"
+    t.string   "pes1"
+    t.string   "pes2"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "provider"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username",               default: "", null: false

@@ -1,0 +1,77 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Clients</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Allergies</th>
+      <th>Cdiet</th>
+      <th>Dx</th>
+      <th>Ht</th>
+      <th>Cbw</th>
+      <th>Date0</th>
+      <th>Thirtywt</th>
+      <th>Ninetywt</th>
+      <th>Oneeightywt</th>
+      <th>Date1</th>
+      <th>Date2</th>
+      <th>Date3</th>
+      <th>Intakefrom</th>
+      <th>Intaketo</th>
+      <th>Bmi</th>
+      <th>Ibw</th>
+      <th>Calreq</th>
+      <th>Proreq</th>
+      <th>Flreq</th>
+      <th>Fassess</th>
+      <th>Fpes</th>
+      <th>Pes0</th>
+      <th>Pes1</th>
+      <th>Pes2</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clients.each do |client| %>
+      <tr>
+        <td><%= client.firstname %></td>
+        <td><%= client.lastname %></td>
+        <td><%= client.allergies %></td>
+        <td><%= client.cdiet %></td>
+        <td><%= client.dx %></td>
+        <td><%= client.ht %></td>
+        <td><%= client.cbw %></td>
+        <td><%= client.date0 %></td>
+        <td><%= client.thirtywt %></td>
+        <td><%= client.ninetywt %></td>
+        <td><%= client.oneeightywt %></td>
+        <td><%= client.date1 %></td>
+        <td><%= client.date2 %></td>
+        <td><%= client.date3 %></td>
+        <td><%= client.intakefrom %></td>
+        <td><%= client.intaketo %></td>
+        <td><%= client.bmi %></td>
+        <td><%= client.ibw %></td>
+        <td><%= client.calreq %></td>
+        <td><%= client.proreq %></td>
+        <td><%= client.flreq %></td>
+        <td><%= client.fassess %></td>
+        <td><%= client.fpes %></td>
+        <td><%= client.pes0 %></td>
+        <td><%= client.pes1 %></td>
+        <td><%= client.pes2 %></td>
+        <td><%= link_to 'Show', client %></td>
+        <td><%= link_to 'Edit', edit_client_path(client) %></td>
+        <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Client', new_client_path %>

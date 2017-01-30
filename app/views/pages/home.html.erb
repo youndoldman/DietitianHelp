@@ -13,6 +13,8 @@
       rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <%= stylesheet_link_tag 'ion.rangeSlider' %>
+  <%= stylesheet_link_tag 'selectize' %>
+  <!--[if IE 8]><script src="js/es5.js"></script><![endif]-->
 
 
   <%= favicon_link_tag 'favicon.ico' %>
@@ -26,6 +28,7 @@
 </head>
 
 <body id="">
+  <!--
 <div id="preloader" class="preloader table-wrapper">
     <div class="table-row">
       <div class="table-cell">
@@ -37,11 +40,11 @@
       </div>
     </div>
   </div> 
-
-<%= render partial: 'pages/header' %>
+-->
+<frame><%= render partial: 'pages/header' %></frame>
 
     <!--Content-->
-<%= render partial: 'pages/info' %>
+<frame><%= render partial: 'pages/info' %></frame>
 
 <!-- Main form -->
         <div class="col-lg-3">
@@ -53,8 +56,10 @@
                 <%= image_tag('maleselect.png', :id => "gendermspan", :style => 'display:block;max-width:80px;margin-right:0px;padding-bottom:25px;') %>
                 </div>
             <h4><strong>Inline form</strong></h4>
-            <form class="content-form form-inline">
-              <div class="field-container form-group">
+            <!-- REPLACING FORM FOR CLIENT <form class="content-form form-inline"> -->
+           <frame> <%= render :partial => '/clients/form' %></frame>
+
+             <!-- <div class="field-container form-group">
                 <input type="string" id="dietin" onchange="diet()", class="inin form-control material input-lg", required>
                 <label class="inlabel"for="dietin">Current Diet</label>
               </div>
@@ -74,7 +79,7 @@
                 <input type="number" id="ht" onchange="ibw(), bmi()", class="inin form-control material input-lg" required>
                 <label class="inlabel"for="ht">Height</label>
               </div>
-            </form>
+            </form> -->
             <br>
           </div>
         </div>
@@ -505,6 +510,8 @@
 <%= javascript_include_tag 'cta.min' %>
 <%= javascript_include_tag 'typed' %>
 <%= javascript_include_tag 'ion.rangeSlider' %>
+
+
   
   <!--Menu-->
 
@@ -570,6 +577,11 @@
 <%= javascript_include_tag 'sweetalert.min' %>
 <%= javascript_include_tag 'smoke.min' %>
 <%= javascript_include_tag 'notificationFx' %>
+
+<!--AUTOCOMPLETE PLUGINS -->
+<%= javascript_include_tag 'sifter' %>
+<%= javascript_include_tag 'microplugin' %>
+<%= javascript_include_tag 'selectize' %>
 
 
 <!-- DO NOT TOUCH WITHOUT REVIEWING -->
@@ -761,8 +773,20 @@ function run() {
   <%= javascript_include_tag 'nprogress' %>
   <%= javascript_include_tag 'medical' %>
 
+<script>// <select id="select-to"></select>
 
+$('#select-beast').selectize({
+    create: true,
+    sortField: {
+        field: 'text',
+        direction: 'asc'
+    },
+    dropdownParent: 'body'
+});</script>
 <script>
+
+
+$('.inin').prop('required',true);
 
 
 $('#dobin').pikaday({
@@ -961,6 +985,8 @@ function checker() {
   $('#gendermspan').click(function() {$('#switch5').prop('checked', true);})
   $('#genderfspan').click(function() {$('#switch5').prop('checked', false);})
 }
+
+
 
 
 // MEDICAL FAST EDITING
