@@ -55,7 +55,11 @@
     <%= f.label :allergies, class: "inlabel" %>
     
   </div>
- </div class="ERASEME">
+      <div class="field-container form-group">
+    <%= f.text_field :provider, type: "string", class: "inin form-control material input-lg", required: true %>
+    <%= f.label :name, "Provider", class: "inlabel" %>
+  </div>
+ </div>
    <div class="actions" style="display: block;">
     <%= f.submit %>
   </div>
