@@ -2,8 +2,8 @@
 
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
-Rails.application.config.assets.precompile = ['*.js', '*.png', '.jpg', '*.eot', '*.svg', '.scss', '.ttf', '.woff', '.woff2']
-
+Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'flash')
+Rails.application.config.assets.precompile = ['*.js', '*.png', '.jpg', '*.eot', '*.svg', '*.swf', '.scss', '.ttf', '.woff', '.woff2']
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 

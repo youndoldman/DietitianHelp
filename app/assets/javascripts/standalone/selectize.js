@@ -1082,13 +1082,6 @@
 			if (!value && placeholder) {
 				value = placeholder;
 			}
-	
-			width = measureString(value, $input) + 4;
-			if (width !== currentWidth) {
-				currentWidth = width;
-				$input.width(width);
-				$input.triggerHandler('resize');
-			}
 		};
 	
 		$input.on('keydown keyup update blur', update);
@@ -1251,7 +1244,7 @@
 			inputMode         = self.settings.mode;
 			classes           = $input.attr('class') || '';
 	
-			$wrapper          = $('<div>').addClass(settings.wrapperClass).addClass(classes).addClass(inputMode);
+			$wrapper          = $('<div>').addClass();
 			$control          = $('<div>').addClass(settings.inputClass).addClass('items').appendTo($wrapper);
 			$control_input    = $('<input type="text" autocomplete="off" />').appendTo($control).attr('tabindex', $input.is(':disabled') ? '-1' : self.tabIndex);
 			$dropdown_parent  = $(settings.dropdownParent || $wrapper);
@@ -1260,16 +1253,12 @@
 	
 			if(inputId = $input.attr('id')) {
 				$control_input.attr('id', inputId + '-selectized');
-				$("label[for='"+inputId+"']").attr('for', inputId + '-selectized');
+				$("label[for='"+inputId+"']").attr('for', inputId);
 			}
 	
 			if(self.settings.copyClassesToDropdown) {
 				$dropdown.addClass(classes);
 			}
-	
-			$wrapper.css({
-				width: $input[0].style.width
-			});
 	
 			if (self.plugins.names.length) {
 				classes_plugins = 'plugin-' + self.plugins.names.join(' plugin-');
@@ -1425,7 +1414,7 @@
 					return '<div class="option">' + escape(data[field_label]) + '</div>';
 				},
 				'item': function(data, escape) {
-					return '<div class="item">' + escape(data[field_label]) + '</div>';
+					return '<div class="item", style="padding-right:4px">' + escape(data[field_label]) + '</div>';
 				},
 				'option_create': function(data, escape) {
 					return '<div class="create">Add <strong>' + escape(data.input) + '</strong>&hellip;</div>';
@@ -2042,7 +2031,7 @@
 			var self = this;
 	
 			self.setTextboxValue('');
-			self.$control_input.css({opacity: 0, position: 'absolute', left: self.rtl ? 10000 : -10000});
+			self.$control_input.css({opacity: 0, position: 'absolute'});
 			self.isInputHidden = true;
 		},
 	
@@ -2050,7 +2039,7 @@
 		 * Restores input visibility.
 		 */
 		showInput: function() {
-			this.$control_input.css({opacity: 1, position: 'relative', left: 0});
+			this.$control_input.css({opacity: 1, position: 'absolute', left: 0});
 			this.isInputHidden = false;
 		},
 	
@@ -2776,7 +2765,9 @@
 				.toggleClass('rtl', self.rtl);
 	
 			self.$control
+				.attr('id', 'selectinput')
 				.toggleClass('focus', self.isFocused)
+				.toggleClass('inin:valid', self.isFocused)
 				.toggleClass('disabled', self.isDisabled)
 				.toggleClass('required', self.isRequired)
 				.toggleClass('invalid', self.isInvalid)
@@ -2894,7 +2885,7 @@
 	
 			this.$dropdown.css({
 				width : $control.outerWidth(),
-				top   : offset.top,
+				top   : offset.top + 15,
 				left  : offset.left
 			});
 		},
@@ -3306,7 +3297,7 @@
 		searchConjunction: 'and',
 	
 		mode: null,
-		wrapperClass: 'selectize-control',
+		wrapperClass: 'field-container form-group',
 		inputClass: 'selectize-input',
 		dropdownClass: 'selectize-dropdown',
 		dropdownContentClass: 'selectize-dropdown-content',

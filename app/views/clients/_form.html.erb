@@ -1,4 +1,4 @@
-<%= form_for (Client.new), html: {class: "content-form form-inline"} do |f| %>
+<%= form_for @Clients, html: {class: "content-form form-inline"} do |f| %>
 
   <div class="field-container form-group">
     <%= f.text_field :firstname, type: "string", class: "inin form-control material input-lg", required: true%>
@@ -14,6 +14,11 @@
   <div class="field-container form-group">
     <%= f.text_field :dob, type: "string", class: "inin form-control material input-lg", required: true %>
     <%= f.label :name, "Date of Birth", class: "inlabel" %>
+  </div>
+   <div class="field-container form-group">
+    <%= f.text_field :gender, type: "string", class: "inin form-control material input-lg", required: true %>
+    <%= f.label :name, "Gender", class: "inlabel" %>
+    
   </div>
     <div class="field-container form-group">
     <%= f.text_field :provider, type: "string", class: "inin form-control material input-lg", required: true %>

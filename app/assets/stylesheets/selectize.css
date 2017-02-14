@@ -17,10 +17,9 @@
 .selectize-control.plugin-drag_drop.multi > .selectize-input > div.ui-sortable-placeholder {
   visibility: visible !important;
   background: #f2f2f2 !important;
-  background: rgba(0, 0, 0, 0.06) !important;
+  background: rgba(0, 0, 0, 0.8) !important;
   border: 0 none !important;
-  -webkit-box-shadow: inset 0 0 12px 4px #ffffff;
-  box-shadow: inset 0 0 12px 4px #ffffff;
+  -webkit-input-placeholder: white;
 }
 .selectize-control.plugin-drag_drop .ui-sortable-placeholder::after {
   content: '!';
@@ -121,37 +120,45 @@
 .selectize-dropdown,
 .selectize-input,
 .selectize-input input {
-  color: #303030;
+  color: #555;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 18px;
-  -webkit-font-smoothing: inherit;
+  position: absolute;
+  height: 18px;
+  padding: 0px 9px 9px 0;
+  border: 0;
+  -webkit-border-radius: 0;
+          border-radius: 0;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#a94442), to(#a94442)), -webkit-gradient(linear, left top, left bottom, from(#d2d2d2), to(#d2d2d2));
+  background-image: -webkit-linear-gradient(#a94442, #a94442), -webkit-linear-gradient(#d2d2d2, #d2d2d2);
+  background-image: linear-gradient(#a94442, #a94442), linear-gradient(#d2d2d2, #d2d2d2);
+  background-size: 0 2px,100% 1px;
+  background-repeat: no-repeat;
+  background-position: center bottom, center -webkit-calc(100% - 1px);
+  background-position: center bottom, center calc(100% - 1px);
+  background-color: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 .selectize-input,
 .selectize-control.single .selectize-input.input-active {
-  background: #ffffff;
+  background: none; 
   cursor: text;
   display: inline-block;
 }
 .selectize-input {
-  border: 1px solid #d0d0d0;
-  padding: 8px 8px;
+  border: none;
+  padding: 16px 9px 9px 0;
+  margin: 12px 0 -36px 0;
   display: inline-block;
   width: 100%;
+  height: 55px;
   overflow: hidden;
   position: relative;
   z-index: 1;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
 }
 .selectize-control.multi .selectize-input.has-items {
-  padding: 6px 8px 3px;
 }
 .selectize-input.full {
   background-color: #ffffff;
@@ -161,13 +168,8 @@
   cursor: default !important;
 }
 .selectize-input.focus {
-  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 .selectize-input.dropdown-active {
-  -webkit-border-radius: 3px 3px 0 0;
-  -moz-border-radius: 3px 3px 0 0;
-  border-radius: 3px 3px 0 0;
 }
 .selectize-input > * {
   vertical-align: baseline;
@@ -175,77 +177,74 @@
   display: inline-block;
   zoom: 1;
   *display: inline;
+  height: 18px;
 }
 .selectize-control.multi .selectize-input > div {
   cursor: pointer;
   margin: 0 3px 3px 0;
   padding: 2px 6px;
-  background: #f2f2f2;
-  color: #303030;
+  background: #90c1f1;
+  color: white;
   border: 0 solid #d0d0d0;
 }
 .selectize-control.multi .selectize-input > div.active {
-  background: #e8e8e8;
-  color: #303030;
-  border: 0 solid #cacaca;
+  background: #90c1f1;
+  color: white;
 }
 .selectize-control.multi .selectize-input.disabled > div,
 .selectize-control.multi .selectize-input.disabled > div.active {
-  color: #7d7d7d;
-  background: #ffffff;
-  border: 0 solid #ffffff;
+  color: #90c1f1;
+  background: white;
 }
 .selectize-input > input {
-  display: inline-block !important;
-  padding: 0 !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  max-width: 100% !important;
-  margin: 0 2px 0 0 !important;
-  text-indent: 0 !important;
-  border: 0 none !important;
-  background: none !important;
-  line-height: inherit !important;
-  -webkit-user-select: auto !important;
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important;
+  padding-left: 0;
+  border: 0;
+  -webkit-border-radius: 0;
+          border-radius: 0;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#a94442), to(#a94442)), -webkit-gradient(linear, left top, left bottom, from(#d2d2d2), to(#d2d2d2));
+  background-image: -webkit-linear-gradient(#a94442, #a94442), -webkit-linear-gradient(#d2d2d2, #d2d2d2);
+  background-image: linear-gradient(#a94442, #a94442), linear-gradient(#d2d2d2, #d2d2d2);
+  background-size: 0 2px,100% 1px;
+  background-repeat: no-repeat;
+  background-position: center bottom, center -webkit-calc(100% - 1px);
+  background-position: center bottom, center calc(100% - 1px);
+  background-color: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  height: 18px;
 }
 .selectize-input > input::-ms-clear {
   display: none;
 }
 .selectize-input > input:focus {
-  outline: none !important;
+  outline: none;
+  -webkit-animation: input-highlight .5s forwards;
+          animation: input-highlight .5s forwards;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
 }
 .selectize-input::after {
   content: ' ';
   display: block;
   clear: left;
+
 }
 .selectize-input.dropdown-active::before {
   content: ' ';
+  position: relative;
   display: block;
-  position: absolute;
-  background: #f0f0f0;
-  height: 1px;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  overflow: hidden;
+  z-index: 1;
+  background: rgba(125, 168, 208, 0.2);
 }
 .selectize-dropdown {
-  position: absolute;
   z-index: 10;
   border: 1px solid #d0d0d0;
-  background: #ffffff;
-  margin: -1px 0 0 0;
+  background-color: rgba(125, 168, 208, 0.2);
   border-top: 0 none;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  -webkit-border-radius: 0 0 3px 3px;
-  -moz-border-radius: 0 0 3px 3px;
-  border-radius: 0 0 3px 3px;
 }
 .selectize-dropdown [data-selectable] {
   cursor: pointer;
@@ -284,6 +283,7 @@
   overflow-x: hidden;
   max-height: 200px;
   -webkit-overflow-scrolling: touch;
+  background-color: white;
 }
 .selectize-control.single .selectize-input,
 .selectize-control.single .selectize-input input {
@@ -307,8 +307,6 @@
   border-color: #808080 transparent transparent transparent;
 }
 .selectize-control.single .selectize-input.dropdown-active:after {
-  margin-top: -4px;
-  border-width: 0 5px 5px 5px;
   border-color: transparent transparent #808080 transparent;
 }
 .selectize-control.rtl.single .selectize-input:after {

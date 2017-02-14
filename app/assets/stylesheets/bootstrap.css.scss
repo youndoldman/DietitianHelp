@@ -1200,7 +1200,7 @@ h6,
 .h5,
 .h6 {
   font-family: inherit;
-  font-weight: 500;
+  font-weight: 100;
   line-height: 1.1;
   color: inherit;
 }
@@ -5029,7 +5029,7 @@ a.badge:focus {
   padding-bottom: 30px;
   margin-bottom: 30px;
   color: inherit;
-  background-color: #eee;
+  background-color: white;
 }
 .jumbotron h1,
 .jumbotron .h1 {
@@ -5039,6 +5039,7 @@ a.badge:focus {
   margin-bottom: 15px;
   font-size: 21px;
   font-weight: 200;
+  line-height: 22px;
 }
 .jumbotron > hr {
   border-top-color: #d5d5d5;
@@ -5968,6 +5969,7 @@ button.close {
   position: relative;
   width: auto;
   margin: 10px;
+  top: 30%;
 }
 .modal-content {
   position: relative;

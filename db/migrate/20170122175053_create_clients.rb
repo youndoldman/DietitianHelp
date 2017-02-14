@@ -28,7 +28,6 @@ class CreateClients < ActiveRecord::Migration[5.0]
       t.string :pes0
       t.string :pes1
       t.string :pes2
-      t.string :provider
 
       t.timestamps
     end

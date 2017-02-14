@@ -10,6 +10,7 @@ class ClientsController < ApplicationController
   # GET /clients/1
   # GET /clients/1.json
   def show
+    @client = Client.find(params[:id])
   end
 
   # GET /clients/new
@@ -19,6 +20,7 @@ class ClientsController < ApplicationController
 
   # GET /clients/1/edit
   def edit
+    @Clients = Client.find(params[:id])
   end
 
   # POST /clients
@@ -64,11 +66,11 @@ class ClientsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client
-      @client = Client.find(params[:id])
+      @Client = Client.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:firstname, :lastname, :allergies, :cdiet, :dx, :ht, :cbw, :date0, :thirtywt, :ninetywt, :oneeightywt, :date1, :date2, :date3, :intakefrom, :intaketo, :bmi, :ibw, :calreq, :proreq, :flreq, :fassess, :fpes, :pes0, :pes1, :pes2)
+      params.require(:client).permit(:id, :firstname, :lastname, :dob, :gender, :allergies, :provider, :cdiet, :dx, :ht, :cbw, :date0, :thirtywt, :ninetywt, :oneeightywt, :date1, :date2, :date3, :intakefrom, :intaketo, :bmi, :ibw, :calreq, :proreq, :flreq, :fassess, :fpes, :pes0, :pes1, :pes2)
     end
 end
