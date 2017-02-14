@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170201013002) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "provider"
+    t.string   "gender"
   end
 
   create_table "users", force: :cascade do |t|
