@@ -4,6 +4,7 @@ class CreateClients < ActiveRecord::Migration[5.0]
       t.string :firstname
       t.string :lastname
       t.string :dob
+      t.string :gender
       t.string :allergies
       t.string :cdiet
       t.string :dx
