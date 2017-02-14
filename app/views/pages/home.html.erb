@@ -652,7 +652,7 @@ $('.gn-search').selectize({
     load: function(query, callback) {
         if (!query.length) return callback();
         $.ajax({
-            url: 'https://dietitianhelp.herokuapp.com/clients',
+            url: 'http://localhost:3000/clients',
             type: 'GET',
             dataType: 'json',
             data: {
