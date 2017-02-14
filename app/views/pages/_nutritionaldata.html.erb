@@ -1,0 +1,275 @@
+<div class=""><div class="col-lg-9">
+  <div class="tabbable tabs-with-bg">
+    <ul class="nav nav-tabs nav-justified">
+      <li class="active">
+        <a href="#tab-1" data-toggle="tab" aria-expanded="true">Gather</a>
+      </li>
+      <li class="">
+        <a href="#tab-2" data-toggle="tab" aria-expanded="false">Assess</a>
+      </li>
+      <li class="">
+        <a href="#datatable" data-toggle="tab" aria-expanded="false">Weight History</a>
+      </li>
+    </ul>
+
+    <!-- TABLE 1 -->
+    <div class="tab-content">
+      <div class="tab-pane big-box fade active in" id="tab-1">
+        <frame>
+        <div style="display:inline-block;vertical-align:top;margin:12px;width:30%"><h1>Current</h1><%= form_for (Client.new), html: {class: "content-form"} do |f| %>
+          <div class="field-container form-group">
+            <%= f.text_field :cdiet, type: "string", class: "inin form-control material input-lg", required: true, onchange: "diet()"%>
+            <%= f.label :cdiet, 'Current Diet', class: "inlabel" %>
+            
+          </div>
+          <div class="field-container form-group">
+            <%= f.text_field :dx, type: "string", class: "inin form-control material input-lg", required: true, onchange: "dx()" %>
+            <%= f.label :dx, id: 'dxlabel', class: "inlabel seleclabel" %>
+            
+          </div>
+          <div class="field-container form-group">
+            <%= f.number_field :cbw, type: "string", class: "inin form-control material input-lg", required: true, onchange: "cal()" %>
+            <%= f.label :cbw, 'Current Body Weight',class: "inlabel" %>
+            
+          </div>
+          <div class="form-inline">
+          <div class="field-container form-group" style="width:20%">
+            <%= f.number_field :ht, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "bmi(), ibw()" %>
+            <%= f.label :ht, 'Height', class: "inlabel" %>
+            
+          </div>
+          <div class="field-container form-group" style="width:35%">
+            <%= f.text_field :date0, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+            <%= f.label :date0, 'Date', class: "inlabel" %>
+            
+          </div>
+        </div>
+          <% end %>
+        </div>
+        </frame>
+        <div style="display:inline-block;margin:12px;vertical-align:top;width:30%">
+          <h1>Weight History</h1>
+          <%= form_for (Client.new), html: {class: "content-form"} do |f| %>
+          <div class="form-inline">
+            <div class="field-container form-group" style="width:20%;margin:12px">
+              <%= f.number_field :thirtywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :thirtywt, class: "inlabel" %>
+              
+            </div>
+            <div class="field-container form-group" style="width:35%">
+              <%= f.text_field :date1, type: "string", class: "inin form-control material input-lg", style:"width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :date1, 'Date', class: "inlabel" %>
+              
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="field-container form-group" style="width:20%;margin:12px">
+              <%= f.number_field :ninetywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :ninetywt, class: "inlabel" %>
+              
+            </div>
+            <div class="field-container form-group" style="width:35%">
+              <%= f.text_field :date2, type: "string", class: "inin form-control material input-lg", style:"width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :date2, 'Date', class: "inlabel" %>
+              
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="field-container form-group" style="width:20%;margin:12px">
+              <%= f.number_field :oneeightywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :oneeightywt, class: "inlabel" %>
+              
+            </div>
+            <div class="field-container form-group" style="width:35%">
+              <%= f.text_field :date3, type: "string", class: "inin form-control material input-lg", style:"width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :date3, 'Date', class: "inlabel" %>
+              
+            </div>
+          </div>
+          <% end %>
+        </div>
+
+      <div style="display:inline-block;margin:12px;vertical-align:top;width:30%">
+          <h1 style="display:inline-block">Labs</h1> <div class="btn-group">
+              <button class="btn waves btn-success waves-effect waves-float" type="button">Dropdown</button>
+              <button data-toggle="dropdown" class="btn waves btn-success dropdown-toggle waves-effect waves-float" type="button" aria-expanded="false">
+                <span class="caret"></span></button>
+                        <%= form_for (Client.new), html: {class: "dropdown-menu"} do |f| %>
+          <div class="form-inline">
+            <div class="field-container form-group" style="width:20%;margin:12px">
+              <%= f.number_field :thirtywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :thirtywt, class: "inlabel" %>
+              
+            </div>
+            <div class="field-container form-group" style="width:35%">
+              <%= f.text_field :date1, type: "string", class: "inin form-control material input-lg", style:"width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :date1, 'Date', class: "inlabel" %>
+              
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="field-container form-group" style="width:20%;margin:12px">
+              <%= f.number_field :ninetywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :ninetywt, class: "inlabel" %>
+              
+            </div>
+            <div class="field-container form-group" style="width:35%">
+              <%= f.text_field :date2, type: "string", class: "inin form-control material input-lg", style:"width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :date2, 'Date', class: "inlabel" %>
+              
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="field-container form-group" style="width:20%;margin:12px">
+              <%= f.number_field :oneeightywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :oneeightywt, class: "inlabel" %>
+              
+            </div>
+            <div class="field-container form-group" style="width:35%">
+              <%= f.text_field :date3, type: "string", class: "inin form-control material input-lg", style:"width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :date3, 'Date', class: "inlabel" %>
+              
+            </div>
+          </div>
+          <% end %>
+
+
+            </div>
+          <div id="electrolytes">
+          <div class="verticalline" style="border-right: 2px solid black;margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
+          <div class="verticalline" style="border-right: 2px solid black;margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
+           <div class="verticalline" style="margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
+
+          <hr class="horline"><div class="diaglineup"></div>
+          <div class="verticalline" style="border-right: 2px solid black;margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
+          <div class="verticalline" style="border-right: 2px solid black;margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
+          <div class="verticalline" style="margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
+          <div class="diaglinedown"></div>
+          <hr>
+          <div></div>
+
+        </div>
+        <div id="cbc">
+          <div>Na</div>
+          <div>K</div>
+          <div>Cl</div>
+          <div>Co2</div>
+          <div>BUN</div>
+          <div>Creat</div>
+          <div>Glu</div>
+          <div>HGB</div>
+          <div>HCT</div>
+          <div>ALB</div>
+          <div>T.Protein</div>
+          <div>Chol</div>
+          <div>Tri</div>
+          <div>A1C</div>
+          <div></div>
+
+        </div>
+          <!-- Trigger the modal with a button -->
+          <button class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(rchart0, 500), diet(), intake(), cal(), pro(), fl(), dx(), bmi(), getAge(), adime()">Run</button> <button class="btn btn-primary btn-lg waves waves-button waves-effect waves-float">Save</button>
+        </div>
+
+
+      </div>
+
+      <!-- TAB 2 -->
+      <div id="tab-2" class="tab-pane big-box fade in">
+      <div class="jumbotron">
+        <div id="assessment"class="container">
+          <h1>Assessment - <span id="todaysdate"></span> </h1>
+          <p id="assval" class="w-amount">
+            <span id='agespan' class='w-amount'>- -</span>y/o <span>Resident</span> currently on <span id='cdietspan' class='w-amount'>- - </span> Diet to manage Dx of <span id="dxspan", class='w-amount'>- -</span>. Average intake has noted to range <span id='intakefromspan', class='w-amount'>- -</span>  <span id='intaketospan', class='w-amount'></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class='w-amount'>- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibw" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.
+          </p> <button id="run" class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(rchart0, 500), diet(), intake(), gender(), cal(), pro(), fl(), dx(), bmi(), getAge()">Run</button> <button class="btn btn-primary btn-lg waves waves-button waves-effect waves-float">Save</button></p>
+        </div>
+      </div>
+    </div>
+
+
+
+      <!-- TAB 3/datatable -->
+      <div id="datatable"class="tab-pane big-box fade in">
+        <div class="table-responsive">
+              <ul class="nav nav-tabs nav-justified">
+      <li class="">
+        <a href="#tab-4" data-toggle="tab" aria-expanded="true">ADIME</a>
+      </li>
+      <li class="">
+        <a href="#tab-5" data-toggle="tab" aria-expanded="false">PES</a>
+      </li>
+      <li class="">
+        <a href="#tab-6" data-toggle="tab" aria-expanded="false">Full Assessment</a>
+      </li>
+    </ul>
+          <table id="datatable1" class="display">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Weight</th>
+                <th>Height</th>
+                <th>BMI</th>
+                <th>%IBW</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gecko</td>
+                <td>Firefox 1.0</td>
+                <td>Win 98+/OSX.2+</td>
+                <td>1.7</td>
+                <td>A</td>
+                <td>omg this web application will be such a beast but I need to make sure I don't include unecessary stuff. How would this paragraph wrap if I go beyond two lines of sentences.</td>
+              </tr>
+              <tr>
+                <td>Gecko</td>
+                <td>Firefox 1.5</td>
+                <td>Win 98+/OSX.2+</td>
+                <td>1.6</td>
+                <td>B</td>
+                <td>B</td>
+              </tr>
+              <tr>
+                <td>Gecko</td>
+                <td>Firefox 1.8</td>
+                <td>Win 7+</td>
+                <td>2.2</td>
+                <td>A</td>
+                <td>A</td>
+              </tr>
+              
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+<!-- ADIME-->
+<div id="tab-4" class="tab-pane big-box fade in">
+      <div class="jumbotron">
+        <div id="assessment"class="container">
+          <h1>Assessment - <span id="todaysdate"></span> </h1>
+          <p id="assval" class="w-amount">
+            <span id='agespan' class='w-amount'>- -</span>y/o <span>Resident</span> currently on <span id='cdietspan' class='w-amount'>- - </span> Diet to manage Dx of <span id="dxspan", class='w-amount'>- -</span>. Average intake has noted to range <span id='intakefromspan', class='w-amount'>- -</span>  <span id='intaketospan', class='w-amount'></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class='w-amount'>- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibw" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.
+          </p> 
+          <h1>Diagnosis - <span id="todaysdate"></span> </h1>
+          <p id="dxadime"></p>
+          <h1>Intervention - <span id="todaysdate"></span> </h1>
+          <p id="intadime"></p>
+          <h1>Monitoring/Evaluation - <span id="todaysdate"></span> </h1><p id="monevadime"></p>
+          <button id="run" class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(rchart0, 500), diet(), adime(), intake(), cal(), pro(), fl(), dx(), bmi(), getAge(), gender()">Run</button> <button class="btn btn-primary btn-lg waves waves-button waves-effect waves-float">Save</button></p>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    </div>
+  </div>
+</div>

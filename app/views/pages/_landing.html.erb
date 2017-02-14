@@ -1,0 +1,73 @@
+<div id="landing" style="visibility:visible;z-index:2000;position: fixed" class="table-wrapper">
+    <div class="bgblur table-row">
+      <div class="table-cell text-center">
+        <div class="landingfront pagenotfound i-block">
+          <div class="content-box box-shadow">
+            <div class="top">
+              <h1 class="" style="margin:0.67em 0 -0.3em;">Search/Add</h1>
+
+              <a href="" class="fa-stack fa-2x icon-back">
+                <i class="fa fa-circle fa-stack-2x blue"></i>
+                <i class="fa fa-long-arrow-left fa-stack-1x fa-inverse"></i>
+              </a>
+            </div>
+              <form class="big-box">
+              	<a href="" class="fa-stack fa-2x icon-home" style="top:52%;z-index:1500" type="submit" name="commit" value="Create Client" data-disable-with="Create Client">
+                <i class="fa fa-circle fa-stack-2x yellow"></i>
+                <i id="landsearchicon" class="fa fa-search fa-stack-1x fa-inverse"></i>
+              </a>
+                <div class="form-group">
+                  <input id="select-beast-landsearch" type="search" class="gn-search form-control material" id="email" placeholder="Search" autofocus>	
+                </div>
+                <label for="select-beast-landsearch">Name</label>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <div id="hiddenform" class="hidden-form" style="display:none">
+ 	<%= form_for (Client.new), html: {class: "content-form form-inline"} do |f| %>
+
+  <div class="field-container form-group">
+    <%= f.text_field :firstname, type: "string", class: "inin form-control material input-lg", required: true%>
+    <%= f.label :name, "First Name", class: "inlabel"%>
+    
+  </div>
+
+  <div class="field-container form-group">
+    <%= f.text_field :lastname, type: "string", class: "inin form-control material input-lg", required: true %>
+    <%= f.label :name, "Last Name", class: "inlabel" %>
+    
+  </div>
+  <div class="field-container form-group">
+    <%= f.text_field :dob, type: "string", class: "inin form-control material input-lg", required: true %>
+    <%= f.label :name, "Date of Birth", class: "inlabel" %>
+  </div>
+  <div class="field-container form-group">
+    <%= f.text_field :gender, type: "string", class: "inin form-control material input-lg", required: true %>
+    <%= f.label :name, "Gender", class: "inlabel" %>
+    
+  </div>
+  <div class="field-container form-group">
+    <%= f.text_field :allergies, type: "string", class: "inin form-control material input-lg", required: true %>
+    <%= f.label :allergies, class: "inlabel" %>
+    
+  </div>
+      <div class="field-container form-group">
+    <%= f.text_field :provider, type: "string", class: "inin form-control material input-lg", required: true %>
+    <%= f.label :name, "Provider", class: "inlabel" %>
+  </div>
+ </div>
+   <div class="actions" style="display: block;">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+  <script src="bower_components/Waves/dist/waves.min.js"></script>
+  <script>
+    //Waves effect on buttons      
+    Waves.attach('.waves', ['waves-float']);
+    Waves.init();
+  </script>
