@@ -21,7 +21,7 @@
                 <span class="label label-danger pull-right">16</span>
                 <a href="/clients" aria-expanded="false"><i class="fa fa-user"></i>Clients<span class="fa arrow"></span></a>
               </li>
-              <li data-toggle="modal" data-target="#myModal">
+              <li data-toggle="modal" data-target="#wthistorya">
                 <a id="wthistorya" aria-expanded="false"><i class="fa fa-briefcase"></i>History<span class="fa arrow"></span></a>
                 <ul class="gn-submenu collapse" aria-expanded="false">
                   <li><a href="colors.html">Assessment</a></li>
@@ -68,6 +68,11 @@
             </a>
           </li>
           <li class="">
+            <a data-toggle="modal" data-target="#labsform">
+              <i class="fa fa-search"></i>
+            </a>
+          </li>
+          <li class="">
             <a href='users/sign_out' class='logo' rel="nofollow" data-method="delete" data-confirm="Are you sure?">
               <i class="fa fa-toggle-on"></i>
             </a>
@@ -86,8 +91,85 @@
       </li>
     </ul>
 
-    <!-- Modal -->
+    <!-- Modal Search -->
 <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+        <div class="content-box box-shadow big-box todo-list">
+          <h1>Labs - </h1>
+
+            <div class="panele">
+              <div class="panel-body todo">
+                <ul class="list-group ui-sortable">
+                  <form action="">
+                    <div>
+                      <label for="alb" style="display: inline-block">Alb</label>
+                      <input id="alb" type="integer" placeholder="Alb">
+                    </div>
+                    <div>
+                      <label for="bun" style="display: inline-block">BUN</label>
+                      <input id="bun" type="integer" placeholder="BUN">
+                    </div>
+                    <div>
+                      <label for="creat" style="display: inline-block">Creat</label>
+                      <input id="creat" type="integer" placeholder="creat">
+                    </div>
+                    <div>
+                      <label for="chol" style="display: inline-block">Chol</label>
+                      <input id="chol" type="integer" placeholder="Chol">
+                    </div>
+                    <div>
+                      <label for="glu" style="display: inline-block">Glu</label>
+                      <input id="glu" type="integer" placeholder="Glu">
+                    </div>
+                    <div>
+                      <label for="hct" style="display: inline-block">Hct</label>
+                      <input id="hct" type="integer" placeholder="Hct">
+                    </div>
+                    <div>
+                      <label for="hgb" style="display: inline-block">Hgb</label>
+                      <input id="hgb" type="integer" placeholder="Hgb">
+                    </div>
+                    <div>
+                      <label for="iron" style="display: inline-block">Iron</label>
+                      <input id="iron" type="integer" placeholder="Iron">
+                    </div>
+                    <div>
+                      <label for="k" style="display: inline-block">K</label>
+                      <input id="k" type="integer" placeholder="K">
+                    </div>
+                    <div>
+                      <label for="na" style="display: inline-block">Na</label>
+                      <input id="na" type="integer" placeholder="Na">
+                    </div>
+                    <div>
+                      <label for="tprotein" style="display: inline-block">Total Protein</label>
+                      <input id="tprotein" type="integer" placeholder="Total Protein">
+                    </div>
+                    <div>
+                      <label for="tlymphocytect" style="display: inline-block">Total Lymphocyte Ct.</label>
+                      <input id="tlymphocytect" type="integer" placeholder="Total Lymphocyte Ct.">
+                    </div>
+                    <div>
+                      <label for="other" style="display: inline-block">Other</label>
+                      <input id="other" type="integer" placeholder="Other">
+                    </div>
+
+                  </form>
+                </ul>
+              </div>
+            </div>
+
+
+          </div>
+          
+
+  </div>
+</div>
+
+    <!-- Modal Labs Form-->
+<div id="labsform" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -98,7 +180,8 @@
   </div>
 </div>
 
-    <!-- Modal -->
+
+    <!-- Modal Wt History-->
 <div id="wthistorymodal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 

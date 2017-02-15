@@ -149,23 +149,46 @@
           <div></div>
 
         </div>
-        <div id="cbc">
-          <div>Na</div>
-          <div>K</div>
-          <div>Cl</div>
-          <div>Co2</div>
-          <div>BUN</div>
-          <div>Creat</div>
-          <div>Glu</div>
-          <div>HGB</div>
-          <div>HCT</div>
-          <div>ALB</div>
-          <div>T.Protein</div>
-          <div>Chol</div>
-          <div>Tri</div>
-          <div>A1C</div>
-          <div></div>
-
+        <div style="display:inline-block;margin:12px;vertical-align:top;width:30%">
+          <h1>Weight History</h1>
+          <%= form_for (Client.new), html: {class: "content-form"} do |f| %>
+          <div class="form-inline">
+            <div class="field-container form-group" style="width:20%;margin:12px">
+              <%= f.number_field :thirtywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :thirtywt, class: "inlabel" %>
+              
+            </div>
+            <div class="field-container form-group" style="width:35%">
+              <%= f.text_field :date1, type: "string", class: "inin form-control material input-lg", style:"width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :date1, 'Date', class: "inlabel" %>
+              
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="field-container form-group" style="width:20%;margin:12px">
+              <%= f.number_field :ninetywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :ninetywt, class: "inlabel" %>
+              
+            </div>
+            <div class="field-container form-group" style="width:35%">
+              <%= f.text_field :date2, type: "string", class: "inin form-control material input-lg", style:"width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :date2, 'Date', class: "inlabel" %>
+              
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="field-container form-group" style="width:20%;margin:12px">
+              <%= f.number_field :oneeightywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :oneeightywt, class: "inlabel" %>
+              
+            </div>
+            <div class="field-container form-group" style="width:35%">
+              <%= f.text_field :date3, type: "string", class: "inin form-control material input-lg", style:"width:100%", required: true, onchange: "chart0()" %>
+              <%= f.label :date3, 'Date', class: "inlabel" %>
+              
+            </div>
+          </div>
+          <% end %>
         </div>
           <!-- Trigger the modal with a button -->
           <button class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(rchart0, 500), diet(), intake(), cal(), pro(), fl(), dx(), bmi(), getAge(), adime()">Run</button> <button class="btn btn-primary btn-lg waves waves-button waves-effect waves-float">Save</button>
