@@ -2,6 +2,7 @@
 <html lang="en" class="no-js">
 
 <head>
+
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,6 +31,8 @@
 </head>
 
 <body>
+
+
 <div id="preloader" class="preloader table-wrapper" style="background: white;">
     <div class="table-row">
       <div id='contente'>
@@ -46,250 +49,25 @@
 </div>
     </div>
   </div>
+
 <script>
+
 ////////////
 //REMOVES ALERT GAP FROM DEVISE BETWEEN HEADER AND BODY
 ///////////
     
-  $('.notice').attr('class', '');
-  $('.alert').attr('class', '');
+  $('.notice').remove();
+  $('.alert').remove();
 </script>
 
 
 <frame><%= render partial: 'pages/landing' %></frame>
 <div id="mainwrapper"class="table-wrapper1">
 <frame><%= render partial: 'pages/header' %></frame>
+<iframe id="clientload" src="" frameborder="0" height="900px" width="100%" scrolling="no"></iframe>
 
     <!--Content-->
-<frame><%= render partial: 'pages/info' %></frame>
 
-<frame><%= render partial: 'pages/nutritionaldata' %></frame>
-<!-- Main form -->
-<!-- main form end -->
-        <div class="col-lg-3">
-          <div class="content-box big-box box-shadow">
-             <h4><strong>Intake</strong></h4>
-                  <div id='parentofselect' class="form-inline" onclick="intake()">
-                  <select id="client_intakefrom" class="cs-select cs-skin-border">
-                      <option value="" disabled>From</option>
-                      <option value="100%">100%</option>
-                      <option value="75%">75%</option>
-                      <option value="50%">50%</option>
-                      <option value="25%">25%</option>
-                      <option value="0%">0%</option>
-                      <option value="1">Refuse</option>
-                    </select>
-                    <select id="client_intaketo" class="cs-select cs-skin-border 1">
-                      <option value="" disabled>To</option>
-                      <option value="100%">100%</option>
-                      <option value="75%">75%</option>
-                      <option value="50%">50%</option>
-                      <option value="25%">25%</option>
-                      <option value="0%">0%</option>
-                    </select>
-                  </div>
-                </div>
-          </div>
-
-
-        <div class="col-lg-3">
-          <div class="content-box big-box box-shadow">
-                    <div class="form-inline">
-                    <h4><strong>Weight Goal</strong></h4>
-                    <select id="goals" class="cs-select cs-skin-border" onclick="cal()">
-                      <option value="" disabled>Goal</option>
-                      <option id="gainwt" value="gainwt">Gain Weight</option>
-                      <option value="maintainwt"  selected>Maintain Weight</option>
-                      <option value="losewt">Lose Weight</option>
-                    </select>
-                  </div>
-                <div class="checkbox checkbox-danger checkbox-big">
-                  <input type="checkbox" id="checkbox1">
-                  <label for="checkbox1">
-                      Diabetes
-                  </label>
-                </div>
-                <div class="checkbox checkbox-danger checkbox-big">
-                  <input type="checkbox" id="checkbox2">
-                  <label for="checkbox2">
-                      Hypertension
-                  </label>
-                </div>
-                <div class="checkbox checkbox-danger checkbox-big">
-                  <input type="checkbox" id="checkbox3">
-                  <label for="checkbox3">
-                      Renal Issues
-                  </label>
-                </div>
-          </div>
-        </div>
-    <!--FORM-->
-  
-<!-- FOOD NEAR ME PLUGIN
-              <div class="form-group">
-                <input type="string" id="location" class="form-control material input-lg", placeholder="Location" onchange="loc()">
-              </div> 
-              <div class="form-group">
-                <input type="string" id="radius" class="form-control material input-lg", placeholder="How far from you?">
-              </div>
-
-              -->
-<!-- FOOD SEARCH
-              <div class="form-group">
-                <input type="string" id="food" class="form-control material input-lg", placeholder="What are you craving?eg.Pizza,Burger, Pasta" onchange="zomato(), run()">
-              </div>
-
-            -->
-
-
-
-
-
-
-<!-- FOOD SEARCH API-->
-<!--
-              <div class="content-box box-shadow ultra-widget">
-                <div class="w-content big-box">
-                  <div id="mealplan1">
-                      
-                    <div id="onefood" class="onefood">
-
-                    </div>
-                    <div onclick="run()" id="onefood1" class="onefood">
-                      hello
-
-                    </div>
-
-<gcse:search onchange="shearch()"></gcse:search>
-<gcse:searchresults-only></gcse:searchresults-only>
-
-                    
-                    
-
-
-
-                  
-   
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-
-
-                </div>
-              </div> -->
-<!--ANTHROPOMETRICS-->
-<!--TODO LIST-->
-
-          <div class="col-lg-4 content-box box-shadow big-box todo-list">
-
-            <div class="sort-todo">
-              <a class="all-todo" href="#">All</a>
-              <a class="active-todo" href="#">Active <span class="badge yellow-bg"></span></a>
-              <a class="complete-todo" href="#">Complete <span class="badge red-bg"></span></a>
-              <a class="archive-todo" href="#">Archive <span class="badge green-bg"></span></a>
-            </div>
-
-            <form id="add_todo" method="post">
-              <div class="form-group add-todo">
-                <div class="input-group">
-                  <div class="input-group-addon"><i class="fa fa-pencil green"></i></div>
-                  <input type="text" class="form-control name-of-todo" placeholder="Write here your to do item">
-                </div>
-              </div>
-            </form>
-
-            <div class="panele">
-              <div class="panel-body todo">
-                <ul class="list-group">
-                  <li class="list-group-item list-success">
-                    <div class="checkbox">
-                      <input type="checkbox" id="checkbox" />
-                      <label for="checkbox">
-                        Searches
-                      </label>
-                    </div>
-                    <div class="pull-right action-btns">
-                      <a class="archive"><span class="fa fa-archive"></span></a>
-                      <a class="trash"><span class="fa fa-close"></span></a>
-                    </div>
-                  </li>
-                  <li class="list-group-item  list-danger">
-                    <div class="checkbox">
-                      <input type="checkbox" id="checkbox2" />
-                      <label for="checkbox2">
-                        Marketing
-                      </label>
-                    </div>
-                    <div class="pull-right action-btns">
-                      <a class="archive"><span class="fa fa-archive"></span></a>
-                      <a class="trash"><span class="fa fa-close"></span></a>
-                    </div>
-                  </li>
-                  <li class="list-group-item  list-warning checked-todo">
-                    <div class="checkbox">
-                      <input type="checkbox" id="checkbox3" checked/>
-                      <label for="checkbox3">
-                        Links
-                      </label>
-                    </div>
-                    <div class="pull-right action-btns">
-                      <a class="archive"><span class="fa fa-archive"></span></a>
-                      <a class="trash"><span class="fa fa-close"></span></a>
-                    </div>
-                  </li>
-                  <li class="list-group-item  list-info">
-                    <div class="checkbox">
-                      <input type="checkbox" id="checkbox4" />
-                      <label for="checkbox4">
-                        E-mails
-                      </label>
-                    </div>
-                    <div class="pull-right action-btns">
-                      <a class="archive"><span class="fa fa-archive"></span></a>
-                      <a class="trash"><span class="fa fa-close"></span></a>
-                    </div>
-                  </li>
-                  <li class="list-group-item  list-danger">
-                    <div class="checkbox">
-                      <input type="checkbox" id="checkbox5" />
-                      <label for="checkbox5">
-                        Social Media
-                      </label>
-                    </div>
-                    <div class="pull-right action-btns">
-                      <a class="archive"><span class="fa fa-archive"></span></a>
-                      <a class="trash"><span class="fa fa-close"></span></a>
-                    </div>
-                  </li>
-                  <li class="list-group-item  list-primary">
-                    <div class="checkbox">
-                      <input type="checkbox" id="checkbox6" />
-                      <label for="checkbox6">
-                        Advertising
-                      </label>
-                    </div>
-                    <div class="pull-right action-btns">
-                      <a class="archive"><span class="fa fa-archive"></span></a>
-                      <a class="trash"><span class="fa fa-close"></span></a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="checkbox clear-todo pull-left">
-              <input type="checkbox" id="clear" />
-              <label for="clear">
-                Mark all as complete
-              </label>
-            </div>
-            <button id="clear-comp" class="btn btn-warning waves text-uppercase pull-right">Clear Completed</button>
-
-
-          </div>
-      </div>
     </div>
   </div>
 </div>
@@ -336,13 +114,7 @@
   <%= javascript_include_tag 'jquery.flot.orderBars' %>
 
   <!--Custom Flot Charts-->
-
   <%= javascript_include_tag 'Chart' %>
-  <%= javascript_include_tag 'line-chart-1' %>
-  <%= javascript_include_tag 'line-chart-2' %>
-  <%= javascript_include_tag 'line-chart-3' %>
-  <%= javascript_include_tag 'bar-chart' %>
-
   <!--C3.js-->
 
   <%= javascript_include_tag 'd3.min' %>
@@ -386,100 +158,16 @@
 <!--AUTOCOMPLETE PLUGINS -->
 <%= javascript_include_tag 'standalone/selectize' %>
 
+<!-- MODAL EFFECTS -->
+<%= javascript_include_tag 'cssParser' %>
+<%= javascript_include_tag 'modalEffects' %>
 
 <!-- DO NOT TOUCH WITHOUT REVIEWING -->
-
-  <script>
-
-//DATATABLE FUNCTION TO LIMIT AMOUNT OF RESULTS DISPLAYED
-
-    $(function () {
-      //Data Tables
-      $('#datatable1').DataTable({
-        displayLength: 25,
-        dom: 'T<"clear">lfrtip',
-        tableTools: {
-          "sSwfPath": "assets/copy_csv_xls_pdf.swf"
-        },
-        responsive: true
-      });
-    });
-  
-
-
-
-
-  var ctx2 = document.getElementById("chart-line").getContext("2d");
-  var myLine = new Chart(ctx2).Line(lineChartData, {
-          responsive: true
-      });
-  var parent = document.getElementById("assessment")
-    $(function () {
-
-
-
-      /*c3.js*/ // NEEDED FOR THE CHART
-      var chart = c3.generate({
-        bindto: '#reg-history',
-        size: {
-          height: 90
-        },
-        data: {
-          columns: [
-            ['New users', 30, 35, 45, 33, 48, 54, 41, 66, 49, 43, 38, 46]
-          ]
-        },
-        legend: {
-          show: false
-        },
-        color: {
-          pattern: ['#fff']
-        },
-        point: {
-          r: 3
-        },
-        axis: {
-          x: {
-            show: false
-          },
-          y: {
-            show: false
-          }
-        }
-      });
-            // show the notification
- 
-
-
-
-      //Tooltips for Flot Charts
-      if ($(".flot-chart")[0]) {
-        $(".flot-chart").bind("plothover", function (event, pos, item) {
-          if (item) {
-          var x = item.datapoint[0].toFixed(2),
-            y = item.datapoint[1].toFixed(2);
-
-          $(".flot-tooltip").html(x + " of " + y)
-            .css({top: item.pageY+5, left: item.pageX+5})
-            .fadeIn(200);
-        } else {
-          $(".flot-tooltip").hide();
-        }
-        });
-
-        $("<div class='flot-tooltip'></div>").appendTo("body");
-      }
-    });
-  </script>
-
-  <!-- Food list API-->
-
-
 
   <!-- Equation can be simplified into two variables -->
 <script>
 
-
+//DOCUMENT READY
 $(document).ready(function(){
     $(document).ajaxStart(function(){
         $("#wait").css("display", "block");
@@ -497,11 +185,14 @@ $(document).ready(function(){
     if(selectedClient == null) {
     $('#landing').css('visibility', 'visible');
                                     }
-  if(selectedClient > 0) {
+    if(selectedClient > 0) {
     $('#landing').css('visibility', 'hidden');
-                                }
-
+            }
 });
+
+</script>
+
+<script>
 
 var food1;
 var lat;
@@ -621,7 +312,7 @@ var selectedClient;
 var jsona = $.getJSON('https://dietitianhelp.herokuapp.com/clients', function(data) {  return JSON.stringify(data)});
     //data is the JSON string
 
-
+var newClientName;
 
 
 
@@ -633,20 +324,41 @@ var jsona = $.getJSON('https://dietitianhelp.herokuapp.com/clients', function(da
 $('.gn-search').selectize({
     theme: 'links',
     maxItems: 1,
-    preload: false,
+    preload: true,
     valueField: 'id',
+    placeholder: 'Search/create',
     searchField: ['lastname', 'firstname'],
     options: [],
     create: true,
+    allowEmptyOption: false,
     updatePlaceholder: true,
+    openOnFocus: true,
     render: {
         option: function(data, escape) {
-            return '<div class="item">' + escape(data.firstname) + ' ' + escape(data.lastname) + ' ' +
-                '</div>';
-        },
-        item: function(data, escape) {
+            if(data.firstname == undefined) {
+              newClientName = data.text
+            return '<div class="item">' + escape(data.text) +'</div>';
+              }
+              else {
             return '<div class="item">' + escape(data.firstname) + ' ' + escape(data.lastname) + ' ' + 
                 '</div>';
+              }
+        },
+        item: function(data, escape) {
+          if(data.firstname == undefined) {
+            newClientName = data.text
+            var newClientNameArr = newClientName.split(" ");
+            $('#hiddenfirstname').val(newClientNameArr[0]);
+            $('#hiddenlastname').val(newClientNameArr[1]);
+            $( "#hiddenform" ).first().show( "fast");
+            $( "#hiddensubmit" ).first().show( "fast");
+            $('#hiddensubmit').attr('class','fa fa-stack-1x fa-inverse fa-user-plus');
+            return '<div class="item">' + escape(data.text) +'</div>';
+              }
+              else {
+            return '<div class="item">' + escape(data.firstname) + ' ' + escape(data.lastname) + ' ' + 
+                '</div>';
+              }
         }
     },
     load: function(query, callback) {
@@ -691,11 +403,14 @@ if ($('#select-beast-head:first-child').val() > 0) {
 };
   selectedClient = parseInt($('#select-beast-modal:first-child').html());
 
+$('#selectinput').attr('class', 'selectize-input items has-options not-full');
 //////////
 // PLOT DATA IF CLIENT EXIST
 /////////
 
   if(jQuery.isNumeric(selectedClient)) {
+
+  $('#clientload').attr("src", "clients/" + selectedClient);
     
   $('#client_firstnamespan').html(jsona.responseJSON[selectedClient- 1450].firstname);
   $('#client_lastnamespan').html(jsona.responseJSON[selectedClient - 1450].lastname);
@@ -731,8 +446,9 @@ if ($('#select-beast-head:first-child').val() > 0) {
   NProgress.start();
   NProgress.done();
   $('#mainwrapper').toggleClass('table-wrapper1');
-  $('#clienteditbut').onClick('href', '/client/' + selectedClient + '/edit')
 }, 1000);
+
+
 };
 
 /////////////
@@ -808,7 +524,9 @@ $('#client_dx').selectize({
 
 <script>
 
-
+////////////////////
+// DATEPICKERS 'PICKADAY'
+///////////////////
 
 $('.inin').prop('required',true);
 
@@ -846,8 +564,6 @@ $('#client_date3').pikaday({
     });
 window.onload = function() {
   $('.selectize-dropdown').css('zIndex', '9999');
-
-  document.getElementById('todaysdate').innerHTML = moment(new Date()).format('LL');
 
   };
 var acc = document.getElementsByClassName("accordion");
@@ -1013,434 +729,53 @@ function checker() {
 */
 
 
-// MEDICAL FAST EDITING
-
-/*
- *
- *   DIETITIAN.HELP
- *   ALL RIGHTS RESERVED
- *
-*/
-
-function diet() {
-
-  $("#cdietspan")[0].innerText = document.getElementById('client_cdiet').value;
-  $(function(){
-    $("#cdietspan").typed({
-      strings: [document.getElementById('client_cdiet').value],
-      typeSpeed: 4
-    });
-  });
-
-
-};
-  
-function intake() {
-  if($('#client_intakefrom')[0].value == 1){
-    $("#client_intaketo")[0].parentElement.className = 'cs-select cs-skin-border cs-skin-borderdisabled';
-    $("#intakefromspan")[0].innerHTML = 'Refuse';
-    $("#intaketospan")[0].innerHTML = '';
-  }
-  else {
-    $("#client_intaketo")[0].parentElement.className = 'cs-select cs-skin-border cs-active';
-  $("#intakefromspan")[0].innerHTML = document.getElementById('client_intakefrom').value;
-  $("#intaketospan")[0].innerHTML = '- ' + document.getElementById('client_intaketo').value;
-        }
-};
-
-var genderval = 'male'
-var ibwval;
-
-/* GENDER SCRIPT!
-
-function gender() {
-
-      if(document.getElementById('switch5').checked) {
-          genderval = 'female';
-          $('#gendermspan').fadeOut(20, function(){
-            $('#genderfspan').fadeIn(50);
-          })};
-      if(document.getElementById('switch5').checked == false) {
-        genderval = 'male';
-        $('#genderfspan').fadeOut(20, function(){
-            $('#gendermspan').fadeIn(50);
-          });}
-};
-
-*/
-function ibw() { 
-
-    document.getElementById("ibwmale").className = "blue"
-    document.getElementById("ibwfemale").className = "red"
-    var x = document.getElementById("client_ht").value;
-    var y = x - 60 
-    var z = y * 6 + 106
-    document.getElementById("ibwmalespan").style.display = "none"
-    document.getElementById("ibwfemalespan").style.display = "none"
-    document.getElementById("loaderg").style.display = "block"
-    document.getElementById("loaderg2").style.display = "block"
-
-    var a = document.getElementById("client_ht").value;
-    var b = x - 60
-    var c = y * 5 + 105
-   
-
-    if(document.getElementById("client_ht").value.length == '') {
-      widgetUsed("ibwmale", 0);
-      widgetUsed("ibwfemale", 0);
-      document.getElementById("ibwmalespan").style.display = "none"
-      document.getElementById("ibwfemalespan").style.display = "none"
-      document.getElementById("loaderg").style.display = "block"
-      document.getElementById("loaderg2").style.display = "block"
-      document.getElementById("ibwmale").className = "emptygray"
-      document.getElementById("ibwfemale").className = "emptygray"
-    }
-    if(z > 0 && c > 0 ) {
-      document.getElementById("ibwmalespan").style.display = "block"
-      document.getElementById("ibwfemalespan").style.display = "inline"
-      document.getElementById("loaderg").style.display = "none"
-      document.getElementById("loaderg2").style.display = "none"
-      document.getElementById("ibwmale").className = "blue"
-      document.getElementById("ibwfemale").className = "red"
-          }
-
-      if(document.getElementById('switch4').checked) {
-      widgetUsed(("ibwmale"), Math.floor(z /2.2));
-      widgetUsed(("ibwfemale"), Math.round(c /2.2));
-      document.getElementById("inkg").style.display = "block"
-      document.getElementById("inlbs").style.display = "none"
-
-}
-      if(document.getElementById('switch4').checked == false) {
-      widgetUsed(("ibwmale"), Math.floor(z));
-      widgetUsed(("ibwfemale"), Math.round(c));
-      document.getElementById("inkg").style.display = "none"
-      document.getElementById("inlbs").style.display = "block"
-}
-    if(z < 0 && c < 0 ) {
-      widgetUsed("ibwmale", 0);
-      widgetUsed("ibwfemale", 0);
-      document.getElementById("ibwmalespan").style.display = "none"
-      document.getElementById("ibwfemalespan").style.display = "none"
-      document.getElementById("loaderg").style.display = "block"
-      document.getElementById("loaderg2").style.display = "block"
-      document.getElementById("ibwmale").className = "emptygray"
-      document.getElementById("ibwfemale").className = "emptygray"
-    }
-    if(document.getElementById('switch4').unchecked) {
-      widgetUsed(("ibwmale"), Math.floor(z));
-      widgetUsed(("ibwfemale"), Math.round(c /2.2));
-}
-    
-    if(genderval == 'male'){
-      ibwval = z;
-    }
-    if (genderval == 'female'){
-      ibwval = c;
-    }
-    $("#percentibw")[0].innerHTML = Math.round(document.getElementById("client_cbw").value/ibwval * 100);
-  };
-
-function cal() { 
-    var x = document.getElementById("client_cbw").value;
-    var y = x/2.2
-    var z = y * 30
-    var goalselect = document.getElementById('goals');
-    var goalselected = goalselect.options[goalselect.selectedIndex].innerHTML;
-    $("#cbwspan").text(jsona.responseJSON[selectedClient - 1450].cbw)
-    
-
-    if(goalselected == 'Gain Weight') {
-     widgetUsed("calrequirement", parseInt(z - z + 1 * y * 35));
-        }
-
-    if(goalselected == 'Maintain Weight') {
-     widgetUsed("calrequirement", parseInt(z));
-        }
-
-    if(goalselected == 'Lose Weight') {
-     widgetUsed("calrequirement", parseInt(z - z + 1 * y * 25));
-        }
-    }
-
-function dx() {
-$("#dxspan")[0].innerHTML = document.getElementById("client_dx").value;
-  $(function(){
-    $("#dxspan").typed({
-      strings: [document.getElementById('client_dx').value],
-      typeSpeed: 4
-    });
-  });
-
-}
-function bmi() { 
-    var x = document.getElementById("client_cbw").value;
-    var y = document.getElementById("client_ht").value;
-    var z = x / y
-    var a = z / y
-    var b = a * 703
-
-
-   if(document.getElementById("client_cbw").value.length < 1 || b > 50 ) {
-      bmiused("bmispan", 0);
-      bmiused("bmispanhead", 0);
-      bmiused("bmispanin", 0);
-
-
-    }
-
-    if(b < 50 && b > 10) {
-      $("#bmispan").innerHTML = b;
-      $("#bmispanhead")[0].innerHTML = b.toFixed(1);
-      bmiused("bmispan", b.toFixed(1));
-      bmiused("bmispanin", b.toFixed(1));
-      bmiused("bmispanhead", b.toFixed(1));
-    }
-
-    bmiused("bmispan", b.toFixed(1));
-          };
-
-function pro() { 
-    var x = document.getElementById("client_cbw").value;
-    var y = x/2.2
-    var z = y * 1
-    widgetUsed("prorequirement", Math.round(z));
-} 
-function fl() { 
-    var x = document.getElementById("client_cbw").value;
-    var y = x/2.2
-    var z = y * 30
-    widgetUsed("flrequirement", Math.round(z));
-        }
-
-function convert() {
-
-  var a = document.getElementById("ibwmale").value / 2.2
-  var b = document.getElementById("ibwfemale").value / 2.2
-  widgetUsed(("ibwmale"), Math.floor(a));
-  widgetUsed(("ibwfemale"), Math.round(b));
-
-}
-
-
-
-function rchart0 () {
- NProgress.start();
-  //resets all parameters in assess
-
-  var loss1;
-  var loss2;
-  var loss3;
-  var gain1;
-  var gain2;
-  var gain3;
-
-$("#loss1days")[0].innerHTML = ''
-$("#loss2days")[0].innerHTML = ''
-$("#loss3days")[0].innerHTML = ''
-$("#gain1days")[0].innerHTML = ''
-$("#gain2days")[0].innerHTML = ''
-$("#gain3days")[0].innerHTML = ''
-
-  myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
-  myLine.scale.xLabels[3] = document.getElementById("client_date0").value;
-  myLine.datasets[1].points[2].value = document.getElementById("client_thirtywt").value;
-  myLine.scale.xLabels[2] = document.getElementById("client_date1").value;
-  myLine.datasets[1].points[1].value = document.getElementById("client_ninetywt").value;
-  myLine.scale.xLabels[1] = document.getElementById("client_date2").value;
-  myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
-  myLine.scale.xLabels[0] = document.getElementById("client_date3").value;
-  myLine.update();
-
-  NProgress.inc();
-
-  if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[2].value * 100) <= 95) {
-    loss1 = true
-
-  }
-  if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[2].value * 100) >= 105) {
-    gain1 = true
-  }
-  
-  if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[1].value * 100) <= 92.5) {
-    loss2 = true
-  }
-  if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[1].value * 1000) >= 1075) {
-    gain2 = true
-
-  }
-  if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[0].value * 100) <= 90) {
-    loss3 = true
-
-  }
-  if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[0].value * 100) >= 110) {
-    gain3 = true
-
-  }
-
-  NProgress.inc();
-
-  if($('#wthistory').smkValidate({lang:'es'})){}
-
-  if(loss1 == true || loss2 == true || loss3 == true){
-    $("#losshist")[0].innerHTML = 'Significant Weight Loss for the past ';
-    if(loss1 == true){
-      $("#loss1days")[0].innerHTML = ' 30';
-      if(loss2 == true || loss3 == true){
-        $("#loss1days")[0].innerHTML = ' 30/'
-      }
-    }
-    if(loss2 == true){
-      $("#loss2days")[0].innerHTML = '90';
-        if(loss3 == true){
-        $("#loss2days")[0].innerHTML = '90/'
-      }
-    }
-    if(loss3 == true){
-      $("#loss3days")[0].innerHTML = '180';
-    }
-  }
-  NProgress.inc();
-  if(loss1 == true || loss2 == true || loss3 == true){
-    $("#lossdays")[0].innerHTML = ' days'
-    }
- if(gain1 == true || gain2 == true || gain3 == true){
-    $("#gainhist")[0].innerHTML = 'Significant Weight Gain for the past ';
-    if(gain1 == true){
-      $("#gain1days")[0].innerHTML = ' 30';
-      if(gain2 == true || gain3 == true){
-        $("#gain1days")[0].innerHTML = ' 30/'
-      }
-    }
-    if(gain2 == true){
-      $("#gain2days")[0].innerHTML = '90';
-        if(gain3 == true){
-        $("#gain2days")[0].innerHTML = '90/'
-      }
-    }
-    if(gain3 == true){
-      $("#gain3days")[0].innerHTML = '180';
-    }
-  }
-  if(gain1 == true || gain2 == true || gain3 == true){
-    $("#gaindays")[0].innerHTML = ' days'
-    }
-  if((loss1 == true || loss2 == true || loss3 == true) && (gain1 == true || gain2 == true || gain3 == true)){
-    $("#and")[0].innerHTML = ' and '
-    }
-    if(loss1 == true || loss2 == true || loss3 == true || gain1 == true || gain2 == true || gain3 == true) {
-      $.smkAlert({ text: 'Significant Weight Change', type: 'danger', permanent: true });
-    }
-NProgress.done();
-//setTimeout(noti, 1000);
-};
-
-function noti() {
-  swal("Assessment Completed", "Modify as necessary", "success");
-
-}
-
-function chart0 () {
-
-  if(document.getElementById("client_date0").value.length == '') {
-      return;
-
-    }
-    
-  myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
-
-  if (myLine.datasets[1].points[3].value > 0) {
-      myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
-      myLine.scale.xLabels[3] = document.getElementById("client_date0").value;
-
-
-  }
-
-
-
-  if(document.getElementById("client_date1").value.length == '') {
-      return;
-
-    }
-    
-  myLine.datasets[1].points[2].value = document.getElementById("thirtywt").value;
-
-  if (myLine.datasets[1].points[2].value > 0) {
-      myLine.datasets[1].points[2].value = document.getElementById("thirtywt").value;
-      myLine.scale.xLabels[2] = document.getElementById("client_date1").value;
-
-
-  }
-
-      if(document.getElementById("client_date2").value.length == '') {
-      return;
-
-    }
-  myLine.datasets[1].points[1].value = document.getElementById("ninetywt").value;
-
-  if (myLine.datasets[1].points[1].value > 0) {
-      myLine.datasets[1].points[1].value = document.getElementById("ninetywt").value;
-      myLine.scale.xLabels[1] = document.getElementById("client_date2").value;
-
-
-  }
-
-
-     if(document.getElementById("client_date3").value.length == '') {
-      return;
-
-    }
-  myLine.datasets[1].points[0].value = document.getElementById("oneeightywt").value;
-
-  if (myLine.datasets[1].points[0].value > 0) {
-      myLine.datasets[1].points[0].value = document.getElementById("oneeightywt").value;
-      myLine.scale.xLabels[0] = document.getElementById("client_date3").value;
-
-
-  }
-  myLine.update();
-};
-
-
-
-      //UltraWidget
-      function widgetUsed(id, number, string) {     
-        $("#" + id).prop('Counter',0).animate({
-              Counter: number
-          }, {
-              duration: 800,
-              easing: 'swing',
-              step: function (now) {
-                  $("#" + id).text(now.toFixed(0));
-              }
-          });
-      };
-      
-      $(".w-refresh").click(function(){
-        var counter = $(this).closest(".ultra-widget").data("counter");
-        var counter_id = $(this).closest(".ultra-widget").attr("id");
-        widgetUsed(counter_id, counter);    
-      });
-            function bmiused(id, number, string) {     
-        $("#" + id ).prop('Counter',0).animate({
-              Counter: number
-          }, {
-              duration: 800,
-              easing: 'swing',
-              step: function (now) {
-                  $("#" + id).text(now.toFixed(1));
-              }
-          });
-      };
-      
-      $(".w-refresh").click(function(){
-        var counter = $(this).closest(".ultra-widget").data("counter");
-        var counter_id = $(this).closest(".ultra-widget").attr("id");
-        widgetUsed(counter_id, counter);    
-      });
 
 
 </script>
+
+ <script>
+
+
+
+var $parentElement= document
+
+
+    //Waves effect on buttons      
+    Waves.attach('.waves', ['waves-float']);
+    Waves.init();
+
+function removee(){
+  var parent = document.querySelectorAll('iframe')[0].contentWindow
+  var child = document.querySelectorAll('iframe')[0].contentWindow.document.getElementsByClassName('notice');
+  var child2 = document.querySelectorAll('iframe')[0].contentWindow.document.getElementsByClassName('alert');
+  $(child).remove();
+  $(child2).remove();
+
+
+}; 
+
+function ajaxSubmit(){
+    var data  = $("form")
+    //Ajax code here
+    $.ajax({
+            url: 'https://dietitianhelp.herokuapp.com/clients/' + selectedClient,
+            type: 'PATCH',
+            dataType: 'json',
+            data: data,
+          });
+    console.log(data)
+}
+
+function submit() {
+
+         // tasks to do 
+         console.log('done');
+        selectedClient = <%= Client.all.length %>
+
+}
+
+<% currentUser = current_user.username.to_s%>
+  </script>
 
 </body>
 

@@ -17,29 +17,16 @@
               <li  class="gn-search-item">
                 <select id="select-beast-head" placeholder="Search" class="gn-search" style="opacity: 1; position: absolute; left: 0px; width: 100%; padding-top:10px;"></select>
               </li>
+              <li>
+                <a id="assessmenttool" aria-expanded="false"><i class="fa fa-language"></i>Assess<span class="fa arrow"></span></a>
+              </li>
                <li>
-                <span class="label label-danger pull-right">16</span>
-                <a href="/clients" aria-expanded="false"><i class="fa fa-user"></i>Clients<span class="fa arrow"></span></a>
+                <a id="clientsfrommenu" aria-expanded="false"><i class="fa fa-user"></i>Clients<span class="fa arrow"></span></a>
               </li>
-              <li data-toggle="modal" data-target="#wthistorya">
-                <a id="wthistorya" aria-expanded="false"><i class="fa fa-briefcase"></i>History<span class="fa arrow"></span></a>
-                <ul class="gn-submenu collapse" aria-expanded="false">
-                  <li><a href="colors.html">Assessment</a></li>
-                  <li ><a>Weight</a>
-              <i class="fa fa-search"></i>
-            </a></li>
-                  <li><a href="icons.html">Intake</a></li>
-                  <li><a href="form-elements.html">Diets</a></li>
-                </ul>
-              </li>
-            </ul>
+                <li>
+                <a type="button"id="historyfrommenu" aria-expanded="false"><i class="fa fa-history"></i>History<span class="fa arrow"></span></a>
           </div>
           <!-- /gn-scroller -->
-          <div id='assessment'class="bottom-bnts">
-            <a class="profile" href="#"><i class="mdi mdi-account"></i></a>
-            <a class="fix-nav" href="#"><i class="mdi mdi-pin"></i></a>
-            <a class="logout" href="#"><i class="mdi mdi-power"></i></a>
-          </div>
         </nav>
       </li>
       <li class="pull-left">
@@ -63,7 +50,7 @@
         <ul class="nav navbar-right right-menu">
               <div class="empty"></div>
           <li class="">
-            <a data-toggle="modal" data-target="#myModal">
+            <a data-toggle="modal" data-target="#searchmodal">
               <i class="fa fa-search"></i>
             </a>
           </li>
@@ -92,84 +79,10 @@
     </ul>
 
     <!-- Modal Search -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
 
-    <!-- Modal content-->
-        <div class="content-box box-shadow big-box todo-list">
-          <h1>Labs - </h1>
-
-            <div class="panele">
-              <div class="panel-body todo">
-                <ul class="list-group ui-sortable">
-                  <form action="">
-                    <div>
-                      <label for="alb" style="display: inline-block">Alb</label>
-                      <input id="alb" type="integer" placeholder="Alb">
-                    </div>
-                    <div>
-                      <label for="bun" style="display: inline-block">BUN</label>
-                      <input id="bun" type="integer" placeholder="BUN">
-                    </div>
-                    <div>
-                      <label for="creat" style="display: inline-block">Creat</label>
-                      <input id="creat" type="integer" placeholder="creat">
-                    </div>
-                    <div>
-                      <label for="chol" style="display: inline-block">Chol</label>
-                      <input id="chol" type="integer" placeholder="Chol">
-                    </div>
-                    <div>
-                      <label for="glu" style="display: inline-block">Glu</label>
-                      <input id="glu" type="integer" placeholder="Glu">
-                    </div>
-                    <div>
-                      <label for="hct" style="display: inline-block">Hct</label>
-                      <input id="hct" type="integer" placeholder="Hct">
-                    </div>
-                    <div>
-                      <label for="hgb" style="display: inline-block">Hgb</label>
-                      <input id="hgb" type="integer" placeholder="Hgb">
-                    </div>
-                    <div>
-                      <label for="iron" style="display: inline-block">Iron</label>
-                      <input id="iron" type="integer" placeholder="Iron">
-                    </div>
-                    <div>
-                      <label for="k" style="display: inline-block">K</label>
-                      <input id="k" type="integer" placeholder="K">
-                    </div>
-                    <div>
-                      <label for="na" style="display: inline-block">Na</label>
-                      <input id="na" type="integer" placeholder="Na">
-                    </div>
-                    <div>
-                      <label for="tprotein" style="display: inline-block">Total Protein</label>
-                      <input id="tprotein" type="integer" placeholder="Total Protein">
-                    </div>
-                    <div>
-                      <label for="tlymphocytect" style="display: inline-block">Total Lymphocyte Ct.</label>
-                      <input id="tlymphocytect" type="integer" placeholder="Total Lymphocyte Ct.">
-                    </div>
-                    <div>
-                      <label for="other" style="display: inline-block">Other</label>
-                      <input id="other" type="integer" placeholder="Other">
-                    </div>
-
-                  </form>
-                </ul>
-              </div>
-            </div>
-
-
-          </div>
-          
-
-  </div>
-</div>
 
     <!-- Modal Labs Form-->
-<div id="labsform" class="modal fade" role="dialog">
+<div id="searchmodal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -238,7 +151,36 @@
 
 <!-- JAVASCRIPT BEGINS -->
 <script>
+var hist = 
 
+$('#assessmenttool').click(function(){
+  $.ajax({
+            url: "clients/" + selectedClient + "/nutritionaldata",
+            type: 'GET',
+            success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
+            window.removee();
+            $(document.querySelectorAll('iframe')[0].contentWindow.document.getElementById('updatebut')).click(function(){
+              window.ajaxSubmit()
+            });
+          }
+});
+})
+$('#historyfrommenu').click(function(){
+  $.ajax({
+            url: "client_info/" + selectedClient,
+            type: 'GET',
+            success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
+          window.removee();}
+});
+})
+$('#clientsfrommenu').click(function(){
+  $.ajax({
+            url: "clients",
+            type: 'GET',
+            success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
+          window.removee();}
+});
+})
 
 </script>
     <!-- JAVASCRIPT ENDS-->

@@ -6,68 +6,78 @@
             <div class="top">
               <h1 class="" style="margin:0.67em 0 -0.3em;">Search/Add</h1>
 
-              <a href="" class="fa-stack fa-2x icon-back">
+              <a class="fa-stack fa-2x icon-back">
                 <i class="fa fa-circle fa-stack-2x blue"></i>
                 <i class="fa fa-long-arrow-left fa-stack-1x fa-inverse"></i>
               </a>
             </div>
               <form class="big-box">
-              	<a href="" class="fa-stack fa-2x icon-home" style="top:52%;z-index:1500" type="submit" name="commit" value="Create Client" data-disable-with="Create Client">
+              	<a class="fa-stack fa-2x icon-home" style="top:52%;z-index:1500" type="submit" name="commit" value="Create Client" data-disable-with="Create Client">
                 <i class="fa fa-circle fa-stack-2x yellow"></i>
                 <i id="landsearchicon" class="fa fa-search fa-stack-1x fa-inverse"></i>
               </a>
                 <div class="form-group">
-                  <input id="select-beast-landsearch" type="search" class="gn-search form-control material" id="email" placeholder="Search" autofocus>	
+                  <input id="select-beast-landsearch" type="search" class="gn-search form-control material" placeholder="Search" autofocus>	
                 </div>
                 <label for="select-beast-landsearch">Name</label>
               </form>
+               <div id="hiddenform" class="hidden-form" style="display: none; margin-top: -30px">
+  <%= form_for (Client.new), remote: true, onsubmit: "submit()", html: {class: "content-form form-inline"} do |f| %>
+
+  <div  class="field-container form-group" style="dispaly: none;" >
+    <%= f.text_field :firstname, id: "hiddenfirstname", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true%>
+    <%= f.label :firstName, "First Name", style: "margin: 0px;", class: "" %>
+  </div>
+
+  <div  class="field-container form-group" >
+    <%= f.text_field :lastname, id: "hiddenlastname", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+    <%= f.label :lastname, "Last Name", style: "margin: 0px;", class: "" %>
+  </div>
+
+    <div  class="field-container form-group" >
+    <%= f.text_field :provider, type: "string", value: current_user.username.to_s, disabled: 'disabled', id: "hiddenprovider", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+    <%= f.label :provider, "Provider", style: "margin: 0px;", class: "" %>
+  </div>
+
+  <div  class="field-container form-group" >
+    <%= f.text_field :dob, id: "hiddendob", type: "date", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;",required: true %>
+    <%= f.label :dob, "Date of Birth", style: "margin: 0px;", class: "" %>
+  </div>
+
+  <div  class="field-container form-group" >
+    <%= f.text_field :gender, id: "hiddengender", placeholder: "'Male', 'Female'",type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+    <%= f.label :gender, "Gender", style: "margin: 0px;", class: "" %>
+  </div>
+
+  <div  class="field-container form-group" >
+    <%= f.text_field :allergies, id: "hiddenallergies", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+    <%= f.label :Allergies, "Allergies", style: "margin: 0px;", class: "" %>
+  </div>
+
+  <div  class="field-container form-group" >
+    <%= f.text_field :cbw, id: "hiddencbw", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", placeholder: "lbs",required: true %>
+    <%= f.label :cbw, "CBW", style: "margin: 0px;", class: "" %>
+  </div>
+
+  <div  class="field-container form-group" >
+    <%= f.text_field :ht, id: "hiddenht", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", placeholder: "inches", required: true %>
+    <%= f.label :ht, "Height", style: "margin: 0px;", class: "" %>
+  </div>
+
+ </div>
+   <div  class="actions">
+    <%= f.submit id: "hiddensubmit" %>
+  </div>
+<% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
 
- <div id="hiddenform" class="hidden-form" style="display:none">
- 	<%= form_for (Client.new), html: {class: "content-form form-inline"} do |f| %>
 
-  <div class="field-container form-group">
-    <%= f.text_field :firstname, type: "string", class: "inin form-control material input-lg", required: true%>
-    <%= f.label :name, "First Name", class: "inlabel"%>
-    
-  </div>
-
-  <div class="field-container form-group">
-    <%= f.text_field :lastname, type: "string", class: "inin form-control material input-lg", required: true %>
-    <%= f.label :name, "Last Name", class: "inlabel" %>
-    
-  </div>
-  <div class="field-container form-group">
-    <%= f.text_field :dob, type: "string", class: "inin form-control material input-lg", required: true %>
-    <%= f.label :name, "Date of Birth", class: "inlabel" %>
-  </div>
-  <div class="field-container form-group">
-    <%= f.text_field :gender, type: "string", class: "inin form-control material input-lg", required: true %>
-    <%= f.label :name, "Gender", class: "inlabel" %>
-    
-  </div>
-  <div class="field-container form-group">
-    <%= f.text_field :allergies, type: "string", class: "inin form-control material input-lg", required: true %>
-    <%= f.label :allergies, class: "inlabel" %>
-    
-  </div>
-      <div class="field-container form-group">
-    <%= f.text_field :provider, type: "string", class: "inin form-control material input-lg", required: true %>
-    <%= f.label :name, "Provider", class: "inlabel" %>
-  </div>
- </div>
-   <div class="actions" style="display: none;">
-    <%= f.submit %>
-  </div>
-<% end %>
+<script>
+</script>
 
   <script src="bower_components/Waves/dist/waves.min.js"></script>
-  <script>
-    //Waves effect on buttons      
-    Waves.attach('.waves', ['waves-float']);
-    Waves.init();
-  </script>
+ 

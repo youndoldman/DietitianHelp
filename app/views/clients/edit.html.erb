@@ -1,6 +1,151 @@
-<h1>Editing Client</h1>
+<head>
 
-<%= render 'form', client: @client %>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="msapplication-tap-highlight" content="no" />
 
-<%= link_to 'Show', @client %> |
-<%= link_to 'Back', clients_path %>
+  <title>DIETITIAN.HELP | Dashboard</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <%= stylesheet_link_tag 'ion.rangeSlider' %>
+  <%= stylesheet_link_tag 'selectize' %>
+  <%= stylesheet_link_tag 'jquery.dataTables' %>
+  <!--[if IE 8]><script src="js/es5.js"></script><![endif]-->
+
+
+  <%= favicon_link_tag 'favicon.ico' %>
+	
+
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+  <!--[if lt IE 9]>
+      <script src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
+      <script src="bower_components/respondJs/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+    <!--Content-->
+<frame><%= render partial: 'pages/info' %></frame>
+
+<!-- CLIENT EDIT MODAL
+  <div id="clienteditmodal" class="modal fade">
+  <div class="modal-dialog">
+
+          <div class="content-box box-shadow big-box todo-list">
+              </div>
+
+  </div>
+</div>
+
+-->
+<!-- CLIENT EDIT MODAL END -->    
+
+
+        
+    <!--FORM-->
+  
+    <!--Scripts-->
+<%= javascript_include_tag 'jquery.min' %>
+<%= javascript_include_tag 'jquery-ui.min' %>
+<%= javascript_include_tag 'jquery.bootstrap.wizard' %>
+<%= javascript_include_tag 'jquery.flot' %>
+<%= javascript_include_tag 'jquery.flot.resize' %>
+<%= javascript_include_tag 'bootstrap.min' %>
+<%= javascript_include_tag 'metisMenu.min' %>
+<%= javascript_include_tag 'waves.min' %>
+<%= javascript_include_tag 'moment.min' %>
+<%= javascript_include_tag 'modernizr.custom' %>
+<%= javascript_include_tag 'jquery.mCustomScrollbar' %>
+<%= javascript_include_tag 'cta.min' %>
+<%= javascript_include_tag 'typed' %>
+<%= javascript_include_tag 'ion.rangeSlider' %>
+
+
+  
+
+
+  <!--Selects-->
+
+  <%= javascript_include_tag 'selectFx' %>
+
+  <%= javascript_include_tag 'p5' %>
+
+
+  <!--Flot-->
+
+  <%= javascript_include_tag 'jquery.flot' %>
+  <%= javascript_include_tag 'jquery.flot.resize' %>
+  <%= javascript_include_tag 'curvedLines' %>
+  <%= javascript_include_tag 'jquery.flot.orderBars' %>
+
+  <!--Custom Flot Charts-->
+
+  <%= javascript_include_tag 'Chart' %>
+  <%= javascript_include_tag 'line-chart-1' %>
+  <%= javascript_include_tag 'line-chart-2' %>
+  <%= javascript_include_tag 'line-chart-3' %>
+  <%= javascript_include_tag 'bar-chart' %>
+
+  <!--C3.js-->
+
+  <%= javascript_include_tag 'd3.min' %>
+  <%= javascript_include_tag 'c3.min' %>
+
+
+  <!--EasyPieChart-->
+ <%= javascript_include_tag 'jquery.easypiechart.min' %>
+
+  <!--Zabuto Calendar-->
+
+  <%= javascript_include_tag 'zabuto_calendar.min' %>
+
+
+  <!--Simple Weather-->
+
+  <%= javascript_include_tag 'jquery.simpleWeather.min' %>
+
+
+
+<!-- DATA TABLES-->
+<%= javascript_include_tag 'jquery.dataTables' %>
+<%= javascript_include_tag 'dataTables.responsive' %>
+<%= javascript_include_tag 'dataTables.tableTools' %>
+
+    <!--Custom Scriptssasa-->
+
+<%= javascript_include_tag 'pikaday' %>
+<%= javascript_include_tag 'pikaday.jquery' %>
+<%= javascript_include_tag 'example' %>
+
+
+  <!--Notification-->
+<%= javascript_include_tag 'jsface' %>
+<%= javascript_include_tag 'snap.svg-min' %>
+<%= javascript_include_tag 'sweetalert.min' %>
+<%= javascript_include_tag 'smoke.min' %>
+<%= javascript_include_tag 'notificationFx' %>
+
+<!--AUTOCOMPLETE PLUGINS -->
+<%= javascript_include_tag 'standalone/selectize' %>
+
+<!-- MODAL EFFECTS -->
+<%= javascript_include_tag 'cssParser' %>
+<%= javascript_include_tag 'modalEffects' %>
+  <%= javascript_include_tag 'datedropper' %>
+  <%= javascript_include_tag 'nprogress' %>
+  <%= javascript_include_tag 'medical' %>
+
+<!-- DO NOT TOUCH WITHOUT REVIEWING -->
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+
+</script>
+
+</html>
+

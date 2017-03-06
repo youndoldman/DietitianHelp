@@ -2224,7 +2224,6 @@
 			self.$dropdown.css({visibility: 'hidden', display: 'block'});
 			self.positionDropdown();
 			self.$dropdown.css({visibility: 'visible'});
-			self.$dropdown.css({position: 'absolute'});
 			self.trigger('dropdown_open', self.$dropdown);
 		},
 	
@@ -2671,8 +2670,8 @@
 		searchConjunction: 'and',
 	
 		mode: null,
-		wrapperClass: 'field-container form-group',
-		inputClass: 'inin form-control material input-lg',
+		wrapperClass: 'selectize-control',
+		inputClass: 'selectize-input',
 		dropdownClass: 'selectize-dropdown',
 		dropdownContentClass: 'selectize-dropdown-content',
 	

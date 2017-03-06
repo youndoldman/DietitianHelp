@@ -115,6 +115,8 @@ CUSTOM PRELOADER
   animation-name: opacity;
   animation-duration: 2s;
   animation-iteration-count: infinite;
+  animation-delay: 1.5s;
+  -webkit-animation-delay: 1.5s;
 }
 
 #visiblee p {
@@ -217,10 +219,12 @@ CUSTOM PRELOADER END
     background:#f0f0f0;
     box-shadow:0px 0px 10px #777777;
 }
-
+.hidden {
+  display: none;
+}
 #iframe1 {
-    height: 360px;
-    width: 640px;
+    height: 600px;
+    width: 100%;
     margin:0;
     padding:0;
     border:0;
@@ -1351,7 +1355,7 @@ body {
   -webkit-border-radius: 3px;
           border-radius: 3px;
   margin: 10px;
-  overflow: hidden;
+  overflow: visible;
   -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
           box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
 }

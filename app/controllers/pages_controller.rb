@@ -10,7 +10,9 @@ private
       redirect_to 'users/sign_in'
     end
   def home
-
+  end
+  def nutritionaldata
+    @Client = Client.find(params[:id])
   end
   def login	
   end

@@ -5092,24 +5092,24 @@ a.thumbnail.active {
   padding: 9px;
   color: #333;
 }
-.alert {
+.alerte {
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
 }
-.alert h4 {
+.alerte h4 {
   margin-top: 0;
   color: inherit;
 }
-.alert .alert-link {
+.alerte .alert-link {
   font-weight: bold;
 }
-.alert > p,
-.alert > ul {
+.alerte > p,
+.alerte > ul {
   margin-bottom: 0;
 }
-.alert > p + p {
+.alerte > p + p {
   margin-top: 5px;
 }
 .alert-dismissable,
@@ -5945,6 +5945,7 @@ button.close {
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
   outline: 0;
+
 }
 .modal.fade .modal-dialog {
   -webkit-transition: -webkit-transform .3s ease-out;
@@ -5969,7 +5970,7 @@ button.close {
   position: relative;
   width: auto;
   margin: 10px;
-  top: 30%;
+  top: 20%;
 }
 .modal-content {
   position: relative;
@@ -5999,6 +6000,18 @@ button.close {
 .modal-backdrop.in {
   filter: alpha(opacity=50);
   opacity: .5;
+         /* Any browser which supports CSS3 */
+    filter: blur(16px);
+
+    /* Firefox */ 
+    filter: url("blur.svg#gaussian_blur");
+
+    /* Webkit */
+    -webkit-filter: blur(16px);
+
+    /* Opera */
+    -o-filter: blur(20px);
+    opacity: 0.3;
 }
 .modal-header {
   min-height: 16.42857143px;
