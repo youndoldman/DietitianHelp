@@ -9,7 +9,6 @@ gem 'devise'
 gem 'rails', '= 5.0.0'
 # Use sqlite3 as the database for Active Record
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -42,6 +41,7 @@ end
  group :production do
  gem 'rails_12factor'
  gem 'puma', '~> 3.0'
+ gem 'pg'
  end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
@@ -56,9 +56,6 @@ group :development, :test do
   gem 'sqlite3'
 end
 
-group :production do
-  gem 'pg'
-end
 #bourbon for activeform
 gem 'bourbon'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
