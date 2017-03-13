@@ -1,0 +1,618 @@
+/* FOR PROGRESS BUTTONS 
+*/
+/* line 6, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[disabled],
+.progress-button[disabled].state-loading {
+  cursor: default;
+}
+
+/* line 11, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button .content {
+  position: relative;
+  display: block;
+}
+
+/* line 16, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button .content::before,
+.progress-button .content::after {
+  position: absolute;
+  right: 20px;
+  color: #0e7138;
+  font-family: "icomoon";
+  opacity: 0;
+  -webkit-transition: opacity 0.3s 0.3s;
+  transition: opacity 0.3s 0.3s;
+}
+
+/* line 27, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button .content::before {
+  content: "\e600";
+  /* Checkmark for success */
+}
+
+/* line 31, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button .content::after {
+  content: "\e601";
+  /* Cross for error */
+}
+
+/* line 35, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button.state-success .content::before,
+.progress-button.state-error .content::after {
+  opacity: 1;
+}
+
+/* line 40, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.notransition {
+  -webkit-transition: none !important;
+  transition: none !important;
+}
+
+/* line 45, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button .progress {
+  background: #148544;
+}
+
+/* line 49, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button .progress-inner {
+  position: absolute;
+  left: 0;
+  background: #0e7138;
+}
+
+/* line 55, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-horizontal] .progress-inner {
+  top: 0;
+  width: 0;
+  height: 100%;
+  -webkit-transition: width 0.3s, opacity 0.3s;
+  transition: width 0.3s, opacity 0.3s;
+}
+
+/* line 63, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-vertical] .progress-inner {
+  bottom: 0;
+  width: 100%;
+  height: 0;
+  -webkit-transition: height 0.3s, opacity 0.3s;
+  transition: height 0.3s, opacity 0.3s;
+}
+
+/* Necessary 3d styles for buttons with perspective */
+/* line 73, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-perspective] {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+  background: transparent;
+  -webkit-perspective: 900px;
+  perspective: 900px;
+}
+
+/* line 82, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-perspective] .content {
+  padding: 0 60px;
+  background: #1d9650;
+}
+
+/* line 87, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-perspective] .progress-wrap {
+  display: block;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+/* line 95, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-perspective] .content,
+.progress-button[data-perspective] .progress {
+  outline: 1px solid transparent;
+  /* Smoothen jagged edges in FF */
+}
+
+/* Individual styles */
+/* Choose the effect(s) you want, delete the rest */
+/* Fill horizontal */
+/* ====================== */
+/* line 106, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="fill"][data-horizontal] {
+  overflow: hidden;
+}
+
+/* line 110, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="fill"][data-horizontal] .content {
+  z-index: 10;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+/* line 116, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="fill"][data-horizontal] .content::before,
+.progress-button[data-style="fill"][data-horizontal] .content::after {
+  top: 100%;
+  right: auto;
+  left: 50%;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+/* line 127, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="fill"][data-horizontal].state-success .content,
+.progress-button[data-style="fill"][data-horizontal].state-error .content {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+/* Fill vertical */
+/* ====================== */
+/* line 136, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="fill"][data-vertical] {
+  overflow: hidden;
+}
+
+/* line 140, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="fill"][data-vertical] .content {
+  z-index: 10;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+/* line 146, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="fill"][data-vertical] .content::before,
+.progress-button[data-style="fill"][data-vertical] .content::after {
+  top: 100%;
+  right: auto;
+  left: 50%;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+/* line 157, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="fill"][data-vertical].state-success .content,
+.progress-button[data-style="fill"][data-vertical].state-error .content {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+/* Shrink horizontal */
+/* ====================== */
+/* line 166, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="shrink"] {
+  /* common for horizontal and vertical */
+  overflow: hidden;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+}
+
+/* line 172, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="shrink"][data-horizontal] .content {
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* line 177, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="shrink"][data-horizontal] .content::before,
+.progress-button[data-style="shrink"][data-horizontal] .content::after {
+  top: 100%;
+  right: auto;
+  left: 50%;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+/* line 188, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="shrink"][data-horizontal].state-loading {
+  -webkit-transform: scaleY(0.3);
+  transform: scaleY(0.3);
+}
+
+/* line 193, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="shrink"][data-horizontal].state-loading .content {
+  opacity: 0;
+}
+
+/* line 197, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="shrink"][data-horizontal].state-success .content,
+.progress-button[data-style="shrink"][data-horizontal].state-error .content {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+/* Shrink vertical */
+/* ====================== */
+/* line 206, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="shrink"][data-vertical] .content {
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* line 211, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="shrink"][data-vertical] .content::before,
+.progress-button[data-style="shrink"][data-vertical] .content::after {
+  top: 100%;
+  right: auto;
+  left: 50%;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+/* line 222, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="shrink"][data-vertical].state-loading {
+  -webkit-transform: scaleX(0.1);
+  transform: scaleX(0.1);
+}
+
+/* line 227, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="shrink"][data-vertical].state-loading .content {
+  opacity: 0;
+}
+
+/* line 231, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="shrink"][data-vertical].state-success .content,
+.progress-button[data-style="shrink"][data-vertical].state-error .content {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+/* Rotate bottom 3d */
+/* ====================== */
+/* line 240, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-angle-bottom"] .progress {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  box-shadow: 0 -1px 0 #148544;
+  /* fix the blurriness that causes a gap */
+  -webkit-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
+  -webkit-transform-origin: 50% 0%;
+  transform-origin: 50% 0%;
+}
+
+/* line 253, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-angle-bottom"].state-loading .progress-wrap {
+  -webkit-transform: rotateX(45deg);
+  transform: rotateX(45deg);
+}
+
+/* Rotate top 3d */
+/* ====================== */
+/* line 261, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-angle-top"] .progress {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  box-shadow: 0 1px 0 #148544;
+  /* fix the blurriness that causes a gap */
+  -webkit-transform: rotateX(90deg);
+  transform: rotateX(90deg);
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+}
+
+/* line 274, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-angle-top"].state-loading .progress-wrap {
+  -webkit-transform: rotateX(-45deg);
+  transform: rotateX(-45deg);
+}
+
+/* Rotate left 3d */
+/* ====================== */
+/* line 282, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-angle-left"] .progress {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  width: 20px;
+  height: 100%;
+  box-shadow: 1px 0 0 #148544;
+  /* fix the blurriness that causes a gap */
+  -webkit-transform: rotateY(-90deg);
+  transform: rotateY(-90deg);
+  -webkit-transform-origin: 100% 50%;
+  transform-origin: 100% 50%;
+}
+
+/* line 295, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-angle-left"].state-loading .progress-wrap {
+  -webkit-transform: rotateY(45deg);
+  transform: rotateY(45deg);
+}
+
+/* Rotate right 3d */
+/* ====================== */
+/* line 303, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-angle-right"] .progress {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 20px;
+  height: 100%;
+  box-shadow: -1px 0 0 #148544;
+  /* fix the blurriness that causes a gap */
+  -webkit-transform: rotateY(90deg);
+  transform: rotateY(90deg);
+  -webkit-transform-origin: 0% 50%;
+  transform-origin: 0% 50%;
+}
+
+/* line 316, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-angle-right"].state-loading .progress-wrap {
+  -webkit-transform: rotateY(-45deg);
+  transform: rotateY(-45deg);
+}
+
+/* Rotate side down 3d */
+/* ====================== */
+/* line 324, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-side-down"] .progress {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  -webkit-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
+  -webkit-transform-origin: 50% 0%;
+  transform-origin: 50% 0%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* line 338, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-side-down"].state-loading .progress-wrap {
+  -webkit-transform: rotateX(90deg) translateZ(10px);
+  transform: rotateX(90deg) translateZ(10px);
+}
+
+/* Rotate side up 3d */
+/* ====================== */
+/* line 346, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-side-up"] .progress {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  -webkit-transform: rotateX(90deg);
+  transform: rotateX(90deg);
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* line 360, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-side-up"].state-loading .progress-wrap {
+  -webkit-transform: rotateX(-90deg) translateZ(10px);
+  transform: rotateX(-90deg) translateZ(10px);
+}
+
+/* Rotate side left 3d */
+/* ====================== */
+/* line 368, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-side-left"] .progress-wrap {
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+}
+
+/* line 373, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-side-left"] .progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 100%;
+  -webkit-transform: rotateY(90deg);
+  transform: rotateY(90deg);
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+}
+
+/* line 385, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-side-left"].state-loading .progress-wrap {
+  -webkit-transform: translateX(50%) rotateY(90deg) translateZ(10px);
+  transform: translateX(50%) rotateY(90deg) translateZ(10px);
+}
+
+/* Rotate side right 3d */
+/* ====================== */
+/* line 393, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-side-right"] .progress-wrap {
+  -webkit-transform-origin: 100% 50%;
+  transform-origin: 100% 50%;
+}
+
+/* line 398, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-side-right"] .progress {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 20px;
+  height: 100%;
+  -webkit-transform: rotateY(90deg);
+  transform: rotateY(90deg);
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+}
+
+/* line 410, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-side-right"].state-loading .progress-wrap {
+  -webkit-transform: translateX(-50%) rotateY(-90deg) translateZ(10px);
+  transform: translateX(-50%) rotateY(-90deg) translateZ(10px);
+}
+
+/* Rotate back 3d */
+/* ====================== */
+/* line 418, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-back"] .progress-wrap {
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+/* line 423, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-back"] .content {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* line 428, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-back"] .progress {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotateX(-180deg);
+  transform: rotateX(-180deg);
+  -webkit-transform-origin: 50% 0%;
+  transform-origin: 50% 0%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* line 442, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="rotate-back"].state-loading .progress-wrap {
+  -webkit-transform: rotateX(180deg) scaleX(0.6) scaleY(0.3);
+  transform: rotateX(180deg) scaleX(0.6) scaleY(0.3);
+}
+
+/* flip open 3d */
+/* ====================== */
+/* line 450, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="flip-open"] .content {
+  z-index: 10;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  -webkit-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+}
+
+/* line 458, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="flip-open"] .progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 466, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="flip-open"].state-loading .content {
+  -webkit-transform: rotateX(45deg);
+  transform: rotateX(45deg);
+}
+
+/* slide down */
+/* ====================== */
+/* line 474, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="slide-down"] {
+  padding: 0;
+  overflow: visible;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* line 481, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="slide-down"] .content {
+  z-index: 10;
+  padding: 0 60px;
+  background: #1d9650;
+}
+
+/* line 487, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="slide-down"] .progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+}
+
+/* line 497, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="slide-down"].state-loading .progress {
+  -webkit-transform: translateY(10px);
+  transform: translateY(10px);
+}
+
+/* move-up */
+/* ====================== */
+/* line 505, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="move-up"] {
+  padding: 0;
+  overflow: visible;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* line 512, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="move-up"] .content {
+  z-index: 10;
+  padding: 0 60px;
+  background: #1d9650;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+}
+
+/* line 520, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="move-up"] .progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 528, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="move-up"].state-loading .content {
+  -webkit-transform: translateY(-10px);
+  transform: translateY(-10px);
+}
+
+/* top-line */
+/* ====================== */
+/* line 536, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="top-line"] .progress-inner {
+  height: 3px;
+}
+
+/* line 540, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="top-line"] .content::before,
+.progress-button[data-style="top-line"] .content::after {
+  right: auto;
+  left: 100%;
+  margin-left: 25px;
+}
+
+/* lateral-lines */
+/* ====================== */
+/* line 550, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="lateral-lines"] .progress-inner {
+  width: 100%;
+  border-right: 3px solid #0e7138;
+  border-left: 3px solid #0e7138;
+  background: transparent;
+}
+
+/* line 557, /Users/CarlosAlmonte/Desktop/APPS/yellow/app/assets/stylesheets/componentPBUTTON.css.scss */
+.progress-button[data-style="lateral-lines"] .content::before,
+.progress-button[data-style="lateral-lines"] .content::after {
+  right: auto;
+  left: 100%;
+  margin-left: 25px;
+}

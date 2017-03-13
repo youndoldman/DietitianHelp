@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 	devise_scope :user do get "/users/sign_out" => "devise/sessions#destroy" end
 	root 'pages#home';
 	get 'client_info/key_info', to: "client_info#key_info"
+	get '#processingViewModal', to: 'pages#home'
 
 	get 'clients/:id/nutritionaldata' => 'clients#nutritionaldata'
 

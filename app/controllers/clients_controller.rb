@@ -4,13 +4,33 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    @clients = []
+    @getter = Client.all.each do |client|
+      if client.provider.to_s === current_user.username.to_s
+        @clients << client
+      else 
+      end
+    end
   end
 
   # GET /clients/1
   # GET /clients/1.json
-  def show
+  def show()
     @client = Client.find(params[:id])
+    def will_show
+      Client.find(params[:id])
+    end
+    def will_not_show
+      redirect_to clients_path
+      respond_to do |format|
+      format.html { flash[:notice] = "NOPE" }
+      end
+    end
+    if @client.provider.to_s === current_user.username.to_s
+      will_show
+    else
+      will_not_show
+    end
   end
 
   # GET /clients/new
@@ -31,10 +51,10 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(client_params)
-
+    @client_attr = @client.attributes
     respond_to do |format|
       if @client.save
-        format.html { flash[:notice] = "Post successfully created" }
+        format.js { render :js => "loadClient(" + @client.id.to_s + ");"}
         format.json { render :show, status: :created, location: @client }
       else
         format.html { render :new }
@@ -53,7 +73,7 @@ class ClientsController < ApplicationController
   def update
     respond_to do |format|
       if @Client.update(client_params)
-        format.html { flash[:notice] = "Post successfully created" }
+        format.html { flash[:notice] = "" }
         format.json { render :show, status: :ok, location: @client }
       else
         format.html { render :edit }
@@ -67,7 +87,7 @@ class ClientsController < ApplicationController
   def destroy
     @client.destroy
     respond_to do |format|
-      format.html { redirect_to clients_url, notice: 'Client was successfully destroyed.' }
+      format.html { flash[:notice] = 'Client was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

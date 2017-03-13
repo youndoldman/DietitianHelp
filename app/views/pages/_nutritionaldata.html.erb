@@ -14,13 +14,16 @@
       <%= stylesheet_link_tag 'ion.rangeSlider' %>
       <%= stylesheet_link_tag 'selectize' %>
       <%= stylesheet_link_tag 'jquery.dataTables' %>
+      <%= stylesheet_link_tag 'cs-skin-border' %>
+        <%= stylesheet_link_tag 'iziModal' %>
+  <%= stylesheet_link_tag 'iziToast' %>
       <!--[if IE 8]><script src="js/es5.js"></script><![endif]-->
       <%= favicon_link_tag 'favicon.ico' %>
       <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
       <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
       <!--[if lt IE 9]>
-      <script src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
-      <script src="bower_components/respondJs/dest/respond.min.js"></script>
+      <script src="html5shiv.min.js"></script>
+      <script src="respond.min.js"></script>
       <![endif]-->
     </head>
     <body>
@@ -38,743 +41,911 @@
                 <a href="#datatable" data-toggle="tab" aria-expanded="false">Weight History</a>
               </li>
             </ul>
-            <!-- TABLE 1 -->
-            <div class="tab-content">
-              <div class="tab-pane big-box fade active in" id="tab-1">
-                <div style="display:inline-block;vertical-align:top;margin:12px;width:30%"><h1>Current</h1>
-                  <%= form_for @Client, remote: true, html: {class: "content-form", id: "form"} do |f| %>
-                  <!-- FORM-->
-                  <div class="field-container form-group hidden">
-                    <%= f.text_field :provider, type: "string", id: "hiddenprovider", class: "inin form-control material input-lg", required: true %>
-                    <%= f.label :name, "Provider", class: "inlabel" %>
-                  </div>
-                  <div class="field-container form-group">
-                    <%= f.text_field :allergies, type: "string", class: "inin form-control material input-lg", required: true %>
-                    <%= f.label :allergies, class: "inlabel" %>
+          </div>
+          <!-- TABLE 1 -->
+          
+          <div class="tab-content">
+            <div id="tab-1" class="tab-pane big-box fade active in">
+              <div style="display:inline-block;vertical-align:top;margin:12px;width:30%"><h1>Current</h1>
+                <%= form_for @Client, remote: true, html: {class: "content-form", id: "updateClient"} do |f| %>
+                <!-- FORM-->
+                <div class="field-container form-group hidden">
+                  <%= f.text_field :provider, type: "string", id: "hiddenprovider", class: "inin form-control material input-lg", required: true %>
+                  <%= f.label :name, "Provider", class: "inlabel" %>
+                </div>
+                <div class="field-container form-group">
+                  <%= f.text_field :allergies, type: "string", class: "inin form-control material input-lg", required: true %>
+                  <%= f.label :allergies, class: "inlabel" %>
+                  
+                </div>
+                <div class="field-container form-group hidden">
+                  <%= f.text_field :bmi, type: "string", id: "hiddenbmi",class: "inin form-control material input-lg", required: true %>
+                  <%= f.label :bmi, class: "inlabel" %>
+                  
+                </div>
+                <div class="field-container form-group hidden">
+                  <%= f.number_field :ibw, type: "string", class: "inin form-control material input-lg", id: "hiddenibw", required: true %>
+                  <%= f.label :ibw, class: "inlabel" %>
+                  
+                </div>
+                <div class="field-container form-group hidden">
+                  <%= f.number_field :calreq, type: "string", class: "inin form-control material input-lg",id: "hiddencalreq", required: true %>
+                  <%= f.label :calreq, class: "inlabel" %>
+                  
+                </div>
+                <div class="field-container form-group hidden">
+                  <%= f.number_field :proreq, type: "string", class: "inin form-control material input-lg",id: "hiddenproreq", required: true %>
+                  <%= f.label :proreq, class: "inlabel" %>
+                  
+                </div>
+                <div class="field-container form-group hidden">
+                  <%= f.number_field :flreq, type: "string", class: "inin form-control material input-lg", id: "hiddenflreq", required: true %>
+                  <%= f.label :flreq, class: "inlabel" %>
+                  
+                </div>
+                <div class="field-container form-group hidden">
+                  <%= f.text_field :fassess, type: "string", class: "inin form-control material input-lg", id: "hiddenfassess", required: true %>
+                  <%= f.label :fassess, class: "inlabel" %>
+                  
+                </div>
+                <!-- HIDDEN FORM -->
+                <div class="field-container form-group">
+                  <%= f.text_field :cdiet, type: "string", class: "inin form-control material input-lg", required: true, onchange: "diet()"%>
+                  <%= f.label :cdiet, 'Current Diet', class: "inlabel" %>
+                  
+                </div>
+                <div class="field-container form-group">
+                  <%= f.text_field :dx, type: "string", class: "inin form-control material input-lg", required: true, onchange: "dx()" %>
+                  <%= f.label :dx, id: 'dxlabel', class: "inlabel seleclabel" %>
+                  
+                </div>
+                <div class="field-container form-group">
+                  <%= f.number_field :cbw, type: "string", class: "inin form-control material input-lg", required: true, onchange: "cal(), bmi(), pro(), fl(), chart0()" %>
+                  <%= f.label :cbw, 'Current Body Weight',class: "inlabel" %>
+                  
+                </div>
+                <div class="form-inline">
+                  <div class="field-container form-group" style="width:20%">
+                    <%= f.number_field :ht, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "bmi(), ibw()" %>
+                    <%= f.label :ht, 'Height', class: "inlabel" %>
                     
                   </div>
-                  <div class="field-container form-group hidden">
-                    <%= f.text_field :bmi, type: "string", id: "hiddenbmi",class: "inin form-control material input-lg", required: true %>
-                    <%= f.label :bmi, class: "inlabel" %>
+                  <div class="field-container form-group" style="width:35%">
+                    <%= f.text_field :date0, type: "text", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+                    <%= f.label :date0, 'Date', class: "inlabel" %>
                     
-                  </div>
-                  <div class="field-container form-group hidden">
-                    <%= f.number_field :ibw, type: "string", class: "inin form-control material input-lg", id: "hiddenibw", required: true %>
-                    <%= f.label :ibw, class: "inlabel" %>
-                    
-                  </div>
-                  <div class="field-container form-group hidden">
-                    <%= f.number_field :calreq, type: "string", class: "inin form-control material input-lg",id: "hiddencalreq", required: true %>
-                    <%= f.label :calreq, class: "inlabel" %>
-                    
-                  </div>
-                  <div class="field-container form-group hidden">
-                    <%= f.number_field :proreq, type: "string", class: "inin form-control material input-lg",id: "hiddenproreq", required: true %>
-                    <%= f.label :proreq, class: "inlabel" %>
-                    
-                  </div>
-                  <div class="field-container form-group hidden">
-                    <%= f.number_field :flreq, type: "string", class: "inin form-control material input-lg", id: "hiddenflreq", required: true %>
-                    <%= f.label :flreq, class: "inlabel" %>
-                    
-                  </div>
-                  <div class="field-container form-group hidden">
-                    <%= f.text_field :fassess, type: "string", class: "inin form-control material input-lg", id: "hiddenfassess", required: true %>
-                    <%= f.label :fassess, class: "inlabel" %>
-                    
-                  </div>
-                  <!-- HIDDEN FORM -->
-                  <div class="field-container form-group">
-                    <%= f.text_field :cdiet, type: "string", class: "inin form-control material input-lg", required: true, onchange: "diet()"%>
-                    <%= f.label :cdiet, 'Current Diet', class: "inlabel" %>
-                    
-                  </div>
-                  <div class="field-container form-group">
-                    <%= f.text_field :dx, type: "string", class: "inin form-control material input-lg", required: true, onchange: "dx()" %>
-                    <%= f.label :dx, id: 'dxlabel', class: "inlabel seleclabel" %>
-                    
-                  </div>
-                  <div class="field-container form-group">
-                    <%= f.number_field :cbw, type: "string", class: "inin form-control material input-lg", required: true, onchange: "cal(), bmi(), pro(), fl(), chart0()" %>
-                    <%= f.label :cbw, 'Current Body Weight',class: "inlabel" %>
-                    
-                  </div>
-                  <div class="form-inline">
-                    <div class="field-container form-group" style="width:20%">
-                      <%= f.number_field :ht, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "bmi(), ibw()" %>
-                      <%= f.label :ht, 'Height', class: "inlabel" %>
-                      
-                    </div>
-                    <div class="field-container form-group" style="width:35%">
-                      <%= f.text_field :date0, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
-                      <%= f.label :date0, 'Date', class: "inlabel" %>
-                      
-                    </div>
                   </div>
                 </div>
-                <div style="display:inline-block;margin:12px;vertical-align:top;width:30%">
-                  <h1>Weight History</h1>
-                  <div class="form-inline">
-                    <div class="field-container form-group" style="width:20%;margin:12px">
-                      <%= f.number_field :thirtywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
-                      <%= f.label :thirtywt, class: "inlabel" %>
-                      
-                    </div>
-                    <div class="field-container form-group" style="width:35%">
-                      <%= f.text_field :date1, type: "string", class: "inin form-control material input-lg", style:"width:100%", required: true, onchange: "chart0()" %>
-                      <%= f.label :date1, 'Date', class: "inlabel" %>
-                      
-                    </div>
+              </div>
+              <div style="display:inline-block;margin:12px;vertical-align:top;width:30%">
+                <h1>Weight History</h1>
+                <div class="form-inline">
+                  <div class="field-container form-group" style="width:20%;margin:12px">
+                    <%= f.number_field :thirtywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+                    <%= f.label :thirtywt, "-30 Wt", class: "inlabel" %>
+                    
                   </div>
-                  <div class="form-inline">
-                    <div class="field-container form-group" style="width:20%;margin:12px">
-                      <%= f.number_field :ninetywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
-                      <%= f.label :ninetywt, class: "inlabel" %>
-                      
-                    </div>
-                    <div class="field-container form-group" style="width:35%">
-                      <%= f.text_field :date2, type: "string", class: "inin form-control material input-lg", style:"width:100%", required: true, onchange: "chart0()" %>
-                      <%= f.label :date2, 'Date', class: "inlabel" %>
-                      
-                    </div>
-                  </div>
-                  <div class="form-inline">
-                    <div class="field-container form-group" style="width:20%;margin:12px">
-                      <%= f.number_field :oneeightywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
-                      <%= f.label :oneeightywt, class: "inlabel" %>
-                      
-                    </div>
-                    <div class="field-container form-group" style="width:35%">
-                      <%= f.text_field :date3, type: "string", class: "inin form-control material input-lg", style:"width:100%", required: true, onchange: "chart0()" %>
-                      <%= f.label :date3, 'Date', class: "inlabel" %>
-                      
-                    </div>
-                    <div>
-                      <%= f.submit class: "actions btn btn-success btn-lg waves waves-button waves-effect waves-float", id: "updatebut" %>
-                    </div>
-                  </div>
-                  <% end %>
-                </div>
-                <div style="display:inline-block;margin:12px;vertical-align:top;width:30%">
-                  <div style="display:inline-block"><h1 style="display:inline-block">Labs</h1></div>
-                  <div data-toggle="modal" data-target="#labsform" style="display:inline-block;cursor: pointer;">
-                    <a class="fa-stack fa-1x icon-back" style="margin-bottom: 8px">
-                      <i class="fa fa-circle fa-stack-2x blue"></i>
-                    <i class="fa fa-plus fa-stack-1x fa-inverse"></i></a></div>
-                    <div id="electrolytes">
-                      <div class="verticalline" style="border-right: 2px solid black;margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
-                      <div class="verticalline" style="border-right: 2px solid black;margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
-                      <div class="verticalline" style="margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
-                      <hr class="horline"><div class="diaglineup"></div>
-                      <div class="verticalline" style="border-right: 2px solid black;margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
-                      <div class="verticalline" style="border-right: 2px solid black;margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
-                      <div class="verticalline" style="margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
-                      <div class="diaglinedown"></div>
-                      <hr>
-                      <div></div>
-                    </div>
-                    <!-- Trigger the modal with a button -->
-                    <button class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(chart0, 500), diet(), intake(), cal(), pro(), fl(), dx(), bmi(), getAge(), adime(), ibw(), setTimeout(assessment, 2000)">Run</button>
+                  <div class="field-container form-group" style="width:35%">
+                    <%= f.text_field :date1, type: "text", class: "inin form-control material input-lg", style:"width:150%", required: true, onchange: "chart0()" %>
+                    <%= f.label :date1, 'Date', class: "inlabel" %>
+                    
                   </div>
                 </div>
-                <!-- TAB 2 -->
-                <div id="tab-2" class="tab-pane big-box fade in">
-                  <div class="jumbotron">
-                    <div id="assessment"class="container">
-                      <h1>Assessment - <span id="todaysdate"></span> </h1>
-                      <p id="assval" class="w-amount">
-                        <span id='agespan' class='w-amount'>- -</span>y/o <span>Resident</span> currently on <span id='cdietspan' class='w-amount'>- - </span> Diet to manage Dx of <span id="dxspan", class='w-amount'>- -</span>. Average intake has noted to range <span id='intakefromspan', class='w-amount'>- -</span>  <span id='intaketospan', class='w-amount'></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class='w-amount'>- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibw" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.
-                      </p> <button id="run" class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(rchart0, 500), diet(), intake(), gender(), cal(), pro(), fl(), dx(), bmi(), getAge(), setTimeout(assessment, 500)">Run</button> <button class="btn btn-primary btn-lg waves waves-button waves-effect waves-float">Save</button></p>
+                <div class="form-inline">
+                  <div class="field-container form-group" style="width:20%;margin:12px">
+                    <%= f.number_field :ninetywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+                    <%= f.label :ninetywt, "-90 Wt" , class: "inlabel" %>
+                    
+                  </div>
+                  <div class="field-container form-group" style="width:35%">
+                    <%= f.text_field :date2, type: "text", class: "inin form-control material input-lg", style:"width:150%", required: true, onchange: "chart0()" %>
+                    <%= f.label :date2, 'Date', class: "inlabel" %>
+                    
+                  </div>
+                </div>
+                <div class="form-inline">
+                  <div class="field-container form-group" style="width:20%;margin:12px">
+                    <%= f.number_field :oneeightywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+                    <%= f.label :oneeightywt, "-180 Wt" , class: "inlabel" %>
+                    
+                  </div>
+                  <div class="field-container form-group" style="width:35%">
+                    <%= f.text_field :date3, type: "text", class: "inin form-control material input-lg", style:"width:150%", required: true, onchange: "chart0()" %>
+                    <%= f.label :date3, 'Date', class: "inlabel" %>
+                    
+                  </div>
+                  <div>
+                    <%= f.submit class: "actions btn btn-lg waves waves-button waves-effect waves-float", id: "updatebut", style: "background: #374B89; color: #FFFFFF;"%>
+                  </div>
+                </div>
+                <% end %>
+              </div>
+              <div style="display:inline-block;margin:12px;vertical-align:top;width:30%">
+                <div style="display:inline-block"><h1 style="display:inline-block">Labs</h1></div>
+                <div class="trigger" data-izimodal-open="labsform" cursor="pointer">
+                  <a class="fa-stack fa-1x icon-back" style="margin-bottom: 8px">
+                    <i class="fa fa-circle fa-stack-2x blue"></i>
+                  <i class="fa fa-plus fa-stack-1x fa-inverse"></i></a></div>
+                  <div id="electrolytes">
+                    <div class="verticalline" style="border-right: 2px solid black;margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
+                    <div class="verticalline" style="border-right: 2px solid black;margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
+                    <div class="verticalline" style="margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
+                    <hr class="horline"><div class="diaglineup"></div>
+                    <div class="verticalline" style="border-right: 2px solid black;margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
+                    <div class="verticalline" style="border-right: 2px solid black;margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
+                    <div class="verticalline" style="margin:0px;padding:0 25px 0 15px;display:inline-block">122</div>
+                    <div class="diaglinedown"></div>
+                    <hr>
+                    <div></div>
+                  </div>
+                  <!-- Trigger the modal with a button -->
+                  <button class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(chart0, 500), diet(), ibw(), intake(), cal(), pro(), fl(), dx(), bmi(), getAge(), adime(), ibw(), setTimeout(assessment, 2000), rchart0()">Run</button>
+                </div>
+              </div>
+              <!-- TAB 2 -->
+              <div id="tab-2" class="tab-pane big-box fade in">
+                <div class="jumbotron">
+                  <div id="assessment"class="container">
+                    <h1>Assessment - <span id="todaysdate"></span> </h1>
+                    <p id="assval" class="w-amount">
+                      <span id='agespan' class='w-amount'>- -</span>y/o <span>Resident</span> currently on <span id='cdietspan' class='w-amount'>- - </span> Diet to manage Dx of <span id="dxspan", class='w-amount'>- -</span>. Average intake: <span id='intakefromspan', class='w-amount'>- -</span>  <span id='intaketospan', class='w-amount'></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class='w-amount'>- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.
+                    </p> <button class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(chart0, 500), diet(), ibw(), intake(), cal(), pro(), fl(), dx(), bmi(), getAge(), adime(), ibw(), setTimeout(assessment, 2000), rchart0()">Run</button> <button class="btn btn-primary btn-lg waves waves-button waves-effect waves-float">Save</button></p>
+                  </div>
+                </div>
+              </div>
+              <!-- TAB 3/datatable -->
+              <div id="datatable"class="tab-pane big-box fade in">
+                <div class="table-responsive">
+                  <ul class="nav nav-tabs nav-justified">
+                    <li class="">
+                      <a href="#tab-4" data-toggle="tab" aria-expanded="true">ADIME</a>
+                    </li>
+                    <li class="">
+                      <a href="#tab-5" data-toggle="tab" aria-expanded="false">PES</a>
+                    </li>
+                    <li class="">
+                      <a href="#tab-6" data-toggle="tab" aria-expanded="false">Full Assessment</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-content">
+                  <!-- ADIME-->
+                  <div id="tab-4" class="tab-pane big-box fade in active">
+                    <div class="jumbotron">
+                      <div id="adime"class="container">
+                        <h1>Assessment - <span id="todaysdate"></span> </h1>
+                        <p id="assval" class="w-amount">
+                          <span id='agespan' class='w-amount'>- -</span>y/o <span>Resident</span> currently on <span id='cdietspan' class='w-amount'>- - </span> Diet to manage Dx of <span id="dxspan", class='w-amount'>- -</span>. Average intake has noted to range <span id='intakefromspan', class='w-amount'>- -</span>  <span id='intaketospan', class='w-amount'></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class='w-amount'>- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibw" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.
+                        </p>
+                        <h1>Diagnosis - <span id="todaysdate"></span> </h1>
+                        <p id="dxadime"></p>
+                        <h1>Intervention - <span id="todaysdate"></span> </h1>
+                        <p id="intadime"></p>
+                        <h1>Monitoring/Evaluation - <span id="todaysdate"></span> </h1><p id="monevadime"></p>
+                      <button id="run" class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(rchart0, 500), diet(), adime(), intake(), cal(), pro(), fl(), dx(), bmi(), getAge(), gender()">Run</button> <button class="btn btn-primary btn-lg waves waves-button waves-effect waves-float">Save</button></p>
                     </div>
-                  </div>
-                </div>
-                <!-- TAB 3/datatable -->
-                <div id="datatable"class="tab-pane big-box fade in">
-                  <div class="table-responsive">
-                    <ul class="nav nav-tabs nav-justified">
-                      <li class="">
-                        <a href="#tab-4" data-toggle="tab" aria-expanded="true">ADIME</a>
-                      </li>
-                      <li class="">
-                        <a href="#tab-5" data-toggle="tab" aria-expanded="false">PES</a>
-                      </li>
-                      <li class="">
-                        <a href="#tab-6" data-toggle="tab" aria-expanded="false">Full Assessment</a>
-                      </li>
-                    </ul>
-                    <table id="datatable1" class="display">
-                      <thead>
-                        <tr>
-                          <th>Weight</th>
-                          <th>BMI</th>
-                          <th>Date</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td><%= @Client.cbw %></td>
-                          <td><%= @Client.bmi %></td>
-                          <td><%= @Client.date0 %></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <!-- ADIME-->
-                <div id="tab-4" class="tab-pane big-box fade in">
-                  <div class="jumbotron">
-                    <div id="adime"class="container">
-                      <h1>Assessment - <span id="todaysdate"></span> </h1>
-                      <p id="assval" class="w-amount">
-                        <span id='agespan' class='w-amount'>- -</span>y/o <span>Resident</span> currently on <span id='cdietspan' class='w-amount'>- - </span> Diet to manage Dx of <span id="dxspan", class='w-amount'>- -</span>. Average intake has noted to range <span id='intakefromspan', class='w-amount'>- -</span>  <span id='intaketospan', class='w-amount'></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class='w-amount'>- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibw" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.
-                      </p>
-                      <h1>Diagnosis - <span id="todaysdate"></span> </h1>
-                      <p id="dxadime"></p>
-                      <h1>Intervention - <span id="todaysdate"></span> </h1>
-                      <p id="intadime"></p>
-                      <h1>Monitoring/Evaluation - <span id="todaysdate"></span> </h1><p id="monevadime"></p>
-                    <button id="run" class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(rchart0, 500), diet(), adime(), intake(), cal(), pro(), fl(), dx(), bmi(), getAge(), gender()">Run</button> <button class="btn btn-primary btn-lg waves waves-button waves-effect waves-float">Save</button></p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div id="labsform" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-        <div class="content-box box-shadow big-box todo-list">
-          <h1>Labs - </h1>
-
-            <div class="panele">
-              <div class="panel-body todo">
-                <ul class="list-group ui-sortable">
-                  <form action="">
-                    <div>
-                      <label for="alb" style="display: inline-block">Alb</label>
-                      <input id="alb" type="integer" placeholder="Alb">
-                    </div>
-                    <div>
-                      <label for="bun" style="display: inline-block">BUN</label>
-                      <input id="bun" type="integer" placeholder="BUN">
-                    </div>
-                    <div>
-                      <label for="creat" style="display: inline-block">Creat</label>
-                      <input id="creat" type="integer" placeholder="creat">
-                    </div>
-                    <div>
-                      <label for="chol" style="display: inline-block">Chol</label>
-                      <input id="chol" type="integer" placeholder="Chol">
-                    </div>
-                    <div>
-                      <label for="glu" style="display: inline-block">Glu</label>
-                      <input id="glu" type="integer" placeholder="Glu">
-                    </div>
-                    <div>
-                      <label for="hct" style="display: inline-block">Hct</label>
-                      <input id="hct" type="integer" placeholder="Hct">
-                    </div>
-                    <div>
-                      <label for="hgb" style="display: inline-block">Hgb</label>
-                      <input id="hgb" type="integer" placeholder="Hgb">
-                    </div>
-                    <div>
-                      <label for="iron" style="display: inline-block">Iron</label>
-                      <input id="iron" type="integer" placeholder="Iron">
-                    </div>
-                    <div>
-                      <label for="k" style="display: inline-block">K</label>
-                      <input id="k" type="integer" placeholder="K">
-                    </div>
-                    <div>
-                      <label for="na" style="display: inline-block">Na</label>
-                      <input id="na" type="integer" placeholder="Na">
-                    </div>
-                    <div>
-                      <label for="tprotein" style="display: inline-block">Total Protein</label>
-                      <input id="tprotein" type="integer" placeholder="Total Protein">
-                    </div>
-                    <div>
-                      <label for="tlymphocytect" style="display: inline-block">Total Lymphocyte Ct.</label>
-                      <input id="tlymphocytect" type="integer" placeholder="Total Lymphocyte Ct.">
-                    </div>
-                    <div>
-                      <label for="other" style="display: inline-block">Other</label>
-                      <input id="other" type="integer" placeholder="Other">
-                    </div>
-
-                  </form>
-                </ul>
+        <div id="labsform" class="iziModal" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="content-box box-shadow big-box todo-list">
+              <h1>Labs - </h1>
+              <div class="panele">
+                <div class="panel-body todo">
+                  <ul class="list-group ui-sortable">
+                    <form action="">
+                      <div>
+                        <label for="alb" style="display: inline-block">Alb</label>
+                        <input id="alb" type="integer" placeholder="Alb">
+                      </div>
+                      <div>
+                        <label for="bun" style="display: inline-block">BUN</label>
+                        <input id="bun" type="integer" placeholder="BUN">
+                      </div>
+                      <div>
+                        <label for="creat" style="display: inline-block">Creat</label>
+                        <input id="creat" type="integer" placeholder="creat">
+                      </div>
+                      <div>
+                        <label for="chol" style="display: inline-block">Chol</label>
+                        <input id="chol" type="integer" placeholder="Chol">
+                      </div>
+                      <div>
+                        <label for="glu" style="display: inline-block">Glu</label>
+                        <input id="glu" type="integer" placeholder="Glu">
+                      </div>
+                      <div>
+                        <label for="hct" style="display: inline-block">Hct</label>
+                        <input id="hct" type="integer" placeholder="Hct">
+                      </div>
+                      <div>
+                        <label for="hgb" style="display: inline-block">Hgb</label>
+                        <input id="hgb" type="integer" placeholder="Hgb">
+                      </div>
+                      <div>
+                        <label for="iron" style="display: inline-block">Iron</label>
+                        <input id="iron" type="integer" placeholder="Iron">
+                      </div>
+                      <div>
+                        <label for="k" style="display: inline-block">K</label>
+                        <input id="k" type="integer" placeholder="K">
+                      </div>
+                      <div>
+                        <label for="na" style="display: inline-block">Na</label>
+                        <input id="na" type="integer" placeholder="Na">
+                      </div>
+                      <div>
+                        <label for="tprotein" style="display: inline-block">Total Protein</label>
+                        <input id="tprotein" type="integer" placeholder="Total Protein">
+                      </div>
+                      <div>
+                        <label for="tlymphocytect" style="display: inline-block">Total Lymphocyte Ct.</label>
+                        <input id="tlymphocytect" type="integer" placeholder="Total Lymphocyte Ct.">
+                      </div>
+                      <div>
+                        <label for="other" style="display: inline-block">Other</label>
+                        <input id="other" type="integer" placeholder="Other">
+                      </div>
+                    </form>
+                  </ul>
+                </div>
               </div>
             </div>
-
-
+            
           </div>
-          
+        </div>
+        <!-- EMPTY DIV TO ADD SPACE SINCE OFFSET NOT WORKING-->
+        <div id="spacer"class="col-lg-3"></div>
+        <div class="col-lg-3 content-box">
+      <div class="content-title big-box i-block">
+        <h4 class="zero-m">Weight History</h4>
+        <div class="content-tools i-block pull-right">
+          <span class="text-uppercase pull-right">Plot data</span>
+          <a id="expanding", class="repeat-btn", onclick="setTimeout(window.rchart0, 500)">
+            <i class="fa fa-repeat"></i>
+          </a>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="big-box">
+        <div class="chartjs-container">
+          <canvas id="chart-line"></canvas>
+        </div>
+      </div>
+    </div>
 
-  </div>
-</div>
-        <!--Scripts-->
-        <%= javascript_include_tag 'jquery.min' %>
-        <%= javascript_include_tag 'jquery-ui.min' %>
-        <%= javascript_include_tag 'jquery.bootstrap.wizard' %>
-        <%= javascript_include_tag 'jquery.flot' %>
-        <%= javascript_include_tag 'jquery.flot.resize' %>
-        <%= javascript_include_tag 'bootstrap.min' %>
-        <%= javascript_include_tag 'metisMenu.min' %>
-        <%= javascript_include_tag 'waves.min' %>
-        <%= javascript_include_tag 'moment.min' %>
-        <%= javascript_include_tag 'modernizr.custom' %>
-        <%= javascript_include_tag 'jquery.mCustomScrollbar' %>
-        <%= javascript_include_tag 'cta.min' %>
-        <%= javascript_include_tag 'typed' %>
-        <%= javascript_include_tag 'ion.rangeSlider' %>
-        
-        <!--Menu-->
-        <%= javascript_include_tag 'classie' %>
-        <!--Selects-->
-        <%= javascript_include_tag 'selectFx' %>
-        <!--Flot-->
-        <%= javascript_include_tag 'jquery.flot' %>
-        <%= javascript_include_tag 'jquery.flot.resize' %>
-        <%= javascript_include_tag 'curvedLines' %>
-        <%= javascript_include_tag 'jquery.flot.orderBars' %>
-        <!--Custom Flot Charts-->
-        <!--C3.js-->
-        <%= javascript_include_tag 'd3.min' %>
-        <%= javascript_include_tag 'c3.min' %>
-        <!--EasyPieChart-->
-        <%= javascript_include_tag 'jquery.easypiechart.min' %>
-        <!--Zabuto Calendar-->
-        <%= javascript_include_tag 'zabuto_calendar.min' %>
-        <!--Simple Weather-->
-        <%= javascript_include_tag 'jquery.simpleWeather.min' %>
-        <!-- DATA TABLES-->
-        <%= javascript_include_tag 'jquery.dataTables' %>
-        <%= javascript_include_tag 'dataTables.responsive' %>
-        <%= javascript_include_tag 'dataTables.tableTools' %>
-        <!--Custom Scriptssasa-->
-        <%= javascript_include_tag 'pikaday' %>
-        <%= javascript_include_tag 'pikaday.jquery' %>
-        <%= javascript_include_tag 'example' %>
-        <!--Notification-->
-        <%= javascript_include_tag 'jsface' %>
-        <%= javascript_include_tag 'snap.svg-min' %>
-        <%= javascript_include_tag 'sweetalert.min' %>
-        <%= javascript_include_tag 'smoke.min' %>
-        <%= javascript_include_tag 'notificationFx' %>
-        <!--AUTOCOMPLETE PLUGINS -->
-        <%= javascript_include_tag 'standalone/selectize' %>
-        <!-- MODAL EFFECTS -->
-        <%= javascript_include_tag 'cssParser' %>
-        <%= javascript_include_tag 'modalEffects' %>
-        <%= javascript_include_tag 'datedropper' %>
-        <%= javascript_include_tag 'nprogress' %>
-        <%= javascript_include_tag 'medical' %>
-      </body>
-      <script>
-      //DATATABLE FUNCTION TO LIMIT AMOUNT OF RESULTS DISPLAYED IN SUPPOSEDLY WT HISTORY FROM PANEL TABS
-      $(function () {
-      //Data Tables
-      $('#datatable1').DataTable({
-      displayLength: 25,
-      dom: 'T<"clear">lfrtip',
-      tableTools: {
-      "sSwfPath": "../assets/copy_csv_xls_pdf.swf"
-      },
-      responsive: true
-      });
-      });
-      
-      var parent = document.getElementById("assessment")
-      $(function () {
-      /*c3.js*/ // NEEDED FOR THE CHART
-      var chart = c3.generate({
-      bindto: '#reg-history',
-      size: {
-      height: 90
-      },
-      data: {
-      columns: [
-      ['New users', 30, 35, 45, 33, 48, 54, 41, 66, 49, 43, 38, 46]
-      ]
-      },
-      legend: {
-      show: false
-      },
-      color: {
-      pattern: ['#fff']
-      },
-      point: {
-      r: 3
-      },
-      axis: {
-      x: {
-      show: false
-      },
-      y: {
-      show: false
-      }
-      }
-      });
-      // show the notification
-      
-      //Tooltips for Flot Charts
-      if ($(".flot-chart")[0]) {
-      $(".flot-chart").bind("plothover", function (event, pos, item) {
-      if (item) {
-      var x = item.datapoint[0].toFixed(2),
-      y = item.datapoint[1].toFixed(2);
-      $(".flot-tooltip").html(x + " of " + y)
-      .css({top: item.pageY+5, left: item.pageX+5})
-      .fadeIn(200);
-      } else {
-      $(".flot-tooltip").hide();
-      }
-      });
-      $("<div class='flot-tooltip'></div>").appendTo("body");
-      }
-      });
-      // MEDICAL FAST EDITING
-      /*
-      *
-      *   DIETITIAN.HELP
-      *   ALL RIGHTS RESERVED
-      *
-      */
-      function rchart0 () {
-      NProgress.start();
-      var ctx2 = document.getElementById("chart-line").getContext("2d");
-      var myLine = new Chart(ctx2).Line(lineChartData, {
-      responsive: true
-      });
-      //resets all parameters in assess
-      var loss1;
-      var loss2;
-      var loss3;
-      var gain1;
-      var gain2;
-      var gain3;
-      $("#loss1days").innerHTML = ''
-      $("#loss2days").innerHTML = ''
-      $("#loss3days").innerHTML = ''
-      $("#gain1days").innerHTML = ''
-      $("#gain2days").innerHTML = ''
-      $("#gain3days").innerHTML = ''
-      myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
-      myLine.scale.xLabels[3] = document.getElementById("client_date0").value;
-      myLine.datasets[1].points[2].value = document.getElementById("client_thirtywt").value;
-      myLine.scale.xLabels[2] = document.getElementById("client_date1").value;
-      myLine.datasets[1].points[1].value = document.getElementById("client_ninetywt").value;
-      myLine.scale.xLabels[1] = document.getElementById("client_date2").value;
-      myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
-      myLine.scale.xLabels[0] = document.getElementById("client_date3").value;
-      myLine.update();
-      NProgress.inc();
-      if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[2].value * 100) <= 95) {
-      loss1 = true
-      }
-      if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[2].value * 100) >= 105) {
-      gain1 = true
-      }
-      
-      if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[1].value * 100) <= 92.5) {
-      loss2 = true
-      }
-      if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[1].value * 1000) >= 1075) {
-      gain2 = true
-      }
-      if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[0].value * 100) <= 90) {
-      loss3 = true
-      }
-      if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[0].value * 100) >= 110) {
-      gain3 = true
-      }
-      NProgress.inc();
-      if($('#wthistory').smkValidate({lang:'es'})){}
-      if(loss1 == true || loss2 == true || loss3 == true){
-      $("#losshist")[0].innerHTML = 'Significant Weight Loss for the past ';
-      if(loss1 == true){
-      $("#loss1days")[0].innerHTML = ' 30';
-      if(loss2 == true || loss3 == true){
-      $("#loss1days")[0].innerHTML = ' 30/'
-      }
-      }
-      if(loss2 == true){
-      $("#loss2days")[0].innerHTML = '90';
-      if(loss3 == true){
-      $("#loss2days")[0].innerHTML = '90/'
-      }
-      }
-      if(loss3 == true){
-      $("#loss3days")[0].innerHTML = '180';
-      }
-      }
-      NProgress.inc();
-      if(loss1 == true || loss2 == true || loss3 == true){
-      $("#lossdays")[0].innerHTML = ' days'
-      }
-      if(gain1 == true || gain2 == true || gain3 == true){
-      $("#gainhist")[0].innerHTML = 'Significant Weight Gain for the past ';
-      if(gain1 == true){
-      $("#gain1days")[0].innerHTML = ' 30';
-      if(gain2 == true || gain3 == true){
-      $("#gain1days")[0].innerHTML = ' 30/'
-      }
-      }
-      if(gain2 == true){
-      $("#gain2days")[0].innerHTML = '90';
-      if(gain3 == true){
-      $("#gain2days")[0].innerHTML = '90/'
-      }
-      }
-      if(gain3 == true){
-      $("#gain3days")[0].innerHTML = '180';
-      }
-      }
-      if(gain1 == true || gain2 == true || gain3 == true){
-      $("#gaindays")[0].innerHTML = ' days'
-      }
-      if((loss1 == true || loss2 == true || loss3 == true) && (gain1 == true || gain2 == true || gain3 == true)){
-      $("#and")[0].innerHTML = ' and '
-      }
-      if(loss1 == true || loss2 == true || loss3 == true || gain1 == true || gain2 == true || gain3 == true) {
-      $.smkAlert({ text: 'Significant Weight Change', type: 'danger', permanent: true });
-      }
-      //setTimeout(noti, 1000);
-      NProgress.done();
-      };
-      function diet() {
-      $("#cdietspan")[0].innerText = $('#client_cdiet').val();
-      $(function(){
-      $("#cdietspan").typed({
-      strings: ["<%= @Client.cdiet %>"],
-      typeSpeed: 4
-      });
-      });
-      };
-      
-      function intake() {
-      if($('#client_intakefrom').value == 1){
-      $("#client_intaketo").parentElement.className = 'cs-select cs-skin-border cs-skin-borderdisabled';
-      $("#intakefromspan").innerHTML = 'Refuse';
-      $("#intaketospan").innerHTML = '';
-      }
-      };
-      var genderval = "<%= @Client.gender %>"
-      var ibwval;
-      /* GENDER SCRIPT!
-      function gender() {
-      if(document.getElementById('switch5').checked) {
-      genderval = 'female';
-      $('#gendermspan').fadeOut(20, function(){
-      $('#genderfspan').fadeIn(50);
-      })};
-      if(document.getElementById('switch5').checked == false) {
-      genderval = 'male';
-      $('#genderfspan').fadeOut(20, function(){
-      $('#gendermspan').fadeIn(50);
-      });}
-      };
-      */
-      function ibw() {
+    <!-- INTAKE-->
+    <div id="prueba"class="col-lg-2 content-box big-box box-shadow">
+      <h4><strong>Intake</strong></h4>
+      <div id='parentofselect' class="form-inline" onclick="intake()">
+        <select id="client_intakefrom" class="cs-select cs-skin-border" onclick="intake()">
+          <option value="" disabled>From</option>
+          <option value="100%">100%</option>
+          <option value="75%">75%</option>
+          <option value="50%">50%</option>
+          <option value="25%">25%</option>
+          <option value="0%">0%</option>
+          <option value="1">Refuse</option>
+        </select>
+        <select id="client_intaketo" class="cs-select cs-skin-border 1" onclick="intake()">
+          <option value="" disabled>To</option>
+          <option value="100%">100%</option>
+          <option value="75%">75%</option>
+          <option value="50%">50%</option>
+          <option value="25%">25%</option>
+          <option value="0%">0%</option>
+        </select>
+        <h4><strong>Assistance Needed</strong></h4>
+      <div id='' class="form-inline" onclick="intake()">
+        <select id="client_intaketo" class="cs-select cs-skin-border" onclick="intake()">
+          <option value="" disabled>To</option>
+          <option value="3">Total Dependece</option>
+          <option value="2">Limited Assistance</option>
+          <option value="1">Setup Supervision</option>
+          <option value="0">Feeds Self</option>
+        </select>
+      </div>
+      </div>
+    </div>
+
+    <!-- WEIGHT GOAL -->
+    <div class="col-lg-3 content-box big-box box-shadow">
+      <div class="form-inline">
+        <h4><strong>Pressure Ulcer</strong></h4>
+        <select id="pressureUlcer" class="cs-select cs-skin-border" onclick="">
+          <option value="" selected>No Pressure Ulcer</option>
+          <option value="1">Stage 1</option>
+          <option value="2" >Stage 2</option>
+          <option value="3">Stage 3</option>
+          <option value="4">Stage 4</option>
+        </select>
+      </div>
+      <div class="checkbox checkbox-danger checkbox-big">
+        <input type="checkbox" id="checkbox1">
+        <label for="checkbox1">
+          Diabetes
+        </label>
+      </div>
+      <div class="checkbox checkbox-danger checkbox-big">
+        <input type="checkbox" id="checkbox2">
+        <label for="checkbox2">
+          Hypertension
+        </label>
+      </div>
+      <div class="checkbox checkbox-danger checkbox-big">
+        <input type="checkbox" id="checkbox3">
+        <label for="checkbox3">
+          Renal Issues
+        </label>
+      </div>
+    </div>
+        <div id="modal-alert" class="iziModal" data-iziModal-group="alert" data-iziModal-loop></div>
+      </div>
+    </div>
+    <!--Scripts-->
+    <%= javascript_include_tag 'jquery.min' %>
+    <%= javascript_include_tag 'jquery-ui.min' %>
+    <%= javascript_include_tag 'jquery.bootstrap.wizard' %>
+    <%= javascript_include_tag 'jquery.flot' %>
+    <%= javascript_include_tag 'jquery.flot.resize' %>
+    <%= javascript_include_tag 'bootstrap.min' %>
+    <%= javascript_include_tag 'metisMenu.min' %>
+    <%= javascript_include_tag 'waves.min' %>
+    <%= javascript_include_tag 'moment.min' %>
+    <%= javascript_include_tag 'modernizr.custom' %>
+    <%= javascript_include_tag 'jquery.mCustomScrollbar' %>
+    <%= javascript_include_tag 'cta.min' %>
+    <%= javascript_include_tag 'typed' %>
+    <%= javascript_include_tag 'ion.rangeSlider' %>
+    <%= javascript_include_tag 'iziModal' %>
+    
+    <!--Menu-->
+    <%= javascript_include_tag 'classie' %>
+    <!--Selects-->
+    <%= javascript_include_tag 'selectFx' %>
+    <!--Flot-->
+    <%= javascript_include_tag 'jquery.flot' %>
+    <%= javascript_include_tag 'jquery.flot.resize' %>
+    <%= javascript_include_tag 'curvedLines' %>
+    <%= javascript_include_tag 'jquery.flot.orderBars' %>
+    <!-- AJAXFORM-->
+    <%= javascript_include_tag 'jquery.form.min.js' %>
+    <!-- MASKED INPUT TO MATCH DATE, PHONE NUMBERS, ETC...-->
+    <%= javascript_include_tag 'jquery.maskedinput' %> 
+    <!--C3.js-->
+    <%= javascript_include_tag 'd3.min' %>
+    <%= javascript_include_tag 'c3.min' %>
+    <!--EasyPieChart-->
+    <%= javascript_include_tag 'jquery.easypiechart.min' %>
+    <!--Zabuto Calendar-->
+    <%= javascript_include_tag 'zabuto_calendar.min' %>
+    <!--Simple Weather-->
+    <%= javascript_include_tag 'jquery.simpleWeather.min' %>
+    <!-- DATA TABLES-->
+    <%= javascript_include_tag 'jquery.dataTables' %>
+    <%= javascript_include_tag 'dataTables.responsive' %>
+    <%= javascript_include_tag 'dataTables.tableTools' %>
+    <!--Custom Scriptssasa-->
+    <%= javascript_include_tag 'pikaday' %>
+    <%= javascript_include_tag 'pikaday.jquery' %>
+    <%= javascript_include_tag 'example' %>
+    <!--Notification-->
+    <%= javascript_include_tag 'jsface' %>
+    <%= javascript_include_tag 'snap.svg-min' %>
+    <%= javascript_include_tag 'sweetalert.min' %>
+    <%= javascript_include_tag 'smoke.min' %>
+    <%= javascript_include_tag 'notificationFx' %>
+    <!--AUTOCOMPLETE PLUGINS -->
+    <%= javascript_include_tag 'standalone/selectize' %>
+    <!-- MODAL EFFECTS -->
+    <%= javascript_include_tag 'cssParser' %>
+    <%= javascript_include_tag 'modalEffects' %>
+    <%= javascript_include_tag 'datedropper' %>
+    <%= javascript_include_tag 'nprogress' %>
+    <%= javascript_include_tag 'medical' %>
+    <!-- PROGRESS BUTTONS -->
+    <!-- PROGRESS BUTTONS -->
+    <%= javascript_include_tag 'modernizr.customPBUTTONS' %>
+    <%= javascript_include_tag 'classiePBUTTONS' %>
+    <%= javascript_include_tag 'progressButton' %>
+    <!-- NOTIFICATIONS LAST-->
+    <%= javascript_include_tag 'iziToast' %>
+  </body>
+  <script>
+  //DATATABLE FUNCTION TO LIMIT AMOUNT OF RESULTS DISPLAYED IN SUPPOSEDLY WT HISTORY FROM PANEL TABS
+  $(function () {
+  //Data Tables
+  $('#datatable1').DataTable({
+  displayLength: 25,
+  dom: 'T<"clear">lfrtip',
+  tableTools: {
+  "sSwfPath": "../assets/copy_csv_xls_pdf.swf"
+  },
+  responsive: true
+  });
+  });
+  
+  var parent = document.getElementById("assessment")
+  $(function () {
+  /*c3.js*/ // NEEDED FOR THE CHART
+  var chart = c3.generate({
+  bindto: '#reg-history',
+  size: {
+  height: 90
+  },
+  data: {
+  columns: [
+  ['New users', 30, 35, 45, 33, 48, 54, 41, 66, 49, 43, 38, 46]
+  ]
+  },
+  legend: {
+  show: false
+  },
+  color: {
+  pattern: ['#fff']
+  },
+  point: {
+  r: 3
+  },
+  axis: {
+  x: {
+  show: false
+  },
+  y: {
+  show: false
+  }
+  }
+  });
+  // show the notification
+  
+  //Tooltips for Flot Charts
+  if ($(".flot-chart")[0]) {
+  $(".flot-chart").bind("plothover", function (event, pos, item) {
+  if (item) {
+  var x = item.datapoint[0].toFixed(2),
+  y = item.datapoint[1].toFixed(2);
+  $(".flot-tooltip").html(x + " of " + y)
+  .css({top: item.pageY+5, left: item.pageX+5})
+  .fadeIn(200);
+  } else {
+  $(".flot-tooltip").hide();
+  }
+  });
+  $("<div class='flot-tooltip'></div>").appendTo("body");
+  }
+  });
+  // MEDICAL FAST EDITING
+  /*
+  *
+  *   DIETITIAN.HELP
+  *   ALL RIGHTS RESERVED
+  *
+  */
+
+  /////////
+  // INITIALIZE WEIGHT HISTORY CHART
+  /////////
+
+  /*c3.js*/ // NEEDED FOR THE CHART
+  // show the notification
+  
+  var ctx2 = document.getElementById("chart-line").getContext("2d");
+  var myLine = new Chart(ctx2).Line(lineChartData, {
+  responsive: true
+  });
+  $(function () {
+  //Tooltips for Flot Charts
+  if ($(".flot-chart")[0]) {
+  $(".flot-chart").bind("plothover", function (event, pos, item) {
+  if (item) {
+  var x = item.datapoint[0].toFixed(2),
+  y = item.datapoint[1].toFixed(2);
+  $(".flot-tooltip").html(x + " of " + y)
+  .css({top: item.pageY+5, left: item.pageX+5})
+  .fadeIn(200);
+  } else {
+  $(".flot-tooltip").hide();
+  }
+  });
+  $("<div class='flot-tooltip'></div>").appendTo("body");
+  }
+  });
+
+  function rchart0 () {
+  NProgress.start();
+
+  //resets all parameters in assess
+  var loss1 = false;
+  var loss2 = false;
+  var loss3 = false;
+  var gain1 = false;
+  var gain2 = false;
+  var gain3 = false;
+  $("#loss1days").innerHTML = '';
+  $("#loss2days").innerHTML = '';
+  $("#loss3days").innerHTML = '';
+  $("#gain1days").innerHTML = '';
+  $("#gain2days").innerHTML = '';
+  $("#gain3days").innerHTML = '';
+  myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
+  myLine.scale.xLabels[3] = document.getElementById("client_date0").value;
+  myLine.datasets[1].points[2].value = document.getElementById("client_thirtywt").value;
+  myLine.scale.xLabels[2] = document.getElementById("client_date1").value;
+  myLine.datasets[1].points[1].value = document.getElementById("client_ninetywt").value;
+  myLine.scale.xLabels[1] = document.getElementById("client_date2").value;
+  myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
+  myLine.scale.xLabels[0] = document.getElementById("client_date3").value;
+  myLine.update();
+  NProgress.inc();
+  if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[2].value * 100) <= 95) {
+  loss1 = true;
+  }
+  if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[2].value * 100) >= 105) {
+  gain1 = true;
+  }
+  
+  if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[1].value * 100) <= 92.5) {
+  loss2 = true;
+  }
+  if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[1].value * 1000) >= 1075) {
+  gain2 = true;
+  console.log(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[1].value * 1000));
+  }
+  if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[0].value * 100) <= 90) {
+  loss3 = true;
+  }
+  if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[0].value * 100) >= 110) {
+  gain3 = true;
+  }
+  NProgress.inc();
+  if($('#wthistory').smkValidate({lang:'es'})){}
+  if(loss1 === true || loss2 === true || loss3 === true){
+  $("#losshist")[0].innerHTML = 'Significant Weight Loss for the past ';
+  if(loss1 === true){
+  $("#loss1days")[0].innerHTML = ' 30';
+  if(loss2 === true || loss3 === true){
+  $("#loss1days")[0].innerHTML = ' 30/';
+  }
+  }
+  if(loss2 === true){
+  $("#loss2days")[0].innerHTML = '90';
+  if(loss3 === true){
+  $("#loss2days")[0].innerHTML = '90/';
+  }
+  }
+  if(loss3 === true){
+  $("#loss3days")[0].innerHTML = '180';
+  }
+  }
+  NProgress.inc();
+  if(loss1 === true || loss2 === true || loss3 === true){
+  $("#lossdays")[0].innerHTML = ' days';
+  }
+  if(gain1 === true || gain2 === true || gain3 === true){
+  $("#gainhist")[0].innerHTML = 'Significant Weight Gain for the past ';
+  if(gain1 === true){
+  $("#gain1days")[0].innerHTML = ' 30';
+  if(gain2 === true || gain3 === true){
+  $("#gain1days")[0].innerHTML = ' 30/';
+  }
+  }
+  if(gain2 === true){
+  $("#gain2days")[0].innerHTML = '90';
+  if(gain3 === true){
+  $("#gain2days")[0].innerHTML = '90/';
+  }
+  }
+  if(gain3 === true){
+  $("#gain3days")[0].innerHTML = '180';
+  }
+  }
+  if(gain1 === true || gain2 === true || gain3 === true){
+  $("#gaindays")[0].innerHTML = ' days';
+  }
+  if((loss1 === true || loss2 === true || loss3 === true) && (gain1 === true || gain2 === true || gain3 === true)){
+  $("#and")[0].innerHTML = ' and ';
+  }
+  if(loss1 === true || loss2 === true || loss3 === true || gain1 === true || gain2 === true || gain3 === true) {
+  iziToast.warning({
+    title: 'Significant',
+    message: 'Weight Change',
+    position: 'topRight',
+});
+  }
+  //setTimeout(noti, 1000);
+  NProgress.done();
+  }
+  function diet() {
+  $("#cdietspan")[0].innerText = $('#client_cdiet').val();
+  $(function(){
+  $("#cdietspan").typed({
+  strings: ["<%= @Client.cdiet %>"],
+  typeSpeed: 4
+  });
+  });
+  };
+  
+  function intake() {
+  if($('#client_intakefrom').val() === "1"){
+  $("#intakefromspan").html('Refuse');
+  $('#client_intaketo').attr('disabled', 'disabled');
+  $("#intaketospan").html('');
+  }
+  else {
+    $("#intakefromspan").html($('#client_intakefrom').val())
+    $("#intakeftopan").html($('#client_intaketo').val())
+  }
+  };
+  var genderval = "<%= @Client.gender.downcase %>"
+  /* GENDER SCRIPT!
+  function gender() {
+  if(document.getElementById('switch5').checked) {
+  genderval = 'female';
+  $('#gendermspan').fadeOut(20, function(){
+  $('#genderfspan').fadeIn(50);
+  })};
+  if(document.getElementById('switch5').checked == false) {
+  genderval = 'male';
+  $('#genderfspan').fadeOut(20, function(){
+  $('#gendermspan').fadeIn(50);
+  });}
+  };
+  */
+  function ibw() {
+  var ibwval;
+  
+  if(document.getElementById("client_ht").value.length === '') {
+  widgetUsed("ibwspanin", 0);
+  }
+  else if(genderval === 'male') {
       var x = document.getElementById("client_ht").value;
-      var y = x - 60
-      var z = y * 6 + 106
-      var a = document.getElementById("client_ht").value;
-      var b = x - 60
-      var c = y * 5 + 105
-      
-      if(document.getElementById("client_ht").value.length == '') {
-      widgetUsed("ibwmale", 0);
-      widgetUsed("ibwfemale", 0);
-      }
-      if(z > 0 && c > 0 ) {
-      if(genderval === 'male') {
-      ibwval = z;
-      }
-      else {
-      ibwval = c;
-      }
-      };
-      widgetUsed("ibwspanin", Math.round(ibwval));
-      var percentibw = Math.round(document.getElementById("client_cbw").value/ibwval * 100)
-      widgetUsed("percentibw", Math.round(percentibw));
-      $('#hiddenibw').val(ibwval);
-      };
-      function cal() {
-      var x = document.getElementById("client_cbw").value;
-      var y = x/2.2
-      var z = y * 30
-      var goalselect = document.getElementById('goals');
-      var goalselected = goalselect.options[goalselect.selectedIndex].innerHTML;
-      $("#cbwspan").text(<%=@Client.cbw%>)
-      
-      if(goalselected == 'Gain Weight') {
-      widgetUsed("calrequirement", parseInt(z - z + 1 * y * 35));
-      $('#hiddencalreq').val(parseInt(z - z + 1 * y * 35));
-      }
-      if(goalselected == 'Maintain Weight') {
-      widgetUsed("calrequirement", parseInt(z));
-      $('#hiddencalreq').val(parseInt(z));
-      }
-      if(goalselected == 'Lose Weight') {
-      widgetUsed("calrequirement", parseInt(z - z + 1 * y * 25));
-      $('#hiddencalreq').val(parseInt(z - z + 1 * y * 25));
-      }
-      
-      }
-      function dx() {
-      $("#dxspan")[0].innerHTML = document.getElementById("client_dx").value;
-      $(function(){
-      $("#dxspan").typed({
-      strings: [document.getElementById('client_dx').value],
-      typeSpeed: 4
-      });
-      });
-      }
-      function bmi() {
-      var x = document.getElementById("client_cbw").value;
-      var y = document.getElementById("client_ht").value;
-      var z = x / y
-      var a = z / y
-      var b = a * 703
-      if(document.getElementById("client_cbw").value.length < 1 || b > 50 ) {
-      bmiused("bmispan", 0);
-      bmiused("bmispanhead", 0);
-      bmiused("bmispanin", 0);
-      }
-      if(b < 50 && b > 10) {
-      $("#bmispan").innerHTML = b;
-      bmiused("bmispan", b.toFixed(1));
-      bmiused("bmispanin", b.toFixed(1));
-      bmiused("bmispanhead", b.toFixed(1));
-      }
-      bmiused("bmispan", b.toFixed(1));
-      $('#hiddenbmi').val(b.toFixed(1));
-      };
-      function pro() {
-      var x = document.getElementById("client_cbw").value;
-      var y = x/2.2
-      var z = y * 1
-      widgetUsed("prorequirement", Math.round(z));
-      $('#hiddenproreq').val(Math.round(z));
-      }
-      function fl() {
-      var x = document.getElementById("client_cbw").value;
-      var y = x/2.2
-      var z = y * 30
-      widgetUsed("flrequirement", Math.round(z));
-      $('#hiddenflreq').val(Math.round(z));
-      }
-      function assessment() {
-      $('#hiddenfassess').val(document.getElementById('assessment').innerText)
-      NProgress.done();
-      }
-      function chart0() {
-      if(document.getElementById("client_date0").value.length == '') {
-      return;
-      }
-      
-      myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
-      if (myLine.datasets[1].points[3].value > 0) {
-      myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
-      }
-      if(document.getElementById("client_date1").value.length == '') {
-      return;
-      }
-      
-      myLine.datasets[1].points[2].value = document.getElementById("client_thirtywt").value;
-      if (myLine.datasets[1].points[2].value > 0) {
-      myLine.datasets[1].points[2].value = document.getElementById("client_thirtywt").value;
-      }
-      if(document.getElementById("client_date2").value.length == '') {
-      return;
-      }
-      myLine.datasets[1].points[1].value = document.getElementById("client_ninetywt").value;
-      if (myLine.datasets[1].points[1].value > 0) {
-      myLine.datasets[1].points[1].value = document.getElementById("client_ninetywt").value;
-      }
-      if(document.getElementById("client_date3").value.length == '') {
-      return;
-      }
-      myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
-      if (myLine.datasets[1].points[0].value > 0) {
-      myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
-      }
-      myLine.update();
-      };
-      //UltraWidget
-      function widgetUsed(id, number, string) {
-      $("#" + id).prop('Counter',0).animate({
-      Counter: number
-      }, {
-      duration: 800,
-      easing: 'swing',
-      step: function (now) {
-      $("#" + id).text(now.toFixed(0));
-      }
-      });
-      };
-      
-      $(".w-refresh").click(function(){
-      var counter = $(this).closest(".ultra-widget").data("counter");
-      var counter_id = $(this).closest(".ultra-widget").attr("id");
-      widgetUsed(counter_id, counter);
-      });
-      function bmiused(id, number, string) {
-      $("#" + id ).prop('Counter',0).animate({
-      Counter: number
-      }, {
-      duration: 800,
-      easing: 'swing',
-      step: function (now) {
-      $("#" + id).text(now.toFixed(1));
-      }
-      });
-      };
-      
-      $(".w-refresh").click(function(){
-      var counter = $(this).closest(".ultra-widget").data("counter");
-      var counter_id = $(this).closest(".ultra-widget").attr("id");
-      widgetUsed(counter_id, counter);
-      });
-      function adime() {
-      $('#assessadime').html('yeah')
-      $('#dxadime').html('yeah')
-      $('#intadime').html('yeah')
-      $('#monevadime').html('yeah')
-      }
-      var food1;
-      var lat;
-      var lng;
-      var d1;
-      var parsed;
-      var ager;
-      var date = new Date();
-      function getAge(d1, d2){
-      var d1 = document.getElementById('client_dobspan').innerHTML;
-      var d2 = new Date();
-      var diff = d2.getTime() - parseDate($('#client_dobspan').text()).getTime();
-      ager = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25
-      ));$(function(){
-      $("#agespan").typed({
-      strings: [ager.toString()],
-      typeSpeed: 50
-      });
-      });
-      };
-      // parse a date in yyyy-mm-dd format
-      function parseDate(input) {
-      var parts = input.match(/(\d+)/g);
-      // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-      return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
-      }
-      document.getElementById('todaysdate').innerHTML = moment(new Date()).format('LL');
-      function removee(){
-      $('.notice').remove();
-      $('.alert').remove();
-      };
-      $(document).ready(removee);
-      </script>
+  var y = x - 60;
+  var z = y * 6 + 106;
+  ibwval = z;
+  }
+  else if(genderval === 'female'){
+  var a = document.getElementById("client_ht").value;
+  var b = a - 60;
+  var c = b * 5 + 105;
+  ibwval = c;
+  }
+  widgetUsed("ibwspanin", Math.round(ibwval));
+  var percentibw = Math.round(document.getElementById("client_cbw").value/ibwval * 100);
+  widgetUsed("percentibw", Math.round(percentibw));
+  widgetUsed("percentibwfassess", Math.round(percentibw));
+  $('#hiddenibw').val(ibwval);
+  //WILL RUN ASSESSMENT() FROM HERE TO NOT ADD ANOTHER ONCHANGE
+  assessment();
+  }
+  function cal() {
+  var x = document.getElementById("client_cbw").value;
+  var y = x/2.2
+  var z = y * 30
+  //TOOK AWAY ABILITY TO ADD CALORIES FOR WT GAIN/LOSS -CALORIC NEEDS FOR WT MAINTENANCE FOR NOW
+  var goalselect;
+  var goalselected = 'Maintain Weight'
+  $("#cbwspan").text(<%=@Client.cbw%>)
+  
+  if(goalselected == 'Gain Weight') {
+  widgetUsed("calrequirement", parseInt(z - z + 1 * y * 35));
+  $('#hiddencalreq').val(parseInt(z - z + 1 * y * 35));
+  }
+  if(goalselected == 'Maintain Weight') {
+  widgetUsed("calrequirement", parseInt(z));
+  $('#hiddencalreq').val(parseInt(z));
+  }
+  if(goalselected == 'Lose Weight') {
+  widgetUsed("calrequirement", parseInt(z - z + 1 * y * 25));
+  $('#hiddencalreq').val(parseInt(z - z + 1 * y * 25));
+  }
+  }
+  function dx() {
+  $("#dxspan")[0].innerHTML = document.getElementById("client_dx").value;
+  $(function(){
+  $("#dxspan").typed({
+  strings: [document.getElementById('client_dx').value],
+  typeSpeed: 4
+  });
+  });
+  }
+  function bmi() {
+  var x = document.getElementById("client_cbw").value;
+  var y = document.getElementById("client_ht").value;
+  var z = x / y
+  var a = z / y
+  var b = a * 703
+  if(document.getElementById("client_cbw").value.length < 1 || b > 50 ) {
+  bmiused("bmispan", 0);
+  bmiused("bmispanhead", 0);
+  bmiused("bmispanin", 0);
+  }
+  if(b < 50 && b > 10) {
+  $("#bmispan").innerHTML = b;
+  bmiused("bmispan", b.toFixed(1));
+  bmiused("bmispanin", b.toFixed(1));
+  bmiused("bmispanhead", b.toFixed(1));
+  }
+  bmiused("bmispan", b.toFixed(1));
+  $('#hiddenbmi').val(b.toFixed(1));
+  };
+  function pro() {
+  var x = document.getElementById("client_cbw").value;
+  var y = x/2.2
+  var z = y * 1
+  widgetUsed("prorequirement", Math.round(z));
+  $('#hiddenproreq').val(Math.round(z));
+  }
+  function fl() {
+  var x = document.getElementById("client_cbw").value;
+  var y = x/2.2
+  var z = y * 30
+  widgetUsed("flrequirement", Math.round(z));
+  $('#hiddenflreq').val(Math.round(z));
+  }
+  function assessment() {
+  $('#hiddenfassess').val(document.getElementById('assessment').innerText)
+  NProgress.done();
+  }
+  function chart0() {
+  if(document.getElementById("client_date0").value.length == '') {
+  return;
+  }
+  
+  myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
+  if (myLine.datasets[1].points[3].value > 0) {
+  myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
+  }
+  if(document.getElementById("client_date1").value.length == '') {
+  return;
+  }
+  
+  myLine.datasets[1].points[2].value = document.getElementById("client_thirtywt").value;
+  if (myLine.datasets[1].points[2].value > 0) {
+  myLine.datasets[1].points[2].value = document.getElementById("client_thirtywt").value;
+  }
+  if(document.getElementById("client_date2").value.length == '') {
+  return;
+  }
+  myLine.datasets[1].points[1].value = document.getElementById("client_ninetywt").value;
+  if (myLine.datasets[1].points[1].value > 0) {
+  myLine.datasets[1].points[1].value = document.getElementById("client_ninetywt").value;
+  }
+  if(document.getElementById("client_date3").value.length == '') {
+  return;
+  }
+  myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
+  if (myLine.datasets[1].points[0].value > 0) {
+  myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
+  }
+  myLine.update();
+  };
+  //UltraWidget
+  function widgetUsed(id, number, string) {
+  $("#" + id).prop('Counter',0).animate({
+  Counter: number
+  }, {
+  duration: 800,
+  easing: 'swing',
+  step: function (now) {
+  $("#" + id).text(now.toFixed(0));
+  }
+  });
+  };
+  
+  $(".w-refresh").click(function(){
+  var counter = $(this).closest(".ultra-widget").data("counter");
+  var counter_id = $(this).closest(".ultra-widget").attr("id");
+  widgetUsed(counter_id, counter);
+  });
+  function bmiused(id, number, string) {
+  $("#" + id ).prop('Counter',0).animate({
+  Counter: number
+  }, {
+  duration: 800,
+  easing: 'swing',
+  step: function (now) {
+  $("#" + id).text(now.toFixed(1));
+  }
+  });
+  };
+  
+  $(".w-refresh").click(function(){
+  var counter = $(this).closest(".ultra-widget").data("counter");
+  var counter_id = $(this).closest(".ultra-widget").attr("id");
+  widgetUsed(counter_id, counter);
+  });
+  function adime() {
+  $('#assessadime').html('yeah')
+  $('#dxadime').html('yeah')
+  $('#intadime').html('yeah')
+  $('#monevadime').html('yeah')
+  }
+  var food1;
+  var lat;
+  var lng;
+  var d1;
+  var parsed;
+  var ager;
+  var date = new Date();
+  function getAge(d1, d2){
+  var d1 = document.getElementById('client_dobspan').innerHTML;
+  var d2 = new Date();
+  var diff = d2.getTime() - parseDate($('#client_dobspan').text()).getTime();
+  ager = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25
+  ));$(function(){
+  $("#agespan").typed({
+  strings: [ager.toString()],
+  typeSpeed: 50
+  });
+  });
+  };
+function parseDate(dateStr) {
+  var dateParts = dateStr.split("/");
+  return new Date(dateParts[2], (dateParts[1] - 1), dateParts[0]);
+}
+  document.getElementById('todaysdate').innerHTML = moment(new Date()).format('LL');
+  function removee(){
+  $('.alert').remove();
+  };
+  $(document).ready(function() {
+  top.$("#processingViewModal").iziModal('close')
+  $("#labsform").iziModal();
+  $("#modal-alert").iziModal({
+    title: 'Client Updated',
+    subtitle: '<%=@client.firstname + ' ' + @client.lastname%>',
+    icon: 'icon-check',
+    iconColor: '#00af66',
+    headerColor: '#374B89',
+    attached: 'top', // bottom, top
+    width: 400,
+    timeout: 3000,
+    timeoutProgressbar: true,
+    pauseOnHover: true,
+    timeoutProgressbarColor: '#CABC42',
+});
+    removee()
+var x = window.top.document.querySelectorAll('#landing');
+var y = window.top.document.querySelectorAll('#mainwrapper')
+  $(x).fadeOut()
+  setTimeout(function() {
+  window.NProgress.start();
+  window.NProgress.done();
+  $(y).removeClass('table-wrapper1');
+}, 1000);
+  iziToast.success({
+    title: '<%=@client.firstname + ' ' + @client.lastname%>',
+    message: 'Loaded',
+    position: 'topLeft',
+    timeout: 2000,
+});
+
+  //MASKS DATE INPUT TO TAKE WITH HUMAN DATE FORMAT ADDING PLACE HOLDER + MASK
+   $("#client_date0").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
+   $("#client_date1").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
+   $("#client_date2").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
+   $("#client_date3").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
+
+   //CALENDAR POPDOWN FROM DATE INPUTS
+   $("#client_date0").pikaday();
+   $("#client_date1").pikaday();
+   $("#client_date2").pikaday();
+   $("#client_date3").pikaday();
+
+
+  //set default dates on input to respective dates (-30/90/180 days)
+  $('#client_date1').val(moment().subtract(30, "days").format("DD/MM/YYYY"))
+  $('#client_date2').val(moment().subtract(90, "days").format("DD/MM/YYYY"))
+  $('#client_date3').val(moment().subtract(180, "days").format("DD/MM/YYYY"))
+
+  });
+$('#updateClient').ajaxForm({
+          success: function() {
+          $("#modal-alert").iziModal('open'); 
+          }
+        })
+  </script>

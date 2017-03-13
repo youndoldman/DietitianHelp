@@ -1225,6 +1225,10 @@ body {
   color: #374B89;
 }
 
+.black {
+  color: #575757;
+}
+
 .light-blue {
   color: #90c1f1;
 }
@@ -1340,21 +1344,13 @@ body {
 }
 
 /*Boxes*/
-.content {
-  margin: 0;
-  padding: 20px 30px 66px;
-  position: relative;
-  background: #F1F4F5;
-  -webkit-transition: margin, .4s;
-          transition: margin, .4s;
-}
 
 .content-box {
   position: relative;
   background: #fff;
   -webkit-border-radius: 3px;
           border-radius: 3px;
-  margin: 10px;
+  margin: 10px 10px 10px 0;
   overflow: visible;
   -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
           box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
@@ -1856,7 +1852,7 @@ body {
 
 /*Tabs*/
 .tabbable {
-  margin-bottom: 30px;
+  margin-bottom: 0px;
   margin-top: 10px
 }
 
@@ -3384,7 +3380,7 @@ ul.inbox-pagination li {
   color: #5a7391;
   font-size: 16px;
   font-weight: 150;
-  margin-bottom: 7px;
+  margin-bottom: 15px;
   display: inline-block;
 }
 
@@ -4224,48 +4220,6 @@ body .ns-effect-loadingcircle {
 
 .ns-effect-scale .ns-close::before, .ns-effect-scale .ns-close::after, .ns-effect-genie .ns-close::before, .ns-effect-genie .ns-close::after, .ns-effect-jelly .ns-close::before, .ns-effect-jelly .ns-close::after, .ns-effect-slide .ns-close::before, .ns-effect-slide .ns-close::after {
   background: #fff;
-}
-
-.progress-button {
-  position: relative;
-  display: inline-block;
-  outline: none;
-  border: none;
-  font-weight: 700;
-  letter-spacing: 1px;
-  z-index: 50;
-  overflow: hidden;
-}
-
-.progress-button .content {
-  position: relative;
-  display: block;
-  z-index: 10;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-  -webkit-transition: -webkit-transform 0.3s;
-          transition: transform 0.3s;
-}
-
-.progress-button .progress {
-  position: absolute;
-  left: 0;
-  background: rgba(0, 0, 0, 0.2);
-  top: 0;
-  width: 0%;
-  opacity: 0;
-  height: 100%;
-  z-index: 0;
-  -webkit-transition: width 0s 0.3s, opacity 0.3s;
-          transition: width 0s 0.3s, opacity 0.3s;
-}
-
-.progress-button.active .progress {
-  opacity: 1;
-  width: 100%;
-  -webkit-transition: width 1.2s;
-          transition: width 1.2s;
 }
 
 .ns-type-error {
@@ -6603,10 +6557,6 @@ form.content-form.form-inline {
     display: none !important;
   }
   /*Remove margins from content block*/
-  .content {
-    margin: 0;
-    padding: 20px 10px 40px;
-  }
   /*Project box*/
   .sort-projects .search-project .form-control {
     padding-left: 0;

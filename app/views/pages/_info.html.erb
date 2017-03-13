@@ -1,365 +1,169 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
-  <!-- Identifying info -->
-    <div class="col-lg-3">
-          <div class="content-box profile-sidebar box-shadow">
-            <div class="profile-usertitle">
-              <div class="profile-usertitle-name">
-                <span id="client_firstnamespan" style="font-size:28px;font-weight:150;float:left"><%= @Client.firstname.capitalize %></span><div style="float:left">&nbsp;</div><span id="client_lastnamespan" style="float:left;font-size:28px;font-weight:150;"><%= @Client.lastname.capitalize %></span>
-              </div>
-              <div id="client_dobspan" class="profile-usertitle-job">
-                <%= @Client.dob %>
-              </div>
-              <div id="client_genderspan" class="profile-usertitle-job">
-                <%= @Client.gender %>
-              </div>
+<!-- Identifying info -->
+<div class="col-lg-3">
+  <div class="content-box profile-sidebar box-shadow">
+    <div class="profile-usertitle">
+      <div class="profile-usertitle-name">
+        <div class="field-container form-group">
+          <%= form_for @Client, html: {class: "content-form", id: "updateClientInfo", style: "display: none;"} do |f| %>
+          <div>
+            <%= f.text_field :firstname, type: "string", class: "inin form-control material input-lg", id: "hiddenfirstnameinfo", required: true %>
+            <%= f.label :firstname, 'First Name', class: "inlabel" %>
+          </div>
+          <div class="field-container form-group">
+            <%= f.text_field :lastname, type: "string", class: "inin form-control material input-lg", id: "hiddenlastnameinfo", required: true %>
+            <%= f.label :lastname, 'Last Name', class: "inlabel" %>
+          </div>
+          <div class="field-container form-group">
+            <%= f.text_field :dob, type: "date", class: "inin form-control material input-lg", id: "hiddendobinfo", required: true %>
+            <%= f.label :dob, 'Date of Birth', class: "inlabel" %>
+          </div>
+          <div class="field-container form-group">
+            <%= f.text_field :gender, type: "string", class: "inin form-control material input-lg", id: "hiddengenderinfo", required: true %>
+            <%= f.label :gender, 'Gender', class: "inlabel" %>
+          </div>
+          <%= f.submit 'Save', class: "actions btn waves waves-effect waves-float", id: "saveClientInfoBtn", style: "background: #5F9EA0; color: #FFFFFF;"%>
+          <% end %>
+          </div>
+          <div id="spanInfoDiv" style="">
+            <div class="profile-usertitle-name">
+            <span id="client_firstnamespan" style="font-size:28px;font-weight:150;float:left"><%= @Client.firstname.capitalize %></span>
+            <div style="float:left">&nbsp;</div>
+            <span id="client_lastnamespan" style="float:left;font-size:28px;font-weight:150;"><%= @Client.lastname.capitalize %></span><br>
+          </div>
+            <div id="client_dobspan" class="profile-usertitle-job">
+              <%= @Client.dob %>
             </div>
-
-            <div class="profile-userbuttons">
-              <button id="clienteditbut" type="button" class="btn btn-danger waves waves-effect waves-float" data-toggle="modal" data-target="#clienteditmodal">Edit</button>
-            </div>
-            <div class="profile-usermenu">
-              <ul class="nav">
-                <li id="bmiresult"class="" style="display: inline-block">
-                  <span  id="bmispanin" class="green" style="font-size:30px"><%= @Client.bmi %></span>
-                  <span class="emptygray" style="font-size:12px">kg/m2</span>
-                </li>
-                <li class="" data-counter="0" style="display:inline-block;float:right">
-                  <span id="calrequirement" class="red" style="font-size:30px"><%= @Client.calreq %></span>
-                    <span class="emptygray" style="font-size:12px">cal/day</span>
-                </li>
-                <li class="" data-counter="0" style="display: inline-block;padding-right:20px">
-                    <span id="ibwspanin" class="yellow" style="font-size:30px"><%= @Client.ibw %></span>
-                    <span class="emptygray" style="font-size:12px">lbs</span>
-                </li>
-                <li class="" data-counter="0" style="display:inline-block;float:right">
-                    <span  id="prorequirement" class="green" style="font-size:30px"><%= @Client.proreq %></span>
-                    <span class="emptygray" style="font-size:12px">g/day</span>
-                </li>
-                <br>
-                <li class="" data-counter="0" style="display: inline-block">
-                  <span id="percentibw" class="yellow" style="font-size:30px">90</span>
-                    <span class="emptygray" style="font-size:12px">%ibw</span>
-                </li>
-                <li class="" data-counter="0" style="display:inline-block;float:right">
-                    <span id="flrequirement" class="yellow" style="font-size:30px"><%= @Client.flreq %></span>
-                    <span class="emptygray" style="font-size:12px">oz/day</span>
-                </li>
-              </ul>
+            <div id="client_genderspan" class="profile-usertitle-job">
+              <%= @Client.gender %>
             </div>
           </div>
-          <!--WEIGHT HISTORY-->
-              <div class="content-box">
-                <div class="content-title big-box i-block">
-                  <h4 class="zero-m">Weight History</h4>
-                  <div class="content-tools i-block pull-right">
-                    <span class="text-uppercase pull-right">Plot data</span>
-                    <a id="expanding", class="repeat-btn", onclick="setTimeout(window.rchart0, 500)">
-                      <i class="fa fa-repeat"></i>
-                    </a>
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="big-box">
-                  <div class="chartjs-container">
-                    <canvas id="chart-line"></canvas>
-                  </div>
-                </div>
-              </div>
-          <div id="prueba"class="content-box big-box box-shadow">
-             <h4><strong>Intake</strong></h4>
-                  <div id='parentofselect' class="form-inline" onclick="intake()">
-                  <select id="client_intakefrom" class="cs-select cs-skin-border">
-                      <option value="" disabled>From</option>
-                      <option value="100%">100%</option>
-                      <option value="75%">75%</option>
-                      <option value="50%">50%</option>
-                      <option value="25%">25%</option>
-                      <option value="0%">0%</option>
-                      <option value="1">Refuse</option>
-                    </select>
-                    <select id="client_intaketo" class="cs-select cs-skin-border 1">
-                      <option value="" disabled>To</option>
-                      <option value="100%">100%</option>
-                      <option value="75%">75%</option>
-                      <option value="50%">50%</option>
-                      <option value="25%">25%</option>
-                      <option value="0%">0%</option>
-                    </select>
-                  </div>
-                </div>
-
-
-          <div class="content-box big-box box-shadow">
-                    <div class="form-inline">
-                    <h4><strong>Weight Goal</strong></h4>
-                    <select id="goals" class="cs-select cs-skin-border" onclick="cal()">
-                      <option value="" disabled>Goal</option>
-                      <option id="gainwt" value="gainwt">Gain Weight</option>
-                      <option value="maintainwt"  selected>Maintain Weight</option>
-                      <option value="losewt">Lose Weight</option>
-                    </select>
-                  </div>
-                <div class="checkbox checkbox-danger checkbox-big">
-                  <input type="checkbox" id="checkbox1">
-                  <label for="checkbox1">
-                      Diabetes
-                  </label>
-                </div>
-                <div class="checkbox checkbox-danger checkbox-big">
-                  <input type="checkbox" id="checkbox2">
-                  <label for="checkbox2">
-                      Hypertension
-                  </label>
-                </div>
-                <div class="checkbox checkbox-danger checkbox-big">
-                  <input type="checkbox" id="checkbox3">
-                  <label for="checkbox3">
-                      Renal Issues
-                  </label>
-                </div>
+          </div>
+        <div class="">
+          <button id="clienteditbut" type="button" class="btn waves waves-effect waves-float" data-toggle="modal" data-target="#clienteditmodal" style="background: #374B89; color: #FFFFFF;">Edit</button>
+          <button id="clientCancelEditBtn" type="button" class="btn waves waves-effect waves-float" data-toggle="modal" data-target="#clienteditmodal" style="background: #374B89; color: #FFFFFF;display: none">Cancel</button>
+        </div>
+        <div>
+        <div id="currentHealthParams" class="profile-usermenu" style="display: block">
+          <ul class="nav">
+            <li class="" style="display: inline-block; float: left;margin-right: 40px">
+              <span  id="bmispanin" class="green" style="font-size:30px"><%= @Client.bmi %></span>
+              <span class="emptygray" style="font-size:12px">kg/m2</span>
+            </li>
+            <li style="display: inline-block;float: right;margin-left: 20px">
+                <span id="calrequirement" class="black" style="font-size:30px;"><%= @Client.calreq %></span>
+                <span class="emptygray" style="font-size:12px;">cal/day</span>
+            </li>
+            <li class="" style="display: inline-block; float: left;margin-right: 60px">
+                <span id="ibwspanin" class="black" style="font-size:30px"><%= @Client.ibw %></span>
+                <span class="emptygray" style="font-size:12px">lbs</span>
+            </li>
+            <li style="display: inline-block;float: right;margin-left: 60px">
+                <span  id="prorequirement" class="black" style="font-size:30px;"><%= @Client.proreq %></span>
+                <span class="emptygray" style="font-size:12px">g/day</span>
+            </li>
+            <li class="" style="display: inline-block; float: left;margin-right: 40px">
+              <span id="percentibw" class="yellow" style="font-size:30px">90</span>
+              <span class="emptygray" style="font-size:12px">%ibw</span>
+            </li>
+            <li style="display: inline-block;float: right;margin-left: 20px">
+                <span id="flrequirement" class="black" style="font-size:30px;"><%= @Client.flreq %></span>
+                <span class="emptygray" style="font-size:12px">oz/day</span>
+            </li>
+          </ul>
         </div>
         </div>
-
-
-    <!--Scripts-->
-<%= javascript_include_tag 'jquery.min' %>
-<%= javascript_include_tag 'jquery-ui.min' %>
-<%= javascript_include_tag 'jquery.bootstrap.wizard' %>
-<%= javascript_include_tag 'jquery.flot' %>
-<%= javascript_include_tag 'jquery.flot.resize' %>
-<%= javascript_include_tag 'bootstrap.min' %>
-<%= javascript_include_tag 'metisMenu.min' %>
-<%= javascript_include_tag 'waves.min' %>
-<%= javascript_include_tag 'moment.min' %>
-<%= javascript_include_tag 'modernizr.custom' %>
-<%= javascript_include_tag 'jquery.mCustomScrollbar' %>
-<%= javascript_include_tag 'cta.min' %>
-<%= javascript_include_tag 'typed' %>
-<%= javascript_include_tag 'ion.rangeSlider' %>
-
-
+      <!--WEIGHT HISTORY-->
+    </div>
+  </div>
+</div>
+  <!--Scripts-->
+  <%= javascript_include_tag 'jquery.min' %>
+  <%= javascript_include_tag 'jquery-ui.min' %>
+  <%= javascript_include_tag 'jquery.bootstrap.wizard' %>
+  <%= javascript_include_tag 'jquery.flot' %>
+  <%= javascript_include_tag 'jquery.flot.resize' %>
+  <%= javascript_include_tag 'bootstrap.min' %>
+  <%= javascript_include_tag 'metisMenu.min' %>
+  <%= javascript_include_tag 'waves.min' %>
+  <%= javascript_include_tag 'moment.min' %>
+  <%= javascript_include_tag 'modernizr.custom' %>
+  <%= javascript_include_tag 'jquery.mCustomScrollbar' %>
+  <%= javascript_include_tag 'cta.min' %>
+  <%= javascript_include_tag 'typed' %>
+  <%= javascript_include_tag 'ion.rangeSlider' %>
   
   <!--Menu-->
-
   <%= javascript_include_tag 'classie' %>
-
-
   <!--Selects-->
-
   <%= javascript_include_tag 'selectFx' %>
-
   <%= javascript_include_tag 'p5' %>
-
-
   <!--Flot-->
-
   <%= javascript_include_tag 'jquery.flot' %>
   <%= javascript_include_tag 'jquery.flot.resize' %>
   <%= javascript_include_tag 'curvedLines' %>
   <%= javascript_include_tag 'jquery.flot.orderBars' %>
-
+      <!-- AJAXFORM-->
+    <%= javascript_include_tag 'jquery.form.min.js' %> 
   <!--Custom Flot Charts-->
   <%= javascript_include_tag 'Chart' %>
   <!--C3.js-->
-
   <%= javascript_include_tag 'd3.min' %>
   <%= javascript_include_tag 'c3.min' %>
-
-
   <!--EasyPieChart-->
- <%= javascript_include_tag 'jquery.easypiechart.min' %>
-
+  <%= javascript_include_tag 'jquery.easypiechart.min' %>
   <!--Zabuto Calendar-->
-
   <%= javascript_include_tag 'zabuto_calendar.min' %>
-
-
   <!--Simple Weather-->
-
   <%= javascript_include_tag 'jquery.simpleWeather.min' %>
-
-
-
-<!-- DATA TABLES-->
-<%= javascript_include_tag 'jquery.dataTables' %>
-<%= javascript_include_tag 'dataTables.responsive' %>
-<%= javascript_include_tag 'dataTables.tableTools' %>
-
-    <!--Custom Scriptssasa-->
-
-<%= javascript_include_tag 'pikaday' %>
-<%= javascript_include_tag 'pikaday.jquery' %>
-<%= javascript_include_tag 'example' %>
-
-
+  <!-- DATA TABLES-->
+  <%= javascript_include_tag 'jquery.dataTables' %>
+  <%= javascript_include_tag 'dataTables.responsive' %>
+  <%= javascript_include_tag 'dataTables.tableTools' %>
+  <!--Custom Scriptssasa-->
+  <%= javascript_include_tag 'pikaday' %>
+  <%= javascript_include_tag 'pikaday.jquery' %>
+  <%= javascript_include_tag 'example' %>
   <!--Notification-->
-<%= javascript_include_tag 'jsface' %>
-<%= javascript_include_tag 'snap.svg-min' %>
-<%= javascript_include_tag 'sweetalert.min' %>
-<%= javascript_include_tag 'smoke.min' %>
-<%= javascript_include_tag 'notificationFx' %>
-
-<!--AUTOCOMPLETE PLUGINS -->
-<%= javascript_include_tag 'standalone/selectize' %>
-
-<!-- MODAL EFFECTS -->
-<%= javascript_include_tag 'cssParser' %>
-<%= javascript_include_tag 'modalEffects' %>
- 
-        <script>
-
-
+  <%= javascript_include_tag 'jsface' %>
+  <%= javascript_include_tag 'snap.svg-min' %>
+  <%= javascript_include_tag 'sweetalert.min' %>
+  <%= javascript_include_tag 'smoke.min' %>
+  <%= javascript_include_tag 'notificationFx' %>
+  <!--AUTOCOMPLETE PLUGINS -->
+  <%= javascript_include_tag 'standalone/selectize' %>
+  <!-- MODAL EFFECTS -->
+  <%= javascript_include_tag 'cssParser' %>
+  <%= javascript_include_tag 'modalEffects' %>
   
-
-
-
-      /*c3.js*/ // NEEDED FOR THE CHART
-            // show the notification
- 
-              var ctx2 = document.getElementById("chart-line").getContext("2d");
-  var myLine = new Chart(ctx2).Line(lineChartData, {
-          responsive: true
-      });
-
-
-    $(function () {
-
-
-
-
-
-
-
-
-      //Tooltips for Flot Charts
-      if ($(".flot-chart")[0]) {
-        $(".flot-chart").bind("plothover", function (event, pos, item) {
-          if (item) {
-          var x = item.datapoint[0].toFixed(2),
-            y = item.datapoint[1].toFixed(2);
-
-          $(".flot-tooltip").html(x + " of " + y)
-            .css({top: item.pageY+5, left: item.pageX+5})
-            .fadeIn(200);
-        } else {
-          $(".flot-tooltip").hide();
-        }
-        });
-
-        $("<div class='flot-tooltip'></div>").appendTo("body");
-      }
-    });
-
-    function rchart0 () {
- NProgress.start();
-  //resets all parameters in assess
-
-  var loss1;
-  var loss2;
-  var loss3;
-  var gain1;
-  var gain2;
-  var gain3;
-
-$("#loss1days").innerHTML = ''
-$("#loss2days").innerHTML = ''
-$("#loss3days").innerHTML = ''
-$("#gain1days").innerHTML = ''
-$("#gain2days").innerHTML = ''
-$("#gain3days").innerHTML = ''
-
-  myLine.datasets[1].points[3].value = $("#client_cbw").value;
-  myLine.scale.xLabels[3] = $("#client_date0").value;
-  myLine.datasets[1].points[2].value = $("#client_thirtywt").value;
-  myLine.scale.xLabels[2] = $("#client_date1").value;
-  myLine.datasets[1].points[1].value = $("#client_ninetywt").value;
-  myLine.scale.xLabels[1] = $("#client_date2").value;
-  myLine.datasets[1].points[0].value = $("#client_oneeightywt").value;
-  myLine.scale.xLabels[0] = $("#client_date3").value;
-  myLine.update();
-
-  NProgress.inc();
-
-  if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[2].value * 100) <= 95) {
-    loss1 = true
-
+  <script>
+  ///////
+  //SPAN TO INPUT FOR CLIENT INFO UPDATE
+  //////
+  $('#clienteditbut').click(function() {
+  $('#updateClientInfo').toggle('fast')
+  $('#spanInfoDiv').toggle('fast')
+  $('#clienteditbut').toggle('fast')
+  $('#clientCancelEditBtn').toggle('fast')
+  $('#currentHealthParams').toggle('fast')
+  })
+  $('#clientCancelEditBtn').click(function() {
+  $('#updateClientInfo').toggle('fast')
+  $('#clientCancelEditBtn').toggle('fast')
+  $('#clienteditbut').toggle('fast')
+  $('#spanInfoDiv').toggle('fast')
+  $('#currentHealthParams').toggle('fast')
+  })
+  $('#updateClientInfo').ajaxForm({
+    success: function() {
+  $('#updateClientInfo').toggle('fast');
+  $('#spanInfoDiv').toggle('fast');
+    $('#client_firstnamespan').html($('#hiddenfirstnameinfo').val());
+      $('#client_lastnamespan').html($('#hiddenlastnameinfo').val());
+      $('#client_dobspan').html($('#hiddendobinfo').val());
+      $('#client_genderspan').html($('#hiddengenderinfo').val());
+      $('#clientCancelEditBtn').toggle('fast')
+      $('#clienteditbut').toggle('fast')
+      return true
   }
-  if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[2].value * 100) >= 105) {
-    gain1 = true
-  }
-  
-  if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[1].value * 100) <= 92.5) {
-    loss2 = true
-  }
-  if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[1].value * 1000) >= 1075) {
-    gain2 = true
-
-  }
-  if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[0].value * 100) <= 90) {
-    loss3 = true
-
-  }
-  if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[0].value * 100) >= 110) {
-    gain3 = true
-
-  }
-
-  NProgress.inc();
-
-  if($('#wthistory').smkValidate({lang:'es'})){}
-
-  if(loss1 == true || loss2 == true || loss3 == true){
-    $("#losshist")[0].innerHTML = 'Significant Weight Loss for the past ';
-    if(loss1 == true){
-      $("#loss1days")[0].innerHTML = ' 30';
-      if(loss2 == true || loss3 == true){
-        $("#loss1days")[0].innerHTML = ' 30/'
-      }
-    }
-    if(loss2 == true){
-      $("#loss2days")[0].innerHTML = '90';
-        if(loss3 == true){
-        $("#loss2days")[0].innerHTML = '90/'
-      }
-    }
-    if(loss3 == true){
-      $("#loss3days")[0].innerHTML = '180';
-    }
-  }
-  NProgress.inc();
-  if(loss1 == true || loss2 == true || loss3 == true){
-    $("#lossdays")[0].innerHTML = ' days'
-    }
- if(gain1 == true || gain2 == true || gain3 == true){
-    $("#gainhist")[0].innerHTML = 'Significant Weight Gain for the past ';
-    if(gain1 == true){
-      $("#gain1days")[0].innerHTML = ' 30';
-      if(gain2 == true || gain3 == true){
-        $("#gain1days")[0].innerHTML = ' 30/'
-      }
-    }
-    if(gain2 == true){
-      $("#gain2days")[0].innerHTML = '90';
-        if(gain3 == true){
-        $("#gain2days")[0].innerHTML = '90/'
-      }
-    }
-    if(gain3 == true){
-      $("#gain3days")[0].innerHTML = '180';
-    }
-  }
-  if(gain1 == true || gain2 == true || gain3 == true){
-    $("#gaindays")[0].innerHTML = ' days'
-    }
-  if((loss1 == true || loss2 == true || loss3 == true) && (gain1 == true || gain2 == true || gain3 == true)){
-    $("#and")[0].innerHTML = ' and '
-    }
-    if(loss1 == true || loss2 == true || loss3 == true || gain1 == true || gain2 == true || gain3 == true) {
-      $.smkAlert({ text: 'Significant Weight Change', type: 'danger', permanent: true });
-    }
-//setTimeout(noti, 1000);
-};
-
-</script>
-
+  });
+  </script>
