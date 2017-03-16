@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class PagesController < ApplicationController 
 	before_action :require_login, only: [:require_login]
 
 private
@@ -16,4 +16,5 @@ private
   end
   def login	
   end
+
 end

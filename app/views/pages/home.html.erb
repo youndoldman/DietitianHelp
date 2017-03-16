@@ -122,6 +122,9 @@
       <%= javascript_include_tag 'modalEffects' %>
       <!-- NOTIFICATIONS LAST-->
       <%= javascript_include_tag 'iziToast' %>
+
+      <!-- BLUR BACKGROUND-->
+      <%= javascript_include_tag 'jquery.foggy.min' %>
       <!-- DO NOT TOUCH WITHOUT REVIEWING -->
       <!-- Equation can be simplified into two variables -->
       <script>
@@ -571,7 +574,7 @@
       var data  = $("#newClient")
       //Ajax code here
       $.ajaxForm({
-      url: 'https://dietitianhelp.herokuapp.com//clients/' + clienId,
+      url: 'https://dietitianhelp.herokuapp.com/clients/' + clienId,
       type: 'POST',
       dataType: 'json',
       data: data,

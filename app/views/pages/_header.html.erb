@@ -1,190 +1,128 @@
-    <ul id="gn-menu" class="gn-menu-main">
-      <li class="gn-trigger">
-        <a id="menu-toggle" class="menu-toggle gn-icon gn-icon-menu">
-          <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div class="cross">
-            <span></span>
-            <span></span>
-          </div>
-        </a>
-        <nav class="gn-menu-wrapper">
-          <div class="gn-scroller">
-            <ul class="gn-menu metismenu">
-              <li  class="gn-search-item">
-                <select id="select-beast-head" placeholder="Search" class="gn-search" style="opacity: 1; position: absolute; left: 0px; width: 100%; padding-top:10px;"></select>
-              </li>
-              <li>
-                <a id="assessmenttool" aria-expanded="false"><i class="fa fa-language"></i>Assess<span class="fa arrow"></span></a>
-              </li>
-               <li>
-                <a id="clientsfrommenu" aria-expanded="false"><i class="fa fa-user"></i>Clients<span class="fa arrow"></span></a>
-              </li>
-                <li>
-                <a type="button"id="historyfrommenu" aria-expanded="false"><i class="fa fa-history"></i>History<span class="fa arrow"></span></a>
-          </div>
-          <!-- /gn-scroller -->
-        </nav>
-      </li>
-      <li class="pull-left">
-        <a href="" class="logo">DIETITIAN.HELP<i class="fa fa-heartbeat"></i></a>
-      </li>
-      <span id="bmispanhead" class="w-amount">39.2</span>
-      <li class="top-clock">
-        <span class="current-time"></span>
-      </li>
-      <li class="dropdown notifications">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-              <i type="button" onclick="setTimeout(rchart0, 500)", class="fa fa-edit fa-2x" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"></i> <span class="label label-warning"></span>
-            </a>
-          </li>
-      <li class="dropdown notifications">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-area-chart fa-2x"></i> <span class="label label-warning"></span>
-            </a>
-          </li>
-      <li class="pull-right">
-        <ul class="nav navbar-right right-menu">
-              <div class="empty"></div>
-          <li class="">
-            <a id="searchHeaderIcon">
-              <i class="fa fa-search"></i>
-            </a>
-          </li>
-          <li class="">
-            <a data-toggle="modal" data-target="#labsform">
-              <i class="fa fa-search"></i>
-            </a>
-          </li>
-          <li class="">
-            <a href='users/sign_out' class='logo' rel="nofollow" data-method="delete" data-confirm="Are you sure?">
-              <i class="fa fa-toggle-on"></i>
-            </a>
-          </li>
-          <li class="dropdown notifications">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-edit"></i> <span class="label label-warning"></span>
-            </a>
-          </li>
-          <li class="dropdown some-btn">
-            <a class="fullscreen">
-              <i class="mdi mdi-fullscreen"></i>
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-
-    <!-- Modal Search -->
-
-
-    <!-- Modal Labs Form-->
-<div id="searchmodal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-          <div  class="gn-search-item">
-                <select id="select-beast-modal" placeholder="Search" class="gn-search" style="opacity: 1; position: absolute; left: 0px; width: 100%; padding-top:10px;"></select>
-              </div>
-
-  </div>
-</div>
-
-
-    <!-- Modal Wt History-->
-<div id="wthistorymodal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-          <div class="big-box">
-        <div class="table-responsive">
-          <table class="display">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Weight</th>
-                <th>Height</th>
-                <th>BMI</th>
-                <th>%IBW</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Gecko</td>
-                <td>Firefox 1.0</td>
-                <td>Win 98+/OSX.2+</td>
-                <td>1.7</td>
-                <td>A</td>
-                <td>omg this web application will be such a beast but I need to make sure I don't include unecessary stuff. How would this paragraph wrap if I go beyond two lines of sentences.</td>
-              </tr>
-              <tr>
-                <td>Gecko</td>
-                <td>Firefox 1.5</td>
-                <td>Win 98+/OSX.2+</td>
-                <td>1.6</td>
-                <td>B</td>
-                <td>B</td>
-              </tr>
-              <tr>
-                <td>Gecko</td>
-                <td>Firefox 1.8</td>
-                <td>Win 7+</td>
-                <td>2.2</td>
-                <td>A</td>
-                <td>A</td>
-              </tr>
-              
-
-
-            </tbody>
-          </table>
-        </div>
+<ul id="gn-menu" class="gn-menu-main">
+  <li class="gn-trigger">
+    <a id="menu-toggle" class="menu-toggle gn-icon gn-icon-menu">
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-    </div>
-  </div>
-</div>
+      <div class="cross">
+        <span></span>
+        <span></span>
+      </div>
+    </a>
+    <nav class="gn-menu-wrapper">
+      <div class="gn-scroller">
+        <ul class="gn-menu metismenu">
+          <li  class="gn-search-item">
+          <select id="select-beast-head" placeholder="Search" class="gn-search" style="opacity: 1; position: absolute; left: 0px; width: 100%; padding-top:10px;"></select>
+        </li>
+        <li>
+          <a id="assessmenttool" aria-expanded="false"><i class="fa fa-language"></i>Assess<span class="fa arrow"></span></a>
+        </li>
+        <li>
+          <a id="clientsfrommenu" aria-expanded="false"><i class="fa fa-user"></i>Clients<span class="fa arrow"></span></a>
+        </li>
+        <li>
+          <a type="button"id="historyfrommenu" aria-expanded="false"><i class="fa fa-history"></i>History<span class="fa arrow"></span></a>
+        </div>
 
-<!-- JAVASCRIPT BEGINS -->
-<script>
-var hist = 
-
-$('#assessmenttool').click(function(){
+        <!-- /gn-scroller -->
+      </nav>
+    </li>
+    <li class="pull-left">
+      <a href="" class="logo">DIETITIAN.HELP<i class="fa fa-heartbeat"></i></a>
+    </li>
+    <li class="top-clock">
+      <span class="current-time"></span>
+    </li>
+        </li>
+        <li class="pull-right">
+      <ul class="nav navbar-right right-menu">
+        <div class="empty"></div>
+        <li class="form-inline">
+          <% if !current_user %>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+            <%= f.text_field :username, class: "form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%>
+            <%= f.password_field :password, class: "form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>
+          <div class="btn text-uppercase waves waves-effect waves-float" style="background-color: #374b89;margin-left: 10px">
+            <%= f.submit "Sign in", name:"submit", style:"border:none;background: transparent;text-transform:uppercase;color: #FFFFFF"%>
+          </div>
+          <div class="btn btn-warning text-uppercase waves waves-effect waves-float">
+          <button id="registerBtn" style="border:none;background:transparent;text-transform:uppercase">Register</button>
+        </div>
+          <% end %>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:id => "sign_up_user", :style => "display: none"},
+          :format => :json,
+          :remote => true ) do |f| %>
+          <%= devise_error_messages! %>
+            <%= f.text_field :username, class: "input-container form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%>
+            <%= f.password_field :password, class: "input-container form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>
+            <%= f.password_field :password_confirmation, class: "input-container form-control material", placeholder: "Password Confirmation", id: "passwordconfirm", autocomplete: "off" %>
+          <div class="btn btn-warning text-uppercase waves waves-effect waves-float">
+            <%= f.submit "Register", name:"submit", style:"border:none;background:transparent;text-transform:uppercase"%>
+          </div>
+          <div class="btn btn-success text-uppercase waves waves-effect waves-float" style="background-color: #374b89;margin-left: 10px">
+          <button id="logInBtn" style="border:none;background:transparent;background-color: transparent !important;text-transform:uppercase">Log In</button>
+        </div>
+          <% end %>
+          <% else %>
+          <% end %>
+        </li>
+        <li class="">
+          <a id="searchHeaderIcon">
+            <i class="fa fa-search"></i>
+          </a>
+        </li>
+        <li class="">
+          <a href='users/sign_out' class='logo' rel="nofollow" data-method="delete" data-confirm="Are you sure?">
+            <i class="fa fa-toggle-on"></i>
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <!-- Modal Search -->
+  <!-- Modal Wt History-->
+  <!-- JAVASCRIPT BEGINS -->
+  <script>
+  var hist =
+  $('#assessmenttool').click(function(){
   $.ajax({
-            url: "clients/" + selectedClient + "/nutritionaldata",
-            type: 'GET',
-            success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
-            window.removee();
-            $(document.querySelectorAll('iframe')[0].contentWindow.document.getElementById('updatebut')).click(function(){
-              window.ajaxSubmit()
-            });
-          }
-});
-})
-$('#historyfrommenu').click(function(){
+  url: "clients/" + selectedClient + "/nutritionaldata",
+  type: 'GET',
+  success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
+  window.removee();
+  $(document.querySelectorAll('iframe')[0].contentWindow.document.getElementById('updatebut')).click(function(){
+  window.ajaxSubmit()
+  });
+  }
+  });
+  })
+  $('#historyfrommenu').click(function(){
   $.ajax({
-            url: "client_info/" + selectedClient,
-            type: 'GET',
-            success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
-          window.removee();}
-});
-})
-$('#clientsfrommenu').click(function(){
+  url: "client_info/" + selectedClient,
+  type: 'GET',
+  success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
+  window.removee();}
+  });
+  })
+  $('#clientsfrommenu').click(function(){
   $.ajax({
-            url: "clients",
-            type: 'GET',
-            success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
-          window.removee();}
-});
-})
-
-$('#searchHeaderIcon').click(function() {
+  url: "clients",
+  type: 'GET',
+  success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
+  window.removee();}
+  });
+  })
+  $('#searchHeaderIcon').click(function() {
   top.$('#landing').toggle('fast');
-});
-
-</script>
-    <!-- JAVASCRIPT ENDS-->
+  });
+$('#registerBtn').click(function(e){
+  e.preventDefault();
+  $('#new_user').hide('fast');
+  $('#sign_up_user').show('fast');
+})
+  </script>
+  <!-- JAVASCRIPT ENDS-->

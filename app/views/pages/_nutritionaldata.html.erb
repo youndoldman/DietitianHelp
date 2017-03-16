@@ -122,7 +122,7 @@
                 <div class="form-inline">
                   <div class="field-container form-group" style="width:20%;margin:12px">
                     <%= f.number_field :thirtywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
-                    <%= f.label :thirtywt, "-30 Wt", class: "inlabel" %>
+                    <%= f.label :thirtywt, "-30", class: "inlabel" %>
                     
                   </div>
                   <div class="field-container form-group" style="width:35%">
@@ -134,7 +134,7 @@
                 <div class="form-inline">
                   <div class="field-container form-group" style="width:20%;margin:12px">
                     <%= f.number_field :ninetywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
-                    <%= f.label :ninetywt, "-90 Wt" , class: "inlabel" %>
+                    <%= f.label :ninetywt, "-90" , class: "inlabel" %>
                     
                   </div>
                   <div class="field-container form-group" style="width:35%">
@@ -146,7 +146,7 @@
                 <div class="form-inline">
                   <div class="field-container form-group" style="width:20%;margin:12px">
                     <%= f.number_field :oneeightywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
-                    <%= f.label :oneeightywt, "-180 Wt" , class: "inlabel" %>
+                    <%= f.label :oneeightywt, "-180" , class: "inlabel" %>
                     
                   </div>
                   <div class="field-container form-group" style="width:35%">
@@ -214,14 +214,13 @@
                     <div class="jumbotron">
                       <div id="adime"class="container">
                         <h1>Assessment - <span id="todaysdate"></span> </h1>
-                        <p id="assval" class="w-amount">
-                          <span id='agespan' class='w-amount'>- -</span>y/o <span>Resident</span> currently on <span id='cdietspan' class='w-amount'>- - </span> Diet to manage Dx of <span id="dxspan", class='w-amount'>- -</span>. Average intake has noted to range <span id='intakefromspan', class='w-amount'>- -</span>  <span id='intaketospan', class='w-amount'></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class='w-amount'>- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibw" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.
+                        <p id="fassessadime" class="w-amount">
                         </p>
-                        <h1>Diagnosis - <span id="todaysdate"></span> </h1>
+                        <h1>Diagnosis</h1>
                         <p id="dxadime"></p>
                         <h1>Intervention - <span id="todaysdate"></span> </h1>
                         <p id="intadime"></p>
-                        <h1>Monitoring/Evaluation - <span id="todaysdate"></span> </h1><p id="monevadime"></p>
+                        <h1>Monitoring/Evaluation</h1><p id="monevadime">Will continue to monitor and make changes as PRN.</p>
                       <button id="run" class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(rchart0, 500), diet(), adime(), intake(), cal(), pro(), fl(), dx(), bmi(), getAge(), gender()">Run</button> <button class="btn btn-primary btn-lg waves waves-button waves-effect waves-float">Save</button></p>
                     </div>
                   </div>
@@ -860,10 +859,10 @@
   widgetUsed(counter_id, counter);
   });
   function adime() {
-  $('#assessadime').html('yeah')
-  $('#dxadime').html('yeah')
-  $('#intadime').html('yeah')
-  $('#monevadime').html('yeah')
+  $('#fassessadime').html($('#assval').text())
+  $('#dxadime').html($('#client_dx').val())
+  $('#intadime').html($('#client_cdiet').val())
+  $('#monevadime').html()
   }
   var food1;
   var lat;
@@ -938,9 +937,9 @@ var y = window.top.document.querySelectorAll('#mainwrapper')
 
 
   //set default dates on input to respective dates (-30/90/180 days)
-  $('#client_date1').val(moment().subtract(30, "days").format("DD/MM/YYYY"))
-  $('#client_date2').val(moment().subtract(90, "days").format("DD/MM/YYYY"))
-  $('#client_date3').val(moment().subtract(180, "days").format("DD/MM/YYYY"))
+  $('#client_date1').val(moment().subtract(30, "days").format("MM/DD/YYYY"))
+  $('#client_date2').val(moment().subtract(90, "days").format("MM/DD/YYYY"))
+  $('#client_date3').val(moment().subtract(180, "days").format("MM/DD/YYYY"))
 
   });
 $('#updateClient').ajaxForm({

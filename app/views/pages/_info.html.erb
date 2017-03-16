@@ -14,7 +14,7 @@
             <%= f.label :lastname, 'Last Name', class: "inlabel" %>
           </div>
           <div class="field-container form-group">
-            <%= f.text_field :dob, type: "date", class: "inin form-control material input-lg", id: "hiddendobinfo", required: true %>
+            <%= f.text_field :dob, type: "string", class: "inin form-control material input-lg", id: "hiddendobinfo", required: true %>
             <%= f.label :dob, 'Date of Birth', class: "inlabel" %>
           </div>
           <div class="field-container form-group">
@@ -163,7 +163,9 @@
       $('#client_genderspan').html($('#hiddengenderinfo').val());
       $('#clientCancelEditBtn').toggle('fast')
       $('#clienteditbut').toggle('fast')
+      $('#currentHealthParams').toggle('fast')
       return true
   }
   });
+  $("#hiddendobinfo").pikaday();
   </script>
