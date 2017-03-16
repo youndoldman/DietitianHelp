@@ -134,6 +134,8 @@
   <!-- MODAL EFFECTS -->
   <%= javascript_include_tag 'cssParser' %>
   <%= javascript_include_tag 'modalEffects' %>
+  <!-- MASKED INPUT TO MATCH DATE, PHONE NUMBERS, ETC...-->
+    <%= javascript_include_tag 'jquery.maskedinput' %> 
   
   <script>
   ///////
@@ -167,5 +169,6 @@
       return true
   }
   });
+  $("#hiddendobinfo").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
   $("#hiddendobinfo").pikaday();
   </script>
