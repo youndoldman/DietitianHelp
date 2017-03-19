@@ -41,7 +41,34 @@
       <ul class="nav navbar-right right-menu">
         <div class="empty"></div>
         <li class="form-inline">
-          
+          <% if !current_user %>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+            <%= f.text_field :username, class: "form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%>
+            <%= f.password_field :password, class: "form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>
+          <div class="btn text-uppercase waves waves-effect waves-float" style="background-color: #374b89;margin-left: 10px">
+            <%= f.submit "Sign in", name:"submit", style:"border:none;background: transparent;text-transform:uppercase;color: #FFFFFF"%>
+          </div>
+          <div class="btn btn-warning text-uppercase waves waves-effect waves-float">
+          <button id="registerBtn" style="border:none;background:transparent;text-transform:uppercase">Register</button>
+        </div>
+          <% end %>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:id => "sign_up_user", :style => "display: none"},
+          :format => :json,
+          :remote => true ) do |f| %>
+          <%= devise_error_messages! %>
+            <%= f.text_field :username, class: "input-container form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%>
+            <%= f.password_field :password, class: "input-container form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>
+            <%= f.password_field :password_confirmation, class: "input-container form-control material", placeholder: "Password Confirmation", id: "passwordconfirm", autocomplete: "off" %>
+          <div class="btn btn-warning text-uppercase waves waves-effect waves-float">
+            <%= f.submit "Register", name:"submit", style:"border:none;background:transparent;text-transform:uppercase"%>
+          </div>
+          <div class="btn btn-success text-uppercase waves waves-effect waves-float" style="background-color: #374b89;margin-left: 10px">
+          <button id="logInBtn" style="border:none;background:transparent;background-color: transparent !important;text-transform:uppercase">Log In</button>
+        </div>
+          <% end %>
+          <% else %>
+          <% end %>
         </li>
         <li class="">
           <a id="searchHeaderIcon">

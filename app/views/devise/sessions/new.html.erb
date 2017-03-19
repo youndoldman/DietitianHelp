@@ -29,148 +29,30 @@
       <script src="respond.min.js"></script>
       <![endif]-->
     </head>
-    <body id="landingBody">
-        <ul id="gn-menu" class="gn-menu-main">
-  <li class="gn-trigger">
-    <a id="menu-toggle" class="menu-toggle gn-icon gn-icon-menu">
-      <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div class="cross">
-        <span></span>
-        <span></span>
-      </div>
-    </a>
-    <nav class="gn-menu-wrapper">
-      <div class="gn-scroller">
-        <ul class="gn-menu metismenu">
-          <li  class="gn-search-item">
-          <select id="select-beast-head" placeholder="Search" class="gn-search" style="opacity: 1; position: absolute; left: 0px; width: 100%; padding-top:10px;"></select>
-        </li>
-        <li>
-          <a id="assessmenttool" aria-expanded="false"><i class="fa fa-language"></i>Assess<span class="fa arrow"></span></a>
-        </li>
-        <li>
-          <a id="clientsfrommenu" aria-expanded="false"><i class="fa fa-user"></i>Clients<span class="fa arrow"></span></a>
-        </li>
-        <li>
-          <a type="button"id="historyfrommenu" aria-expanded="false"><i class="fa fa-history"></i>History<span class="fa arrow"></span></a>
-        </div>
-
-        <!-- /gn-scroller -->
-      </nav>
-    </li>
-    <li class="pull-left">
-      <a href="" class="logo">DIETITIAN.HELP<i class="fa fa-heartbeat"></i></a>
-    </li>
-    <li class="top-clock">
-      <span class="current-time"></span>
-    </li>
-        </li>
-        <li class="pull-right">
-      <ul class="nav navbar-right right-menu">
-        <div class="empty"></div>
-        <li class="form-inline">
-          <% if !current_user %>
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <%= devise_error_messages! %>
-            <%= f.text_field :username, class: "form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%>
-            <%= f.password_field :password, class: "form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>
-          <div class="btn text-uppercase waves waves-effect waves-float" style="background-color: #374b89;margin-left: 10px">
-            <%= f.submit "Sign in", name:"submit", style:"border:none;background: transparent;text-transform:uppercase;color: #FFFFFF"%>
-          </div>
-          <div class="btn btn-warning text-uppercase waves waves-effect waves-float">
-          <button id="registerBtn" style="border:none;background:transparent;text-transform:uppercase">Register</button>
-        </div>
-          <% end %>
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:id => "sign_up_user", :style => "display: none"},
-          :format => :json,
-          :remote => true ) do |f| %>
-          <%= devise_error_messages! %>
-            <%= f.text_field :username, class: "input-container form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%>
-            <%= f.password_field :password, class: "input-container form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>
-            <%= f.password_field :password_confirmation, class: "input-container form-control material", placeholder: "Password Confirmation", id: "passwordconfirm", autocomplete: "off" %>
-          <div class="btn btn-warning text-uppercase waves waves-effect waves-float">
-            <%= f.submit "Register", name:"submit", style:"border:none;background:transparent;text-transform:uppercase"%>
-          </div>
-          <div class="btn btn-success text-uppercase waves waves-effect waves-float" style="background-color: #374b89;margin-left: 10px">
-          <button id="logInBtn" style="border:none;background:transparent;background-color: transparent !important;text-transform:uppercase">Log In</button>
-        </div>
-          <% end %>
-          <% else %>
-          <% end %>
-        </li>
-        <li class="">
-          <a id="searchHeaderIcon">
-            <i class="fa fa-search"></i>
-          </a>
-        </li>
-        <li class="">
-          <a href='users/sign_out' class='logo' rel="nofollow" data-method="delete" data-confirm="Are you sure?">
-            <i class="fa fa-toggle-on"></i>
-          </a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <!-- Modal Search -->
-  <!-- Modal Wt History-->
-  <!-- JAVASCRIPT BEGINS -->
-  <script>
-  var hist =
-  $('#assessmenttool').click(function(){
-  $.ajax({
-  url: "clients/" + selectedClient + "/nutritionaldata",
-  type: 'GET',
-  success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
-  window.removee();
-  $(document.querySelectorAll('iframe')[0].contentWindow.document.getElementById('updatebut')).click(function(){
-  window.ajaxSubmit()
-  });
-  }
-  });
-  })
-  $('#historyfrommenu').click(function(){
-  $.ajax({
-  url: "client_info/" + selectedClient,
-  type: 'GET',
-  success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
-  window.removee();}
-  });
-  })
-  $('#clientsfrommenu').click(function(){
-  $.ajax({
-  url: "clients",
-  type: 'GET',
-  success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
-  window.removee();}
-  });
-  })
-  $('#searchHeaderIcon').click(function() {
-  top.$('#landing').toggle('fast');
-  });
-$('#registerBtn').click(function(e){
-  e.preventDefault();
-  $('#new_user').hide('fast');
-  $('#sign_up_user').show('fast');
-})
-  </script>
-  <!-- JAVASCRIPT ENDS-->
-      <div id="fade" class="center">
+    <body id="landingBody" class="animated fadeIn" style="background-image: url('<%= image_path('jumbotron.png')%>;display: none;">
+      <%= render partial: 'pages/header' %>
+      <div id="fade" class="center" style="display: none;height:100%">
         <div id="jumbotronnoblur" class="" style="width:100%;height:120%;position: absolute;background-color: #FFFFFFF">
         </div>
-          <div id="jumbotronblur" class="" style="width:100%;height:120%;position: absolute;background-image: url('<%= image_path('jumbotron.png')%>">
+          <div id="jumbotronblur" class="" style="width:100%;height:120%;position: absolute;">
       </div>
       <img class="animated fadeInUp" id="jumbotronlogo" src="<%= image_path('jumbotronlogo.png')%>" alt="" style="position: absolute;top: 6em;left: 1em;width: 60%;display: none">
       <div id="slogan" style="display: none;">
       <img class="animated fadeInUp" id="sloganpng" src="<%= image_path('slogan.png')%>" alt="" style="position: absolute;display: block;width: 30%;top: 21em;left: 63em">
       </div>
       </div>
+      <div id="divider1" class="col-lg-6" style="display: none;position: relative;background: #374b89;color:#FFFFFF; width:;height: 60%;padding: 3em 2em 3em 2em">
+          <h1>Dietitians Reinvented.</h1>
+          <h2>Dietitian.help has broken down the Medical Nutrition Therapy process in a way that will ensure that your client will receive the most accurate assessment, allowing you as healthcare provider to determine the most appropiate intervention. All while complying with regulatory bodies, e.g. Medicaid, Medicare, etc...</h2>
+        </div>
+        <div id="divider2" class="col-lg-6" style="display: none;height:60%;background-image: url('<%=image_path('egg.jpg')%>');background-position: 75% 75%;background-size: 100%">
+          <div style="float: right;position: relative; width:100%;height: 100%;padding: 3em 2em 3em 2em">
+        </div>
+        </div>
       <footer>
-        <div><h1>hello!</h1></div>
-        <h1>HELLO</h1>
+        <div id="footer" class="col-lg-12" style="display: none;position: relative;background: #e23f3f;color: #FFFFFF; width: 150%;padding: 5em 2em 5em 2em">
+          <h1>hello!</h1>
+        </div>
       </footer>
       <!-- Pen Title-->
       <%= javascript_include_tag 'waves.min' %>
@@ -187,17 +69,20 @@ $('#registerBtn').click(function(e){
       Waves.attach('.waves', ['waves-float']);
       Waves.init();
       $(document).ready(function(){
-        $('#fade').hide(0).delay(200).show('fast');
+        $('#fade').delay(200).show('fast');
         $('#slogan').delay(1300).fadeIn(580);
         $('#jumbotronlogo').delay(1000).fadeIn(100);
+        $('#divider1').delay(1000).fadeIn(100);
+        $('#divider2').delay(1000).fadeIn(100);
+        $('#footer').delay(1000).fadeIn(100);
         //$('#jumbotronblur').delay(1000).fadeOut(5000);
-        //$('#fade').foggy({
-          //blurRadius: 18,          // In pixels.
+        //$('#divider2').foggy({
+          //  blurRadius: 1,          // In pixels.
         //});
         $('.alert').remove();
         $('.notice').remove();
         $('.top-clock').remove();
-        $('')
+        $('body').show('fast');
       })
       </script>
     </body>
