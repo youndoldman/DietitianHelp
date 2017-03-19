@@ -261,7 +261,7 @@
       ////////
       //DATABASE TO JSON
       ////////
-      var jsona = $.getJSON('http://localhost:3000/clients', function(data) {  return JSON.stringify(data)});
+      var jsona = $.getJSON('https://dietitianhelp.herokuapp.com/clients', function(data) {  return JSON.stringify(data)});
       //data is the JSON string
       var newClientName;
       //////////////////////////////////////////////////
@@ -311,7 +311,7 @@
       load: function(query, callback) {
       if (!query.length) return callback();
       $.ajax({
-      url: 'http://localhost:3000/clients',
+      url: 'https://dietitianhelp.herokuapp.com/clients',
       type: 'GET',
       dataType: 'json',
       data: {
@@ -574,7 +574,7 @@
       var data  = $("#newClient")
       //Ajax code here
       $.ajaxForm({
-      url: 'http://localhost:3000/clients/' + clienId,
+      url: 'https://dietitianhelp.herokuapp.com/clients/' + clienId,
       type: 'POST',
       dataType: 'json',
       data: data,
