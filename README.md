@@ -1,3 +1,6 @@
+This app is my trainning ground. Still in trash mode. Not to be used by actual users. Messy all over the place. Please don't judge my coding abilities 
+
+
 # README
 
 This README would normally document whatever steps are necessary to get the
