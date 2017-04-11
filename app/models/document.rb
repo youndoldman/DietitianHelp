@@ -1,6 +1,6 @@
 class Document < ApplicationRecord
   belongs_to :client
-  belongs_to :fullassessment_id
-  belongs_to :progressnote_id
-  belongs_to :monitoringnote_id
+  belongs_to :fullassessment
+  belongs_to :progressnote
+  belongs_to :monitoringnote
 end
