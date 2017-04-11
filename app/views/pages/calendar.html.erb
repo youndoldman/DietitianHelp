@@ -69,17 +69,6 @@
 
       <!-- INITIALIZE CALENDAR () -->
     <script>
-    <% arr = Nextevaluationnote.where(id: current_user.id).all.map do |x| %>
-      <% [(Client.find(x.client_id).firstname.to_s + " " + Client.find(x.client_id).lastname.to_s), x.nnote_date.to_s] %>
-      <% end %>
-
-
-
-
-
-    var futureEvaluations = <% Nextevaluationnote.where(id: current_user.id).all.map do |x| %>
-      <%= raw "['#{Client.find(x.client_id).firstname.to_s} #{Client.find(x.client_id).lastname.to_s}'" + "," + "'" + x.nnote_date.to_s + "']" %>
-     <% end %>
     $(function () {
 
       $(".event-tag span").click(function () {

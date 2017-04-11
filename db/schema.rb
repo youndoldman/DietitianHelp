@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170411034627) do
+ActiveRecord::Schema.define(version: 20170411122016) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "firstname"
@@ -48,15 +48,15 @@ ActiveRecord::Schema.define(version: 20170411034627) do
 
   create_table "documents", force: :cascade do |t|
     t.integer  "client_id"
-    t.integer  "fullassessment_id_id"
-    t.integer  "progressnote_id_id"
-    t.integer  "monitoringnote_id_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "fullassessment_id"
+    t.integer  "progressnote_id"
+    t.integer  "monitoringnote_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.index ["client_id"], name: "index_documents_on_client_id"
-    t.index ["fullassessment_id_id"], name: "index_documents_on_fullassessment_id_id"
-    t.index ["monitoringnote_id_id"], name: "index_documents_on_monitoringnote_id_id"
-    t.index ["progressnote_id_id"], name: "index_documents_on_progressnote_id_id"
+    t.index ["fullassessment_id"], name: "index_documents_on_fullassessment_id"
+    t.index ["monitoringnote_id"], name: "index_documents_on_monitoringnote_id"
+    t.index ["progressnote_id"], name: "index_documents_on_progressnote_id"
   end
 
   create_table "fullassessments", force: :cascade do |t|
