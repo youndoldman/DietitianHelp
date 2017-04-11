@@ -42,12 +42,12 @@ class NextevaluationnotesController < ApplicationController
   # POST /nextevaluationnotes
   # POST /nextevaluationnotes.json
   def create
-    if Nextevaluationnote.find(params[:id]).user_id != current_user.id
+    @nextevaluationnote = Nextevaluationnote.new(nextevaluationnote_params)
+    if @nextevaluationnote.user_id != current_user.id
     redirect_to clients_path
       respond_to do |x|
         x.html { flash[:notice] = "NOPE" }
       end
-    else     @nextevaluationnote = Nextevaluationnote.new(nextevaluationnote_params)
     end
 
     respond_to do |format|
