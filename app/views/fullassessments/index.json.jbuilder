@@ -1,0 +1,1 @@
+json.array! @fullassessments, partial: 'fullassessments/fullassessment', as: :fullassessment

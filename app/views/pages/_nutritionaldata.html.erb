@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
   <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,6 +16,9 @@
       <%= stylesheet_link_tag 'cs-skin-border' %>
         <%= stylesheet_link_tag 'iziModal' %>
   <%= stylesheet_link_tag 'iziToast' %>
+  <%= stylesheet_link_tag 'cs-select' %>
+  <%= stylesheet_link_tag 'cs-skin-border' %>
+  <%= stylesheet_link_tag 'summernote' %>
       <!--[if IE 8]><script src="js/es5.js"></script><![endif]-->
       <%= favicon_link_tag 'favicon.ico' %>
       <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
@@ -35,10 +37,10 @@
                 <a href="#tab-1" data-toggle="tab" aria-expanded="true">Gather</a>
               </li>
               <li class="">
-                <a href="#tab-2" data-toggle="tab" aria-expanded="false">Assess</a>
+                <a id="assessmentTopTab" href="#tab-2" data-toggle="tab" aria-expanded="false">Assess</a>
               </li>
               <li class="">
-                <a href="#datatable" data-toggle="tab" aria-expanded="false">Weight History</a>
+                <a id="complyTopTab" href="#comply" data-toggle="tab" aria-expanded="false">Comply</a>
               </li>
             </ul>
           </div>
@@ -47,11 +49,11 @@
           <div class="tab-content">
             <div id="tab-1" class="tab-pane big-box fade active in">
               <div style="display:inline-block;vertical-align:top;margin:12px;width:30%"><h1>Current</h1>
-                <%= form_for @Client, remote: true, html: {class: "content-form", id: "updateClient"} do |f| %>
+                <%= form_for @client, remote: true, html: {class: "content-form", id: "updateClient"} do |f| %>
                 <!-- FORM-->
                 <div class="field-container form-group hidden">
-                  <%= f.text_field :provider, type: "string", id: "hiddenprovider", class: "inin form-control material input-lg", required: true %>
-                  <%= f.label :name, "Provider", class: "inlabel" %>
+                  <%= f.text_field :user_id, type: "integer", id: "hiddenprovider", class: "inin form-control material input-lg", required: true %>
+                  <%= f.label :name, "Provider ID", class: "inlabel" %>
                 </div>
                 <div class="field-container form-group">
                   <%= f.text_field :allergies, type: "string", class: "inin form-control material input-lg", required: true %>
@@ -81,11 +83,6 @@
                 <div class="field-container form-group hidden">
                   <%= f.number_field :flreq, type: "string", class: "inin form-control material input-lg", id: "hiddenflreq", required: true %>
                   <%= f.label :flreq, class: "inlabel" %>
-                  
-                </div>
-                <div class="field-container form-group hidden">
-                  <%= f.text_field :fassess, type: "string", class: "inin form-control material input-lg", id: "hiddenfassess", required: true %>
-                  <%= f.label :fassess, class: "inlabel" %>
                   
                 </div>
                 <!-- HIDDEN FORM -->
@@ -154,12 +151,8 @@
                     <%= f.label :date3, 'Date', class: "inlabel" %>
                     
                   </div>
-                  <div>
-                    <%= f.submit class: "actions btn btn-lg waves waves-button waves-effect waves-float", id: "updatebut", style: "background: #374B89; color: #FFFFFF;"%>
-                  </div>
-                </div>
-                <% end %>
               </div>
+            </div>
               <div style="display:inline-block;margin:12px;vertical-align:top;width:30%">
                 <div style="display:inline-block"><h1 style="display:inline-block">Labs</h1></div>
                 <div class="trigger" data-izimodal-open="labsform" cursor="pointer">
@@ -179,49 +172,81 @@
                     <div></div>
                   </div>
                   <!-- Trigger the modal with a button -->
-                  <button class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(chart0, 500), diet(), ibw(), intake(), cal(), pro(), fl(), dx(), bmi(), getAge(), adime(), ibw(), setTimeout(assessment, 2000), rchart0()">Run</button>
+                  <div>
+                    <%= f.submit 'Next', class: "actions btn btn-lg waves waves-button waves-effect waves-float", id: "updatebut", style: "background: #374B89; color: #FFFFFF;"%>
+                  </div>
+                <% end %>
                 </div>
-              </div>
+                </div>
               <!-- TAB 2 -->
               <div id="tab-2" class="tab-pane big-box fade in">
                 <div class="jumbotron">
-                  <div id="assessment"class="container">
-                    <h1>Assessment - <span id="todaysdate"></span> </h1>
-                    <p id="assval" class="w-amount">
-                      <span id='agespan' class='w-amount'>- -</span>y/o <span>Resident</span> currently on <span id='cdietspan' class='w-amount'>- - </span> Diet to manage Dx of <span id="dxspan", class='w-amount'>- -</span>. Average intake: <span id='intakefromspan', class='w-amount'>- -</span>  <span id='intaketospan', class='w-amount'></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class='w-amount'>- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.
-                    </p> <button class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(chart0, 500), diet(), ibw(), intake(), cal(), pro(), fl(), dx(), bmi(), getAge(), adime(), ibw(), setTimeout(assessment, 2000), rchart0()">Run</button> <button class="btn btn-primary btn-lg waves waves-button waves-effect waves-float">Save</button></p>
+                    <div class="field-container form-group hidden">
+                  
+                </div>
+                    <select id="assessmentType" class="cs-select cs-skin-border"style="background-color: white; border: none; font-size: 50px">
+                      <option value="full Assessment">Full Assessment</option>
+                      <option value="quaterly Assessment">Quaterly Assessment</option>
+                      <option value="initialAssessment">Initial Assessment</option>
+                      </select><h1 style="display: inline-block; margin-bottom: 0px"><span id="ADIMETodaysDate"></h1></span> 
+                      <br>
+                      <div id="assessment" class="container">
+                      <div id="assZone">
+                      <p id="assval" class="w-amount" data-toggle="tooltip" data-placement="top" title="Click to edit...">
+                      <span id='agespan' class='w-amount'>- -</span>y/o <span>Client</span> currently on <span id='cdietspan' class='w-amount'>- - </span> Diet to manage Dx of <span id="dxspan" class='w-amount'>- -</span>. Average intake: <span id='intakefromspan', class='w-amount'>- -</span>  <span id='intaketospan', class='w-amount'></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class='w-amount'>- -</span> lbs puts <span>Client</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Client</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.
+                    </p> 
+                    </div>
+                    <button type="button" class="btn btn-lg waves waves-button waves-effect waves-float" onclick="resetAssess()">Reset</button>
+                    <div id="runAndSaveBtns" style="float: right"><button type="button" class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(chart0, 500), diet(), ibw(), intake(), cal(), pro(), fl(), dx(), bmi(), getAge(), adime(), ibw(), setTimeout(assessment, 2000), rchart0()">Run</button> 
+                      <button class="btn btn-primary btn-lg waves waves-button waves-effect waves-float", onclick="moveToComply()">Comply</button></div>
+                    <h1>Diagnosis</h1>
+                        <p id="dxadime"></p>
+                        <h1>Intervention </h1>
+                        <p id="intadime"></p>
+                        <h1>Monitoring/Evaluation</h1><p id="monevadime">Will continue to monitor and make changes as PRN.</p>
                   </div>
                 </div>
               </div>
               <!-- TAB 3/datatable -->
-              <div id="datatable"class="tab-pane big-box fade in">
-                <div class="table-responsive">
-                  <ul class="nav nav-tabs nav-justified">
-                    <li class="">
-                      <a href="#tab-4" data-toggle="tab" aria-expanded="true">ADIME</a>
-                    </li>
-                    <li class="">
-                      <a href="#tab-5" data-toggle="tab" aria-expanded="false">PES</a>
-                    </li>
-                    <li class="">
-                      <a href="#tab-6" data-toggle="tab" aria-expanded="false">Full Assessment</a>
-                    </li>
-                  </ul>
-                </div>
+              <div id="comply" class="tab-pane big-box fade in">
                 <div class="tab-content">
-                  <!-- ADIME-->
+                  <!-- COMPLY-->
                   <div id="tab-4" class="tab-pane big-box fade in active">
                     <div class="jumbotron">
-                      <div id="adime"class="container">
-                        <h1>Assessment - <span id="todaysdate"></span> </h1>
-                        <p id="fassessadime" class="w-amount">
-                        </p>
-                        <h1>Diagnosis</h1>
-                        <p id="dxadime"></p>
-                        <h1>Intervention - <span id="todaysdate"></span> </h1>
-                        <p id="intadime"></p>
-                        <h1>Monitoring/Evaluation</h1><p id="monevadime">Will continue to monitor and make changes as PRN.</p>
-                      <button id="run" class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(rchart0, 500), diet(), adime(), intake(), cal(), pro(), fl(), dx(), bmi(), getAge(), gender()">Run</button> <button class="btn btn-primary btn-lg waves waves-button waves-effect waves-float">Save</button></p>
+                      <div class="container">
+                        <%= form_for Progressnote.new, remote: true do |f| %>
+                        <h2 style="font-weight: 200px">Add New Progress Note</h2>
+                          <div style="margin-left: 1em;height: 122px; width: 100%">
+                            <div id="pNoteDivInput" >
+                              <%= f.text_area :pnote, style: "font-size: 20px;width: 100%; height: 122px", placeholder:"e.g. Appetite is improving and has opted for a lower sodium diet since last visit" %>
+                              <%= f.text_area :client_id, value: "#{@client.id}", readonly: true, style: "display: none" %></div>
+                          </div>
+                          <% end %>
+                          <%= form_for Monitoringnote.new, remote: true do |f| %>
+                          <h2>Add New Monitoring Note</h2>
+                          <div style="margin-left: 1em;height: 122px; width: 100%">
+                            <div id="sumemernote" >
+                              <%= f.text_area :mnote, style:"font-size: 20px;width: 100%; height: 122px", placeholder: "e.g. Sodium levels have decreased: 120mL/dL (12/12/12) vs 140 mL/dL (11/11/11)..." %>
+                            <%= f.text_area :client_id, value: "#{@client.id}", readonly: true, style: "display: none" %></div>
+                          </div>
+                          <% end %>
+                          <%= form_for Nextevaluationnote.new, remote: true do |f| %>
+                        <h2 style="display: inline-block">Next Evaluation on</h2>
+                        <div class="" style="display: inline-block">
+                            <div style=""><%= f.text_field :nnote_date, id: "summernote3", class: "summernote3", style: "border: 0; padding: 0 0 0 0.2em; font-size: 34px" %>
+                              <%= f.text_area :user_id, value: "#{@current_user.id}", readonly: true, style: "display: none" %></div>
+                          </div>
+                          <div style="margin-left: 1em;height: 122px; width: 100%">
+                            <div id="summernote" >
+                              <%= f.text_area :nnote, style:"font-size: 20px;width: 100%; height: 122px", placeholder: "e.g. BMI and %IBW should have normalized. Sodium levels should be WNL..." %>
+                            <%= f.text_area :client_id, value: "#{@client.id}", readonly: true, style: "display: none" %></div>
+                          </div>
+                          <% end %>
+                      <div id="notesAndNextEvaluationButtons" style="margin-top: 2em;float: right">
+                        <!-- EVENTLISTENER THAT SUBMITS ALL FORMS ONCLICK -->
+                <button id="done" class="btn btn-success" type="button"  data-toggle="tooltip" data-placement="top" title="Will save assement and all notes to client's history database">DONE</button>
+                </div>
+                </div></p>
                     </div>
                   </div>
                 </div>
@@ -234,61 +259,61 @@
             <!-- Modal content-->
             <div class="content-box box-shadow big-box todo-list">
               <h1>Labs - </h1>
-              <div class="panele">
-                <div class="panel-body todo">
-                  <ul class="list-group ui-sortable">
+              <div class="">
+                <div class="">
+                  <ul class="">
                     <form action="">
                       <div>
                         <label for="alb" style="display: inline-block">Alb</label>
-                        <input id="alb" type="integer" placeholder="Alb">
+                        <input id="alb" type="number" placeholder="Alb">
                       </div>
                       <div>
                         <label for="bun" style="display: inline-block">BUN</label>
-                        <input id="bun" type="integer" placeholder="BUN">
+                        <input id="bun" type="number" placeholder="BUN">
                       </div>
                       <div>
                         <label for="creat" style="display: inline-block">Creat</label>
-                        <input id="creat" type="integer" placeholder="creat">
+                        <input id="creat" type="number" placeholder="creat">
                       </div>
                       <div>
                         <label for="chol" style="display: inline-block">Chol</label>
-                        <input id="chol" type="integer" placeholder="Chol">
+                        <input id="chol" type="number" placeholder="Chol">
                       </div>
                       <div>
                         <label for="glu" style="display: inline-block">Glu</label>
-                        <input id="glu" type="integer" placeholder="Glu">
+                        <input id="glu" type="number" placeholder="Glu">
                       </div>
                       <div>
                         <label for="hct" style="display: inline-block">Hct</label>
-                        <input id="hct" type="integer" placeholder="Hct">
+                        <input id="hct" type="number" placeholder="Hct">
                       </div>
                       <div>
                         <label for="hgb" style="display: inline-block">Hgb</label>
-                        <input id="hgb" type="integer" placeholder="Hgb">
+                        <input id="hgb" type="number" placeholder="Hgb">
                       </div>
                       <div>
                         <label for="iron" style="display: inline-block">Iron</label>
-                        <input id="iron" type="integer" placeholder="Iron">
+                        <input id="iron" type="number" placeholder="Iron">
                       </div>
                       <div>
                         <label for="k" style="display: inline-block">K</label>
-                        <input id="k" type="integer" placeholder="K">
+                        <input id="k" type="number" placeholder="K">
                       </div>
                       <div>
                         <label for="na" style="display: inline-block">Na</label>
-                        <input id="na" type="integer" placeholder="Na">
+                        <input id="na" type="number" placeholder="Na">
                       </div>
                       <div>
                         <label for="tprotein" style="display: inline-block">Total Protein</label>
-                        <input id="tprotein" type="integer" placeholder="Total Protein">
+                        <input id="tprotein" type="number" placeholder="Total Protein">
                       </div>
                       <div>
                         <label for="tlymphocytect" style="display: inline-block">Total Lymphocyte Ct.</label>
-                        <input id="tlymphocytect" type="integer" placeholder="Total Lymphocyte Ct.">
+                        <input id="tlymphocytect" type="number" placeholder="Total Lymphocyte Ct.">
                       </div>
                       <div>
                         <label for="other" style="display: inline-block">Other</label>
-                        <input id="other" type="integer" placeholder="Other">
+                        <input id="other" type="number" placeholder="Other">
                       </div>
                     </form>
                   </ul>
@@ -298,8 +323,6 @@
             
           </div>
         </div>
-        <!-- EMPTY DIV TO ADD SPACE SINCE OFFSET NOT WORKING-->
-        <div id="spacer"class="col-lg-3"></div>
         <div class="col-lg-3 content-box">
       <div class="content-title big-box i-block">
         <h4 class="zero-m">Weight History</h4>
@@ -384,8 +407,10 @@
       </div>
     </div>
         <div id="modal-alert" class="iziModal" data-iziModal-group="alert" data-iziModal-loop></div>
+        <div id="modal-alert2" class="iziModal" data-iziModal-group="alert" data-iziModal-loop></div>
+        <div id="modal-alert3" class="iziModal" data-iziModal-group="alert" data-iziModal-loop></div>
+        <div id="modal-alert4" class="iziModal" data-iziModal-group="alert" data-iziModal-loop></div>
       </div>
-    </div>
     <!--Scripts-->
     <%= javascript_include_tag 'jquery.min' %>
     <%= javascript_include_tag 'jquery-ui.min' %>
@@ -454,6 +479,7 @@
     <%= javascript_include_tag 'progressButton' %>
     <!-- NOTIFICATIONS LAST-->
     <%= javascript_include_tag 'iziToast' %>
+    <%= javascript_include_tag 'summernote' %>
   </body>
   <script>
   //DATATABLE FUNCTION TO LIMIT AMOUNT OF RESULTS DISPLAYED IN SUPPOSEDLY WT HISTORY FROM PANEL TABS
@@ -532,7 +558,25 @@
 
   /*c3.js*/ // NEEDED FOR THE CHART
   // show the notification
-  
+    function moveToComply() {
+    $.ajax({
+  type: "POST",
+  url: '/fullassessments',
+  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+  data: {
+    fullassessment: 
+    {
+      fassess: $('#assessmentType').find(":selected").text() + " " + $('#ADIMETodaysDate').text() + " " + $('#assessment')[0].innerText,
+      client_id: <%= @client.id %>
+    },
+    commit: "Create Fullassessment" 
+  },
+  success: function() {
+          window.$('#complyTopTab').trigger('click')
+          $("#modal-alert2").iziModal('open'); 
+          },
+})
+  }
   var ctx2 = document.getElementById("chart-line").getContext("2d");
   var myLine = new Chart(ctx2).Line(lineChartData, {
   responsive: true
@@ -556,7 +600,7 @@
   });
 
   function rchart0 () {
-  NProgress.start();
+  top.NProgress.start();
 
   //resets all parameters in assess
   var loss1 = false;
@@ -580,7 +624,7 @@
   myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
   myLine.scale.xLabels[0] = document.getElementById("client_date3").value;
   myLine.update();
-  NProgress.inc();
+  top.NProgress.inc();
   if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[2].value * 100) <= 95) {
   loss1 = true;
   }
@@ -601,7 +645,7 @@
   if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[0].value * 100) >= 110) {
   gain3 = true;
   }
-  NProgress.inc();
+  top.NProgress.inc();
   if($('#wthistory').smkValidate({lang:'es'})){}
   if(loss1 === true || loss2 === true || loss3 === true){
   $("#losshist")[0].innerHTML = 'Significant Weight Loss for the past ';
@@ -621,7 +665,7 @@
   $("#loss3days")[0].innerHTML = '180';
   }
   }
-  NProgress.inc();
+  top.NProgress.inc();
   if(loss1 === true || loss2 === true || loss3 === true){
   $("#lossdays")[0].innerHTML = ' days';
   }
@@ -657,13 +701,13 @@
 });
   }
   //setTimeout(noti, 1000);
-  NProgress.done();
+  top.NProgress.done();
   }
   function diet() {
   $("#cdietspan")[0].innerText = $('#client_cdiet').val();
   $(function(){
   $("#cdietspan").typed({
-  strings: ["<%= @Client.cdiet %>"],
+  strings: ["<%= @client.cdiet %>"],
   typeSpeed: 4
   });
   });
@@ -680,7 +724,7 @@
     $("#intakeftopan").html($('#client_intaketo').val())
   }
   };
-  var genderval = "<%= @Client.gender.downcase %>"
+  var genderval = "<%= @client.gender.downcase %>"
   /* GENDER SCRIPT!
   function gender() {
   if(document.getElementById('switch5').checked) {
@@ -728,7 +772,7 @@
   //TOOK AWAY ABILITY TO ADD CALORIES FOR WT GAIN/LOSS -CALORIC NEEDS FOR WT MAINTENANCE FOR NOW
   var goalselect;
   var goalselected = 'Maintain Weight'
-  $("#cbwspan").text(<%=@Client.cbw%>)
+  $("#cbwspan").text(<%=@client.cbw%>)
   
   if(goalselected == 'Gain Weight') {
   widgetUsed("calrequirement", parseInt(z - z + 1 * y * 35));
@@ -887,33 +931,80 @@ function parseDate(dateStr) {
   var dateParts = dateStr.split("/");
   return new Date(dateParts[2], (dateParts[1] - 1), dateParts[0]);
 }
-  document.getElementById('todaysdate').innerHTML = moment(new Date()).format('LL');
+  document.getElementById('ADIMETodaysDate').innerHTML = moment(new Date()).format('LL');
   function removee(){
   $('.alert').remove();
   };
+  function resetAssess() {
+    $('#assZone').html(top.defaultAssessment);
+    $('#tooltip144344').hide()
+
+  }
   $(document).ready(function() {
   top.$("#processingViewModal").iziModal('close')
   $("#labsform").iziModal();
   $("#modal-alert").iziModal({
-    title: 'Client Updated',
+    title: 'Nutrition Parameters Updated',
     subtitle: '<%=@client.firstname + ' ' + @client.lastname%>',
     icon: 'icon-check',
     iconColor: '#00af66',
     headerColor: '#374B89',
     attached: 'top', // bottom, top
     width: 400,
-    timeout: 3000,
+    timeout: 2300,
     timeoutProgressbar: true,
     pauseOnHover: true,
     timeoutProgressbarColor: '#CABC42',
+    overlay: false,
+});
+  $("#modal-alert2").iziModal({
+    title: 'ADIME Assessment Saved',
+    subtitle: '<%=@client.firstname + ' ' + @client.lastname%>',
+    icon: 'icon-check',
+    iconColor: '#00af66',
+    headerColor: '#374B89',
+    attached: 'top', // bottom, top
+    width: 400,
+    timeout: 2300,
+    timeoutProgressbar: true,
+    pauseOnHover: true,
+    timeoutProgressbarColor: '#CABC42',
+    overlay: false,
+});
+  $("#modal-alert3").iziModal({
+    title: 'ADIME Note Identical to previous',
+    subtitle: 'Save anyways?',
+    icon: 'icon-check',
+    iconColor: '#00af66',
+    headerColor: '#374B89',
+    attached: 'top', // bottom, top
+    width: 400,
+    timeout: 2300,
+    timeoutProgressbar: true,
+    pauseOnHover: true,
+    timeoutProgressbarColor: '#CABC42',
+    overlay: false,
+});
+    $("#modal-alert4").iziModal({
+    title: 'Notes Saved Succesfully',
+    subtitle: 'Save anyways?',
+    icon: 'icon-check',
+    iconColor: '#00af66',
+    headerColor: '#374B89',
+    attached: 'top', // bottom, top
+    width: 400,
+    timeout: 2300,
+    timeoutProgressbar: true,
+    pauseOnHover: true,
+    timeoutProgressbarColor: '#CABC42',
+    overlay: false,
 });
     removee()
 var x = window.top.document.querySelectorAll('#landing');
 var y = window.top.document.querySelectorAll('#mainwrapper')
   $(x).fadeOut()
   setTimeout(function() {
-  window.NProgress.start();
-  window.NProgress.done();
+  top.NProgress.done();
   $(y).removeClass('table-wrapper1');
 }, 1000);
   iziToast.success({
@@ -928,23 +1019,101 @@ var y = window.top.document.querySelectorAll('#mainwrapper')
    $("#client_date1").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
    $("#client_date2").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
    $("#client_date3").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
+   $("#summernote3").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
 
    //CALENDAR POPDOWN FROM DATE INPUTS
    $("#client_date0").pikaday();
    $("#client_date1").pikaday();
    $("#client_date2").pikaday();
    $("#client_date3").pikaday();
+   $("#summernote3").pikaday();
 
 
   //set default dates on input to respective dates (-30/90/180 days)
   $('#client_date1').val(moment().subtract(30, "days").format("MM/DD/YYYY"))
   $('#client_date2').val(moment().subtract(90, "days").format("MM/DD/YYYY"))
   $('#client_date3').val(moment().subtract(180, "days").format("MM/DD/YYYY"))
-
+  $('#summernote3').val(moment().add(90, "days").format("MM/DD/YYYY"))
+  //
+$('#summernote3').summernote({
+    airMode: true,
+  });
+$('#assval').summernote({
+    airMode: true,
+    textareaAutoSync: false,
+  });
   });
 $('#updateClient').ajaxForm({
           success: function() {
+          window.$('#assessmentTopTab').trigger('click')
           $("#modal-alert").iziModal('open'); 
           }
         })
+$('#updateClientFassess').ajaxForm({
+          success: function() {
+          window.$('#complyTopTab').trigger('click')
+          $("#modal-alert2").iziModal('open'); 
+          }
+        })
+// INITIALIZE CHAIN OF FORM SUBMISSION
+$('#new_progressnote').ajaxForm({
+          success: function() {
+            submitMNote();
+          }
+        })
+$('#new_monitoringnote').ajaxForm({
+          success: function() {
+            submitNNote();
+          }
+        })
+$('#new_nextevaluationnote').ajaxForm({
+          success: function() {
+          }
+        })
+$('[data-toggle="tooltip"]').tooltip();
+
+// QUERY TO CLIENT HISTORY WHEN ONCLICK FROM GN-MENU
+top.$('#historyfrommenu').click(function(){
+  $.ajax({
+  url: "/client_info/" + <%= @client.id %>,
+  type: 'GET',
+  success: function(data){ top.document.getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
+  window.removee();}
+  });
+  })
+// HAD TO MAKE FORM SUBMISSIONS INTO FUNCTIONS TO FOLLOW CHAIN OF FORM SUBMISSION
+function submitPNote() {
+  $("#new_progressnote").submit();
+}
+function submitMNote() {
+  $("#new_monitoringnote").submit();
+}
+function submitNNote() {
+  $("#new_nextevaluationnote").submit();
+}
+// SEND AUTHENTICITY TOKEN WITH ALL AJAX REQUESTS
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+// SUBMIT COMPLY NOTES
+$("#done").on("click", function() {
+    if($('#progressnote_pnote').val().length > 0) {
+      submitPNote();
+      return
+    }
+    if($('#monitoringnote_mnote').val().length > 0) {
+      submitMNote();
+      return
+    }
+    if($('#nextevaluationnote_nnote').val().length > 0) {
+      submitNNote();
+      return
+    }
+});
+
+
+
   </script>

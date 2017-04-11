@@ -1,0 +1,1 @@
+json.partial! "nextevaluationnotes/nextevaluationnote", nextevaluationnote: @nextevaluationnote

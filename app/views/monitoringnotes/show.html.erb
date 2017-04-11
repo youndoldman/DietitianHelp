@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Mnote:</strong>
+  <%= @monitoringnote.mnote %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @monitoringnote.client %>
+</p>
+
+<%= link_to 'Edit', edit_monitoringnote_path(@monitoringnote) %> |
+<%= link_to 'Back', monitoringnotes_path %>

@@ -1,6 +1,5 @@
 class PagesController < ApplicationController 
 	before_action :require_login, only: [:require_login]
-
 private
 
   
@@ -12,9 +11,11 @@ private
   def home
   end
   def nutritionaldata
-    @Client = Client.find(params[:id])
+    @client = Client.find(params[:id])
   end
   def login	
+  end
+  def calendar
   end
 
 end

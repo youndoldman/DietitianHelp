@@ -1,0 +1,6 @@
+      invoke  active_record
+      create    db/migrate/20170410041350_create_progress_notes.rb
+      create    app/models/progress_note.rb
+      invoke    test_unit
+      create      test/models/progress_note_test.rb
+      create      test/fixtures/progress_notes.yml

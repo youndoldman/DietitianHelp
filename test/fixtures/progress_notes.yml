@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pnote: MyText
+  : 
+  =: MyString
+  client: one
+
+two:
+  pnote: MyText
+  : 
+  =: MyString
+  client: two

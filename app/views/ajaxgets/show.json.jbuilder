@@ -1,1 +1,0 @@
-json.partial! "ajaxgets/ajaxget", ajaxget: @ajaxget

@@ -1,0 +1,2 @@
+module ProgressnotesHelper
+end

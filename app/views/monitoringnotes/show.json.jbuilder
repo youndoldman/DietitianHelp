@@ -1,0 +1,1 @@
+json.partial! "monitoringnotes/monitoringnote", monitoringnote: @monitoringnote

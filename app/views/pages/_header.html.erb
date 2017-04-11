@@ -1,4 +1,5 @@
-<ul id="gn-menu" class="gn-menu-main">
+
+<ul id="gn-menu" class="gn-menu-main animated fadeIn" style="z-index: 1200">
   <li class="gn-trigger">
     <a id="menu-toggle" class="menu-toggle gn-icon gn-icon-menu">
       <div class="hamburger">
@@ -18,7 +19,7 @@
           <select id="select-beast-head" placeholder="Search" class="gn-search" style="opacity: 1; position: absolute; left: 0px; width: 100%; padding-top:10px;"></select>
         </li>
         <li>
-          <a id="assessmenttool" aria-expanded="false"><i class="fa fa-language"></i>Assess<span class="fa arrow"></span></a>
+          <a id="assessmentTool" aria-expanded="false"><i class="fa fa-language"></i>Assess<span class="fa arrow"></span></a>
         </li>
         <li>
           <a id="clientsfrommenu" aria-expanded="false"><i class="fa fa-user"></i>Clients<span class="fa arrow"></span></a>
@@ -40,8 +41,8 @@
         <li class="pull-right">
       <ul class="nav navbar-right right-menu">
         <div class="empty"></div>
-        <li class="form-inline">
           <% if !current_user %>
+          <li class="form-inline">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {class: "animated fadeInUp"}) do |f| %>
           <%= devise_error_messages! %>
             <%= f.text_field :username, class: "form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%>
@@ -66,11 +67,10 @@
           <div class="btn btn-success text-uppercase waves waves-effect waves-float" style="background-color: #374b89;margin-left: 10px">
           <button id="logInBtn" style="border:none;background:transparent;background-color: transparent !important;text-transform:uppercase">Log In</button>
         </div>
+        </li>
           <% end %>
           <% else %>
-          <% end %>
-        </li>
-        <li class="">
+          <li class="">
           <a id="searchHeaderIcon">
             <i class="fa fa-search"></i>
           </a>
@@ -80,6 +80,7 @@
             <i class="fa fa-toggle-on"></i>
           </a>
         </li>
+          <% end %>
       </ul>
     </li>
   </ul>
@@ -88,26 +89,6 @@
   <!-- JAVASCRIPT BEGINS -->
   <script>
   var hist =
-  $('#assessmenttool').click(function(){
-  $.ajax({
-  url: "clients/" + selectedClient + "/nutritionaldata",
-  type: 'GET',
-  success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
-  window.removee();
-  $(document.querySelectorAll('iframe')[0].contentWindow.document.getElementById('updatebut')).click(function(){
-  window.ajaxSubmit()
-  });
-  }
-  });
-  })
-  $('#historyfrommenu').click(function(){
-  $.ajax({
-  url: "client_info/" + selectedClient,
-  type: 'GET',
-  success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
-  window.removee();}
-  });
-  })
   $('#clientsfrommenu').click(function(){
   $.ajax({
   url: "clients",
@@ -117,7 +98,7 @@
   });
   })
   $('#searchHeaderIcon').click(function() {
-  top.$('#landing').toggle('fast');
+  top.$('#landing').iziModal('open');
   });
 $('#registerBtn').click(function(e){
   e.preventDefault();

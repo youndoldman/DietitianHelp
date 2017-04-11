@@ -1,5 +1,7 @@
 class Client < ApplicationRecord
-	def client_health_params
-			@wt = "i am the weight"
-	end
+	belongs_to :user
+	has_many :full_assessments
+	has_many :progressnotes
+	has_many :monitoringnotes
+	has_many :nextevaluationnotes
 end

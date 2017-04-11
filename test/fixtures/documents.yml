@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client: one
+  fullassessment_id: one
+  progressnote_id: one
+  monitoringnote_id: one
+
+two:
+  client: two
+  fullassessment_id: two
+  progressnote_id: two
+  monitoringnote_id: two

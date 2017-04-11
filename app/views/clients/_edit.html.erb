@@ -261,7 +261,7 @@
   $('#client_lastnamespan').html(jsona.responseJSON[selectedClient - 1450].lastname);
   $('#client_dobspan').html(jsona.responseJSON[selectedClient - 1450].dob);
   $('#client_genderspan').html(jsona.responseJSON[selectedClient - 1450].gender);
-  $('#client_provider').val(jsona.responseJSON[selectedClient - 1450].provider);
+  $('#client_provider').val(jsona.responseJSON[selectedClient - 1450].user_id);
   $('#client_allergies').val(jsona.responseJSON[selectedClient - 1450].allergies);
   $('#client_dx').val(jsona.responseJSON[selectedClient - 1450].dx);
   $('#client_cdiet').val(jsona.responseJSON[selectedClient - 1450].cdiet);
@@ -281,7 +281,6 @@
   $('#client_proreq').val(jsona.responseJSON[selectedClient - 1450].proreq);
   $('#client_flreq').val(jsona.responseJSON[selectedClient - 1450].flreq);
   $('#client_calreq').val(jsona.responseJSON[selectedClient - 1450].calreq);
-  $('#client_fassess').val(jsona.responseJSON[selectedClient - 1450].fassess);
   $('#client_fpes').val(jsona.responseJSON[selectedClient - 1450].fpes);
   $('#client_pes0').val(jsona.responseJSON[selectedClient - 1450].pes0);
   $('#client_pes1').val(jsona.responseJSON[selectedClient - 1450].pes1);

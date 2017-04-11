@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @document.client %>
+</p>
+
+<p>
+  <strong>Fullassessment:</strong>
+  <%= @document.fullassessment_id %>
+</p>
+
+<p>
+  <strong>Progressnote:</strong>
+  <%= @document.progressnote_id %>
+</p>
+
+<p>
+  <strong>Monitoringnote:</strong>
+  <%= @document.monitoringnote_id %>
+</p>
+
+<%= link_to 'Edit', edit_document_path(@document) %> |
+<%= link_to 'Back', documents_path %>

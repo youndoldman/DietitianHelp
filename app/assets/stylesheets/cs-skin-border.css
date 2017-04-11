@@ -9,23 +9,12 @@ div.cs-skin-border {
 	-webkit-transition: background 0.2s, border-color 0.2s;
 	transition: background 0.2s, border-color 0.2s;
 }
-.cs-skin-borderdisabled > span {
-	border: 3px solid #FFFFFF;
-	cursor: initial;
-	color: #FFFFFF;
-	-webkit-transition: background 0.2s, border-color 0.2s;
-	transition: background 0.2s, border-color 0.2s;
-}
+
 .cs-skin-border > span::after,
 .cs-skin-border .cs-selected span::after {
 	font-family: 'FontAwesome';
 	content: '\f078';
 }
-
-div.cs-select .cs-skin-border .disabled 
-{border: 1px solid #999; color: #333; opacity: 0.5;}
-
-.disabled option {color: #000; opacity: 1;}​
 
 .cs-skin-border ul span::after {
 	content: '';

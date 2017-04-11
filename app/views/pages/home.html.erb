@@ -1,8 +1,7 @@
-<% @title="DietitianHelp" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
   <head>
-    <title>DIETITIAN.HELP | Dashboard</title>
+    <title>DIETITIAN.HELP</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,8 +17,10 @@
       <%= stylesheet_link_tag 'normalize' %>
       <%= stylesheet_link_tag 'iziToast' %>
       <%= stylesheet_link_tag 'iziModal' %>
+      <%= stylesheet_link_tag 'cs-skin-border' %>
       <%= stylesheet_link_tag 'componentPBUTTON' %>
       <%= stylesheet_link_tag 'normalizePBUTTON' %>
+      <%= stylesheet_link_tag 'fullcalendar' %>
       <!--[if IE 8]><script src="js/es5.js"></script><![endif]-->
       <%= favicon_link_tag 'favicon.ico' %>
       <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
@@ -28,8 +29,8 @@
       <script src="respond.min.js"></script>
       <![endif]-->
     </head>
-    <body>
-      <div id="preloader" class="preloader table-wrapper" style="background: white;">
+    <body style="top: 2.5em;">
+      <div id="preloader" class="preloader table-wrapper animated fadeIn" style="background: white;">
         <div class="table-row">
           <div id='contente'>
             <div id='visiblee'>
@@ -52,11 +53,106 @@
       
       $('.notice').remove();
       $('.alert').remove();
+      //GETS CSS POSITION TO SITUATE PROGRESS BAR
       </script>
-      <div><%= render partial: 'pages/landing' %></div>
-      <div id="mainwrapper"class="table-wrapper1">
+        <div id="landing" class="">
+<div style="visibility:visible;z-index:900;position: fixed;left: 450px;right: -900;top: 150px;bottom: -200;width: 500px;height: 300px;" class="table-wrapper">
+  <div class="bgblur">
+    <div class="table-cell text-center">
+      <div class="landingfront pagenotfound">
+        <div class="content-box box-shadow">
+          <div class="top">
+            <h1 class="" style="margin:0.67em 0 -0.3em;">Search/Add</h1>
+            <a class="fa-stack fa-2x icon-back">
+              <i class="fa fa-circle fa-stack-2x blue"></i>
+              <i class="fa fa-long-arrow-left fa-stack-1x fa-inverse"></i>
+            </a>
+          </div>
+          <form class="big-box">
+            <a class="fa-stack fa-2x icon-home" style="top:52%;z-index:1500" type="submit" name="commit" value="Create Client" data-disable-with="Create Client">
+              <i class="fa fa-circle fa-stack-2x yellow"></i>
+              <i id="landsearchicon" class="fa fa-search fa-stack-1x fa-inverse"></i>
+            </a>
+            <div class="form-group">
+              <input id="select-beast-landsearch" type="search" class="gn-search form-control material" placeholder="Search" autofocus>
+            </div>
+            <label for="select-beast-landsearch">Name</label>
+          </form>
+          <div id="hiddenform" class="hidden-form" style="display: none; margin-top: -30px">
+            <%= form_for (Client.new), html: {id: "newClient", class: "content-form form-inline", remote: true} do |f| %>
+            <div  class="field-container form-group" style="dispaly: none;" >
+              <%= f.text_field :firstname, id: "hiddenfirstname", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true%>
+              <%= f.label :firstName, "First Name", style: "margin: 0px;", class: "" %>
+            </div>
+            <div  class="field-container form-group" >
+              <%= f.text_field :lastname, id: "hiddenlastname", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+              <%= f.label :lastname, "Last Name", style: "margin: 0px;", class: "" %>
+            </div>
+            <div  class="field-container form-group" >
+              <%= f.text_field :user_id, type: "integer", value: current_user.id, readonly: 'readonly', id: "hiddenprovider", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+              <%= f.label :provider, "Provider ID", style: "margin: 0px;", class: "" %>
+            </div>
+            <div  class="field-container form-group" >
+              <%= f.text_field :dob, id: "hiddendob", type: "text", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;",required: true %>
+              <%= f.label :dob, "Date of Birth", style: "margin: 0px;", class: "" %>
+            </div>
+            <div  class="field-container form-group" >
+              <%= f.text_field :gender, id: "hiddengender", placeholder: "'Male', 'Female'",type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+              <%= f.label :gender, "Gender", style: "margin: 0px;", class: "" %>
+            </div>
+            <div  class="field-container form-group" >
+              <%= f.text_field :allergies, id: "hiddenallergies", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+              <%= f.label :Allergies, "Allergies", style: "margin: 0px;", class: "" %>
+            </div>
+            <div  class="field-container form-group" >
+              <%= f.text_field :cbw, id: "hiddencbw", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", placeholder: "lbs",required: true %>
+              <%= f.label :cbw, "CBW", style: "margin: 0px;", class: "" %>
+            </div>
+            <div  class="field-container form-group" >
+              <%= f.text_field :ht, id: "hiddenht", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", placeholder: "inches", required: true %>
+              <%= f.label :ht, "Height", style: "margin: 0px;", class: "" %>
+            </div>
+            <div  id="hiddensubmit" class="actions" style="display: none;">
+              <button class="progress-button" data-style="top-line" data-horizontal="" onclick="window.submit()">Add Client</button>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- DIV FOR "PROCESSING VIEW..."" LOADER -->
+      <div id="processingViewModal" class="iziModal" data-iziModal-group="alert" data-iziModal-loop></div>
+  <!-- PROGRESS BUTTONS -->
+  <%= javascript_include_tag 'modernizr.customPBUTTONS' %>
+  <%= javascript_include_tag 'classiePBUTTONS' %>
+  <%= javascript_include_tag 'progressButton' %>
+  <!-- NOTES INPUT FLIED-->
+  <%= javascript_include_tag 'summernote' %>
+  <!-- MASKED INPUT TO MATCH DATE, PHONE NUMBERS, ETC...-->
+    <%= javascript_include_tag 'jquery.maskedinput' %> 
+  <script>
+  [].slice.call( document.querySelectorAll( 'button.progress-button' ) ).forEach( function( bttn ) {
+  new ProgressButton( bttn, {
+  callback : function( instance ) {
+  var progress = 0,
+  interval = setInterval( function() {
+  progress = Math.min( progress + Math.random() * 0.1, 1 );
+  instance._setProgress( progress );
+  if( progress === 1 ) {
+  instance._stop(1);
+  clearInterval( interval );
+  }
+  });
+  }
+  } );
+  } );
+  </script>
+      <div id="mainwrapper"class="table-wrapper">
         <div><%= render partial: 'pages/header' %></div>
-        <iframe id="clientload" src="" frameborder="0" height="900px" width="100%" scrolling="no"></iframe>
+        <iframe id="clientload" src="/calendar" frameborder="0" height="900px" width="100%" scrolling="no"></iframe>
       </div>
       <!--Scripts-->
       <%= javascript_include_tag 'jquery.min' %>
@@ -125,11 +221,18 @@
 
       <!-- BLUR BACKGROUND-->
       <%= javascript_include_tag 'jquery.foggy.min' %>
+      <!-- PROGRESS BAR -->
+      <%= javascript_include_tag 'nprogress' %>
+      <!-- FULL CALENDAR JS -->
+      <%= javascript_include_tag 'fullcalendar' %>
       <!-- DO NOT TOUCH WITHOUT REVIEWING -->
       <!-- Equation can be simplified into two variables -->
       <script>
+        var defaultAssessment = '<p id="note-editor-2" class="w-amount note-air-editor note-editable panel-body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Click to edit..." contenteditable="true"> <span id="agespan" class="w-amount">- -</span>y/o <span>Resident</span> currently on <span id="cdietspan" class="w-amount">- - </span> Diet to manage Dx of <span id="dxspan" ,="" class="w-amount">- -</span>. Average intake: <span id="intakefromspan" ,="" class="w-amount">- -</span> <span id="intaketospan" ,="" class="w-amount"></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class="w-amount">- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow" class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN. </p><div class="tooltip fade top in" role="tooltip" id="tooltip144344" style="top: 193.406px; left: 450.25px; display: block;"><div class="tooltip-arrow" style="left: 50%;"></div><div class="tooltip-inner">Click to edit...</div></div>';
       //DOCUMENT READY
       $(document).ready(function(){
+        $("#hiddendob").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
+        top.NProgress.done()
       $(document).ajaxStart(function(){
       $("#wait").css("display", "block");
       });
@@ -155,17 +258,24 @@
     icon: 'ico-check',
     iconColor: '#00af66',
     headerColor: '#374B89',
+    autoOpen: 0, // Boolean, Number
     attached: 'center', // bottom, top
     width: 300,
     timeoutProgressbar: true,
+    transitionIn: 'fadeIn',
     overlay: true,
     pauseOnHover: true,
     timeoutProgressbarColor: '#CABC42',
 });
+        
       top.$("#processingViewModal").iziModal('close')
+      $('#assessmentTool').on('click', function() {
+        window.$("#processingViewModal").iziModal('open');
+          }); 
       });
       </script>
       <script>
+      NProgress.start()
       var food1;
       var lat;
       var lng;
@@ -251,9 +361,9 @@
       
       </script>
       <%= javascript_include_tag 'datedropper' %>
-      <%= javascript_include_tag 'nprogress' %>
       <%= javascript_include_tag 'medical' %>
       <script>
+      var selectedClient;
       var clientId;
       function assign(param) {
         clientId = param
@@ -261,16 +371,21 @@
       ////////
       //DATABASE TO JSON
       ////////
-      var jsona = $.getJSON('https://dietitianhelp.herokuapp.com/clients', function(data) {  return JSON.stringify(data)});
+      var jsona = $.getJSON('/clients', function(data) {  return JSON.stringify(data)});
       //data is the JSON string
       var newClientName;
       //////////////////////////////////////////////////
       //AUTOCOMPLETE FROM CLIENTS DATABASE BEGINS
       /////////////////////////////////////////////////
+      $("#landing").iziModal({
+        transitionIn: '',
+        transitionOut: '',
+      });
+        $("#landing").iziModal('open');
       $('.gn-search').selectize({
       theme: 'links',
       maxItems: 1,
-      preload: true,
+      preload: false,
       valueField: 'id',
       placeholder: 'Search/create',
       searchField: ['lastname', 'firstname'],
@@ -296,7 +411,7 @@
       var newClientNameArr = newClientName.split(" ");
       $('#hiddenfirstname').val(newClientNameArr[0]);
       $('#hiddenlastname').val(newClientNameArr[1]);
-      $('#hiddenprovider').val('<%=current_user.username.to_s%>');
+      $('#hiddenprovider').val('<%=current_user.id%>');
       $( "#hiddenform" ).show( "fast", function() {
       });
       $( "#hiddensubmit" ).show( "fast");
@@ -311,7 +426,7 @@
       load: function(query, callback) {
       if (!query.length) return callback();
       $.ajax({
-      url: 'https://dietitianhelp.herokuapp.com/clients',
+      url: '/clients',
       type: 'GET',
       dataType: 'json',
       data: {
@@ -321,7 +436,6 @@
       callback();
       },
       success: function(res) {
-      console.log(res);
       callback(res);
       $('#select-beast-landsearch-selectized').keyup(function() {
       if($('#landsearch-dropdown:first-child div').attr('class') == 'create') {
@@ -337,7 +451,7 @@
       });
       },
       onChange() { 
-        //onchange from search bar loadsclient with param[id] of item selected
+        //ONCHANGE FROM SEARCH BAR TRIGGERS loadClient FUNCTION WITH ID FOUND IN ITEM SELECTED AS PARAMATER FOR THE FUNCTION...
         loadClient(parseInt($('#select-beast-landsearch').val()))
       },
       });
@@ -349,8 +463,19 @@
       /////////
       if(jQuery.isNumeric(clientId)) {
         processingView();
+
+      //MAKES THE CALL TO DATABASE BY ATTEMPTING TO LOAD URL "clients/<clientId> INTO IFRAME... CONTROLLER CHECKS IF USERNAME HAS ACCESS TO CLIENT THEN RESPONDS WITH CLIENT VIEW.
       $('#clientload').attr("src", "clients/" + clientId);
       };
+      //MAKES LINKS ON HEADER WORK WITH LOADED CLIENT
+      $('#assessmentTool').click(function(){
+        $.ajax({
+        url: "clients/" + clientId,
+        type: 'GET',
+        success: function(data){ $('#clientload').attr("src", "clients/" + clientId);
+        }
+        });
+        })
       }
       /////////////
       // SAVE NEW CLIENT IN DATABASE WHEN NOT FOUND BY SELECTIZE
@@ -369,7 +494,7 @@
       valueField: 'abbrev',
       labelField: 'abbrev',
       searchField: ['commonName', 'medicalName', 'abbrev'],
-      preload: focus,
+      preload: false,
       options: [
       {id: 1, commonName: 'high blood pressure', medicalName: 'Hypertension', abbrev: 'HTN', url: 'ce'},
       {id: 2, commonName: 'Diabetes Type 1', medicalName: 'Diabetes Mellitus', abbrev: 'DM1', url: 'ce'},
@@ -570,17 +695,7 @@
       $(child).remove();
       $(child2).remove();
       };
-      function ajaxSubmit(){
-      var data  = $("#newClient")
-      //Ajax code here
-      $.ajaxForm({
-      url: 'https://dietitianhelp.herokuapp.com/clients/' + clienId,
-      type: 'POST',
-      dataType: 'json',
-      data: data,
-      });
-      console.log(data)
-      }
+
       function submit() {
         var x = $('#newClient');
         x.ajaxSubmit(options = {
@@ -605,8 +720,7 @@
         function processingView() {
           $("#processingViewModal").iziModal('open'); 
       }
-      var currentUser = '<%= current_user.username.to_s %>' 
-      <% currentUser = current_user.username.to_s%>
+      var currentUser = <%= current_user.id %>
       </script>
     </body>
   </html>

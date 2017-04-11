@@ -1,0 +1,207 @@
+<%= stylesheet_link_tag 'fullcalendar' %>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<div id="content" class="content">
+      <div class="row">
+        <div class="col-lg-2">
+          <div id="external-events" class="external-events">
+            <form id="add_event_form" class="form-inline" method="post">
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control new-event-form" placeholder="Add event...">
+                  <div class="input-group-addon">
+                    <button type="submit"><i class="fa fa-plus green"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="event-tag">
+                  <span class="waves waves-circle green-bg selected" data-tag="green-bg"></span>
+                  <span class="waves waves-circle blue-bg" data-tag="blue-bg"></span>
+                  <span class="waves waves-circle red-bg" data-tag="red-bg"></span>
+                  <span class="waves waves-circle yellow-bg" data-tag="yellow-bg"></span>
+                  <span class="waves waves-circle indigo-bg" data-tag="indigo-bg"></span>
+                  <span class="waves waves-circle gray-bg" data-tag="gray-bg"></span>
+                  <span class="waves waves-circle orange-bg" data-tag="orange-bg"></span>
+                  <span class="waves waves-circle light-blue-bg" data-tag="light-blue-bg"></span>
+                </div>
+              </div>
+            </form>
+
+            <h4>Drag Events to Calendar Dates</h4>
+            <div class="fc-event blue-bg" data-bg="blue-bg">Sport Match<span class="fa fa-close remove-event"></span></div>
+            <div class="fc-event red-bg" data-bg="red-bg">Meeting<span class="fa fa-close remove-event"></span></div>
+            <div class="fc-event yellow-bg" data-bg="yellow-bg">Relax<span class="fa fa-close remove-event"></span></div>
+            <div class="fc-event green-bg" data-bg="green-bg">Family Time<span class="fa fa-close remove-event"></span></div>
+            <div class="fc-event gray-bg" data-bg="gray-bg">Coffee<span class="fa fa-close remove-event"></span></div>
+            <div class="fc-event light-blue-bg" data-bg="light-blue-bg">Lunch<span class="fa fa-close remove-event"></span></div>
+            <div class="fc-event orange-bg" data-bg="orange-bg">Holiday<span class="fa fa-close remove-event"></span></div>
+            <div class="fc-event indigo-bg" data-bg="indigo-bg">Theater<span class="fa fa-close remove-event"></span></div>
+
+            <div class="checkbox checkbox-danger">
+              <input type="checkbox" id="drop-remove">
+              <label for="drop-remove">
+                Drop&amp;Remove
+              </label>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-lg-10">
+          <div id="calendar" class="fc-calendar box-shadow"></div>
+        </div>
+      </div>
+
+
+    <%= javascript_include_tag 'jquery.flot' %>
+      <%= javascript_include_tag 'jquery.flot.resize' %>
+      <%= javascript_include_tag 'curvedLines' %>
+      <%= javascript_include_tag 'jquery.flot.orderBars' %>
+<!-- DATA TABLES-->
+      <%= javascript_include_tag 'jquery.dataTables' %>
+      <%= javascript_include_tag 'dataTables.responsive' %>
+      <%= javascript_include_tag 'dataTables.tableTools' %>
+      <%= javascript_include_tag 'moment.min' %>
+
+      <%= javascript_include_tag 'fullcalendar' %>
+
+      <!-- INITIALIZE CALENDAR () -->
+    <script>
+    <% arr = Nextevaluationnote.where(id: current_user.id).all.map do |x| %>
+      <% [(Client.find(x.client_id).firstname.to_s + " " + Client.find(x.client_id).lastname.to_s), x.nnote_date.to_s] %>
+      <% end %>
+
+
+
+
+
+    var futureEvaluations = <% Nextevaluationnote.where(id: current_user.id).all.map do |x| %>
+      <%= raw "['#{Client.find(x.client_id).firstname.to_s} #{Client.find(x.client_id).lastname.to_s}'" + "," + "'" + x.nnote_date.to_s + "']" %>
+     <% end %>
+    $(function () {
+
+      $(".event-tag span").click(function () {
+        $(".event-tag span").removeClass("selected");
+        $(this).addClass("selected");
+      });
+
+      $(document).on('click', '.remove-event', function (e) {
+        $(this).parent().remove();
+      });
+
+
+      /* initialize the external events */
+
+      $('#external-events .fc-event').each(function () {
+
+        // store data so the calendar knows to render an event upon drop
+        $(this).data('eventObject', {
+          title: $.trim($(this).text()),
+          className: $(this).attr("data-bg"), // use the element's text as the event title
+          stick: true // maintain when user navigates (see docs on the renderEvent method)
+        });
+
+        // make the event draggable using jQuery UI
+        $(this).draggable({
+          zIndex: 999,
+          revert: true, // will cause the event to go back to its
+          revertDuration: 0 //  original position after the drag
+        });
+
+      });
+
+
+      /* initialize the calendar */
+      var date = new Date();
+      var d = date.getDate();
+      var m = date.getMonth();
+      var y = date.getFullYear();
+      $('#calendar').fullCalendar({
+        header: {
+          left: 'prev, next',
+          center: 'title',
+          right: 'today, month,agendaWeek,agendaDay'
+        },
+        //Add Events
+        events: [ <% Nextevaluationnote.where(user_id: current_user.id).map do |x| %>
+        <%= raw "{
+        title: '#{Client.find(x.client_id).firstname.to_s} #{Client.find(x.client_id).lastname.to_s}'," %>
+      <%= raw "start:" + ' new Date(' + x.nnote_date.to_s.split("-").map(&:to_i).join(", ") + ")," %>
+      <%= raw "end:" + ' new Date(' + x.nnote_date.to_s.split("-").map(&:to_i).join(", ") + ")," %>
+      <%= raw "className:" + "'indigo-bg' 
+            },"%><% end %>],
+
+        editable: true,
+        eventLimit: true,
+        droppable: true, // this allows things to be dropped onto the calendar
+        drop: function (date, allDay) { // this function is called when something is dropped
+
+          // retrieve the dropped element's stored Event Object
+          var originalEventObject = $(this).data('eventObject');
+
+          // we need to copy it, so that multiple events don't have a reference to the same object
+          var copiedEventObject = $.extend({}, originalEventObject);
+
+          // assign it the date that was reported
+          copiedEventObject.start = date;
+          copiedEventObject.allDay = allDay;
+
+          // render the event on the calendar
+          // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+          $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+          // is the "remove after drop" checkbox checked?
+          if ($('#drop-remove').is(':checked')) {
+            // if so, remove the element from the "Draggable Events" list
+            $(this).remove();
+          }
+
+        }
+
+      });
+
+      /*Add new event*/
+      // Form to add new event
+
+      $("#add_event_form").on('submit', function (ev) {
+        ev.preventDefault();
+
+        var $event = $(this).find('.new-event-form'),
+          event_name = $event.val(),
+          tagColor = $('.event-tag  span.selected').attr('data-tag');
+
+        if (event_name.length >= 3) {
+
+          var newid = "new" + "" + Math.random().toString(36).substring(7);
+          // Create Event Entry
+          $("#external-events .checkbox").before(
+            '<div id="' + newid + '" class="fc-event ' + tagColor + '" data-bg="' + tagColor + '">' + event_name + '<span class="fa fa-close remove-event"></span></div>'
+          );
+
+
+          var eventObject = {
+            title: $.trim($("#" + newid).text()),
+            className: $("#" + newid).attr("data-bg"), // use the element's text as the event title
+            stick: true
+          };
+
+          // store the Event Object in the DOM element so we can get to it later
+          $("#" + newid).data('eventObject', eventObject);
+
+          // Reset draggable
+          $("#" + newid).draggable({
+            revert: true,
+            revertDuration: 0,
+            zIndex: 999
+          });
+
+          // Reset input
+          $event.val('').focus();
+        } else {
+          $event.focus();
+        }
+      });
+    });
+  </script>

@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :nextevaluationnotes
+  resources :documents
+  resources :fullassessments
+  resources :monitoringnotes
+  resources :progressnotes
   resources :clients
   resources :client_info
   devise_for :users, :controllers => {registrations: 'registrations'}
@@ -7,6 +12,7 @@ Rails.application.routes.draw do
 	root 'pages#home';
 	get 'client_info/key_info', to: "client_info#key_info"
 	get '#processingViewModal', to: 'pages#home'
+  get 'calendar', to: 'pages#calendar'
 
 	get 'clients/:id/nutritionaldata' => 'clients#nutritionaldata'
 

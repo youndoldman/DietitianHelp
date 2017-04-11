@@ -23,7 +23,6 @@ class CreateClients < ActiveRecord::Migration[5.0]
       t.integer :calreq
       t.integer :proreq
       t.integer :flreq
-      t.string :fassess
       t.string :fpes
       t.string :pes0
       t.string :pes1
