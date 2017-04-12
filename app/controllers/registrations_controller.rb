@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController  
-# skip_before_filter :verify_authenticity_token, :only => :create
+skip_before_filter :verify_authenticity_token, :only => :create
+class RegistrationsController < Devise::RegistrationsController
  
   def create
     build_resource
@@ -26,4 +27,5 @@ class RegistrationsController < Devise::RegistrationsController
     sign_in(resource_name, resource)
   end
  
+end
 end
