@@ -1,6 +1,6 @@
 <!-- Identifying info -->
 <div class="col-lg-3">
-  <div class="content-box profile-sidebar box-shadow">
+  <div id="infoContainer" class="content-box profile-sidebar box-shadow">
     <div class="profile-usertitle">
       <div class="profile-usertitle-name">
         <div class="field-container form-group">
@@ -39,8 +39,8 @@
           </div>
           </div>
         <div class="">
-          <button id="clienteditbut" type="button" class="btn waves waves-effect waves-float" data-toggle="modal" data-target="#clienteditmodal" style="background: #374B89; color: #FFFFFF;">Edit</button>
-          <button id="clientCancelEditBtn" type="button" class="btn waves waves-effect waves-float" data-toggle="modal" data-target="#clienteditmodal" style="background: #374B89; color: #FFFFFF;display: none">Cancel</button>
+          <button id="clienteditbut" type="button" class="btn waves waves-effect waves-float" data-fadeToggle="modal" data-target="#clienteditmodal" style="background: #374B89; color: #FFFFFF;">Edit</button>
+          <button id="clientCancelEditBtn" type="button" class="btn waves waves-effect waves-float" data-fadeToggle="modal" data-target="#clienteditmodal" style="background: #374B89; color: #FFFFFF;display: none">Cancel</button>
         </div>
         <div>
         <div id="currentHealthParams" class="profile-usermenu" style="display: block">
@@ -130,7 +130,6 @@
   <%= javascript_include_tag 'classie' %>
   <!--Selects-->
   <%= javascript_include_tag 'selectFx' %>
-  <%= javascript_include_tag 'p5' %>
   <!--Flot-->
   <%= javascript_include_tag 'jquery.flot' %>
   <%= javascript_include_tag 'jquery.flot.resize' %>
@@ -176,30 +175,30 @@
   //SPAN TO INPUT FOR CLIENT INFO UPDATE
   //////
   $('#clienteditbut').click(function() {
-  $('#updateClientInfo').toggle('fast')
-  $('#spanInfoDiv').toggle('fast')
-  $('#clienteditbut').toggle('fast')
-  $('#clientCancelEditBtn').toggle('fast')
-  $('#currentHealthParams').toggle('fast')
+  $('#updateClientInfo').fadeToggle('fast')
+  $('#spanInfoDiv').fadeToggle('fast')
+  $('#clienteditbut').fadeToggle('fast')
+  $('#clientCancelEditBtn').fadeToggle('fast')
+  $('#currentHealthParams').fadeToggle('fast')
   })
   $('#clientCancelEditBtn').click(function() {
-  $('#updateClientInfo').toggle('fast')
-  $('#clientCancelEditBtn').toggle('fast')
-  $('#clienteditbut').toggle('fast')
-  $('#spanInfoDiv').toggle('fast')
-  $('#currentHealthParams').toggle('fast')
+  $('#updateClientInfo').fadeToggle('fast')
+  $('#clientCancelEditBtn').fadeToggle('fast')
+  $('#clienteditbut').fadeToggle('fast')
+  $('#spanInfoDiv').fadeToggle('fast')
+  $('#currentHealthParams').fadeToggle('fast')
   })
   $('#updateClientInfo').ajaxForm({
     success: function() {
-  $('#updateClientInfo').toggle('fast');
-  $('#spanInfoDiv').toggle('fast');
+  $('#updateClientInfo').fadeToggle('fast');
+  $('#spanInfoDiv').fadeToggle('fast');
     $('#client_firstnamespan').html($('#hiddenfirstnameinfo').val());
       $('#client_lastnamespan').html($('#hiddenlastnameinfo').val());
       $('#client_dobspan').html($('#hiddendobinfo').val());
       $('#client_genderspan').html($('#hiddengenderinfo').val());
-      $('#clientCancelEditBtn').toggle('fast')
-      $('#clienteditbut').toggle('fast')
-      $('#currentHealthParams').toggle('fast')
+      $('#clientCancelEditBtn').fadeToggle('fast')
+      $('#clienteditbut').fadeToggle('fast')
+      $('#currentHealthParams').fadeToggle('fast')
       return true
   }
   });

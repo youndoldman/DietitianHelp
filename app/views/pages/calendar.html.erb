@@ -3,56 +3,11 @@
       rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-<div id="content" class="content">
-      <div class="row">
-        <div class="col-lg-2">
-          <div id="external-events" class="external-events">
-            <form id="add_event_form" class="form-inline" method="post">
-              <div class="form-group">
-                <div class="input-group">
-                  <input type="text" class="form-control new-event-form" placeholder="Add event...">
-                  <div class="input-group-addon">
-                    <button type="submit"><i class="fa fa-plus green"></i></button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="event-tag">
-                  <span class="waves waves-circle green-bg selected" data-tag="green-bg"></span>
-                  <span class="waves waves-circle blue-bg" data-tag="blue-bg"></span>
-                  <span class="waves waves-circle red-bg" data-tag="red-bg"></span>
-                  <span class="waves waves-circle yellow-bg" data-tag="yellow-bg"></span>
-                  <span class="waves waves-circle indigo-bg" data-tag="indigo-bg"></span>
-                  <span class="waves waves-circle gray-bg" data-tag="gray-bg"></span>
-                  <span class="waves waves-circle orange-bg" data-tag="orange-bg"></span>
-                  <span class="waves waves-circle light-blue-bg" data-tag="light-blue-bg"></span>
-                </div>
-              </div>
-            </form>
-
-            <h4>Drag Events to Calendar Dates</h4>
-            <div class="fc-event blue-bg" data-bg="blue-bg">Sport Match<span class="fa fa-close remove-event"></span></div>
-            <div class="fc-event red-bg" data-bg="red-bg">Meeting<span class="fa fa-close remove-event"></span></div>
-            <div class="fc-event yellow-bg" data-bg="yellow-bg">Relax<span class="fa fa-close remove-event"></span></div>
-            <div class="fc-event green-bg" data-bg="green-bg">Family Time<span class="fa fa-close remove-event"></span></div>
-            <div class="fc-event gray-bg" data-bg="gray-bg">Coffee<span class="fa fa-close remove-event"></span></div>
-            <div class="fc-event light-blue-bg" data-bg="light-blue-bg">Lunch<span class="fa fa-close remove-event"></span></div>
-            <div class="fc-event orange-bg" data-bg="orange-bg">Holiday<span class="fa fa-close remove-event"></span></div>
-            <div class="fc-event indigo-bg" data-bg="indigo-bg">Theater<span class="fa fa-close remove-event"></span></div>
-
-            <div class="checkbox checkbox-danger">
-              <input type="checkbox" id="drop-remove">
-              <label for="drop-remove">
-                Drop&amp;Remove
-              </label>
-            </div>
-
-          </div>
+    <div id="content" class="content">
         </div>
-        <div class="col-lg-10">
+        <div class="col-lg-6">
           <div id="calendar" class="fc-calendar box-shadow"></div>
         </div>
-      </div>
 
 
     <%= javascript_include_tag 'jquery.flot' %>
@@ -69,6 +24,9 @@
 
       <!-- INITIALIZE CALENDAR () -->
     <script>
+    <% to_do_today = [] %>
+    toDoToday = []
+    toDoTodayCount = 0
     $(function () {
 
       $(".event-tag span").click(function () {
@@ -78,27 +36,6 @@
 
       $(document).on('click', '.remove-event', function (e) {
         $(this).parent().remove();
-      });
-
-
-      /* initialize the external events */
-
-      $('#external-events .fc-event').each(function () {
-
-        // store data so the calendar knows to render an event upon drop
-        $(this).data('eventObject', {
-          title: $.trim($(this).text()),
-          className: $(this).attr("data-bg"), // use the element's text as the event title
-          stick: true // maintain when user navigates (see docs on the renderEvent method)
-        });
-
-        // make the event draggable using jQuery UI
-        $(this).draggable({
-          zIndex: 999,
-          revert: true, // will cause the event to go back to its
-          revertDuration: 0 //  original position after the drag
-        });
-
       });
 
 
@@ -114,13 +51,21 @@
           right: 'today, month,agendaWeek,agendaDay'
         },
         //Add Events
+        // FETCHING FROM ALL USER'S CLIENTS --- ATOMATICALLY ADDS 5 DAYS TO NEXTEVALUATIONNOTE_DATE TO = ENDDATE IN CALENDAR
         events: [ <% Nextevaluationnote.where(user_id: current_user.id).map do |x| %>
+        <% start_date = x.nnote_date.to_s.split("-").map(&:to_i).reduce(:+) %>
+        // DUPLICATED END DATE FOR RANGE NEEDED TO PUSH ALL ASSESSMENTS THAT ARE DUE 
+        <% end_date_for_rage = x.nnote_date.to_s.split("-").map(&:to_i).reduce(:+)%>
+        <% end_date = x.nnote_date.to_s.split("-").map(&:to_i)%>
+        <% end_date[2] = end_date[2] + 5 %>
         <%= raw "{
         title: '#{Client.find(x.client_id).firstname.to_s} #{Client.find(x.client_id).lastname.to_s}'," %>
       <%= raw "start:" + ' new Date(' + x.nnote_date.to_s.split("-").map(&:to_i).join(", ") + ")," %>
-      <%= raw "end:" + ' new Date(' + x.nnote_date.to_s.split("-").map(&:to_i).join(", ") + ")," %>
-      <%= raw "className:" + "'indigo-bg' 
-            },"%><% end %>],
+      <%= raw "end:" + ' new Date(' + end_date.join(", ") + ")," %>
+      <%= raw "className:" + "'red-bg' 
+            },"%>
+      <% [start_date..end_date_for_rage].include?(Date.current.to_s.split("-").map(&:to_i).reduce(:+)) ? to_do_today << (Client.where(client_id: x.client_id).firstname.to_s + " " + Client.where(client_id: x.client_id).firstname.to_s) : 0 %>
+            <% end %>],
 
         editable: true,
         eventLimit: true,
@@ -193,4 +138,8 @@
         }
       });
     });
+$(document).ready(function() {
+  top.$("#processingViewModal").iziModal('close')
+  top.$('#clientload').fadeIn();
+});
   </script>

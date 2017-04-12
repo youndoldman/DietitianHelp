@@ -9,6 +9,7 @@
  */
 
 
+
 (function(){
 
 	"use strict";
@@ -28,7 +29,7 @@
 		var computeDimension = function(element,dimension)
 		{
 			if (element['offset'+dimension])
-			{	
+			{
 				return element['offset'+dimension];
 			}
 			else
@@ -3470,6 +3471,15 @@
 
 	});
 
+var origResizeListener = Chart.helpers.addResizeListener;
+Chart.helpers.addResizeListener = function(node, callback){
+
+    if(Chart.defaults.global.responsive){
+        origResizeListener(node,callback);
+    }
+
+};
+Chart.defaults.global.responsive = false;
 
 
 

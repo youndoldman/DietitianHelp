@@ -29,6 +29,8 @@
       <![endif]-->
     </head>
     <body>
+      <script>
+      top.$('#clientload').fadeIn();</script>
       <div id="clientloadright" class="main-wrapper">
         <div class=""><div class="col-lg-9">
           <div class="tabbable tabs-with-bg">
@@ -906,8 +908,8 @@
   });
   function adime() {
   $('#fassessadime').html($('#assval').text())
-  $('#dxadime').html($('#client_dx').val())
-  $('#intadime').html($('#client_cdiet').val())
+  $('#note-editor-3').html($('#client_dx').val())
+  $('#note-editor-4').html($('#client_cdiet').val())
   $('#monevadime').html()
   }
   var food1;
@@ -934,16 +936,12 @@ function parseDate(dateStr) {
   return new Date(dateParts[2], (dateParts[1] - 1), dateParts[0]);
 }
   document.getElementById('ADIMETodaysDate').innerHTML = moment(new Date()).format('LL');
-  function removee(){
-  $('.alert').remove();
-  };
   function resetAssess() {
     $('#assZone').html(top.defaultAssessment);
     $('#tooltip144344').hide()
 
   }
   $(document).ready(function() {
-  top.$("#processingViewModal").iziModal('close')
   $("#labsform").iziModal();
   $("#modal-alert").iziModal({
     title: 'Nutrition Parameters Updated',
@@ -959,6 +957,8 @@ function parseDate(dateStr) {
     timeoutProgressbarColor: '#CABC42',
     overlay: false,
 });
+  top.$("#processingViewModal").iziModal('close')
+  top.NProgress.done();
   $("#modal-alert2").iziModal({
     title: 'ADIME Assessment Saved',
     subtitle: '<%=@client.firstname + ' ' + @client.lastname%>',
@@ -1001,20 +1001,13 @@ function parseDate(dateStr) {
     timeoutProgressbarColor: '#CABC42',
     overlay: false,
 });
-    removee()
+
 var x = window.top.document.querySelectorAll('#landing');
 var y = window.top.document.querySelectorAll('#mainwrapper')
   $(x).fadeOut()
   setTimeout(function() {
-  top.NProgress.done();
   $(y).removeClass('table-wrapper1');
 }, 1000);
-  iziToast.success({
-    title: '<%=@client.firstname + ' ' + @client.lastname%>',
-    message: 'Loaded',
-    position: 'topLeft',
-    timeout: 2000,
-});
 
   //MASKS DATE INPUT TO TAKE WITH HUMAN DATE FORMAT ADDING PLACE HOLDER + MASK
    $("#client_date0").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
@@ -1044,6 +1037,22 @@ $('#assval').summernote({
     airMode: true,
     textareaAutoSync: false,
   });
+
+$('#dxadime').summernote({
+    airMode: true,
+    textareaAutoSync: false,
+  });
+
+$('#intadime').summernote({
+    airMode: true,
+    textareaAutoSync: false,
+  });
+
+$('#monevadime').summernote({
+    airMode: true,
+    textareaAutoSync: false,
+  });
+// END DOCUMENT READY
   });
 $('#updateClient').ajaxForm({
           success: function() {

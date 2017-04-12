@@ -41,14 +41,14 @@
                 <% end %>
             </ul>
           </div>
-          <div class="tab-pane big-box  fade in active" id="tab-2">
+          <div class="tab-pane big-box  fade in" id="tab-2">
             <ul class="cbp_tmtimeline" style=''>
               <% Progressnote.where(client_id: @client.id).all.reverse.map do |progressnote| %>
                 <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><h2>Amet laboriosam saepe</h2><p style='font-size:18px;line-height:1.1'>#{progressnote.pnote}</p></div></li>" %>
                 <% end %>
             </ul>
           </div>
-          <div class="tab-pane big-box  fade in active" id="tab-3">
+          <div class="tab-pane big-box  fade in" id="tab-3">
             <ul class="cbp_tmtimeline" style=''>
               <% Monitoringnote.where(client_id: @client.id).all.reverse.map do |monitoringnote| %>
                 <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><h2>Amet laboriosam saepe</h2><p style='font-size:18px;line-height:1.1'>#{monitoringnote.mnote}</p></div></li>" %>

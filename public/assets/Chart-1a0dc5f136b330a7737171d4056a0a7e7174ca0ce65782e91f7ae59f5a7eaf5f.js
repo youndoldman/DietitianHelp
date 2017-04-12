@@ -9,6 +9,7 @@
  */
 
 
+
 (function(){
 
 	"use strict";
@@ -33,7 +34,7 @@
 			}
 			else
 			{
-				return document.defaultView.getComputedStyle(element).getPropertyValue(dimension);
+				return 300
 			}
 		}
 

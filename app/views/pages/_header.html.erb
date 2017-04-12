@@ -1,5 +1,6 @@
 
 <ul id="gn-menu" class="gn-menu-main animated fadeIn" style="z-index: 1200">
+  <% if current_user %>
   <li class="gn-trigger">
     <a id="menu-toggle" class="menu-toggle gn-icon gn-icon-menu">
       <div class="hamburger">
@@ -15,22 +16,25 @@
     <nav class="gn-menu-wrapper">
       <div class="gn-scroller">
         <ul class="gn-menu metismenu">
-          <li  class="gn-search-item">
-          <select id="select-beast-head" placeholder="Search" class="gn-search" style="opacity: 1; position: absolute; left: 0px; width: 100%; padding-top:10px;"></select>
-        </li>
         <li>
           <a id="assessmentTool" aria-expanded="false"><i class="fa fa-language"></i>Assess<span class="fa arrow"></span></a>
         </li>
         <li>
-          <a id="clientsfrommenu" aria-expanded="false"><i class="fa fa-user"></i>Clients<span class="fa arrow"></span></a>
+          <a id="clientsfrommenu" aria-expanded="false"><i class="fa fa-user"></i>Clients<span class="label label-info pull-right"><%= Client.where(user_id: current_user.id).count%></span></a>
         </li>
         <li>
           <a type="button"id="historyfrommenu" aria-expanded="false"><i class="fa fa-history"></i>History<span class="fa arrow"></span></a>
+        </li>
+        <li>
+            <a id="calendarFromMenu"aria-expanded="false"><i class="fa fa-calendar-o"></i>Calendar<span class="fa arrow"></span></a>
+              </li>
         </div>
 
         <!-- /gn-scroller -->
       </nav>
     </li>
+    <% else %>
+    <% end %>
     <li class="pull-left">
       <a href="" class="logo">DIETITIAN.HELP<i class="fa fa-heartbeat"></i></a>
     </li>
@@ -55,7 +59,6 @@
         </div>
           <% end %>
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class: "animated fadeInUp", :id => "sign_up_user", :style => "display: none"},
-          :format => :json,
           :remote => true ) do |f| %>
           <%= devise_error_messages! %>
             <%= f.text_field :username, class: "input-container form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%>
@@ -97,6 +100,12 @@
   window.removee();}
   });
   })
+  // ONCLICK CALENDAR HEADER
+  $('#calendarFromMenu').click(function(){
+  top.processingView();
+  top.$('#clientload').fadeOut()
+  top.$('#clientload').attr('src', '/calendar')
+  })
   $('#searchHeaderIcon').click(function() {
   top.$('#landing').iziModal('open');
   });
@@ -109,6 +118,9 @@ $('#logInBtn').click(function(e){
   e.preventDefault();
   $('#new_user').show('fast');
   $('#sign_up_user').hide('fast');
+})
+$('#assessmentTool').click(function() {
+  $('#clientload').fadeOut()
 })
   </script>
   <!-- JAVASCRIPT ENDS-->

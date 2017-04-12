@@ -9,6 +9,7 @@
  */
 
 
+
 (function(){
 
 	"use strict";
@@ -28,11 +29,12 @@
 		var computeDimension = function(element,dimension)
 		{
 			if (element['offset'+dimension])
-			{	
+			{
 				return element['offset'+dimension];
 			}
 			else
 			{
+				console.log(document.defaultView.getComputedStyle(element).getPropertyValue(dimension))
 				return document.defaultView.getComputedStyle(element).getPropertyValue(dimension);
 			}
 		}

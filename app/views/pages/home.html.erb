@@ -152,7 +152,7 @@
   </script>
       <div id="mainwrapper"class="table-wrapper">
         <div><%= render partial: 'pages/header' %></div>
-        <iframe id="clientload" src="/calendar" frameborder="0" height="900px" width="100%" scrolling="no"></iframe>
+        <iframe aria-hidden="true" id="clientload" visibility: 'visible' src="/calendar" frameborder="0" height="900px" width="100%" scrolling="no" ></iframe>
       </div>
       <!--Scripts-->
       <%= javascript_include_tag 'jquery.min' %>
@@ -179,7 +179,6 @@
       <%= javascript_include_tag 'gnmenu' %>
       <!--Selects-->
       <%= javascript_include_tag 'selectFx' %>
-      <%= javascript_include_tag 'p5' %>
       <!--Flot-->
       <%= javascript_include_tag 'jquery.flot' %>
       <%= javascript_include_tag 'jquery.flot.resize' %>
@@ -456,7 +455,8 @@
       },
       });
       function loadClient(clientId) {
-
+        $('#clientload').fadeOut()
+        NProgress.inc();
       $('#selectinput').attr('class', 'selectize-input items has-options not-full');
       //////////
       // PLOT DATA IF CLIENT EXIST
@@ -467,7 +467,7 @@
       //MAKES THE CALL TO DATABASE BY ATTEMPTING TO LOAD URL "clients/<clientId> INTO IFRAME... CONTROLLER CHECKS IF USERNAME HAS ACCESS TO CLIENT THEN RESPONDS WITH CLIENT VIEW.
       $('#clientload').attr("src", "clients/" + clientId);
       };
-      //MAKES LINKS ON HEADER WORK WITH LOADED CLIENT
+      //ADDS EVENT AFTER CLIENT LOAD TO MAKE LINK ON HEADER WORK WITH LOADED CLIENT
       $('#assessmentTool').click(function(){
         $.ajax({
         url: "clients/" + clientId,
@@ -476,6 +476,7 @@
         }
         });
         })
+      NProgress.inc();
       }
       /////////////
       // SAVE NEW CLIENT IN DATABASE WHEN NOT FOUND BY SELECTIZE
@@ -688,13 +689,6 @@
       //Waves effect on buttons
       Waves.attach('.waves', ['waves-float']);
       Waves.init();
-      function removee(){
-      var parent = document.querySelectorAll('iframe')[0].contentWindow
-      var child = document.querySelectorAll('iframe')[0].contentWindow.document.getElementsByClassName('notice');
-      var child2 = document.querySelectorAll('iframe')[0].contentWindow.document.getElementsByClassName('alert');
-      $(child).remove();
-      $(child2).remove();
-      };
 
       function submit() {
         var x = $('#newClient');
