@@ -52,7 +52,10 @@
         },
         //Add Events
         // FETCHING FROM ALL USER'S CLIENTS --- ATOMATICALLY ADDS 5 DAYS TO NEXTEVALUATIONNOTE_DATE TO = ENDDATE IN CALENDAR
-        events: [ <% Nextevaluationnote.where(user_id: current_user.id).map do |x| %>
+        events: [<% if Nextevaluationnote.where(user_id: current_user.id).all.count === 0 %>
+        <%= raw "" %>
+        <% else %>
+        <% Nextevaluationnote.where(user_id: current_user.id).map do |x| %>
         <% start_date = x.nnote_date.to_s.split("-").map(&:to_i).reduce(:+) %>
         // DUPLICATED END DATE FOR RANGE NEEDED TO PUSH ALL ASSESSMENTS THAT ARE DUE 
         <% end_date_for_rage = x.nnote_date.to_s.split("-").map(&:to_i).reduce(:+)%>
@@ -60,12 +63,13 @@
         <% end_date[2] = end_date[2] + 5 %>
         <%= raw "{
         title: '#{Client.find(x.client_id).firstname.to_s} #{Client.find(x.client_id).lastname.to_s}'," %>
-      <%= raw "start:" + ' new Date(' + x.nnote_date.to_s.split("-").map(&:to_i).join(", ") + ")," %>
+        <%= raw "start:" + ' new Date(' + x.nnote_date.to_s.split("-").map(&:to_i).join(", ") + ")," %>
       <%= raw "end:" + ' new Date(' + end_date.join(", ") + ")," %>
       <%= raw "className:" + "'red-bg' 
             },"%>
-      <% [start_date..end_date_for_rage].include?(Date.current.to_s.split("-").map(&:to_i).reduce(:+)) ? to_do_today << (Client.where(client_id: x.client_id).firstname.to_s + " " + Client.where(client_id: x.client_id).firstname.to_s) : 0 %>
-            <% end %>],
+            <% [start_date..end_date_for_rage].include?(Date.current.to_s.split("-").map(&:to_i).reduce(:+)) ? to_do_today << (Client.where(client_id: x.client_id).firstname.to_s + " " + Client.where(client_id: x.client_id).firstname.to_s) : 0 %>
+      <% end %>
+      <% end %>],
 
         editable: true,
         eventLimit: true,
