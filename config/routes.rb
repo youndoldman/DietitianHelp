@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :goals
   resources :nextevaluationnotes
   resources :documents
   resources :fullassessments

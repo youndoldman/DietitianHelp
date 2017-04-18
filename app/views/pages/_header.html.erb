@@ -1,3 +1,12 @@
+<%= stylesheet_link_tag 'materialdesignicons.min' %>
+<%= stylesheet_link_tag 'metisMenu.min' %>
+<%= stylesheet_link_tag 'jquery.mCustomScrollbar' %>
+
+
+<%= javascript_include_tag 'metisMenu.min' %>
+<%= javascript_include_tag 'jquery.mCustomScrollbar' %>
+<%= javascript_include_tag 'modernizr.custom' %>
+
 
 <ul id="gn-menu" class="gn-menu-main animated fadeIn" style="z-index: 1200">
   <% if current_user %>
@@ -29,7 +38,9 @@
             <a id="calendarFromMenu"aria-expanded="false"><i class="fa fa-calendar-o"></i>Calendar<span class="fa arrow"></span></a>
               </li>
         </div>
-
+<div class="bottom-bnts">
+            <a id="pinHeader" class="fix-nav" href="#"><i class="mdi mdi-pin-off"></i></a>
+          </div>
         <!-- /gn-scroller -->
       </nav>
     </li>
@@ -106,9 +117,11 @@
   top.$('#clientload').fadeOut()
   top.$('#clientload').attr('src', '/calendar')
   })
+
   $('#searchHeaderIcon').click(function() {
+
   top.$('#landing').iziModal('open');
-  });
+});
 $('#registerBtn').click(function(e){
   e.preventDefault();
   $('#new_user').hide('fast');
@@ -120,7 +133,12 @@ $('#logInBtn').click(function(e){
   $('#sign_up_user').hide('fast');
 })
 $('#assessmentTool').click(function() {
-  $('#clientload').fadeOut()
+  // $('#clientload').fadeOut()
+})
+$('#pinHeader').click(function() {
+  top.$('body').toggleClass('mini-nav')
+  top.$('body').animate({marginLeft: top.$('body').hasClass('mini-nav') ? '60px' : '0'}, 300)
+
 })
   </script>
   <!-- JAVASCRIPT ENDS-->

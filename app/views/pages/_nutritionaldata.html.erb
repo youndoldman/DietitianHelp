@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -236,8 +234,8 @@
                         <h2 style="display: inline-block">Next Evaluation on</h2>
                         <div class="" style="display: inline-block">
                           <!-- V.LOG 1482 -->
-                            <div style=""><%= f.text_field :nnote_date, id: "summernote3", class: "summernote3", style: "border: 0; padding: 0 0 0 0.2em; font-size: 34px" %>
-                              <%= f.text_area :user_id, value: "#{@current_user.id}", readonly: true, style: "display: none" %></div>
+                            <div style=""><%= f.text_field :nnote_date, class: "summernote3", style: "border: 0; padding: 0 0 0 0.2em; font-size: 34px" %>
+                              </div>
                           </div>
                           <div style="margin-left: 1em;height: 122px; width: 100%">
                             <div id="summernote" >
@@ -248,7 +246,7 @@
                           <% end %>
                       <div id="notesAndNextEvaluationButtons" style="margin-top: 2em;float: right">
                         <!-- EVENTLISTENER THAT SUBMITS ALL FORMS ONCLICK -->
-                <button id="done" class="btn btn-success" type="button"  data-toggle="tooltip" data-placement="top" title="Will save assement and all notes to client's history database">DONE</button>
+                <button id="doneBtn" class="btn btn-success" type="button"  data-toggle="tooltip" data-placement="top" title="Will save assement and all notes to client's history database">DONE</button>
                 </div>
                 </div></p>
                     </div>
@@ -1014,23 +1012,23 @@ var y = window.top.document.querySelectorAll('#mainwrapper')
    $("#client_date1").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
    $("#client_date2").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
    $("#client_date3").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
-   $("#summernote3").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
+   $(".summernote3").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
 
    //CALENDAR POPDOWN FROM DATE INPUTS
    $("#client_date0").pikaday();
    $("#client_date1").pikaday();
    $("#client_date2").pikaday();
    $("#client_date3").pikaday();
-   $("#summernote3").pikaday();
+   $(".summernote3").pikaday();
 
 
   //set default dates on input to respective dates (-30/90/180 days)
   $('#client_date1').val(moment().subtract(30, "days").format("MM/DD/YYYY"))
   $('#client_date2').val(moment().subtract(90, "days").format("MM/DD/YYYY"))
   $('#client_date3').val(moment().subtract(180, "days").format("MM/DD/YYYY"))
-  $('#summernote3').val(moment().add(90, "days").format("MM/DD/YYYY"))
+  $('.summernote3').val(moment().add(90, "days").format("MM/DD/YYYY"))
   //
-$('#summernote3').summernote({
+$('.summernote3').summernote({
     airMode: true,
   });
 $('#assval').summernote({
@@ -1092,6 +1090,7 @@ top.$('#historyfrommenu').click(function(){
   window.removee();}
   });
   })
+
 // HAD TO MAKE FORM SUBMISSIONS INTO FUNCTIONS TO FOLLOW CHAIN OF FORM SUBMISSION
 function submitPNote() {
   $("#new_progressnote").submit();
@@ -1100,7 +1099,30 @@ function submitMNote() {
   $("#new_monitoringnote").submit();
 }
 function submitNNote() {
-  $("#new_nextevaluationnote").submit();
+
+
+  // MANUALLY SEND NNOTE BECAUSE DATE SENDER SEEMS BUGGY
+  if($('#note-editor-1').val().length > 0) {
+    $.ajax({
+  type: "POST",
+  url: '/nextevaluationnotes',
+  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+  data: {
+    nextevaluationnote: 
+    {
+      nnote: $('#nextevaluationnote_nnote')[0].value,
+      nnote_date: new Date($('#note-editor-1')[0].value).toISOString().slice(0,10).replace(/-/g,"/"),
+      client_id: <%= @client.id %>,
+      user_id: <%= current_user.id %>,
+    },
+    commit: "Create Nextevaluationnote" 
+  },
+  success: function() {
+          console.log('hey')
+          },
+});
+  }
+  else { return }
 }
 // SEND AUTHENTICITY TOKEN WITH ALL AJAX REQUESTS
 $.ajaxSetup({
@@ -1110,7 +1132,37 @@ $.ajaxSetup({
 });
 
 // SUBMIT COMPLY NOTES
-$("#done").on("click", function() {
+$("#doneBtn").on("click", function() {
+
+// DONE NOTIFICATION AFTER ALL COMPLY FORMS SUBMITTED
+iziToast.show({
+color: 'dark',
+icon: 'icon-person',
+title: 'MNT Completed',
+message: "What's Next?",
+position: 'topCenter', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+progressBarColor: 'rgb(0, 255, 184)',
+buttons: [
+['<button>Dashboard</button>', function (instance, toast) {
+// instance.hide({ transitionOut: 'fadeOutUp' }, toast);
+top.processingView();
+top.$('#clientload').fadeOut();
+top.$('#clientload').attr('src', '/calendar');
+instance.hide();
+}],
+['<button>History</button>', function (instance, toast) {
+// instance.hide({ transitionOut: 'fadeOutUp' }, toast);
+$.ajax({
+url: "/client_info/" + <%= @client.id %>,
+type: 'GET',
+success: function(data){ top.document.getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
+instance.hide();
+}
+});
+}]
+],
+});
+  // DONE NOTIFICATION END
     if($('#progressnote_pnote').val().length > 0) {
       submitPNote();
       return

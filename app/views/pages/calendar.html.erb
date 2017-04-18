@@ -4,10 +4,73 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <div id="content" class="content">
-        </div>
-        <div class="col-lg-6">
+        <div class="col-lg-7">
           <div id="calendar" class="fc-calendar box-shadow"></div>
         </div>
+      </div>
+
+          <div class="animated">
+            <div class="col-lg-2" style="margin-left: 10px">
+              <div class="content-box biggest-box red-bg">
+                <div class="pull-left">
+                  <span class="block">Due today</span>
+                  <h1 class="text-uppercase zero-m" id="dueTodayCnt">0</h1>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            <div class="col-lg-2" style="margin-left: 10px">
+              <div class="content-box biggest-box green-bg">
+                <div class="pull-left">
+                  <span class="block">Visitors</span>
+                  <h1 class="text-uppercase zero-m">0</h1>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+          <iframe src="http://www.todaysdietitian.com/images/TD0317_cover.jpg" frameborder="0" style="margin: 10px; width: 100%;"></iframe>
+          </div>
+  
+        <div class="col-lg-5">
+        <div class="content-box big-box" style="margin: 10px">
+        <h4 class="zero-m">Contextual classes</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <caption>Use contextual classes to color table rows or individual cells.</caption>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                <th>Team</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% Client.where(user_id: current_user.id).all.each_with_index do |x, i| %>
+              <% if x.id != nil%>
+              <tr id=<%="#{x.id}"%> class=<%= i.odd? ? "active clientsOnTable" : "clientsOnTable" %> onclick="top.loadClient(<%=x.id%>)">
+                <th scope="row"><%=x.id%></th>
+                <td><%=x.firstname%></td>
+                <td><%=x.firstname%></td>
+                <% if Nextevaluationnote.where(client_id: 1).last != nil %> 
+                <td><%=Nextevaluationnote.where(client_id: 1).last.nnote_date%></td>
+                <% else %>
+                <%end %>
+                <td><%= link_to 'Show', @client %></td>
+        <td><%= link_to 'Destroy', @client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+              <% else %>
+              <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
 
 
     <%= javascript_include_tag 'jquery.flot' %>
@@ -24,7 +87,8 @@
 
       <!-- INITIALIZE CALENDAR () -->
     <script>
-    <% to_do_today = [] %>
+    
+  <%= to_do_today = {} %>
     toDoToday = []
     toDoTodayCount = 0
     $(function () {
@@ -52,22 +116,30 @@
         },
         //Add Events
         // FETCHING FROM ALL USER'S CLIENTS --- ATOMATICALLY ADDS 5 DAYS TO NEXTEVALUATIONNOTE_DATE TO = ENDDATE IN CALENDAR
+        // MONTHS FROM CALENDAR PLUGIN ARE AHEAD BY 1 WILL DO -1 ON ALL MONTHS TO MATCH CALENDAR OUTPUT -- SEE start_date
         events: [<% if Nextevaluationnote.where(user_id: current_user.id).all.count === 0 %>
         <%= raw "" %>
         <% else %>
         <% Nextevaluationnote.where(user_id: current_user.id).map do |x| %>
-        <% start_date = x.nnote_date.to_s.split("-").map(&:to_i).reduce(:+) %>
-        // DUPLICATED END DATE FOR RANGE NEEDED TO PUSH ALL ASSESSMENTS THAT ARE DUE 
-        <% end_date_for_rage = x.nnote_date.to_s.split("-").map(&:to_i).reduce(:+)%>
+        // start_date = original next evaluation date - 1 month
+        <% start_date = x.nnote_date.to_s.split("-").map(&:to_i) %>
+        <% start_date[1] = start_date[1] - 1 %>
+        // end_date = original next evaluation date = - 1 month and + 5 days
         <% end_date = x.nnote_date.to_s.split("-").map(&:to_i)%>
-        <% end_date[2] = end_date[2] + 5 %>
-        <%= raw "{
-        title: '#{Client.find(x.client_id).firstname.to_s} #{Client.find(x.client_id).lastname.to_s}'," %>
-        <%= raw "start:" + ' new Date(' + x.nnote_date.to_s.split("-").map(&:to_i).join(", ") + ")," %>
+        <% end_date[2], end_date[1] = (end_date[2] + 5), (end_date[1] - 1) %>
+        // start_date_range = original next evaluation date (no modification, used to push to due_today)
+        <% start_date_range = x.nnote_date.to_s.split("-") %>
+
+        <%= raw "{" %>
+        <%= raw "title: '#{Client.find(x.client_id).firstname.to_s} #{Client.find(x.client_id).lastname.to_s}'," %>
+        <%= raw "start:" + ' new Date(' + start_date.join(", ") + ")," %>
       <%= raw "end:" + ' new Date(' + end_date.join(", ") + ")," %>
       <%= raw "className:" + "'red-bg' 
             },"%>
-            <% [start_date..end_date_for_rage].include?(Date.current.to_s.split("-").map(&:to_i).reduce(:+)) ? to_do_today << (Client.where(client_id: x.client_id).firstname.to_s + " " + Client.where(client_id: x.client_id).firstname.to_s) : 0 %>
+        // compares if today's date is between nnote_date -- nnote_date + 5 and pushes to to_do_today as hash
+        // ASSESSMENT DATE RANGE
+            <% Date.parse(Time.now.to_s).between?(Date.parse(start_date_range.join("-").to_s), Date.parse(start_date_range.join("-").to_s) +5) ? to_do_today["#{Client.where(id: x.client_id).first.id}"] = x.nnote_date.to_s : "" %>
+
       <% end %>
       <% end %>],
 
@@ -142,8 +214,30 @@
         }
       });
     });
-$(document).ready(function() {
-  top.$("#processingViewModal").iziModal('close')
-  top.$('#clientload').fadeIn();
+//UltraWidget
+  function widgetUsed(id, number, string) {
+  $("#" + id).prop('Counter',0).animate({
+  Counter: number
+  }, {
+  duration: 800,
+  easing: 'swing',
+  step: function (now) {
+  $("#" + id).text(now.toFixed(0));
+  }
+  });
+  };
+  // HASH CONTAINING CLIENT ID AND NEXT EVALUATION DATE DUE TODAY
+  var dueToday = {<% to_do_today.map do |key, val| %><%= raw key + ":" + "'" + val.to_s + "'," %><% end -%>}
+  // CHANGES COLOR OF CLIENTS ON TABLE THAT ARE DUE TODAY BY COMPARING WITH CLIENTS IN dueToday 
+  $.makeArray($('.clientsOnTable')).forEach(function callback(currentValue, index, array) {
+    if(dueToday[currentValue.id]) {
+      document.getElementById(currentValue.id.toString()).className = "danger";
+    }
 });
+
+ widgetUsed("dueTodayCnt", <%=to_do_today.count %>);
+$(document).ready(function() {
+  top.$("#processingViewModal").iziModal('close');
+  top.$('#clientload').fadeIn();
+})
   </script>

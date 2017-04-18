@@ -84,14 +84,13 @@
               <a class="archive-todo" href="#">Archive <span class="badge green-bg"></span></a>
             </div>
 
-            <form id="add_todo" method="post">
+              <%= form_for Goal.new, html: {id: "add_todo"} do |f| %>
               <div class="form-group add-todo">
                 <div class="input-group">
                   <div class="input-group-addon"><i class="fa fa-pencil green"></i></div>
-                  <input type="text" class="form-control name-of-todo" placeholder="Write Goals">
+                  <%= f.text_field :goals, id:"goalsInput", placeholder: "Write Goals", class: "form-control name-of-todo"%>
                 </div>
               </div>
-            </form>
 
             <div class="">
               <div class="panel-body todo">
@@ -100,15 +99,17 @@
               </div>
             </div>
             <div class="checkbox clear-todo">
+
               <input type="checkbox" id="clear"></input>
               <label for="clear">
                 Mark all as complete
               </label>
-            </div>
             <button id="clear-comp" class="btn btn-warning waves text-uppercase">Clear Completed</button>
-
+            <%= f.submit 'Save Goals', class: "actions btn btn-lg waves waves-button waves-effect waves-float", id: "newGoalBtn", style: "background: #374B89; color: #FFFFFF;"%>
+            <% end %>
 
           </div>
+</div>
 </div>
   <!--Scripts-->
   <%= javascript_include_tag 'jquery.min' %>
@@ -164,6 +165,7 @@
   <%= javascript_include_tag 'notificationFx' %>
   <!--AUTOCOMPLETE PLUGINS -->
   <%= javascript_include_tag 'standalone/selectize' %>
+  <%= javascript_include_tag 'auto-complete.min' %>
   <!-- MODAL EFFECTS -->
   <%= javascript_include_tag 'cssParser' %>
   <%= javascript_include_tag 'modalEffects' %>
@@ -345,6 +347,19 @@
         $('.active-todo span').text(active);
         $('.archive-todo span').text(archive);
       };
-
     });
+
+// AUTOCOMPLETE FOR GOALS
+new autoComplete({
+    selector: '#goalsInput',
+    minChars: 2,
+    source: function(term, suggest){
+        term = term.toLowerCase();
+        var choices = ['Will show a weight loss of 3 lbs/mo', 'Will show a weight loss of 5 lbs/mo', 'Will show a weight loss of 10 lbs/mo', 'Food preferences will be met', 'Will show increased appetite', 'Will show weight increased of 2 lbs/mo', 'Will show weight increase of 3 lbs/mo']
+        var matches = [];
+        for (i=0; i<choices.length; i++)
+            if (choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
+        suggest(matches);
+    }
+});
   </script>

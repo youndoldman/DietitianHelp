@@ -50,9 +50,7 @@
       ////////////
       //REMOVES ALERT GAP FROM DEVISE BETWEEN HEADER AND BODY
       ///////////
-      
-      $('.notice').remove();
-      $('.alert').remove();
+    
       //GETS CSS POSITION TO SITUATE PROGRESS BAR
       </script>
         <div id="landing" class="">
@@ -113,7 +111,7 @@
               <%= f.label :ht, "Height", style: "margin: 0px;", class: "" %>
             </div>
             <div  id="hiddensubmit" class="actions" style="display: none;">
-              <button class="progress-button" data-style="top-line" data-horizontal="" onclick="window.submit()">Add Client</button>
+              <button type="button" class="progress-button" data-style="top-line" data-horizontal="" onclick="window.submit()">Add Client</button>
             </div>
             <% end %>
           </div>
@@ -275,6 +273,7 @@
       </script>
       <script>
       NProgress.start()
+      var loadedClient;
       var food1;
       var lat;
       var lng;
@@ -384,7 +383,7 @@
       $('.gn-search').selectize({
       theme: 'links',
       maxItems: 1,
-      preload: false,
+      preload: 'focus',
       valueField: 'id',
       placeholder: 'Search/create',
       searchField: ['lastname', 'firstname'],
@@ -451,10 +450,26 @@
       },
       onChange() { 
         //ONCHANGE FROM SEARCH BAR TRIGGERS loadClient FUNCTION WITH ID FOUND IN ITEM SELECTED AS PARAMATER FOR THE FUNCTION...
+
+        if(isNaN(parseInt($('#select-beast-landsearch').val()))) {
+          return false
+        }
+        else {
         loadClient(parseInt($('#select-beast-landsearch').val()))
+      }
       },
       });
       function loadClient(clientId) {
+        if (clientId == undefined || clientId == null) {
+          toast("Load/create client first")
+          return
+        };
+        if (clientId === loadedClient) {
+          top.$('#landing').iziModal('fadeOut');
+          toast("Already Loaded")
+          return
+        }
+        top.$('.gn-search')[0].selectize.clearOptions()
         $('#clientload').fadeOut()
         NProgress.inc();
       $('#selectinput').attr('class', 'selectize-input items has-options not-full');
@@ -477,6 +492,8 @@
         });
         })
       NProgress.inc();
+      // LOADEDCLIENT VARIABLE TO COMPARE WITH NEW CLIENT BEING LOADED. IF SAME RETURN FUNCTION AND CLOSE MODAL
+      loadedClient = clientId
       }
       /////////////
       // SAVE NEW CLIENT IN DATABASE WHEN NOT FOUND BY SELECTIZE
@@ -698,6 +715,21 @@
           }
         });
       }
+      // MISCELLANEOUS TOAST
+      function toast(ttl, color="#ca7842") {
+         iziToast.show({
+                            color: color,
+                            icon: 'ico-check',
+                            titleColor: '#FFFFFF',
+                            iconColor: '#FFFFFF',
+                            title: ttl,
+                            position: 'topCenter',
+                            timeout: 2000,
+position: 'topCenter', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+                    progressBarColor: '#cabc42',
+                        });
+      }
+      // NOTIFICATION THAT SHOWS NAME OF CLIENT CREATED
       function clientCreated(ttl) {
          iziToast.show({
                             color: '#5F9EA0',
@@ -709,7 +741,6 @@
                             timeout: 2000,
                             progressBar: false,
                         });
-      setTimeout(processingView, 2000);
       }
         function processingView() {
           $("#processingViewModal").iziModal('open'); 
