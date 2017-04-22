@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'welcome/home'
+
   resources :goals
   resources :nextevaluationnotes
   resources :documents
