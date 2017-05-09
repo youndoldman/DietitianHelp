@@ -33,13 +33,14 @@ Training ground to learn web development. Not intended por professional use.
 	
 
 	-Create sample assessment based on information provided --> 
-		Fill as much information as possible on the "Gather tab" (Labs are still a Work In Progress (WIP), please ignore).
+		Fill as much information as possible on the "Gather" tab. (Labs are still a Work In Progress (WIP), please ignore).
 				
-				BUG #1 --> after filling info on "Gather" tab, hitting "Next" will not advance to the next tab.
+		BUG #1 --> after filling info on "Gather" tab, hitting "Next" will not advance to the next tab.
 				
-				Workaround
-					1. manually click on the "Assess" tab and hit "Run" to run the assessment
-					2. Go back to "Gather" and click "Next" so all the info filled in "Gather" can be saved on the database.
+		Workaround
+			1. manually click on the "Assess" tab and hit "Run" to run the assessment.
+				This will create a sample assessment and will indicate any potential diagnosis based on the information provided in the "Gather" tab.
+			2. Go back to "Gather" and click "Next" so all the info filled in "Gather" can be saved on the database.
 
 
 	-Add notes relevant to Medical Nutrition Therapy --> 
