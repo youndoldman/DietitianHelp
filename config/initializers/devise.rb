@@ -6,9 +6,8 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-config.secret_key = 'cb6dd9da18df76ce9a9614c35eb031d5e058a741dfc16ae9cd3a9fdc0251e69e496cf2bee45a3adfa86416c32c8b6eb1f972c51d49738775c316c90787b23fae'
-config.http_authenticatable_on_xhr = false
-config.navigational_formats = ["*/*", :html, :json]
+  # config.secret_key = '5c1dd9796e18dfea83dca11220c073e187731ecfc9c83d6431f0fcccb190f1bef5a63b266ab634d03e0de0bc7937bbadc0b69a2b5a2ffab320d0ad0b12923e16'
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
@@ -35,7 +34,7 @@ config.navigational_formats = ["*/*", :html, :json]
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [:username]
+  # config.authentication_keys = [:email]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -47,12 +46,12 @@ config.navigational_formats = ["*/*", :html, :json]
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [:username]
+  config.case_insensitive_keys = [:email]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [:username]
+  config.strip_whitespace_keys = [:email]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -109,7 +108,7 @@ config.navigational_formats = ["*/*", :html, :json]
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'f6bbad96dc9be01e6b07e1099254f4a0913731600a9d1766d7f69152d162d0c091b18a7d1444bf019c45d025dfb8ef0bcc5c3b3f061e061862ef75cd2cd3b4aa'
+  # config.pepper = '35e0304f6d48da8716cd99496bef09045668ec0170a39d67070b6b8ada0594d0b27852db9fdbad4342939d16cdd491512a62eddd3d14813d0feda561cce02a04'
 
   # Send a notification email when the user's password is changed
   # config.send_password_change_notification = false
@@ -174,7 +173,7 @@ config.navigational_formats = ["*/*", :html, :json]
   # config.lock_strategy = :failed_attempts
 
   # Defines which key will be used when locking and unlocking an account
-  # config.unlock_keys = [:email, :username]
+  # config.unlock_keys = [:email]
 
   # Defines which strategy will be used to unlock an account.
   # :email = Sends an unlock link to the user email
@@ -185,7 +184,7 @@ config.navigational_formats = ["*/*", :html, :json]
 
   # Number of authentication tries before locking an account if lock_strategy
   # is failed attempts.
-  config.maximum_attempts = 7
+  # config.maximum_attempts = 20
 
   # Time interval to unlock the account if :time is enabled as unlock_strategy.
   # config.unlock_in = 1.hour
@@ -243,7 +242,7 @@ config.navigational_formats = ["*/*", :html, :json]
   # config.navigational_formats = ['*/*', :html]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = Rails.env.test? ? :get : :delete
+  config.sign_out_via = :delete
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
