@@ -13,6 +13,9 @@ Training ground to learn web development. Not intended por professional use.
 -Rails 5.0.0
 
 
+-Devise
+
+
 -SQLite on Development, PostgreSQL on Production
 
 
