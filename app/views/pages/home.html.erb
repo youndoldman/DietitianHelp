@@ -1,751 +1,705 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
-  <head>
-    <title>DIETITIAN.HELP</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="msapplication-tap-highlight" content="no" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-      <%= stylesheet_link_tag 'ion.rangeSlider' %>
-      <%= stylesheet_link_tag 'selectize' %>
-      <%= stylesheet_link_tag 'jquery.dataTables' %>
-      <%= stylesheet_link_tag 'selectize' %>
-      <%= stylesheet_link_tag 'normalize' %>
-      <%= stylesheet_link_tag 'iziToast' %>
-      <%= stylesheet_link_tag 'iziModal' %>
-      <%= stylesheet_link_tag 'cs-skin-border' %>
-      <%= stylesheet_link_tag 'componentPBUTTON' %>
-      <%= stylesheet_link_tag 'normalizePBUTTON' %>
-      <%= stylesheet_link_tag 'fullcalendar' %>
-      <!--[if IE 8]><script src="js/es5.js"></script><![endif]-->
-      <%= favicon_link_tag 'favicon.ico' %>
-      <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-      <!--[if lt IE 9]>
-      <script src="html5shiv.min.js"></script>
-      <script src="respond.min.js"></script>
-      <![endif]-->
-    </head>
-    <body style="top: 2.5em;">
-      <div id="preloader" class="preloader table-wrapper animated fadeIn" style="background: white;">
-        <div class="table-row">
-          <div id='contente'>
-            <div id='visiblee'>
-              <p>
-              </p>
-              <ul>
-                <li >_Gather.</li>
-                <li >_Assess.</li>
-                <li>_Comply.</li>
-                <li>_Done.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <script>
-      ////////////
-      //REMOVES ALERT GAP FROM DEVISE BETWEEN HEADER AND BODY
-      ///////////
-    
-      //GETS CSS POSITION TO SITUATE PROGRESS BAR
-      </script>
-        <div id="landing" class="">
-<div style="visibility:visible;z-index:900;position: fixed;left: 450px;right: -900;top: 150px;bottom: -200;width: 500px;height: 300px;" class="table-wrapper">
-  <div class="bgblur">
-    <div class="table-cell text-center">
-      <div class="landingfront pagenotfound">
-        <div class="content-box box-shadow">
-          <div class="top">
-            <h1 class="" style="margin:0.67em 0 -0.3em;">Search/Add</h1>
-            <a class="fa-stack fa-2x icon-back">
-              <i class="fa fa-circle fa-stack-2x blue"></i>
-              <i class="fa fa-long-arrow-left fa-stack-1x fa-inverse"></i>
-            </a>
-          </div>
-          <form class="big-box">
-            <a class="fa-stack fa-2x icon-home" style="top:52%;z-index:1500" type="submit" name="commit" value="Create Client" data-disable-with="Create Client">
-              <i class="fa fa-circle fa-stack-2x yellow"></i>
-              <i id="landsearchicon" class="fa fa-search fa-stack-1x fa-inverse"></i>
-            </a>
-            <div class="form-group">
-              <input id="select-beast-landsearch" type="search" class="gn-search form-control material" placeholder="Search" autofocus>
-            </div>
-            <label for="select-beast-landsearch">Name</label>
-          </form>
-          <div id="hiddenform" class="hidden-form" style="display: none; margin-top: -30px">
-            <%= form_for (Client.new), html: {id: "newClient", class: "content-form form-inline", remote: true} do |f| %>
-            <div  class="field-container form-group" style="dispaly: none;" >
-              <%= f.text_field :firstname, id: "hiddenfirstname", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true%>
-              <%= f.label :firstName, "First Name", style: "margin: 0px;", class: "" %>
-            </div>
-            <div  class="field-container form-group" >
-              <%= f.text_field :lastname, id: "hiddenlastname", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
-              <%= f.label :lastname, "Last Name", style: "margin: 0px;", class: "" %>
-            </div>
-            <div  class="field-container form-group" >
-              <%= f.text_field :user_id, type: "integer", value: current_user.id, readonly: 'readonly', id: "hiddenprovider", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
-              <%= f.label :provider, "Provider ID", style: "margin: 0px;", class: "" %>
-            </div>
-            <div  class="field-container form-group" >
-              <%= f.text_field :dob, id: "hiddendob", type: "text", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;",required: true %>
-              <%= f.label :dob, "Date of Birth", style: "margin: 0px;", class: "" %>
-            </div>
-            <div  class="field-container form-group" >
-              <%= f.text_field :gender, id: "hiddengender", placeholder: "'Male', 'Female'",type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
-              <%= f.label :gender, "Gender", style: "margin: 0px;", class: "" %>
-            </div>
-            <div  class="field-container form-group" >
-              <%= f.text_field :allergies, id: "hiddenallergies", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
-              <%= f.label :Allergies, "Allergies", style: "margin: 0px;", class: "" %>
-            </div>
-            <div  class="field-container form-group" >
-              <%= f.text_field :cbw, id: "hiddencbw", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", placeholder: "lbs",required: true %>
-              <%= f.label :cbw, "CBW", style: "margin: 0px;", class: "" %>
-            </div>
-            <div  class="field-container form-group" >
-              <%= f.text_field :ht, id: "hiddenht", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", placeholder: "inches", required: true %>
-              <%= f.label :ht, "Height", style: "margin: 0px;", class: "" %>
-            </div>
-            <div  id="hiddensubmit" class="actions" style="display: none;">
-              <button type="button" class="progress-button" data-style="top-line" data-horizontal="" onclick="window.submit()">Add Client</button>
-            </div>
-            <% end %>
+    <%= stylesheet_link_tag 'iziToast' %>
+  <!-- PRELOADER/SLOGAN -->
+    <div id="preloader" class="preloader table-wrapper animated fadeIn" style="background: white;">
+      <div class="table-row">
+        <div id='contente'>
+          <div id='visiblee'>
+            <p>
+            </p>
+            <ul>
+              <li >_Gather.</li>
+              <li >_Assess.</li>
+              <li>_Comply.</li>
+              <li>_Done.</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-</div>
-<!-- DIV FOR "PROCESSING VIEW..."" LOADER -->
-      <div id="processingViewModal" class="iziModal" data-iziModal-group="alert" data-iziModal-loop></div>
-  <!-- PROGRESS BUTTONS -->
-  <%= javascript_include_tag 'modernizr.customPBUTTONS' %>
+    <!-- SEARCH/ADD MODAL -->
+    <div id="searchAddModal" class="">
+      <div style="visibility:visible;z-index:900;position: fixed;left: 450px;right: -900;top: 150px;bottom: -200;width: 500px;height: 300px;" class="table-wrapper">
+        <div class="bgblur">
+          <div class="table-cell text-center">
+            <div class="landingfront pagenotfound">
+              <div class="content-box box-shadow">
+                <div class="top">
+                  <h1 class="" style="margin:0.67em 0 -0.3em;">Search/Add</h1>
+                  <a class="fa-stack fa-2x icon-back">
+                    <i class="fa fa-circle fa-stack-2x blue"></i>
+                    <i class="fa fa-long-arrow-left fa-stack-1x fa-inverse"></i>
+                  </a>
+                </div>
+                <form class="big-box">
+                  <a class="fa-stack fa-2x icon-home" style="top:52%;z-index:1500" type="submit" name="commit" value="Create Client" data-disable-with="Create Client">
+                    <i class="fa fa-circle fa-stack-2x yellow"></i>
+                    <i id="landsearchicon" class="fa fa-search fa-stack-1x fa-inverse"></i>
+                  </a>
+                  <div class="form-group">
+                    <input id="select-beast-landsearch" type="search" class="gn-search form-control material" placeholder="Search" autofocus>
+                  </div>
+                  <label for="select-beast-landsearch">Name</label>
+                </form>
+                <div id="hiddenform" class="hidden-form" style="display: none; margin-top: -30px">
+                  <%= form_for (Client.new), html: {id: "newClient", class: "content-form form-inline", remote: true} do |f| %>
+                  <div  class="field-container form-group" style="dispaly: none;" >
+                    <%= f.text_field :firstname, id: "hiddenfirstname", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true%>
+                    <%= f.label :firstName, "First Name", style: "margin: 0px;", class: "" %>
+                  </div>
+                  <div  class="field-container form-group" >
+                    <%= f.text_field :lastname, id: "hiddenlastname", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+                    <%= f.label :lastname, "Last Name", style: "margin: 0px;", class: "" %>
+                  </div>
+                  <div  class="field-container form-group" >
+                    <%= f.text_field :user_id, type: "integer", value: current_user.id, readonly: 'readonly', id: "hiddenprovider", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+                    <%= f.label :provider, "Provider ID", style: "margin: 0px;", class: "" %>
+                  </div>
+                  <div  class="field-container form-group" >
+                    <%= f.text_field :dob, id: "hiddendob", type: "text", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;",required: true %>
+                    <%= f.label :dob, "Date of Birth", style: "margin: 0px;", class: "" %>
+                  </div>
+                  <div  class="field-container form-group" >
+                    <%= f.text_field :gender, id: "hiddengender", placeholder: "'Male', 'Female'",type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+                    <%= f.label :gender, "Gender", style: "margin: 0px;", class: "" %>
+                  </div>
+                  <div  class="field-container form-group" >
+                    <%= f.text_field :allergies, id: "hiddenallergies", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+                    <%= f.label :Allergies, "Allergies", style: "margin: 0px;", class: "" %>
+                  </div>
+                  <div  class="field-container form-group" >
+                    <%= f.text_field :cbw, id: "hiddencbw", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", placeholder: "lbs",required: true %>
+                    <%= f.label :cbw, "CBW", style: "margin: 0px;", class: "" %>
+                  </div>
+                  <div  class="field-container form-group" >
+                    <%= f.text_field :ht, id: "hiddenht", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", placeholder: "inches", required: true %>
+                    <%= f.label :ht, "Height", style: "margin: 0px;", class: "" %>
+                  </div>
+                  <div  id="hiddensubmit" class="actions" style="display: none;">
+                    <button type="button" class="actions btn btn-lg waves waves-button waves-effect waves-float" data-style="top-line" data-horizontal="" onclick="window.submit()">Add Client</button>
+                  </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- INIT MODAL FOR "PROCESSING VIEW..."" LOADER -->
+    <div id="processingViewModal" class="iziModal" data-iziModal-group="alert" data-iziModal-loop></div>
+    <!-- BEGIN CONTENT -->
+    <div id="mainwrapper"class="table-wrapper">
+      <!-- HEADER LOADS AS PARTIAL -->
+      <div><%= render partial: 'pages/header' %></div>
+      <!-- IFRAME WHERE ALL ACTIONS FROM HEADER TAKE PLACE  -->
+      <iframe aria-hidden="true" id="clientload" visibility: 'visible' src="/calendar" frameborder="0" height="900px" width="100%" scrolling="no" ></iframe>
+    </div>
+  <!-- END CONTENT -->
+  <!--Scripts-->
+  <%= javascript_include_tag 'jquery.min' %>
+  <%= javascript_include_tag 'jquery-ui.min' %>
+  <%= javascript_include_tag 'jquery.bootstrap.wizard' %>
+  <%= javascript_include_tag 'jquery.flot' %>
+  <%= javascript_include_tag 'jquery.flot.resize' %>
+  <%= javascript_include_tag 'bootstrap.min' %>
+  <%= javascript_include_tag 'metisMenu.min' %>
+  <%= javascript_include_tag 'waves.min' %>
+  <%= javascript_include_tag 'moment.min' %>
+  <%= javascript_include_tag 'jquery.mCustomScrollbar' %>
+  <%= javascript_include_tag 'cta.min' %>
+  <%= javascript_include_tag 'typed' %>
+  <%= javascript_include_tag 'ion.rangeSlider' %>  
+  <!-- AJAXFORM-->
+  <%= javascript_include_tag 'jquery.form.min' %>
+  <!-- MASKED INPUT TO MATCH DATE, PHONE NUMBERS, ETC...-->
+  <%= javascript_include_tag 'jquery.maskedinput' %>
+  <!--Menu-->
+  <%= javascript_include_tag 'classie' %>
+  <%= javascript_include_tag 'gnmenu' %>
+  <!--Selects-->
+  <%= javascript_include_tag 'selectFx' %>
+  <!--Flot-->
+  <%= javascript_include_tag 'jquery.flot' %>
+  <%= javascript_include_tag 'jquery.flot.resize' %>
+  <%= javascript_include_tag 'curvedLines' %>
+  <%= javascript_include_tag 'jquery.flot.orderBars' %>
+  <!--Custom Flot Charts-->
+  <%= javascript_include_tag 'Chart' %>
+  <!--C3.js-->
+  <%= javascript_include_tag 'd3.min' %>
+  <%= javascript_include_tag 'c3.min' %>
+  <!--EasyPieChart-->
+  <%= javascript_include_tag 'jquery.easypiechart.min' %>
+  <!--Zabuto Calendar-->
+  <%= javascript_include_tag 'zabuto_calendar.min' %>
+  <!--Simple Weather-->
+  <%= javascript_include_tag 'jquery.simpleWeather.min' %>
+  <!-- DATA TABLES-->
+  <%= javascript_include_tag 'jquery.dataTables' %>
+  <%= javascript_include_tag 'dataTables.responsive' %>
+  <%= javascript_include_tag 'dataTables.tableTools' %>
+  <!--Custom Scriptssasa-->
+  <%= javascript_include_tag 'common' %>
+  <%= javascript_include_tag 'pikaday' %>
+  <%= javascript_include_tag 'pikaday.jquery' %>
+  <%= javascript_include_tag 'example' %>
+  <!--Notification-->
+  <%= javascript_include_tag 'jsface' %>
+  <%= javascript_include_tag 'snap.svg-min' %>
+  <%= javascript_include_tag 'sweetalert.min' %>
+  <%= javascript_include_tag 'smoke.min' %>
+  <%= javascript_include_tag 'notificationFx' %>
+  <!--AUTOCOMPLETE -->
+  <%= javascript_include_tag 'standalone/selectize' %>
+  <!-- MODAL EFFECTS -->
+  <%= javascript_include_tag 'cssParser' %>
+  <%= javascript_include_tag 'modalEffects' %>
+  <!-- NOTIFICATIONS IZI-->
+  <%= javascript_include_tag 'iziToast' %>
+  <%= javascript_include_tag 'iziModal' %>
+  <!-- BLUR BACKGROUND COMMENTED OUT MAY 4 8:30AM
+  javascript_include_tag jquery.foggy.min -->
+  <!-- PROGRESS BAR -->
+  <%= javascript_include_tag 'nprogress' %>
+  <!-- FULL CALENDAR JS -->
+  <%= javascript_include_tag 'fullcalendar' %>
+  <!-- PROGRESS BUTTONS || CONSIDER DELETING -->
+  <%= javascript_include_tag 'modernizr.customPBUTTONS' %> 
   <%= javascript_include_tag 'classiePBUTTONS' %>
-  <%= javascript_include_tag 'progressButton' %>
+  <!-- javascript_include_tag 'progressButton' -->
   <!-- NOTES INPUT FLIED-->
   <%= javascript_include_tag 'summernote' %>
   <!-- MASKED INPUT TO MATCH DATE, PHONE NUMBERS, ETC...-->
-    <%= javascript_include_tag 'jquery.maskedinput' %> 
+  <%= javascript_include_tag 'datedropper' %>
   <script>
-  [].slice.call( document.querySelectorAll( 'button.progress-button' ) ).forEach( function( bttn ) {
-  new ProgressButton( bttn, {
-  callback : function( instance ) {
-  var progress = 0,
-  interval = setInterval( function() {
-  progress = Math.min( progress + Math.random() * 0.1, 1 );
-  instance._setProgress( progress );
-  if( progress === 1 ) {
-  instance._stop(1);
-  clearInterval( interval );
+      // INIT PROGRESS BUTTON
+    [].slice.call( document.querySelectorAll( 'button.progress-button' ) ).forEach( function( bttn ) {
+    new ProgressButton( bttn, {
+    callback : function( instance ) {
+    var progress = 0,
+    interval = setInterval( function() {
+    progress = Math.min( progress + Math.random() * 0.1, 1 );
+    instance._setProgress( progress );
+    if( progress === 1 ) {
+    instance._stop(1);
+    clearInterval( interval );
+    }
+    });
+    }
+    } );
+    } );
+  // PRESSING THE RESET BUTTON ON ADIME TAB APPENDS defaultAssessment TO DIV
+  var defaultAssessment = '<p id="note-editor-2" class="w-amount note-air-editor note-editable panel-body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Click to edit..." contenteditable="true"> <span id="agespan" class="w-amount">- -</span>y/o <span>Resident</span> currently on <span id="cdietspan" class="w-amount">- - </span> Diet to manage Dx of <span id="dxspan" ,="" class="w-amount">- -</span>. Average intake: <span id="intakefromspan" ,="" class="w-amount">- -</span> <span id="intaketospan" ,="" class="w-amount"></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class="w-amount">- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow" class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN. </p><div class="tooltip fade top in" role="tooltip" id="tooltip144344" style="top: 193.406px; left: 450.25px; display: block;"><div class="tooltip-arrow" style="left: 50%;"></div><div class="tooltip-inner">Click to edit...</div></div>';
+  </script>
+  <script>
+  NProgress.start()
+  var loadedClient;
+  var food1;
+  var lat;
+  var lng;
+  var d1;
+  var parsed;
+  var ager;
+  var date = new Date();
+  function getAge(d1, d2){
+  var d1 = document.getElementById('client_dobspan').innerHTML;
+  var d2 = new Date();
+  var diff = d2.getTime() - parseDate($('#client_dobspan').text()).getTime();
+  ager = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25
+  ));$(function(){
+  $("#agespan").typed({
+  strings: [ager.toString()],
+  typeSpeed: 50
+  });
+  });
+  };
+  // parse a date in yyyy-mm-dd format
+  function parseDate(input) {
+  var parts = input.match(/(\d+)/g);
+  // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+  return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
+  }
+  // ///////////////////////
+  // FUNCTIONS FROM ALPHA VERSION GIVES LOCATION OF "CRAVING" NEAR YOU
+  // //////////////////////
+  // function loc() {
+  // var base = 'http://maps.googleapis.com/maps/api/geocode/json?address=';
+  // var food = document.getElementById("location").value;
+  // var url = base + food;
+  // $.getJSON(url, function(data) {
+  // lat = data.results[0].geometry.location.lat;
+  // lng = data.results[0].geometry.location.lng;
+  // console.log(data)
+  // });
+  // };
+  // function zomato() {
+  // document.getElementById("onefood").innerHTML = ''
+  // var base = 'https://developers.zomato.com/api/v2.1/search?apikey=8d0401fb02d07321de28693fa2a18355&'
+  // var food = 'q=' + document.getElementById("food").value;
+  // var radius = document.getElementById("radius").value;
+  // var location = '&lat=' + lat + '&lon=' + lng;
+  // var url = base + food + location + radius;
+  // $.getJSON(url, function(data)
+  // {
+  // for(var i = 0; i < data.restaurants.length; i++) {
+  // var obj = data.restaurants[i].restaurant;
+  // document.getElementById("onefood").innerHTML += '<span class="text-uppercase w-name emptygray">' + i  + ' ' + obj.name + '</span><br>';
+  
+  // }
+  
+  // });
+  // };
+  // function run() {
+  // document.getElementById("onefood1").innerHTML = ''
+  // var base = 'http://api.nal.usda.gov/ndb/search/?format=json&'
+  // var food = 'q=' + document.getElementById("food").value;
+  // var url = base + food + '&sort=r&ds=Standard Reference&max=8&offset=0&api_key=Dd2cDdK3zCP6teHFkZk06XRTq4bgC1kMo3NPnLxm'
+  // $.getJSON(url, function(data) {
+  // //data is the JSON string\
+  // for(var i = 0; i < data.list.item.length; i++) {
+  // var obj = data.list.item[i];
+  // document.getElementById("onefood1").innerHTML += '<span class="text-uppercase w-name emptygray">' + i  + ' ' + obj.name + '</span><br>';
+  
+  // function run1() {
+  // document.getElementById("onefood1").innerHTML = ''
+  // var base1 = 'http://api.nal.usda.gov/ndb/reports/?ndbno='
+  // var food1 = obj.ndbno
+  // var url1 = base1 + food1 + '&type=b&format=json&api_key=Dd2cDdK3zCP6teHFkZk06XRTq4bgC1kMo3NPnLxm'
+  // $.getJSON(url1, function(data1) {
+  // console.log(data1.report.food.nutrients[1].value)
+  // document.getElementById("onefood1").innerHTML += data1.report.food.nutrients[1].value + '<br>'
+  // });
+  // };
+  // }
+  // });
+  // };
+   function adime() {
+  $('#assessadime').html('yeah')
+  $('#dxadime').html('yeah')
+  $('#intadime').html('yeah')
+  $('#monevadime').html('yeah')
+  } 
+  </script>
+
+  <script>
+  var selectedClient;
+  var clientId;
+  function assign(param) {
+  clientId = param
+  }
+  ////////
+  //DATABASE TO JSON
+  ////////
+  var jsona = $.getJSON('/clients', function(data) {  return JSON.stringify(data)});
+  //data is the JSON string
+  var newClientName;
+  //////////////////////////////////////////////////
+  //AUTOCOMPLETE FROM CLIENTS DATABASE BEGINS
+  /////////////////////////////////////////////////
+  $("#searchAddModal").iziModal({
+  transitionIn: '',
+  transitionOut: '',
+  });
+  $("#searchAddModal").iziModal('open');
+  $('.gn-search').selectize({
+  theme: 'links',
+  maxItems: 1,
+  preload: 'focus',
+  valueField: 'id',
+  placeholder: 'Search/create',
+  searchField: ['lastname', 'firstname'],
+  options: [],
+  create: true,
+  allowEmptyOption: false,
+  updatePlaceholder: true,
+  openOnFocus: true,
+  render: {
+  option: function(data, escape) {
+  if(data.firstname == undefined) {
+  newClientName = data.text
+  return '<div class="item">' + escape(data.text) +'</div>';
+  }
+  else {
+  return '<div class="item">' + escape(data.firstname) + ' ' + escape(data.lastname) + ' ' +
+  '</div>';
+  }
+  },
+  item: function(data, escape) {
+  if(data.firstname == undefined) {
+  newClientName = data.text
+  var newClientNameArr = newClientName.split(" ");
+  $('#hiddenfirstname').val(newClientNameArr[0]);
+  $('#hiddenlastname').val(newClientNameArr[1]);
+  $('#hiddenprovider').val('<%=current_user.id%>');
+  $( "#hiddenform" ).show( "fast", function() {
+  });
+  $( "#hiddensubmit" ).show( "fast");
+  return '<div class="item">' + escape(data.text) +'</div>';
+  }
+  else {
+  return '<div class="item">' + escape(data.firstname) + ' ' + escape(data.lastname) + ' ' +
+  '</div>';
+  }
+  }
+  },
+  load: function(query, callback) {
+  if (!query.length) return callback();
+  $.ajax({
+  url: '/clients',
+  type: 'GET',
+  dataType: 'json',
+  data: {
+  q: query,
+  },
+  error: function() {
+  callback();
+  },
+  success: function(res) {
+  callback(res);
+  $('#select-beast-landsearch-selectized').keyup(function() {
+  if($('#landsearch-dropdown:first-child div').attr('class') == 'create') {
+  $('#landsearchicon').attr('class','fa fa-search fa-stack-1x fa-inverse');
+  }
+  if($('#landsearch-dropdown:first-child div').attr('class') == 'create active') {
+  $('#landsearchicon').attr('class','fa fa-stack-1x fa-inverse fa-user-plus');
+  }
+  
+  });
+  
+  },
+  });
+  },
+  onChange() {
+  //ONCHANGE FROM SEARCH BAR TRIGGERS loadClient FUNCTION WITH ID FOUND IN ITEM SELECTED AS PARAMATER FOR THE FUNCTION...
+  if(isNaN(parseInt($('#select-beast-landsearch').val()))) {
+    // IF ITEM IN SEARCH BAR IS INVALID (NaN) EXIT FUNCTION
+  return false
+  }
+  else {
+    // ELSE loadClient(ValueOfItemInSearchBar aka Client ID)
+  loadClient(parseInt($('#select-beast-landsearch').val()))
+  }
+  },
+  });
+  function loadClient(clientId) {
+  assign(clientId);
+  // VALIDATES clientId 
+  // IF INVALID
+  if (clientId == undefined || clientId == null) {
+  toast("Load/create client first")
+  return
+  };
+  // IF ALREADY LOADED
+  if (clientId === loadedClient) {
+  top.$('#landing').iziModal('fadeOut');
+  toast("Already Loaded")
+  return
+  }
+  // clearOptions FORCES selectize TO RELOAD CLIENTS EVERYTIME FUNCTION IS CALLED ---- NEEDED TO REFLECT ANY CHANGES TO THE DATABASE DURING THIS USER SESSION
+  top.$('.gn-search')[0].selectize.clearOptions()
+  // FADE OUT DURING LOADING FOR SMOOTH VISUAL TRANSITION
+  $('#clientload').fadeOut()
+  NProgress.inc();
+  $('#selectinput').attr('class', 'selectize-input items has-options not-full');
+  //////////
+  // PLOT DATA IF CLIENT EXIST
+  /////////
+  if(jQuery.isNumeric(clientId)) {
+  processingView();
+  //MAKES THE CALL TO DATABASE BY ATTEMPTING TO LOAD URL "clients/<clientId> INTO IFRAME... CONTROLLER CHECKS IF USERNAME HAS ACCESS TO CLIENT THEN RESPONDS WITH CLIENT VIEW.
+  $('#clientload').attr("src", "clients/" + clientId);
+  };
+  //ADDS EVENT AFTER CLIENT LOAD TO MAKE LINK ON HEADER WORK WITH LOADED CLIENT
+  $('#assessmentTool').click(function(){
+  $.ajax({
+  url: "clients/" + clientId,
+  type: 'GET',
+  success: function(data){ $('#clientload').attr("src", "clients/" + clientId);
+  }
+  });
+  })
+  NProgress.inc();
+  // LOADEDCLIENT VARIABLE TO COMPARE WITH NEW CLIENT BEING LOADED. IF SAME RETURN FUNCTION AND CLOSE MODAL
+  loadedClient = clientId
+  }
+  //////////////////////////////////////////////////
+  //AUTOCOMPLETE FROM CLIENTS DATABASE END
+  /////////////////////////////////////////////////
+  //////////////////////////////////////////////////
+  //AUTOCOMPLETE FORM ELEMENTS, PREPOPULATED OPTIONS FOR Dx's BEGINS
+  /////////////////////////////////////////////////
+  $('#client_dx').selectize({
+  maxItems: null,
+  valueField: 'abbrev',
+  labelField: 'abbrev',
+  searchField: ['commonName', 'medicalName', 'abbrev'],
+  preload: false,
+  options: [
+  {id: 1, commonName: 'high blood pressure', medicalName: 'Hypertension', abbrev: 'HTN', url: 'ce'},
+  {id: 2, commonName: 'Diabetes Type 1', medicalName: 'Diabetes Mellitus', abbrev: 'DM1', url: 'ce'},
+  {id: 3, commonName: 'Hypothyroidism', medicalName: 'Hypothyroidism', abbrev: 'HypoThy', url: 'ce'},
+  {id: 4, commonName: 'Chronic Kidney Disease', medicalName: 'Chronic Kidney Disease', abbrev: 'CKD', url: 'ce'},
+  ],
+  create: false
+  });
+  // jquery transit is used to handle the animation
+  $('#client_dx-selectized').focusin(function() {
+  $( "#dxlabel" ).animate({
+  opacity: 1,
+  top:'-17px',
+  left: '-14px',
+  fontsize: '14px',
+  color: '#999999',
+  });
+  //setTimeout needed for Chrome, for some reson there is no animation from left to right, the pen is immediately present. Slight delay to adding the animation class fixes it
+  
+  });
+  
+  $('#client_dx-selectized').blur(function() {
+  if($('#client_dx').val() == "") {
+  
+  $('#dxlabel').animate({
+  position: 'absolute',
+  pointerevents:'none',
+  top: '1px',
+  left:'-9px',
+  fontsize: '16px',
+  opacity:1,
+  backgroundcolor: 'rgba(0, 0, 0, 0)',
+  padding: '23px 9px',
+  webkittransition: '0.15s ease-in-out',
+  transition: '0.15s ease-in-out'}); }
+  else return
+  });
+  //////////////////////////////////////////////////
+  //AUTOCOMPLETE FORM ELEMENTS, PREPOPULATED OPTIONS ENDS
+  /////////////////////////////////////////////////
+  </script>
+  <script>
+  ////////////////////
+  // DATEPICKERS 'PICKADAY'
+  ///////////////////
+  $('.inin').prop('required',true);
+  $('#client_date0').pikaday({
+  field: document.getElementById('date0'),
+  format: 'M/D/YYYY',
+  defaultDate: '1/23/2014',
+  onStart: function ()
+  {
+  var date = new Date();
+  this.setDate( date.getDate(), date.getMonth() + 1, date.getFullYear())
+  },
+  });
+  window.onload = function() {
+  $('.selectize-dropdown').css('zIndex', '9999');
+  };
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+  for (i = 0; i < acc.length; i++) {
+  acc[i].onclick = function(){
+  this.classList.toggle("active");
+  this.nextElementSibling.classList.toggle("show");
+  }
+  }
+  $(function () {
+  $(".todo ul").sortable();
+  $("#add_todo").on('submit', function (e) {
+  e.preventDefault();
+  var $toDo = $(this).find('.name-of-todo'),
+  toDo_name = $toDo.val(),
+  border = ['list-success', 'list-primary', 'list-warning', 'list-danger', 'list-info'],
+  randomClass = border[Math.floor(Math.random() * border.length)];
+  if (toDo_name.length >= 3) {
+  var newid = "new" + "" + Math.random().toString(36).substring(11);
+  // Create Event Entry
+  $(".todo ul").append(
+  '<li id="' + 'item-' + newid + '" class="list-group-item  ' + randomClass + ' list-item"><div class="checkbox"><input type="checkbox" id="' + newid + '" /><label for="' + newid + '">' + toDo_name + '</label></div><div class="pull-right action-btns"><a class="archive"><span class="fa fa-archive"></span></a><a class="trash"><span class="fa fa-close"></span></a></div></li>'
+  );
+  count();
+  var eventObject = {
+  title: $.trim($("#" + newid).text()),
+  className: $("#" + newid).attr("data-bg"), // use the element's text as the event title
+  stick: true
+  };
+  // store the Event Object in the DOM element so we can get to it later
+  $("#" + newid).data('eventObject', eventObject);
+  // Reset input
+  $toDo.val('').focus();
+  } else {
+  $toDo.focus();
+  }
+  });
+  //Checking items
+  $(document).on('mouseover', '.list-group .checkbox', function () {
+  $('.list-group input:checkbox').each(function () {
+  $(this).change(function () {
+  if ($(this).is(":checked")) {
+  $(this).closest(".list-group-item").addClass("checked-todo").removeClass("list-item");
+  } else {
+  $(this).closest(".list-group-item").removeClass("checked-todo");
+  }
+  count();
+  });
+  });
+  });
+  //Check archive items
+  $(document).on('click', '.action-btns .archive', function (e) {
+  $(this).closest(".list-group-item").removeClass("checked-todo list-item").addClass("archive-item").hide();
+  e.preventDefault();
+  count();
+  });
+  count();
+  $(".list-group-item").addClass("list-item");
+  $('.list-group li').each(function () {
+  if ($(this).hasClass("checked-todo")) {
+  $(this).removeClass("list-item");
+  };
+  });
+  //Show all items
+  $('.all-todo').click(function (e) {
+  $('.archive-item').hide();
+  $('.checked-todo, .list-item').show();
+  e.preventDefault();
+  });
+  //Show only active items
+  $('.active-todo').click(function (e) {
+  $('.checked-todo').hide();
+  $('.archive-item').hide();
+  $('.list-item').show();
+  e.preventDefault();
+  });
+  //Show only completed items
+  $('.complete-todo').click(function (e) {
+  $('.list-item').hide();
+  $('.archive-item').hide();
+  $('.checked-todo').show();
+  e.preventDefault();
+  });
+  //Show only archive items
+  $('.archive-todo').click(function (e) {
+  $('.list-item').hide();
+  $('.checked-todo').hide();
+  $('.archive-item').show();
+  e.preventDefault();
+  });
+  //Mark all as complete
+  $('#clear').change(function () {
+  if ($(this).is(":checked")) {
+  $(".list-group-item").addClass("checked-todo").removeClass("list-item");
+  $("input:checkbox").prop('checked', $(this).prop("checked"));
+  } else {
+  $(".list-group-item").removeClass("checked-todo").addClass("list-item");
+  $("input:checkbox").prop('checked', $(this).prop("checked"));
+  }
+  count();
+  });
+  //Remove all completed items
+  $('#clear-comp').click(function () {
+  var clearedComp = $('.checked-todo').remove();
+  count();
+  });
+  //Remove one completed item
+  $(document).on('click', '.trash', function (e) {
+  var clearedCompItem = $(this).closest(".list-group-item").remove();
+  e.preventDefault();
+  count();
+  });
+  //Count items
+  function count() {
+  var checked = $('.checked-todo').length,
+  archive = $('.archive-item').length,
+  all = $('.list-group-item').length - archive,
+  active = all - checked;
+  $('.complete-todo span').text(checked);
+  $('.active-todo span').text(active);
+  $('.archive-todo span').text(archive);
+  };
+  });
+  </script>
+  <script>
+  // var $parentElement= document <-- COMMENTED OUT MAY 3 6:01AM... ERASE IF NO IMPACT ON APP
+  //Waves effect on buttons
+  Waves.attach('.waves', ['waves-float']);
+  Waves.init();
+  function submit() {
+  var x = $('#newClient');
+  x.ajaxSubmit(options = {
+  success: function() {
+  $('#select-beast-landsearch:first-child').val(jsona.responseJSON.length + 1479)
   }
   });
   }
-  } );
-  } );
+  // MISCELLANEOUS TOAST
+  function toast(ttl, color="#ca7842") {
+  iziToast.show({
+  color: color,
+  icon: 'ico-check',
+  titleColor: '#FFFFFF',
+  iconColor: '#FFFFFF',
+  title: ttl,
+  position: 'topCenter',
+  timeout: 2000,
+  position: 'topCenter', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+  progressBarColor: '#cabc42',
+  });
+  }
+  // NOTIFICATION THAT SHOWS NAME OF CLIENT CREATED
+  function clientCreated(ttl) {
+  iziToast.show({
+  color: '#5F9EA0',
+  icon: 'ico-check',
+  titleColor: '#FFFFFF',
+  iconColor: '#FFFFFF',
+  title: ttl,
+  position: 'topCenter',
+  timeout: 2000,
+  progressBar: false,
+  });
+  }
+    // INIT PROCESSING VIEW JS
+  $("#processingViewModal").iziModal({
+  title: 'Processing View...',
+  icon: 'ico-check',
+  iconColor: '#00af66',
+  headerColor: '#374B89',
+  autoOpen: 0, // Boolean, Number
+  attached: 'center', // bottom, top
+  width: 300,
+  timeoutProgressbar: true,
+  transitionIn: 'fadeIn',
+  overlay: true,
+  pauseOnHover: true,
+  timeoutProgressbarColor: '#CABC42',
+  });
+
+  function processingView() {
+  $("#processingViewModal").iziModal('open');
+  }
+
+  var currentUser = <%= current_user.id %>
+
+    // DOCUMENT READY
+  $(document).ready(function(){
+  $("#hiddendob").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
+  top.NProgress.done()
+  $(document).ajaxStart(function(){
+  $("#wait").css("display", "block");
+  });
+  $(document).ajaxComplete(function(){
+  $("#wait").css("display", "none");
+  });
+  $("button").click(function(){
+  $("#txt").load("demo_ajax_load.asp");
+  });
+  $('#select-beast-head-selectized').css({opacity: 1, position: 'absolute', left: 0, width: '100%', paddingTop: '10px', paddingLeft: '9px'});
+  $('#select-beast-modal-selectized').css({opacity: 1, position: 'absolute', left: 0, width: '100%', paddingTop: '10px', paddingLeft: '9px'});
+  $('#select-beast-landsearch-selectized').css({opacity: 1, position: 'absolute', left: 0, width: '100%', paddingTop: '10px', paddingLeft: '9px'});
+  $('.selectize-dropdown-content').attr('id', 'landsearch-dropdown');
+  
+  top.$("#processingViewModal").iziModal('close')
+  $('#assessmentTool').on('click', function() {
+  window.$("#processingViewModal").iziModal('open');
+  });
+  });
   </script>
-      <div id="mainwrapper"class="table-wrapper">
-        <div><%= render partial: 'pages/header' %></div>
-        <iframe aria-hidden="true" id="clientload" visibility: 'visible' src="/calendar" frameborder="0" height="900px" width="100%" scrolling="no" ></iframe>
-      </div>
-      <!--Scripts-->
-      <%= javascript_include_tag 'jquery.min' %>
-      <%= javascript_include_tag 'jquery-ui.min' %>
-      <%= javascript_include_tag 'jquery.bootstrap.wizard' %>
-      <%= javascript_include_tag 'jquery.flot' %>
-      <%= javascript_include_tag 'jquery.flot.resize' %>
-      <%= javascript_include_tag 'bootstrap.min' %>
-      <%= javascript_include_tag 'metisMenu.min' %>
-      <%= javascript_include_tag 'waves.min' %>
-      <%= javascript_include_tag 'moment.min' %>
-      <%= javascript_include_tag 'jquery.mCustomScrollbar' %>
-      <%= javascript_include_tag 'cta.min' %>
-      <%= javascript_include_tag 'typed' %>
-      <%= javascript_include_tag 'ion.rangeSlider' %>
-      <%= javascript_include_tag 'iziModal' %>
-      
-      <!-- AJAXFORM-->
-      <%= javascript_include_tag 'jquery.form.min' %>
-      <!-- MASKED INPUT TO MATCH DATE, PHONE NUMBERS, ETC...-->
-    <%= javascript_include_tag 'jquery.maskedinput' %> 
-      <!--Menu-->
-      <%= javascript_include_tag 'classie' %>
-      <%= javascript_include_tag 'gnmenu' %>
-      <!--Selects-->
-      <%= javascript_include_tag 'selectFx' %>
-      <!--Flot-->
-      <%= javascript_include_tag 'jquery.flot' %>
-      <%= javascript_include_tag 'jquery.flot.resize' %>
-      <%= javascript_include_tag 'curvedLines' %>
-      <%= javascript_include_tag 'jquery.flot.orderBars' %>
-      <!--Custom Flot Charts-->
-      <%= javascript_include_tag 'Chart' %>
-      <!--C3.js-->
-      <%= javascript_include_tag 'd3.min' %>
-      <%= javascript_include_tag 'c3.min' %>
-      <!--EasyPieChart-->
-      <%= javascript_include_tag 'jquery.easypiechart.min' %>
-      <!--Zabuto Calendar-->
-      <%= javascript_include_tag 'zabuto_calendar.min' %>
-      <!--Simple Weather-->
-      <%= javascript_include_tag 'jquery.simpleWeather.min' %>
-      <!-- DATA TABLES-->
-      <%= javascript_include_tag 'jquery.dataTables' %>
-      <%= javascript_include_tag 'dataTables.responsive' %>
-      <%= javascript_include_tag 'dataTables.tableTools' %>
-      <!--Custom Scriptssasa-->
-      <%= javascript_include_tag 'common' %>
-      <%= javascript_include_tag 'pikaday' %>
-      <%= javascript_include_tag 'pikaday.jquery' %>
-      <%= javascript_include_tag 'example' %>
-      <!--Notification-->
-      <%= javascript_include_tag 'jsface' %>
-      <%= javascript_include_tag 'snap.svg-min' %>
-      <%= javascript_include_tag 'sweetalert.min' %>
-      <%= javascript_include_tag 'smoke.min' %>
-      <%= javascript_include_tag 'notificationFx' %>
-      <!--AUTOCOMPLETE PLUGINS -->
-      <%= javascript_include_tag 'standalone/selectize' %>
-      <!-- MODAL EFFECTS -->
-      <%= javascript_include_tag 'cssParser' %>
-      <%= javascript_include_tag 'modalEffects' %>
-      <!-- NOTIFICATIONS LAST-->
-      <%= javascript_include_tag 'iziToast' %>
-
-      <!-- BLUR BACKGROUND-->
-      <%= javascript_include_tag 'jquery.foggy.min' %>
-      <!-- PROGRESS BAR -->
-      <%= javascript_include_tag 'nprogress' %>
-      <!-- FULL CALENDAR JS -->
-      <%= javascript_include_tag 'fullcalendar' %>
-      <!-- DO NOT TOUCH WITHOUT REVIEWING -->
-      <!-- Equation can be simplified into two variables -->
-      <script>
-        var defaultAssessment = '<p id="note-editor-2" class="w-amount note-air-editor note-editable panel-body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Click to edit..." contenteditable="true"> <span id="agespan" class="w-amount">- -</span>y/o <span>Resident</span> currently on <span id="cdietspan" class="w-amount">- - </span> Diet to manage Dx of <span id="dxspan" ,="" class="w-amount">- -</span>. Average intake: <span id="intakefromspan" ,="" class="w-amount">- -</span> <span id="intaketospan" ,="" class="w-amount"></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class="w-amount">- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow" class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN. </p><div class="tooltip fade top in" role="tooltip" id="tooltip144344" style="top: 193.406px; left: 450.25px; display: block;"><div class="tooltip-arrow" style="left: 50%;"></div><div class="tooltip-inner">Click to edit...</div></div>';
-      //DOCUMENT READY
-      $(document).ready(function(){
-        $("#hiddendob").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
-        top.NProgress.done()
-      $(document).ajaxStart(function(){
-      $("#wait").css("display", "block");
-      });
-      $(document).ajaxComplete(function(){
-      $("#wait").css("display", "none");
-      });
-      $("button").click(function(){
-      $("#txt").load("demo_ajax_load.asp");
-      });
-      $('#select-beast-head-selectized').css({opacity: 1, position: 'absolute', left: 0, width: '100%', paddingTop: '10px', paddingLeft: '9px'});
-      $('#select-beast-modal-selectized').css({opacity: 1, position: 'absolute', left: 0, width: '100%', paddingTop: '10px', paddingLeft: '9px'});
-      $('#select-beast-landsearch-selectized').css({opacity: 1, position: 'absolute', left: 0, width: '100%', paddingTop: '10px', paddingLeft: '9px'});
-      $('.selectize-dropdown-content').attr('id', 'landsearch-dropdown');
-      if(clientId == null) {
-      $('#landing').css('visibility', 'visible');
-      }
-      if(clientId > 0) {
-      $(".iziModal-overlay").css('visibility', 'hidden')
-      $('#landing').css('visibility', 'hidden');
-      }
-        $("#processingViewModal").iziModal({
-    title: 'Processing View...',
-    icon: 'ico-check',
-    iconColor: '#00af66',
-    headerColor: '#374B89',
-    autoOpen: 0, // Boolean, Number
-    attached: 'center', // bottom, top
-    width: 300,
-    timeoutProgressbar: true,
-    transitionIn: 'fadeIn',
-    overlay: true,
-    pauseOnHover: true,
-    timeoutProgressbarColor: '#CABC42',
-});
-        
-      top.$("#processingViewModal").iziModal('close')
-      $('#assessmentTool').on('click', function() {
-        window.$("#processingViewModal").iziModal('open');
-          }); 
-      });
-      </script>
-      <script>
-      NProgress.start()
-      var loadedClient;
-      var food1;
-      var lat;
-      var lng;
-      var d1;
-      var parsed;
-      var ager;
-      var date = new Date();
-      function getAge(d1, d2){
-      var d1 = document.getElementById('client_dobspan').innerHTML;
-      var d2 = new Date();
-      var diff = d2.getTime() - parseDate($('#client_dobspan').text()).getTime();
-      ager = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25
-      ));$(function(){
-      $("#agespan").typed({
-      strings: [ager.toString()],
-      typeSpeed: 50
-      });
-      });
-      };
-      // parse a date in yyyy-mm-dd format
-      function parseDate(input) {
-      var parts = input.match(/(\d+)/g);
-      // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-      return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
-      }
-      function loc() {
-      var base = 'http://maps.googleapis.com/maps/api/geocode/json?address=';
-      var food = document.getElementById("location").value;
-      var url = base + food;
-      $.getJSON(url, function(data) {
-      lat = data.results[0].geometry.location.lat;
-      lng = data.results[0].geometry.location.lng;
-      console.log(data)
-      });
-      };
-      function zomato() {
-      document.getElementById("onefood").innerHTML = ''
-      var base = 'https://developers.zomato.com/api/v2.1/search?apikey=8d0401fb02d07321de28693fa2a18355&'
-      var food = 'q=' + document.getElementById("food").value;
-      var radius = document.getElementById("radius").value;
-      var location = '&lat=' + lat + '&lon=' + lng;
-      var url = base + food + location + radius;
-      $.getJSON(url, function(data)
-      {
-      for(var i = 0; i < data.restaurants.length; i++) {
-      var obj = data.restaurants[i].restaurant;
-      document.getElementById("onefood").innerHTML += '<span class="text-uppercase w-name emptygray">' + i  + ' ' + obj.name + '</span><br>';
-      
-      }
-      
-      });
-      };
-      function adime() {
-      $('#assessadime').html('yeah')
-      $('#dxadime').html('yeah')
-      $('#intadime').html('yeah')
-      $('#monevadime').html('yeah')
-      }
-      function run() {
-      document.getElementById("onefood1").innerHTML = ''
-      var base = 'http://api.nal.usda.gov/ndb/search/?format=json&'
-      var food = 'q=' + document.getElementById("food").value;
-      var url = base + food + '&sort=r&ds=Standard Reference&max=8&offset=0&api_key=Dd2cDdK3zCP6teHFkZk06XRTq4bgC1kMo3NPnLxm'
-      $.getJSON(url, function(data) {
-      //data is the JSON string\
-      for(var i = 0; i < data.list.item.length; i++) {
-      var obj = data.list.item[i];
-      document.getElementById("onefood1").innerHTML += '<span class="text-uppercase w-name emptygray">' + i  + ' ' + obj.name + '</span><br>';
-      
-      function run1() {
-      document.getElementById("onefood1").innerHTML = ''
-      var base1 = 'http://api.nal.usda.gov/ndb/reports/?ndbno='
-      var food1 = obj.ndbno
-      var url1 = base1 + food1 + '&type=b&format=json&api_key=Dd2cDdK3zCP6teHFkZk06XRTq4bgC1kMo3NPnLxm'
-      $.getJSON(url1, function(data1) {
-      console.log(data1.report.food.nutrients[1].value)
-      document.getElementById("onefood1").innerHTML += data1.report.food.nutrients[1].value + '<br>'
-      });
-      };
-      }
-      });
-      };
-      
-      </script>
-      <%= javascript_include_tag 'datedropper' %>
-      <%= javascript_include_tag 'medical' %>
-      <script>
-      var selectedClient;
-      var clientId;
-      function assign(param) {
-        clientId = param
-      }
-      ////////
-      //DATABASE TO JSON
-      ////////
-      var jsona = $.getJSON('/clients', function(data) {  return JSON.stringify(data)});
-      //data is the JSON string
-      var newClientName;
-      //////////////////////////////////////////////////
-      //AUTOCOMPLETE FROM CLIENTS DATABASE BEGINS
-      /////////////////////////////////////////////////
-      $("#landing").iziModal({
-        transitionIn: '',
-        transitionOut: '',
-      });
-        $("#landing").iziModal('open');
-      $('.gn-search').selectize({
-      theme: 'links',
-      maxItems: 1,
-      preload: 'focus',
-      valueField: 'id',
-      placeholder: 'Search/create',
-      searchField: ['lastname', 'firstname'],
-      options: [],
-      create: true,
-      allowEmptyOption: false,
-      updatePlaceholder: true,
-      openOnFocus: true,
-      render: {
-      option: function(data, escape) {
-      if(data.firstname == undefined) {
-      newClientName = data.text
-      return '<div class="item">' + escape(data.text) +'</div>';
-      }
-      else {
-      return '<div class="item">' + escape(data.firstname) + ' ' + escape(data.lastname) + ' ' +
-      '</div>';
-      }
-      },
-      item: function(data, escape) {
-      if(data.firstname == undefined) {
-      newClientName = data.text
-      var newClientNameArr = newClientName.split(" ");
-      $('#hiddenfirstname').val(newClientNameArr[0]);
-      $('#hiddenlastname').val(newClientNameArr[1]);
-      $('#hiddenprovider').val('<%=current_user.id%>');
-      $( "#hiddenform" ).show( "fast", function() {
-      });
-      $( "#hiddensubmit" ).show( "fast");
-      return '<div class="item">' + escape(data.text) +'</div>';
-      }
-      else {
-      return '<div class="item">' + escape(data.firstname) + ' ' + escape(data.lastname) + ' ' +
-      '</div>';
-      }
-      }
-      },
-      load: function(query, callback) {
-      if (!query.length) return callback();
-      $.ajax({
-      url: '/clients',
-      type: 'GET',
-      dataType: 'json',
-      data: {
-      q: query,
-      },
-      error: function() {
-      callback();
-      },
-      success: function(res) {
-      callback(res);
-      $('#select-beast-landsearch-selectized').keyup(function() {
-      if($('#landsearch-dropdown:first-child div').attr('class') == 'create') {
-      $('#landsearchicon').attr('class','fa fa-search fa-stack-1x fa-inverse');
-      }
-      if($('#landsearch-dropdown:first-child div').attr('class') == 'create active') {
-      $('#landsearchicon').attr('class','fa fa-stack-1x fa-inverse fa-user-plus');
-      }
-      
-      });
-      
-      },
-      });
-      },
-      onChange() { 
-        //ONCHANGE FROM SEARCH BAR TRIGGERS loadClient FUNCTION WITH ID FOUND IN ITEM SELECTED AS PARAMATER FOR THE FUNCTION...
-
-        if(isNaN(parseInt($('#select-beast-landsearch').val()))) {
-          return false
-        }
-        else {
-        loadClient(parseInt($('#select-beast-landsearch').val()))
-      }
-      },
-      });
-      function loadClient(clientId) {
-        if (clientId == undefined || clientId == null) {
-          toast("Load/create client first")
-          return
-        };
-        if (clientId === loadedClient) {
-          top.$('#landing').iziModal('fadeOut');
-          toast("Already Loaded")
-          return
-        }
-        top.$('.gn-search')[0].selectize.clearOptions()
-        $('#clientload').fadeOut()
-        NProgress.inc();
-      $('#selectinput').attr('class', 'selectize-input items has-options not-full');
-      //////////
-      // PLOT DATA IF CLIENT EXIST
-      /////////
-      if(jQuery.isNumeric(clientId)) {
-        processingView();
-
-      //MAKES THE CALL TO DATABASE BY ATTEMPTING TO LOAD URL "clients/<clientId> INTO IFRAME... CONTROLLER CHECKS IF USERNAME HAS ACCESS TO CLIENT THEN RESPONDS WITH CLIENT VIEW.
-      $('#clientload').attr("src", "clients/" + clientId);
-      };
-      //ADDS EVENT AFTER CLIENT LOAD TO MAKE LINK ON HEADER WORK WITH LOADED CLIENT
-      $('#assessmentTool').click(function(){
-        $.ajax({
-        url: "clients/" + clientId,
-        type: 'GET',
-        success: function(data){ $('#clientload').attr("src", "clients/" + clientId);
-        }
-        });
-        })
-      NProgress.inc();
-      // LOADEDCLIENT VARIABLE TO COMPARE WITH NEW CLIENT BEING LOADED. IF SAME RETURN FUNCTION AND CLOSE MODAL
-      loadedClient = clientId
-      }
-      /////////////
-      // SAVE NEW CLIENT IN DATABASE WHEN NOT FOUND BY SELECTIZE
-      /////////////
-      /////
-      // CHANGES SEARCH ICON IN LANDSEARCH TO PLUS WHEN CLIENT NOT FOUND
-      /////
-      //////////////////////////////////////////////////
-      //AUTOCOMPLETE FROM CLIENTS DATABASE END
-      /////////////////////////////////////////////////
-      //////////////////////////////////////////////////
-      //AUTOCOMPLETE FORM ELEMENTS, PREPOPULATED OPTIONS FOR Dx's BEGINS
-      /////////////////////////////////////////////////
-      $('#client_dx').selectize({
-      maxItems: null,
-      valueField: 'abbrev',
-      labelField: 'abbrev',
-      searchField: ['commonName', 'medicalName', 'abbrev'],
-      preload: false,
-      options: [
-      {id: 1, commonName: 'high blood pressure', medicalName: 'Hypertension', abbrev: 'HTN', url: 'ce'},
-      {id: 2, commonName: 'Diabetes Type 1', medicalName: 'Diabetes Mellitus', abbrev: 'DM1', url: 'ce'},
-      {id: 3, commonName: 'Hypothyroidism', medicalName: 'Hypothyroidism', abbrev: 'HypoThy', url: 'ce'},
-      {id: 4, commonName: 'Chronic Kidney Disease', medicalName: 'Chronic Kidney Disease', abbrev: 'CKD', url: 'ce'},
-      ],
-      create: false
-      });
-      // jquery transit is used to handle the animation
-      $('#client_dx-selectized').focusin(function() {
-      $( "#dxlabel" ).animate({
-      opacity: 1,
-      top:'-17px',
-      left: '-14px',
-      fontsize: '14px',
-      color: '#999999',
-      });
-      //setTimeout needed for Chrome, for some reson there is no animation from left to right, the pen is immediately present. Slight delay to adding the animation class fixes it
-      
-      });
-      
-      $('#client_dx-selectized').blur(function() {
-      if($('#client_dx').val() == "") {
-      
-      $('#dxlabel').animate({
-      position: 'absolute',
-      pointerevents:'none',
-      top: '1px',
-      left:'-9px',
-      fontsize: '16px',
-      opacity:1,
-      backgroundcolor: 'rgba(0, 0, 0, 0)',
-      padding: '23px 9px',
-      webkittransition: '0.15s ease-in-out',
-      transition: '0.15s ease-in-out'}); }
-      else return
-      });
-      //////////////////////////////////////////////////
-      //AUTOCOMPLETE FORM ELEMENTS, PREPOPULATED OPTIONS BEGINS
-      /////////////////////////////////////////////////
-      </script>
-      <script>
-      ////////////////////
-      // DATEPICKERS 'PICKADAY'
-      ///////////////////
-      $('.inin').prop('required',true);
-      $('#client_date0').pikaday({
-      field: document.getElementById('date0'),
-      format: 'M/D/YYYY',
-      defaultDate: '1/23/2014',
-      onStart: function ()
-      {
-      var date = new Date();
-      this.setDate( date.getDate(), date.getMonth() + 1, date.getFullYear())
-      },
-      });
-      window.onload = function() {
-      $('.selectize-dropdown').css('zIndex', '9999');
-      };
-      var acc = document.getElementsByClassName("accordion");
-      var i;
-      for (i = 0; i < acc.length; i++) {
-      acc[i].onclick = function(){
-      this.classList.toggle("active");
-      this.nextElementSibling.classList.toggle("show");
-      }
-      }
-      $(function () {
-      $(".todo ul").sortable();
-      $("#add_todo").on('submit', function (e) {
-      e.preventDefault();
-      var $toDo = $(this).find('.name-of-todo'),
-      toDo_name = $toDo.val(),
-      border = ['list-success', 'list-primary', 'list-warning', 'list-danger', 'list-info'],
-      randomClass = border[Math.floor(Math.random() * border.length)];
-      if (toDo_name.length >= 3) {
-      var newid = "new" + "" + Math.random().toString(36).substring(11);
-      // Create Event Entry
-      $(".todo ul").append(
-      '<li id="' + 'item-' + newid + '" class="list-group-item  ' + randomClass + ' list-item"><div class="checkbox"><input type="checkbox" id="' + newid + '" /><label for="' + newid + '">' + toDo_name + '</label></div><div class="pull-right action-btns"><a class="archive"><span class="fa fa-archive"></span></a><a class="trash"><span class="fa fa-close"></span></a></div></li>'
-      );
-      count();
-      var eventObject = {
-      title: $.trim($("#" + newid).text()),
-      className: $("#" + newid).attr("data-bg"), // use the element's text as the event title
-      stick: true
-      };
-      // store the Event Object in the DOM element so we can get to it later
-      $("#" + newid).data('eventObject', eventObject);
-      // Reset input
-      $toDo.val('').focus();
-      } else {
-      $toDo.focus();
-      }
-      });
-      //Checking items
-      $(document).on('mouseover', '.list-group .checkbox', function () {
-      $('.list-group input:checkbox').each(function () {
-      $(this).change(function () {
-      if ($(this).is(":checked")) {
-      $(this).closest(".list-group-item").addClass("checked-todo").removeClass("list-item");
-      } else {
-      $(this).closest(".list-group-item").removeClass("checked-todo");
-      }
-      count();
-      });
-      });
-      });
-      //Check archive items
-      $(document).on('click', '.action-btns .archive', function (e) {
-      $(this).closest(".list-group-item").removeClass("checked-todo list-item").addClass("archive-item").hide();
-      e.preventDefault();
-      count();
-      });
-      count();
-      $(".list-group-item").addClass("list-item");
-      $('.list-group li').each(function () {
-      if ($(this).hasClass("checked-todo")) {
-      $(this).removeClass("list-item");
-      };
-      });
-      //Show all items
-      $('.all-todo').click(function (e) {
-      $('.archive-item').hide();
-      $('.checked-todo, .list-item').show();
-      e.preventDefault();
-      });
-      //Show only active items
-      $('.active-todo').click(function (e) {
-      $('.checked-todo').hide();
-      $('.archive-item').hide();
-      $('.list-item').show();
-      e.preventDefault();
-      });
-      //Show only completed items
-      $('.complete-todo').click(function (e) {
-      $('.list-item').hide();
-      $('.archive-item').hide();
-      $('.checked-todo').show();
-      e.preventDefault();
-      });
-      //Show only archive items
-      $('.archive-todo').click(function (e) {
-      $('.list-item').hide();
-      $('.checked-todo').hide();
-      $('.archive-item').show();
-      e.preventDefault();
-      });
-      //Mark all as complete
-      $('#clear').change(function () {
-      if ($(this).is(":checked")) {
-      $(".list-group-item").addClass("checked-todo").removeClass("list-item");
-      $("input:checkbox").prop('checked', $(this).prop("checked"));
-      } else {
-      $(".list-group-item").removeClass("checked-todo").addClass("list-item");
-      $("input:checkbox").prop('checked', $(this).prop("checked"));
-      }
-      count();
-      });
-      //Remove all completed items
-      $('#clear-comp').click(function () {
-      var clearedComp = $('.checked-todo').remove();
-      count();
-      });
-      //Remove one completed item
-      $(document).on('click', '.trash', function (e) {
-      var clearedCompItem = $(this).closest(".list-group-item").remove();
-      e.preventDefault();
-      count();
-      });
-      //Count items
-      function count() {
-      var checked = $('.checked-todo').length,
-      archive = $('.archive-item').length,
-      all = $('.list-group-item').length - archive,
-      active = all - checked;
-      $('.complete-todo span').text(checked);
-      $('.active-todo span').text(active);
-      $('.archive-todo span').text(archive);
-      };
-      });
-      /* GENDER SCRIPT MIGHT BE ABLE TO DELETE AND/OR CONDENSE WTIH gender()
-      function checker() {
-      $('#gendermspan').click(function() {$('#switch5').prop('checked', true);})
-      $('#genderfspan').click(function() {$('#switch5').prop('checked', false);})
-      }
-      */
-      </script>
-      <script>
-      var $parentElement= document
-      //Waves effect on buttons
-      Waves.attach('.waves', ['waves-float']);
-      Waves.init();
-
-      function submit() {
-        var x = $('#newClient');
-        x.ajaxSubmit(options = {
-          success: function() {
-          $('#select-beast-landsearch:first-child').val(jsona.responseJSON.length + 1479)
-          }
-        });
-      }
-      // MISCELLANEOUS TOAST
-      function toast(ttl, color="#ca7842") {
-         iziToast.show({
-                            color: color,
-                            icon: 'ico-check',
-                            titleColor: '#FFFFFF',
-                            iconColor: '#FFFFFF',
-                            title: ttl,
-                            position: 'topCenter',
-                            timeout: 2000,
-position: 'topCenter', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
-                    progressBarColor: '#cabc42',
-                        });
-      }
-      // NOTIFICATION THAT SHOWS NAME OF CLIENT CREATED
-      function clientCreated(ttl) {
-         iziToast.show({
-                            color: '#5F9EA0',
-                            icon: 'ico-check',
-                            titleColor: '#FFFFFF',
-                            iconColor: '#FFFFFF',
-                            title: ttl,
-                            position: 'topCenter',
-                            timeout: 2000,
-                            progressBar: false,
-                        });
-      }
-        function processingView() {
-          $("#processingViewModal").iziModal('open'); 
-      }
-      var currentUser = <%= current_user.id %>
-      </script>
-    </body>
-  </html>
+</html>

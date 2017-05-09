@@ -14,6 +14,7 @@
       <%= stylesheet_link_tag 'jquery.dataTables' %>
       <!--[if IE 8]><script src="js/es5.js"></script><![endif]-->
       <%= favicon_link_tag 'favicon.ico' %>
+
       <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
       <!--[if lt IE 9]>
       <script src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
@@ -37,14 +38,14 @@
           <div class="tab-pane big-box  fade in active" id="tab-1">
             <ul class="cbp_tmtimeline" style=''>
               <% Fullassessment.where(client_id: @client.id).all.reverse.map do |fullassessment| %>
-                <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><h2>Amet laboriosam saepe</h2><p style='font-size:18px;line-height:1.1'>#{fullassessment.fassess}</p></div></li>" %>
+                <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><p style='font-size:18px;line-height:1.1'><h1>#{fullassessment.fassess.split(" -44044- ")[0]} - #{fullassessment.fassess.split(" -44044- ")[1]}</h1><h2>#{fullassessment.fassess.split(" -44044- ")[2]}</h2> <h1>Diagnosis</h1><h2>#{fullassessment.fassess.split(" -44044- ")[3]}</h2><h1>Intervention</h1><h2>#{fullassessment.fassess.split(" -44044- ")[4]}</h2><h1>Monitoring/Evaluation - Next due on #{@client.nextevaluationnotes.last.nnote_date}</h1><h2>#{fullassessment.fassess.split(" -44044- ")[5]}</h2></p></div></li>" %>
                 <% end %>
             </ul>
           </div>
           <div class="tab-pane big-box  fade in" id="tab-2">
             <ul class="cbp_tmtimeline" style=''>
               <% Progressnote.where(client_id: @client.id).all.reverse.map do |progressnote| %>
-                <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><h2>Amet laboriosam saepe</h2><p style='font-size:18px;line-height:1.1'>#{progressnote.pnote}</p></div></li>" %>
+                <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><h2>#{progressnote.created_at} by #{current_user.id}</h2><p style='font-size:18px;line-height:1.1'>#{progressnote.pnote}</p></div></li>" %>
                 <% end %>
             </ul>
           </div>

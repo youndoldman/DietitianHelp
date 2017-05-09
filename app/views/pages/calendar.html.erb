@@ -1,15 +1,10 @@
-<%= stylesheet_link_tag 'fullcalendar' %>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <div id="content" class="content">
         <div class="col-lg-7">
           <div id="calendar" class="fc-calendar box-shadow"></div>
         </div>
       </div>
 
-          <div class="animated">
+          <!-- <div class="animated">
             <div class="col-lg-2" style="margin-left: 10px">
               <div class="content-box biggest-box red-bg">
                 <div class="pull-left">
@@ -28,40 +23,41 @@
                 <div class="clearfix"></div>
               </div>
             </div>
-          </div>
-
-          <div class="col-lg-4">
+          </div> -->
+<!-- ADS -->
+          <!-- <div class="col-lg-4">
           <iframe src="http://www.todaysdietitian.com/images/TD0317_cover.jpg" frameborder="0" style="margin: 10px; width: 100%;"></iframe>
-          </div>
+          </div> -->
   
         <div class="col-lg-5">
-        <div class="content-box big-box" style="margin: 10px">
-        <h4 class="zero-m">Contextual classes</h4>
+        <div class="content-box big-box" style="margin: 0 10px 10px 10px">
+        <h4 class="zero-m">Clients</h4>
         <div class="table-responsive">
-          <table class="table">
-            <caption>Use contextual classes to color table rows or individual cells.</caption>
+          <table id="datatable" class="table">
+            <caption>Use search box to find clients.</caption>
             <thead>
               <tr>
                 <th>ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Username</th>
-                <th>Team</th>
+                <th>Next Assessment Date</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               <% Client.where(user_id: current_user.id).all.each_with_index do |x, i| %>
               <% if x.id != nil%>
+              <!-- CREATES CLIENT TABLE IN DB // GRAY AND WHITE TABLES -->
               <tr id=<%="#{x.id}"%> class=<%= i.odd? ? "active clientsOnTable" : "clientsOnTable" %> onclick="top.loadClient(<%=x.id%>)">
                 <th scope="row"><%=x.id%></th>
                 <td><%=x.firstname%></td>
-                <td><%=x.firstname%></td>
-                <% if Nextevaluationnote.where(client_id: 1).last != nil %> 
-                <td><%=Nextevaluationnote.where(client_id: 1).last.nnote_date%></td>
+                <td><%=x.lastname%></td>
+                <% if Nextevaluationnote.where(client_id: x.id).last != nil %> 
+                <td><%=x.nextevaluationnotes.last.nnote_date%></td>
                 <% else %>
+                <td>- -</td>
                 <%end %>
                 <td><%= link_to 'Show', @client %></td>
-        <td><%= link_to 'Destroy', @client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
               <% else %>
               <% end %>
@@ -85,6 +81,8 @@
 
       <%= javascript_include_tag 'fullcalendar' %>
 
+  <%= javascript_include_tag 'iziToast' %>
+  <%= javascript_include_tag 'iziModal' %>
       <!-- INITIALIZE CALENDAR () -->
     <script>
     
@@ -239,5 +237,21 @@
 $(document).ready(function() {
   top.$("#processingViewModal").iziModal('close');
   top.$('#clientload').fadeIn();
+  top.$('#preloader').fadeOut('slow')
 })
+
+// FOR CLIENTS DATATABLE TO WORK
+
+$(function () {
+      //Data Tables
+      $('#datatable').DataTable({
+        displayLength: 10,
+        dom: 'T<"clear">lfrtip',
+        tableTools: {
+          "sSwfPath": "datatables/copy_csv_xls_pdf.swf",
+          "aButtons": []
+        },
+        responsive: true
+      });
+    });
   </script>

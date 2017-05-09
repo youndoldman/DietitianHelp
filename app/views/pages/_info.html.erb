@@ -45,27 +45,27 @@
         <div>
         <div id="currentHealthParams" class="profile-usermenu" style="display: block">
           <ul class="nav">
-            <li class="" style="display: inline-block; float: left;margin-right: 40px">
+            <li class="" style="display: inline-block; float: left" data-toggle="tooltip" data-placement="top" title="BMI">
               <span  id="bmispanin" class="green" style="font-size:30px"><%= @client.bmi %></span>
               <span class="emptygray" style="font-size:12px">kg/m2</span>
             </li>
-            <li style="display: inline-block;float: right;margin-left: 20px">
-                <span id="calrequirement" class="black" style="font-size:30px;"><%= @client.calreq %></span>
+            <li style="display: inline-block;float: right" data-toggle="tooltip" data-placement="top" title="Daily Caloric Requirement">
+                <span id="calrequirement" class="black" style="font-size:30px;" ><%= @client.calreq %></span>
                 <span class="emptygray" style="font-size:12px;">cal/day</span>
             </li>
-            <li class="" style="display: inline-block; float: left;margin-right: 60px">
+            <li class="" style="display: inline-block; float: left" data-toggle="tooltip" data-placement="right" title="Ideal Body Weight">
                 <span id="ibwspanin" class="black" style="font-size:30px"><%= @client.ibw %></span>
                 <span class="emptygray" style="font-size:12px">lbs</span>
             </li>
-            <li style="display: inline-block;float: right;margin-left: 60px">
+            <li style="display: inline-block;float: right;margin-left: 20px" data-toggle="tooltip" data-placement="right" title="Daily Protein Requirement">
                 <span  id="prorequirement" class="black" style="font-size:30px;"><%= @client.proreq %></span>
                 <span class="emptygray" style="font-size:12px">g/day</span>
             </li>
-            <li class="" style="display: inline-block; float: left;margin-right: 40px">
+            <li class="" style="display: inline-block; float: left;margin-right: 40px" data-toggle="tooltip" data-placement="right" title="Percentage Ideal Body Weight">
               <span id="percentibw" class="yellow" style="font-size:30px">90</span>
               <span class="emptygray" style="font-size:12px">%ibw</span>
             </li>
-            <li style="display: inline-block;float: right;margin-left: 20px">
+            <li style="display: inline-block;float: right" data-toggle="tooltip" data-placement="bottom" title="Daily Fluid Requirement">
                 <span id="flrequirement" class="black" style="font-size:30px;"><%= @client.flreq %></span>
                 <span class="emptygray" style="font-size:12px">oz/day</span>
             </li>

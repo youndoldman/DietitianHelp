@@ -1,13 +1,3 @@
-<%= stylesheet_link_tag 'materialdesignicons.min' %>
-<%= stylesheet_link_tag 'metisMenu.min' %>
-<%= stylesheet_link_tag 'jquery.mCustomScrollbar' %>
-
-
-<%= javascript_include_tag 'metisMenu.min' %>
-<%= javascript_include_tag 'jquery.mCustomScrollbar' %>
-<%= javascript_include_tag 'modernizr.custom' %>
-
-
 <ul id="gn-menu" class="gn-menu-main animated fadeIn" style="z-index: 1200">
   <% if current_user %>
   <li class="gn-trigger">
@@ -120,7 +110,7 @@
 
   $('#searchHeaderIcon').click(function() {
 
-  top.$('#landing').iziModal('open');
+  top.$('#searchAddModal').iziModal('open');
 });
 $('#registerBtn').click(function(e){
   e.preventDefault();
