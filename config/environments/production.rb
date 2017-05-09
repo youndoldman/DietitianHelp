@@ -14,6 +14,7 @@ Rails.application.configure do
   # CUSTOMS
 
   config.action_mailer.default_url_options = { host: 'https://dietitianhelp.herokuapp.com' }
+  config.consider_all_requests_local = true # false
 
 
   config.serve_static_assets = true
