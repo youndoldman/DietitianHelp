@@ -3,6 +3,8 @@
 
 Training ground to learn web development. Not intended por professional use.
 
+* No new users allowed... Please use "iamaguest" "samplepassw0rd" (prepopulated on page load, go ahead and click login)
+
 ----------
 
 -ruby 2.2.3
@@ -14,11 +16,9 @@ Training ground to learn web development. Not intended por professional use.
 -SQLite on Development, PostgreSQL on Production
 
 
--Built using "advantage-responsive-admin-theme". Can be found here -> 
+-Built using "advantage-responsive-admin-theme". Can be found here for reference -> 
 	https://shapebootstrap.net/item/1525214-advantage-responsive-admin-theme
 
-
-* No new users allowed... Please use "iamaguest" "samplepassw0rd" (prepopulated on page load, go ahead and click login)
 
 ----------
 * Features:
@@ -53,7 +53,7 @@ Training ground to learn web development. Not intended por professional use.
 	* See all the assessments that are due for today displayed on the calendar "Dashboard".
 
 
-	* Pending Work/Features
+* Pending Work/Features
 
 
 	* Add goals functionality
