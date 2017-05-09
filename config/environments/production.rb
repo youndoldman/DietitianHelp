@@ -13,8 +13,8 @@ Rails.application.configure do
 
   # CUSTOMS
 
-  config.action_mailer.default_url_options = { host: 'https://dietitianhelp.herokuapp.com', port: 3000 }
-  
+  config.action_mailer.default_url_options = { host: 'https://dietitianhelp.herokuapp.com' }
+
 
   config.serve_static_assets = true
 
