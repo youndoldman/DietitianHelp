@@ -45,9 +45,7 @@
                 <%= devise_error_messages! %>
                <p> </br> 
                   <%= f.text_field :username, class: "form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%> 
-                  </br> 
-                  <%= f.text_field :provider, class: "form-control material", placeholder: "Provider", id: "provider", type: "text", autofocus: true%> 
-                  <br>
+                  </br>
                   <%= f.password_field :password, class: "form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>  
                   <br/>
     <%= f.password_field :password_confirmation, class: "form-control material", placeholder: "Password", id: "password", autocomplete: "off" %>
