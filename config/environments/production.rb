@@ -13,6 +13,8 @@ Rails.application.configure do
 
   # CUSTOMS
 
+  config.secret_key_base = ENV["SECRET_KEY_BASE"]
+
   config.action_mailer.perform_deliveries = false
 
 
