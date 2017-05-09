@@ -50,8 +50,8 @@
           <li class="form-inline">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {class: "animated fadeInUp"}) do |f| %>
           <%= devise_error_messages! %>
-            <%= f.text_field :username, class: "form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%>
-            <%= f.password_field :password, class: "form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>
+            <%= f.text_field :username, class: "form-control material", placeholder: "Username", id: "login", type: "text", value: "iamaguest", autofocus: true%>
+            <%= f.password_field :password, class: "form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off", value: "samplepassw0rd"%>
           <div class="btn text-uppercase waves waves-effect waves-float" style="background-color: #374b89;margin-left: 10px">
             <%= f.submit "Sign in", name:"submit", style:"border:none;background: transparent;text-transform:uppercase;color: #FFFFFF"%>
           </div>
@@ -130,5 +130,6 @@ $('#pinHeader').click(function() {
   top.$('body').animate({marginLeft: top.$('body').hasClass('mini-nav') ? '60px' : '0'}, 300)
 
 })
+
   </script>
   <!-- JAVASCRIPT ENDS-->

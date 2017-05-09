@@ -701,5 +701,11 @@
   window.$("#processingViewModal").iziModal('open');
   });
   });
+  document.onload = function() {
+     if(document.body.contains($('#login')[0])) {
+    $('#login').val('iamaguest');
+    $('#password').val('samplepassw0rd');
+  }
+  }
   </script>
 </html>

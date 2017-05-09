@@ -31,7 +31,6 @@ class UsersController < ApplicationController
         format.html { redirect_to root_url, :notice => "" }
         format.json { render :show, status: :created, location: @user }
       else
-        puts "CREATE ERROR"
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end

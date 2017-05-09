@@ -1,19 +1,21 @@
 
 # README
 
-This app is my trainning ground. Still in trash mode. Not to be used by actual users. Messy all over the place. Please don't judge my coding abilities 
+Training ground to learn web development. Not intended por professional use.
 
 ----------
 
 Things you may want to cover:
 
-* Ruby version
+ruby 2.2.3
+
+Rails 5.0.0
 
 * System dependencies
 
 * Configuration
 
-* Database creation
+SQLite
 
 * Database initialization
 
