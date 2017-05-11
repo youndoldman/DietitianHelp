@@ -1,9 +1,9 @@
 
 # README
 
-Training ground to learn web development. Not intended por professional use.
+Training ground to learn web development.
 
-* No new users allowed... Please use "iamaguest" "samplepassw0rd" (prepopulated on page load, go ahead and click login)
+* No new users permitted yet.
 
 ----------
 
