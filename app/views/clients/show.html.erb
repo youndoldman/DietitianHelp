@@ -1,5 +1,15 @@
-<%= csrf_meta_tag %>
-<%= @current_client %>
+<!-- <%= @current_client %> -->
 <%= render partial: 'pages/info' %>
 <!--Content-->
 <%= render partial: 'pages/nutritionaldata' %>
+
+  <%= javascript_include_tag 'iziModal' %>
+  <%= javascript_include_tag 'iziToast' %>
+  <%= javascript_include_tag 'summernote' %>
+  <%= javascript_include_tag 'nprogress' %>
+  <%= javascript_include_tag 'medical' %>
+  <!--C3.js-->
+  <%= javascript_include_tag 'd3.min' %>
+  <%= javascript_include_tag 'c3.min' %>
+      <!--Custom Flot Charts-->
+  <%= javascript_include_tag 'Chart' %>

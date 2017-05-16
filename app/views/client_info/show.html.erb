@@ -38,7 +38,7 @@
           <div class="tab-pane big-box  fade in active" id="tab-1">
             <ul class="cbp_tmtimeline" style=''>
               <% Fullassessment.where(client_id: @client.id).all.reverse.map do |fullassessment| %>
-                <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><p style='font-size:18px;line-height:1.1'><h1>#{fullassessment.fassess.split(" -44044- ")[0]} - #{fullassessment.fassess.split(" -44044- ")[1]}</h1><h2>#{fullassessment.fassess.split(" -44044- ")[2]}</h2> <h1>Diagnosis</h1><h2>#{fullassessment.fassess.split(" -44044- ")[3]}</h2><h1>Intervention</h1><h2>#{fullassessment.fassess.split(" -44044- ")[4]}</h2><h1>Monitoring/Evaluation - Next due on #{@client.nextevaluationnotes.last.nnote_date}</h1><h2>#{fullassessment.fassess.split(" -44044- ")[5]}</h2></p></div></li>" %>
+                <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><p style='font-size:18px;line-height:1.1'><h1>#{fullassessment.fassess.split(" -44044- ")[0]} - #{fullassessment.fassess.split(" -44044- ")[1]}</h1><h2>#{fullassessment.fassess.split(" -44044- ")[2]}</h2> <h1>Diagnosis</h1><h2>#{fullassessment.fassess.split(" -44044- ")[3]}</h2><h1>Intervention</h1><h2>#{fullassessment.fassess.split(" -44044- ")[4]}</h2><h1>Monitoring/Evaluation - Next due on #{@client.nextevaluationnotes.last.nnote_date ? @client.nextevaluationnotes.last.nnote_date : "Needs date"}</h1><h2>#{fullassessment.fassess.split(" -44044- ")[5]}</h2></p></div></li>" %>
                 <% end %>
             </ul>
           </div>
