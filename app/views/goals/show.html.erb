@@ -9,6 +9,10 @@
   <strong>Goals:</strong>
   <%= @goal.goals %>
 </p>
+<p>
+  <strong>Revision Date:</strong>
+  <%= @goal.revision_date %>
+</p>
 
 <%= link_to 'Edit', edit_goal_path(@goal) %> |
 <%= link_to 'Back', goals_path %>
