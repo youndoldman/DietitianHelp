@@ -28,7 +28,7 @@ class GoalsController < ApplicationController
 
     respond_to do |format|
       if @goal.save
-        format.html { redirect_to @goal, notice: 'Goal was successfully created.' }
+        format.html {}
         format.json { render :show, status: :created, location: @goal }
       else
         format.html { render :new }
@@ -69,6 +69,6 @@ class GoalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params.require(:goal).permit(:client_id, :goals)
+      params.require(:goal).permit(:client_id, :goals, :revision_date)
     end
 end

@@ -4,4 +4,5 @@ class Client < ApplicationRecord
 	has_many :progressnotes
 	has_many :monitoringnotes
 	has_many :nextevaluationnotes
+	has_many :goals
 end

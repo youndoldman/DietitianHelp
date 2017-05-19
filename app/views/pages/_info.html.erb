@@ -88,13 +88,22 @@
               <div class="form-group add-todo">
                 <div class="input-group">
                   <div class="input-group-addon"><i class="fa fa-pencil green"></i></div>
-                  <%= f.text_field :goals, id:"goalsInput", placeholder: "Write Goals", class: "form-control name-of-todo"%>
+                  <%= f.text_field :revision_date, id:"goalsDate", placeholder: "Revision Date", class: "form-control name-of-todo"%>
+                  <%= f.text_field :goals, id:"goalsInput", placeholder: "Goal", class: "form-control name-of-todo"%>
                 </div>
               </div>
 
             <div class="">
               <div class="panel-body todo">
                 <ul class="list-group" style="margin: 0px">
+<% if @client.goals != nil %>
+  <% @client.goals.each do |goal| %>
+                  <li id="item-new9t" class="list-group-item  list-info list-item" data-toggle="tooltip" data-placement="top" title="Revision Date - <%= goal.revision_date%>"><div class="checkbox"><input type="checkbox" id="new9t" ><label for="new9t"><%= goal.goals%></label></div><div class="pull-right action-btns"><a class="archive"><span class="fa fa-archive"></span></a><a class="trash"><span class="fa fa-close"></span></a></div></li>
+                  <%end %>
+                  <% else%>
+                  <% end %>
+
+
                 </ul>
               </div>
             </div>
@@ -105,7 +114,6 @@
                 Mark all as complete
               </label>
             <button id="clear-comp" class="btn btn-warning waves text-uppercase">Clear Completed</button>
-            <%= f.submit 'Save Goals', class: "actions btn btn-lg waves waves-button waves-effect waves-float", id: "newGoalBtn", style: "background: #374B89; color: #FFFFFF;"%>
             <% end %>
 
           </div>
@@ -206,25 +214,27 @@
   });
   $("#hiddendobinfo").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
   $("#hiddendobinfo").pikaday();
+
   // TODO LIST SCRIPT
   $(function () {
       $(".todo ul").sortable();
 
       $("#add_todo").on('submit', function (e) {
         e.preventDefault();
+        submitGoal();
 
-        var $toDo = $(this).find('.name-of-todo'),
+        var $toDo = $(this).find('#goalsInput'),
           toDo_name = $toDo.val(),
+          revision_date = new Date($('#goalsDate')[0].value).toISOString().slice(0,10).replace(/-/g,"/")
           border = ['list-success', 'list-primary', 'list-warning', 'list-danger', 'list-info'],
           randomClass = border[Math.floor(Math.random() * border.length)];
-
 
         if (toDo_name.length >= 3) {
 
           var newid = "new" + "" + Math.random().toString(36).substring(11);
           // Create Event Entry
           $(".todo ul").append(
-            '<li id="' + 'item-' + newid + '" class="list-group-item  ' + randomClass + ' list-item"><div class="checkbox"><input type="checkbox" id="' + newid + '" /><label for="' + newid + '">' + toDo_name + '</label></div><div class="pull-right action-btns"><a class="archive"><span class="fa fa-archive"></span></a><a class="trash"><span class="fa fa-close"></span></a></div></li>'
+            '<li id="' + 'item-' + newid + '" class="list-group-item  ' + randomClass + ' list-item" data-toggle="tooltip" data-placement="top" title="' + revision_date + '" "><div class="checkbox"><input type="checkbox" id="' + newid + '" /><label for="' + newid + '">' + toDo_name + '</label></div><div class="pull-right action-btns"><a class="archive"><span class="fa fa-archive"></span></a><a class="trash"><span class="fa fa-close"></span></a></div></li>'
           );
           count();
 
@@ -349,19 +359,12 @@
       };
     });
 
-// AUTOCOMPLETE FOR GOALS
-new autoComplete({
-    selector: '#goalsInput',
-    minChars: 2,
-    source: function(term, suggest){
-        term = term.toLowerCase();
-        var choices = ['Will show a weight loss of 3 lbs/mo', 'Will show a weight loss of 5 lbs/mo', 'Will show a weight loss of 10 lbs/mo', 'Food preferences will be met', 'Will show increased appetite', 'Will show weight increased of 2 lbs/mo', 'Will show weight increase of 3 lbs/mo']
-        var matches = [];
-        for (i=0; i<choices.length; i++)
-            if (choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
-        suggest(matches);
-    }
-});
+$("#goalsDate").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
+
+$("#goalsDate").pikaday();
+
+
+
 $(document).ready(function() {
 bmi();
 ibw();
@@ -369,4 +372,27 @@ pro()
 fl();
 cal();
 });
+
+function submitGoal() {
+$.ajax({
+type: "POST",
+url: '/goals',
+beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+data: {
+goal:
+{
+goals: $('#goalsInput')[0].value,
+revision_date: new Date($('#goalsDate')[0].value).toISOString().slice(0,10).replace(/-/g,"/"),
+client_id: <%= @client.id %>,
+user_id: <%= current_user.id %>,
+},
+commit: "Create Goal"
+},
+success: function() {
+console.log('hey')
+},
+});
+
+}
+
   </script>
