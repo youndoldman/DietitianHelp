@@ -9,6 +9,7 @@ before_action :configure_account_update_params, only: [:update]
 
   # POST /resource
   def create
+    puts "I DDDID RAN"
     super
   end
 

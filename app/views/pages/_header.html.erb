@@ -59,8 +59,7 @@
           <button id="registerBtn" style="border:none;background:transparent;text-transform:uppercase">Register</button>
         </div>
           <% end %>
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class: "animated fadeInUp", :id => "sign_up_user", :style => "display: none"},
-          :remote => true ) do |f| %>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class: "animated fadeInUp", :id => "sign_up_user", :style => "display: none"}) do |f| %>
           <%= devise_error_messages! %>
             <%= f.text_field :username, class: "input-container form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%>
             <%= f.password_field :password, class: "input-container form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>

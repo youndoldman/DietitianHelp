@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  
   resources :goals
   resources :nextevaluationnotes
   resources :documents
@@ -8,10 +8,15 @@ Rails.application.routes.draw do
   resources :progressnotes
   resources :clients
   resources :client_info
+  devise_for :users, :controllers => {:registrations => "registrations"}
 	devise_scope :user do get "/users/sign_out" => "devise/sessions#destroy" end
-	root 'pages#home'
+	
+  root 'pages#home'
+
 	get 'client_info/key_info', to: "client_info#key_info"
+
 	get '#processingViewModal', to: 'pages#home'
+
   get 'calendar', to: 'pages#calendar'
 
 	get 'clients/:id/nutritionaldata' => 'clients#nutritionaldata'
