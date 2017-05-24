@@ -381,7 +381,6 @@ goal:
 goals: $('#goalsInput')[0].value,
 revision_date: new Date($('#goalsDate')[0].value).toISOString().slice(0,10).replace(/-/g,"/"),
 client_id: <%= @client.id %>,
-status: 'status',
 
 
 },

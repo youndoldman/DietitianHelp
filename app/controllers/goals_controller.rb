@@ -26,6 +26,7 @@ class GoalsController < ApplicationController
   # POST /goals.json
   def create
     @goal = Goal.new(goal_params)
+    @goal.status = 'active'
     respond_to do |format|
       if @goal.save
         format.json { render :show, status: :created, location: @goal }
