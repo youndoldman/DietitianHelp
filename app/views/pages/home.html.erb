@@ -1,5 +1,6 @@
     <%= stylesheet_link_tag 'iziToast' %>
     <%= stylesheet_link_tag 'animate.min' %>
+
   <!-- PRELOADER/SLOGAN -->
     <div id="preloader" class="preloader table-wrapper" style="background: white;">
       <div class="table-row">
@@ -17,7 +18,9 @@
         </div>
       </div>
     </div>
-    <!-- SEARCH/ADD MODAL -->
+
+
+    <!-- BEGIN SEARCH/ADD MODAL -->
     <div id="searchAddModal" class="">
       <div style="visibility:visible;z-index:900;position: fixed;left: 450px;right: -900;top: 150px;bottom: -200;width: 500px;height: 300px;" class="table-wrapper">
         <div class="bgblur">
@@ -86,14 +89,21 @@
         </div>
       </div>
     </div>
-    <!-- INIT MODAL FOR "PROCESSING VIEW..."" LOADER -->
+    <!-- END SEARCH MODAL -->
+
+    <!-- MODAL FOR "PROCESSING VIEW..."" LOADER -->
     <div id="processingViewModal" class="iziModal" data-iziModal-group="alert" data-iziModal-loop></div>
+
     <!-- BEGIN CONTENT -->
     <div id="mainwrapper"class="table-wrapper">
-      <!-- HEADER LOADS AS PARTIAL -->
+
+      <!-- HEADER -->
       <div><%= render partial: 'pages/header' %></div>
+
       <!-- IFRAME WHERE ALL ACTIONS FROM HEADER TAKE PLACE  -->
+      <div style="height: 100%">
       <iframe aria-hidden="true" id="clientload" visibility: 'visible' src="/calendar" frameborder="0" height="900px" width="100%" scrolling="no" ></iframe>
+    </div>
     </div>
   <!-- END CONTENT -->
   <!--Scripts-->
@@ -382,6 +392,9 @@
   }
   },
   });
+      function processingView() {
+  $("#processingViewModal").iziModal('open');
+  }
   function loadClient(clientId) {
   assign(clientId);
   // VALIDATES clientId 
@@ -673,11 +686,8 @@
   timeoutProgressbarColor: '#CABC42',
   });
 
-  function processingView() {
-  $("#processingViewModal").iziModal('open');
-  }
-
   var currentUser = <%= current_user.id %>
+  var $currentClient;
 
     // DOCUMENT READY
   $(document).ready(function(){

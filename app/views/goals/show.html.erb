@@ -1,18 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Client:</strong>
-  <%= @goal.client %>
+  <strong>Goal:</strong>
+  <%= @goal.goals %>
 </p>
 
 <p>
-  <strong>Goals:</strong>
-  <%= @goal.goals %>
-</p>
-<p>
-  <strong>Revision Date:</strong>
+  <strong>Client:</strong>
   <%= @goal.revision_date %>
 </p>
 
 <%= link_to 'Edit', edit_goal_path(@goal) %> |
-<%= link_to 'Back', goals_path %>
+<%= link_to 'Back', goal_path %>

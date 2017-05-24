@@ -1,31 +1,18 @@
-<p id="notice"><%= notice %></p>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<h1>Goals</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Client</th>
-      <th>Goals</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @goals.each do |goal| %>
-      <tr>
-        <td><%= goal.client %></td>
-        <td><%= goal.goals %></td>
-        <td><%= goal.revision_date %></td>
-
-        <td><%= link_to 'Show', goal %></td>
-        <td><%= link_to 'Edit', edit_goal_path(goal) %></td>
-        <td><%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <% @goals.each do |goal| %>
+  <% status = goal.status %>
+    <% if status == 'active' %>
+                  <li id="item-<%= goal.id%>" class="list-group-item  list-info list-item" data-toggle="tooltip" data-placement="top" title="<%= goal.revision_date%>"><div class="checkbox"><input type="checkbox" id="<%= goal.id%>" ><label for="<%= goal.id%>"><%= goal.goals%></label></div><div class="pull-right action-btns"><a class="archive" onclick="updateGoal(<%=goal.id%>, 'archived')"><span class="fa fa-archive"></span></a><a class="trash" onclick="deleteGoal(<%= goal.id%>)"><span class="fa fa-close"></span></a></div></li>
+    <% elsif status == 'complete' %>
+                  <li id="item-<%= goal.id%>" class="list-group-item  list-info list-item" data-toggle="tooltip" data-placement="top" title="<%= goal.revision_date%>"><div class="checkbox"><input type="checkbox" id="<%= goal.id%>" checked=true><label for="<%= goal.id%>"><%= goal.goals%></label></div><div class="pull-right action-btns"><a class="archive" onclick="updateGoal(<%=goal.id%>, 'archived')"><span class="fa fa-archive"></span></a><a class="trash" onclick="deleteGoal(<%= goal.id%>)"><span class="fa fa-close"></span></a></div></li>
+    <% elsif status == 'archived' %>
+     <li id="item-<%= goal.id%>" class="list-group-item  list-info ui-sortable-handle archive-item" data-toggle="tooltip" data-placement="top" title="" data-original-title="<%= goal.revision_date%>" style="display: block;"><div class="checkbox">
+                    <input type="checkbox" id="<%= goal.id%>"><label for="<%= goal.id%>">hello</label></div><div class="pull-right action-btns"><a class="e" onclick="updateGoal(<%= goal.id%>, 'active')"><span class="fa fa-check"></span></a><a class="trash" onclick="deleteGoal(<%= goal.id%>)"><span class="fa fa-close"></span></a></div></li>
+    <% else%>
     <% end %>
-  </tbody>
-</table>
+<%end %>
+                
 
-<br>
 
-<%= link_to 'New Goal', new_goal_path %>

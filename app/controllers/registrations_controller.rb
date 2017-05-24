@@ -12,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    puts "did i ran?"
+    
     build_resource(sign_up_params)
 
     resource.save

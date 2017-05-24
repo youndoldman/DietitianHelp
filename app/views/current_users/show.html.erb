@@ -1,0 +1,95 @@
+  <div id="main-wrapper" class="main-wrapper">
+    <!--Preloader-->
+    <div id="preloader" class="preloader table-wrapper">
+      <div class="table-row">
+        <div class="table-cell">
+          <div class="la-ball-scale-multiple la-3x">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Content-->
+    <div id="content" class="content">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="content-box profile-sidebar box-shadow">
+            <div class="profile-usertitle">
+              <div class="profile-usertitle-name">
+              	<% if current_user.first_name %>
+                <%= current_user.first_name + " " + current_user.last_name %>
+                <% else %>
+                - - , -- 
+                <% end %>
+              </div>
+              <div class="profile-usertitle-job">
+              	<% if current_user.role %>
+                <%= current_user.role%>
+                <% else %>
+                Role
+                <% end %>
+              </div>
+            </div>
+            <div class="profile-userbuttons">
+              <button type="button" class="btn btn-primary waves">Follow</button>
+              <button type="button" class="btn btn-warning waves">Message</button>
+            </div>
+            <div class="profile-usermenu">
+              <ul class="nav">
+                <li class="active">
+                  <a href="#">
+                    <i class="fa fa-home"></i> Overview </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-user"></i> Account Settings </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-check"></i> Tasks </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-flag"></i> Help </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="tabbable tabs-with-bg">
+            <ul class="nav nav-tabs nav-justified">
+              <li class="active">
+                <a href="#tab-1" data-toggle="tab">Settings</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane big-box fade in active" id="tab-1">
+                <form class="content-form">
+                  <div class="form-group">
+                    <input type="text" class="form-control material" id="username" placeholder="Change username">
+                  </div>
+                  <div class="form-group">
+                    <input type="email" class="form-control material" id="email" placeholder="Choose email">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" class="form-control material" id="password" placeholder="Change password">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" class="form-control material" id="password2" placeholder="Confirm password">
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-warning text-uppercase waves">Save</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  

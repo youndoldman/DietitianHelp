@@ -13,4 +13,3 @@
 //= require jquery
 //= require jquery-ui
 //= require turbolinks
-//= require countUp

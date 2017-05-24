@@ -1,5 +1,5 @@
-<!-- Identifying info -->
-<div class="col-lg-3">
+<!-- START CLIENT INFO -->
+<div id="clienloadleft" class="col-lg-3" style="max-width: 350px">
   <div id="infoContainer" class="content-box profile-sidebar box-shadow">
     <div class="profile-usertitle">
       <div class="profile-usertitle-name">
@@ -42,7 +42,9 @@
           <button id="clienteditbut" type="button" class="btn waves waves-effect waves-float" data-fadeToggle="modal" data-target="#clienteditmodal" style="background: #374B89; color: #FFFFFF;">Edit</button>
           <button id="clientCancelEditBtn" type="button" class="btn waves waves-effect waves-float" data-fadeToggle="modal" data-target="#clienteditmodal" style="background: #374B89; color: #FFFFFF;display: none">Cancel</button>
         </div>
-        <div>
+          <!-- END CLIENT INFO -->
+
+          <!-- START CLIENT NUTRITION PARAMS -->
         <div id="currentHealthParams" class="profile-usermenu" style="display: block">
           <ul class="nav">
             <li class="" style="display: inline-block; float: left" data-toggle="tooltip" data-placement="top" title="BMI">
@@ -71,17 +73,17 @@
             </li>
           </ul>
         </div>
-        </div>
-      <!--WEIGHT HISTORY-->
+
     </div>
   </div>
-<!-- GOALS -->
+<!-- END CLIENT NUTRITION PARAMS-->
+
+  <!-- START CLIENT GOALS -->
   <div class="content-box box-shadow big-box todo-list">
             <div class="sort-todo">
-              <a class="all-todo" href="#">All</a>
               <a class="active-todo" href="#">Active <span class="badge yellow-bg"></span></a>
-              <a class="complete-todo" href="#">Complete <span class="badge red-bg"></span></a>
-              <a class="archive-todo" href="#">Archive <span class="badge green-bg"></span></a>
+              <a class="complete-todo" href="#">Completed <span class="badge red-bg"></span></a>
+              <a class="archive-todo" href="#">Archived <span class="badge green-bg"></span></a>
             </div>
 
               <%= form_for Goal.new, html: {id: "add_todo"} do |f| %>
@@ -95,29 +97,21 @@
 
             <div class="">
               <div class="panel-body todo">
-                <ul class="list-group" style="margin: 0px">
-<% if @client.goals != nil %>
-  <% @client.goals.each do |goal| %>
-                  <li id="item-new9t" class="list-group-item  list-info list-item" data-toggle="tooltip" data-placement="top" title="Revision Date - <%= goal.revision_date%>"><div class="checkbox"><input type="checkbox" id="new9t" ><label for="new9t"><%= goal.goals%></label></div><div class="pull-right action-btns"><a class="archive"><span class="fa fa-archive"></span></a><a class="trash"><span class="fa fa-close"></span></a></div></li>
-                  <%end %>
-                  <% else%>
-                  <% end %>
+                <ul id="clientGoals" class="list-group" style="margin: 0px">
 
+<%= render partial: 'goals/show' %>
 
-                </ul>
+            </ul>
               </div>
             </div>
             <div class="checkbox clear-todo">
-
-              <input type="checkbox" id="clear"></input>
-              <label for="clear">
-                Mark all as complete
-              </label>
-            <button id="clear-comp" class="btn btn-warning waves text-uppercase">Clear Completed</button>
             <% end %>
+            <button id="clear-comp" class="btn btn-warning waves text-uppercase" onclick="archiveGoals();">Archive Completed</button>
 
           </div>
 </div>
+<!-- END CLIENT GOAL -->
+
 </div>
   <!--Scripts-->
   <%= javascript_include_tag 'jquery.min' %>
@@ -222,6 +216,7 @@
       $("#add_todo").on('submit', function (e) {
         e.preventDefault();
         submitGoal();
+        console.log(e)
 
         var $toDo = $(this).find('#goalsInput'),
           toDo_name = $toDo.val(),
@@ -233,9 +228,9 @@
 
           var newid = "new" + "" + Math.random().toString(36).substring(11);
           // Create Event Entry
-          $(".todo ul").append(
-            '<li id="' + 'item-' + newid + '" class="list-group-item  ' + randomClass + ' list-item" data-toggle="tooltip" data-placement="top" title="' + revision_date + '" "><div class="checkbox"><input type="checkbox" id="' + newid + '" /><label for="' + newid + '">' + toDo_name + '</label></div><div class="pull-right action-btns"><a class="archive"><span class="fa fa-archive"></span></a><a class="trash"><span class="fa fa-close"></span></a></div></li>'
-          );
+          // $(".todo ul").append(
+          //   '<li id="' + 'item-' + newid + '" class="list-group-item  ' + randomClass + ' list-item" data-toggle="tooltip" data-placement="top" title="' + revision_date + '" "><div class="checkbox"><input type="checkbox" id="' + newid + '" /><label for="' + newid + '">' + toDo_name + '</label></div><div class="pull-right action-btns"><a class="archive"><span class="fa fa-archive"></span></a><a class="trash" onclick="deleteGoal();"><span class="fa fa-close"></span></a></div></li>'
+          // );
           count();
 
 
@@ -261,8 +256,10 @@
         $('.list-group input:checkbox').each(function () {
           $(this).change(function () {
             if ($(this).is(":checked")) {
+              updateGoal(parseInt($(this).attr('id')),'complete');
               $(this).closest(".list-group-item").addClass("checked-todo").removeClass("list-item");
             } else {
+              updateGoal(parseInt($(this).attr('id')),'active');
               $(this).closest(".list-group-item").removeClass("checked-todo");
             }
 
@@ -273,8 +270,7 @@
 
       //Check archive items
       $(document).on('click', '.action-btns .archive', function (e) {
-        $(this).closest(".list-group-item").removeClass("checked-todo list-item").addClass("archive-item").hide();
-        e.preventDefault();
+        // $(this).closest(".list-group-item").removeClass("checked-todo list-item").addClass("archive-item").hide();
         count();
       });
 
@@ -334,7 +330,7 @@
 
       //Remove all completed items
       $('#clear-comp').click(function () {
-        var clearedComp = $('.checked-todo').remove();
+        // var clearedComp = $('.checked-todo').remove();
         count();
       });
 
@@ -373,6 +369,7 @@ fl();
 cal();
 });
 
+
 function submitGoal() {
 $.ajax({
 type: "POST",
@@ -384,15 +381,69 @@ goal:
 goals: $('#goalsInput')[0].value,
 revision_date: new Date($('#goalsDate')[0].value).toISOString().slice(0,10).replace(/-/g,"/"),
 client_id: <%= @client.id %>,
-user_id: <%= current_user.id %>,
+
 },
 commit: "Create Goal"
 },
-success: function() {
-console.log('hey')
+success: function(response) {
+  console.log(response)
+
+          toDo_name = response.goals,
+          revision_date = response.revision_date;
+          randomClass = border[Math.floor(Math.random() * border.length)];
+          var newid = response.id;
+
+
+  $(".todo ul").append(
+            '<li id="' + 'item-' + newid + '" class="list-group-item  ' + randomClass + ' list-item" data-toggle="tooltip" data-placement="top" title="' + revision_date + '" "><div class="checkbox"><input type="checkbox" id="' + newid + '" /><label for="' + newid + '">' + toDo_name + '</label></div><div class="pull-right action-btns"><a class="archive"><span class="fa fa-archive"></span></a><a class="trash" onclick="deleteGoal(' + newid + ');"><span class="fa fa-close"></span></a></div></li>'
+          );
+
 },
 });
 
 }
+
+
+function updateGoal(goalID, stat) {
+$.ajax({
+type: "PUT",
+url: '/goals/' + goalID,
+beforeSend: function() { $('#item-' + goalID.toString()).css('background-color', 'white') },
+
+data: {
+goal:
+{
+status: stat.toString(),
+},
+commit: "Update Goal"
+},
+success: function(response) {
+  $('#item-' + goalID.toString()).css('background-color', '#EAEBED')
+  if(stat == 'archived') {
+    $('#item-' + goalID.toString()).closest(".list-group-item").removeClass("checked-todo list-item").addClass("archive-item").hide();
+  }
+},
+});
+
+}
+
+function deleteGoal(goalID) {
+
+$.ajax({
+type: "DELETE",
+url: '/goals/' + goalID,
+beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+success: function() {
+},
+});
+
+}
+var element;
+function archiveGoals(){
+
+  $('.checked-todo').each(function(key, value) {
+  updateGoal(parseInt($(value).find("[type='checkbox']").attr('id')), 'archived')
+})
+};
 
   </script>

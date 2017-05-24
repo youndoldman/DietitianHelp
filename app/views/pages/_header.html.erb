@@ -15,18 +15,33 @@
     <nav class="gn-menu-wrapper">
       <div class="gn-scroller">
         <ul class="gn-menu metismenu">
-        <li>
-          <a id="assessmentTool" aria-expanded="false"><i class="fa fa-language"></i>Assess<span class="fa arrow"></span></a>
+
+          <li>
+                <a href="index.html" aria-expanded="false"><i class="fa fa-user"></i>Client<span class="fa arrow"></span></a>
+                <ul class="gn-submenu collapse" aria-expanded="false">
+<li>
+          <a id="assessmentTool" aria-expanded="false">Assessment Tool<span id="isClientLoaded" class="badge badge-danger" style="margin-left: 20px">Load Client</span></a>
         </li>
+                <li>
+          <a type="button"id="historyfrommenu" aria-expanded="false">Client History</a>
+        </li>
+
+                  <li><a href="dashboard_3.html">Dashboard v3</a></li>
+                </ul>
+              </li>
+
+        
         <!-- <li>
           <a id="clientsfrommenu" aria-expanded="false"><i class="fa fa-user"></i>Clients<span class="label label-info pull-right"><%= Client.where(user_id: current_user.id).count%></span></a>
         </li> -->
         <li>
-          <a type="button"id="historyfrommenu" aria-expanded="false"><i class="fa fa-history"></i>History<span class="fa arrow"></span></a>
-        </li>
-        <li>
-            <a id="calendarFromMenu"aria-expanded="false"><i class="fa fa-calendar-o"></i>Calendar<span class="fa arrow"></span></a>
+            <a id="calendarFromMenu"aria-expanded="false"><i class="fa fa-calendar-o"></i>Dashboard<span class="fa arrow"></span></a>
               </li>
+
+
+        <li>
+          <a id="accountFromMenu" aria-expanded="false"><i class="fa fa-user-o"></i>Account<span class="fa arrow"></span></a>
+        </li>
         </div>
 <div class="bottom-bnts">
             <a id="pinHeader" class="fix-nav" href="#"><i class="mdi mdi-pin"></i></a>
@@ -37,7 +52,7 @@
     <% else %>
     <% end %>
     <li class="pull-left">
-      <a href="" class="logo">DIETITIAN.HELP<i class="fa fa-heartbeat"></i></a>
+      <a id="logoHeader" class="logo">DIETITIAN.HELP<i class="fa fa-heartbeat"></i></a>
     </li>
     <li class="top-clock">
       <span class="current-time"></span>
@@ -101,7 +116,8 @@
   });
   })
   // ONCLICK CALENDAR HEADER
-  $('#calendarFromMenu').click(function(){
+  $('#calendarFromMenu, #logoHeader').click(function(){
+  top.NProgress.start();
   top.processingView();
   top.$('#clientload').fadeOut()
   top.$('#clientload').attr('src', '/calendar')
@@ -129,6 +145,14 @@ $('#pinHeader').click(function() {
   top.$('body').animate({marginLeft: top.$('body').hasClass('mini-nav') ? '60px' : '0'}, 300)
 
 })
+
+  $('#accountFromMenu').click(function(){
+top.NProgress.start();
+
+  top.processingView();
+  top.$('#clientload').fadeOut()
+  top.$('#clientload').attr('src', '/current_users/' + <%= current_user ? current_user.id : "" %>)
+  })
 
   </script>
   <!-- JAVASCRIPT ENDS-->

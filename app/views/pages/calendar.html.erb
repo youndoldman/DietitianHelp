@@ -1,4 +1,3 @@
-<% puts "HEYYYYYY I RAAAAAN!!!!!!" %>
     <%= stylesheet_link_tag 'iziToast' %>
     <%= stylesheet_link_tag 'iziModal' %>
     <%= stylesheet_link_tag 'animate.min' %>
@@ -92,9 +91,8 @@
       <!-- INITIALIZE CALENDAR () -->
     <script>
     
-  <%= to_do_today = {} %>
-    toDoToday = []
-    toDoTodayCount = 0
+    <% to_do_today = {} %>
+
     $(function () {
 
       $(".event-tag span").click(function () {
@@ -120,7 +118,7 @@
         },
         //Add Events
         // FETCHING FROM ALL USER'S CLIENTS --- ATOMATICALLY ADDS 5 DAYS TO NEXTEVALUATIONNOTE_DATE TO = ENDDATE IN CALENDAR
-        // MONTHS FROM CALENDAR PLUGIN ARE AHEAD BY 1 WILL DO -1 ON ALL MONTHS TO MATCH CALENDAR OUTPUT -- SEE start_date
+        // MONTHS FROM CALENDAR PLUGIN ARE AHEAD BY 1 WILL DO -1 ON ALL MONTHS TO MATCH CALENDAR OUTPUT -- SEE start_date[1]
         events: [<% if Nextevaluationnote.where(user_id: current_user.id).all.count === 0 %>
         <%= raw "" %>
         <% else %>
@@ -138,15 +136,15 @@
         <%= raw "title: '#{Client.find(x.client_id).firstname.to_s} #{Client.find(x.client_id).lastname.to_s}'," %>
         <%= raw "start:" + ' new Date(' + start_date.join(", ") + ")," %>
       <%= raw "end:" + ' new Date(' + end_date.join(", ") + ")," %>
-      <%= raw "className:" + "'red-bg' 
+      <%= raw "className:" + "'' 
             },"%>
         // compares if today's date is between nnote_date -- nnote_date + 5 and pushes to to_do_today as hash
+
         // ASSESSMENT DATE RANGE
             <% Date.parse(Time.now.to_s).between?(Date.parse(start_date_range.join("-").to_s), Date.parse(start_date_range.join("-").to_s) +5) ? to_do_today["#{Client.where(id: x.client_id).first.id}"] = x.nnote_date.to_s : "" %>
 
       <% end %>
       <% end %>],
-
         editable: true,
         eventLimit: true,
         droppable: true, // this allows things to be dropped onto the calendar
@@ -260,4 +258,6 @@ $(function () {
         responsive: true
       });
     });
+
+ toDoToday = <%= raw  to_do_today.to_a.flatten %>;
   </script>

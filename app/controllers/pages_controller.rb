@@ -17,5 +17,8 @@ private
   end
   def calendar
   end
+  def account_profile
+    @user = User.find(params[:id])
+  end
 
 end

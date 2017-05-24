@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :current_users
   resources :goals
   resources :nextevaluationnotes
   resources :documents
@@ -14,6 +15,9 @@ Rails.application.routes.draw do
   root 'pages#home'
 
 	get 'client_info/key_info', to: "client_info#key_info"
+
+  get 'user/key_info', to: "current_users#show"
+
 
 	get '#processingViewModal', to: 'pages#home'
 

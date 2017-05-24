@@ -20,6 +20,7 @@ class ClientsController < ApplicationController
     @client = Client.find(params[:id])
     def will_show
       Client.find(params[:id])
+      $current_client = Client.find(params[:id])
     end
     def will_not_show
       redirect_to clients_path
@@ -27,11 +28,13 @@ class ClientsController < ApplicationController
         format.html { flash[:notice] = "NOPE" }
       end
     end
+    # EXTRA SECURITY CONDITION
     if @client.user_id === current_user.id
       will_show
     else
       will_not_show
     end
+
   end
 
   # GET /clients/new

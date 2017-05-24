@@ -4,12 +4,13 @@ class GoalsController < ApplicationController
   # GET /goals
   # GET /goals.json
   def index
-    @goals = Goal.all
+    @goals = Goal.where(client_id: $current_client.id)
   end
 
   # GET /goals/1
   # GET /goals/1.json
   def show
+    @goal = Goal.find(params[:id])
   end
 
   # GET /goals/new
@@ -25,10 +26,9 @@ class GoalsController < ApplicationController
   # POST /goals.json
   def create
     @goal = Goal.new(goal_params)
-
+    @goal.status = 'active'
     respond_to do |format|
       if @goal.save
-        format.html {}
         format.json { render :show, status: :created, location: @goal }
       else
         format.html { render :new }
@@ -42,7 +42,6 @@ class GoalsController < ApplicationController
   def update
     respond_to do |format|
       if @goal.update(goal_params)
-        format.html { redirect_to @goal, notice: 'Goal was successfully updated.' }
         format.json { render :show, status: :ok, location: @goal }
       else
         format.html { render :edit }
@@ -56,7 +55,6 @@ class GoalsController < ApplicationController
   def destroy
     @goal.destroy
     respond_to do |format|
-      format.html { redirect_to goals_url, notice: 'Goal was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +67,6 @@ class GoalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params.require(:goal).permit(:client_id, :goals, :revision_date)
+      params.require(:goal).permit(:client_id, :goals, :revision_date, :status)
     end
 end

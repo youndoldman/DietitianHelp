@@ -489,8 +489,6 @@ pauseOnHover: true,
 timeoutProgressbarColor: '#CABC42',
 overlay: false,
 });
-top.$("#processingViewModal").iziModal('close')
-top.NProgress.done();
 $("#modal-alert2").iziModal({
 title: 'ADIME Assessment Saved',
 subtitle: '<%=@client.firstname + ' ' + @client.lastname%>',
@@ -576,6 +574,9 @@ $('#monevadime').summernote({
 airMode: true,
 textareaAutoSync: false,
 });
+top.$currentClient = <%= @client.id %>
+top.$('#isClientLoaded').removeClass('badge-danger').addClass('badge-success').text('<%=@client.firstname[0].to_s +  @client.lastname[0].to_s %> Loaded');
+console.log('nut ready')
 // END DOCUMENT READY
 });
 $('#updateClient').ajaxForm({
@@ -717,7 +718,8 @@ return
 })
   }
 
-      // MEDICAL JS -----> CONTAINS ALL CALCULATIONS FOR BMI, IBW, REQUIREMENTS, ETC...
+      // BEGIN MEDICAL JS -----> 
+      // CONTAINS ALL CALCULATIONS FOR BMI, IBW, REQUIREMENTS, ETC...
   /*
   *
   *   DIETITIAN.HELP
@@ -1062,4 +1064,7 @@ return
   $('#monevadime').html()
   }
   // END MEDICAL JS 
+
+
+
 </script>
