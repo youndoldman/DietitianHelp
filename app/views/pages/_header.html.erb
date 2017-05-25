@@ -1,4 +1,4 @@
-<ul id="gn-menu" class="gn-menu-main animated fadeIn" style="z-index: 1200">
+<ul id="gn-menu" class="gn-menu-main" style="z-index: 1200">
   <% if current_user %>
   <li class="gn-trigger">
     <a id="menu-toggle" class="menu-toggle gn-icon gn-icon-menu">
@@ -63,26 +63,26 @@
         <div class="empty"></div>
           <% if !current_user %>
           <li class="form-inline">
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {class: "animated fadeInUp"}) do |f| %>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {class: ""}) do |f| %>
           <%= devise_error_messages! %>
             <%= f.text_field :username, class: "form-control material", placeholder: "Username", id: "login", type: "text", value: "iamaguest", autofocus: true%>
             <%= f.password_field :password, class: "form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off", value: "samplepassw0rd"%>
-          <div class="btn text-uppercase waves waves-effect waves-float" style="background-color: #374b89;margin-left: 10px">
+          <div class="btn text-uppercase" style="background-color: #374b89;margin-left: 10px">
             <%= f.submit "Sign in", name:"submit", style:"border:none;background: transparent;text-transform:uppercase;color: #FFFFFF"%>
           </div>
-          <div class="btn btn-warning text-uppercase waves waves-effect waves-float">
+          <div class="btn btn-warning text-uppercase">
           <button id="registerBtn" style="border:none;background:transparent;text-transform:uppercase">Register</button>
         </div>
           <% end %>
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class: "animated fadeInUp", :id => "sign_up_user", :style => "display: none"}) do |f| %>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class: "", :id => "sign_up_user", :style => "display: none"}) do |f| %>
           <%= devise_error_messages! %>
             <%= f.text_field :username, class: "input-container form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%>
             <%= f.password_field :password, class: "input-container form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>
             <%= f.password_field :password_confirmation, class: "input-container form-control material", placeholder: "Password Confirmation", id: "passwordconfirm", autocomplete: "off" %>
-          <div class="btn btn-warning text-uppercase waves waves-effect waves-float">
+          <div class="btn btn-warning text-uppercase">
             <%= f.submit "Register", name:"submit", style:"border:none;background:transparent;text-transform:uppercase"%>
           </div>
-          <div class="btn btn-success text-uppercase waves waves-effect waves-float" style="background-color: #374b89;margin-left: 10px">
+          <div class="btn btn-success text-uppercase" style="background-color: #374b89;margin-left: 10px">
           <button id="logInBtn" style="border:none;background:transparent;background-color: transparent !important;text-transform:uppercase">Log In</button>
         </div>
         </li>

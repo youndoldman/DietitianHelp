@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'cs-skin-underline' %>
+
 <div id="clientloadright" class="main-wrapper">
   <div class=""><div class="col-lg-9">
     <div class="tabbable tabs-with-bg">
@@ -142,7 +144,7 @@
             </div>
             <!-- Trigger the modal with a button -->
             <div>
-              <%= f.submit 'Next', class: "actions btn btn-lg waves waves-button waves-effect waves-float", id: "updatebut", style: "background: #374B89; color: #FFFFFF;"%>
+              <%= f.submit 'Next', class: "actions btn btn-lg", id: "updatebut", style: "background: #374B89; color: #FFFFFF;"%>
             </div>
             <% end %>
           </div>
@@ -150,14 +152,13 @@
         <!-- TAB 2 -->
         <div id="tab-2" class="tab-pane big-box fade in">
           <div class="jumbotron">
-            <div class="field-container form-group hidden">
-              
-            </div>
-            <select id="assessmentType" class="cs-select cs-skin-border"style="background-color: white; border: none; font-size: 50px">
-              <option value="full Assessment">Full Assessment</option>
-              <option value="quaterly Assessment">Quaterly Assessment</option>
-              <option value="initialAssessment">Initial Assessment</option>
-              </select><h1 style="display: inline-block; margin-bottom: 0px"><span id="ADIMETodaysDate"></h1></span>
+            <div id="assessmentType" class="field-container form-group" style="width: 40%;display: inline-block; margin 0px;">
+              <select class="cs-select cs-skin-underline"style="">
+              <option value="full Assessment">Full Assessment - <%= Time.now.strftime("%b %d, %Y") %></option>
+              <option value="quaterly Assessment">Quaterly Assessment - <%= Time.now.strftime("%b %d, %Y") %></option>
+              <option value="initialAssessment">Initial Assessment - <%= Time.now.strftime("%b %d, %Y") %></option>
+              </select>
+              </div>
               <br>
               <div id="assessment" class="container">
                 <div id="assZone">
@@ -165,9 +166,9 @@
                     <span id='agespan' class='w-amount'>- -</span>y/o <span>Client</span> currently on <span id='cdietspan' class='w-amount'>- - </span> Diet to manage Dx of <span id="dxspan" class='w-amount'>- -</span>. Average intake: <span id='intakefromspan', class='w-amount'>- -</span>  <span id='intaketospan', class='w-amount'></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class='w-amount'>- -</span> lbs puts <span>Client</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Client</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.
                   </p>
                 </div>
-                <button type="button" class="btn btn-lg waves waves-button waves-effect waves-float" onclick="resetAssess()">Reset</button>
-                <div id="runAndSaveBtns" style="float: right"><button type="button" class="btn btn-danger btn-lg waves waves-button waves-effect waves-float" onclick="setTimeout(chart0, 500), diet(), intake(), dx(), getAge(), adime(), setTimeout(assessment, 2000), rchart0()">Run</button>
-                <button class="btn btn-primary btn-lg waves waves-button waves-effect waves-float", onclick="moveToComply()">Comply</button></div>
+                <button type="button" class="btn btn-lg" onclick="resetAssess()">Reset</button>
+                <div id="runAndSaveBtns" style="float: right"><button type="button" class="btn btn-danger btn-lg" onclick="setTimeout(chart0, 500), diet(), intake(), dx(), getAge(), adime(), setTimeout(assessment, 2000), rchart0()">Run</button>
+                <button class="btn btn-primary btn-lg", onclick="moveToComply()">Comply</button></div>
                 <h1>Diagnosis</h1>
                 <p id="dxadime"></p>
                 <h1>Intervention </h1>
@@ -383,18 +384,6 @@
 <script>
 
 //DATATABLE FUNCTION TO LIMIT AMOUNT OF RESULTS DISPLAYED IN SUPPOSEDLY WT HISTORY FROM PANEL TABS
-$(function () {
-//Data Tables
-$('#datatable1').DataTable({
-displayLength: 25,
-dom: 'T<"clear">lfrtip',
-tableTools: {
-"sSwfPath": "../assets/copy_csv_xls_pdf.swf"
-},
-responsive: true
-});
-});
-
 var parent = document.getElementById("assessment")
 $(function () {
 /*c3.js*/ // NEEDED FOR THE CHART
@@ -467,7 +456,6 @@ function parseDate(dateStr) {
 var dateParts = dateStr.split("/");
 return new Date(dateParts[2], (dateParts[1] - 1), dateParts[0]);
 }
-document.getElementById('ADIMETodaysDate').innerHTML = moment(new Date()).format('LL');
 function resetAssess() {
 $('#assZone').html(top.defaultAssessment);
 $('#tooltip144344').hide()
@@ -519,7 +507,6 @@ overlay: false,
 });
 $("#modal-alert4").iziModal({
 title: 'Notes Saved Succesfully',
-subtitle: 'Save anyways?',
 icon: 'icon-check',
 iconColor: '#00af66',
 headerColor: '#374B89',
@@ -576,7 +563,8 @@ textareaAutoSync: false,
 });
 top.$currentClient = <%= @client.id %>
 top.$('#isClientLoaded').removeClass('badge-danger').addClass('badge-success').text('<%=@client.firstname[0].to_s +  @client.lastname[0].to_s %> Loaded');
-console.log('nut ready')
+
+
 // END DOCUMENT READY
 });
 $('#updateClient').ajaxForm({
@@ -755,6 +743,7 @@ return
   });
 
   function rchart0 () {
+
   top.NProgress.start();
 
   //resets all parameters in assess
@@ -779,14 +768,18 @@ return
   myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
   myLine.scale.xLabels[0] = document.getElementById("client_date3").value;
   myLine.update();
+
   top.NProgress.inc();
+
+  // 1 MO. SIGNIFICANT CHANGE
   if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[2].value * 100) <= 95) {
   loss1 = true;
   }
   if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[2].value * 100) >= 105) {
   gain1 = true;
   }
-  
+
+  // 3 MO. SIGNIFICANT CHANGE
   if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[1].value * 100) <= 92.5) {
   loss2 = true;
   }
@@ -794,14 +787,18 @@ return
   gain2 = true;
   console.log(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[1].value * 1000));
   }
+
+  // 6 MO. SIGNIFICANT CHANGE
   if(Math.floor(myLine.datasets[1].points[3].value / myLine.datasets[1].points[0].value * 100) <= 90) {
   loss3 = true;
   }
   if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[0].value * 100) >= 110) {
   gain3 = true;
   }
+
   top.NProgress.inc();
-  if($('#wthistory').smkValidate({lang:'es'})){}
+  // COMMENTED OUT MAY 25 8:08AM
+  // if($('#wthistory').smkValidate({lang:'es'})){}
   if(loss1 === true || loss2 === true || loss3 === true){
   $("#losshist")[0].innerHTML = 'Significant Weight Loss for the past ';
   if(loss1 === true){
@@ -848,6 +845,8 @@ return
   if((loss1 === true || loss2 === true || loss3 === true) && (gain1 === true || gain2 === true || gain3 === true)){
   $("#and")[0].innerHTML = ' and ';
   }
+
+  // IF ANY SIGNIFICANT WEIGHT LOSS PUSH NOTIFICATION
   if(loss1 === true || loss2 === true || loss3 === true || gain1 === true || gain2 === true || gain3 === true) {
   iziToast.warning({
     title: 'Significant',
@@ -989,38 +988,39 @@ return
   $('#hiddenfassess').val(document.getElementById('assessment').innerText)
   NProgress.done();
   }
+  // chart0() COMMENTED OUT MAY 25 8:05AM
   function chart0() {
-  if(document.getElementById("client_date0").value.length == '') {
-  return;
-  }
+  // if(document.getElementById("client_date0").value.length == '') {
+  // return;
+  // }
   
-  myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
-  if (myLine.datasets[1].points[3].value > 0) {
-  myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
-  }
-  if(document.getElementById("client_date1").value.length == '') {
-  return;
-  }
+  // myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
+  // if (myLine.datasets[1].points[3].value > 0) {
+  // myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
+  // }
+  // if(document.getElementById("client_date1").value.length == '') {
+  // return;
+  // }
   
-  myLine.datasets[1].points[2].value = document.getElementById("client_thirtywt").value;
-  if (myLine.datasets[1].points[2].value > 0) {
-  myLine.datasets[1].points[2].value = document.getElementById("client_thirtywt").value;
-  }
-  if(document.getElementById("client_date2").value.length == '') {
-  return;
-  }
-  myLine.datasets[1].points[1].value = document.getElementById("client_ninetywt").value;
-  if (myLine.datasets[1].points[1].value > 0) {
-  myLine.datasets[1].points[1].value = document.getElementById("client_ninetywt").value;
-  }
-  if(document.getElementById("client_date3").value.length == '') {
-  return;
-  }
-  myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
-  if (myLine.datasets[1].points[0].value > 0) {
-  myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
-  }
-  myLine.update();
+  // myLine.datasets[1].points[2].value = document.getElementById("client_thirtywt").value;
+  // if (myLine.datasets[1].points[2].value > 0) {
+  // myLine.datasets[1].points[2].value = document.getElementById("client_thirtywt").value;
+  // }
+  // if(document.getElementById("client_date2").value.length == '') {
+  // return;
+  // }
+  // myLine.datasets[1].points[1].value = document.getElementById("client_ninetywt").value;
+  // if (myLine.datasets[1].points[1].value > 0) {
+  // myLine.datasets[1].points[1].value = document.getElementById("client_ninetywt").value;
+  // }
+  // if(document.getElementById("client_date3").value.length == '') {
+  // return;
+  // }
+  // myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
+  // if (myLine.datasets[1].points[0].value > 0) {
+  // myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
+  // }
+  // myLine.update();
   };
   //UltraWidget
   function widgetUsed(id, number, string) {
@@ -1065,6 +1065,12 @@ return
   }
   // END MEDICAL JS 
 
+// SELECTFX FOR SELECT IN ASSESS TAB
 
+      (function() {
+        [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {  
+          new SelectFx(el);
+        } );
+      })();
 
 </script>

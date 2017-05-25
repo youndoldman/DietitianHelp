@@ -7,9 +7,7 @@ div.cs-select {
 	background: #fff;
 	z-index: 100;
 	width: 100%;
-	max-width: 250px;
-    margin-right: 20px;
-    margin-bottom: 10px;
+	max-width: 500px;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -53,13 +51,12 @@ div.cs-select:focus {
 }
 
 .cs-select > span::after {
-	content: '\f078';
+	content: '\25BE';
 	right: 1em;
 }
 
 .cs-select .cs-selected span::after {
-    font-family: 'FontAwesome';
-	content: '\f00c';
+	content: '\2713';
 	margin-left: 1em;
 }
 

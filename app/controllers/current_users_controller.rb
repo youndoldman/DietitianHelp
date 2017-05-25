@@ -11,7 +11,9 @@ class CurrentUsersController < ApplicationController
   # GET /current_users/1.json
   def show
     @current_user = User.find(params[:id])
+    resource = User.find(params[:id])
   end
+  
 
   # GET /current_users/new
   def new

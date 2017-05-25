@@ -79,7 +79,7 @@
                     <%= f.label :ht, "Height", style: "margin: 0px;", class: "" %>
                   </div>
                   <div  id="hiddensubmit" class="actions" style="display: none;">
-                    <button type="button" class="actions btn btn-lg waves waves-button waves-effect waves-float" data-style="top-line" data-horizontal="" onclick="window.submit()">Add Client</button>
+                    <button type="button" class="actions btn btn-lg" data-style="top-line" data-horizontal="" onclick="window.submit()">Add Client</button>
                   </div>
                   <% end %>
                 </div>
@@ -114,7 +114,6 @@
   <%= javascript_include_tag 'jquery.flot.resize' %>
   <%= javascript_include_tag 'bootstrap.min' %>
   <%= javascript_include_tag 'metisMenu.min' %>
-  <%= javascript_include_tag 'waves.min' %>
   <%= javascript_include_tag 'moment.min' %>
   <%= javascript_include_tag 'jquery.mCustomScrollbar' %>
   <%= javascript_include_tag 'cta.min' %>
@@ -142,7 +141,7 @@
   <!--EasyPieChart-->
   <%= javascript_include_tag 'jquery.easypiechart.min' %>
   <!--Zabuto Calendar-->
-  <%= javascript_include_tag 'zabuto_calendar.min' %>
+  <!-- <%= javascript_include_tag 'zabuto_calendar.min' %> -->
   <!--Simple Weather-->
   <%= javascript_include_tag 'jquery.simpleWeather.min' %>
   <!-- DATA TABLES-->
@@ -158,7 +157,6 @@
   <%= javascript_include_tag 'jsface' %>
   <%= javascript_include_tag 'snap.svg-min' %>
   <%= javascript_include_tag 'sweetalert.min' %>
-  <%= javascript_include_tag 'smoke.min' %>
   <%= javascript_include_tag 'notificationFx' %>
   <!--AUTOCOMPLETE -->
   <%= javascript_include_tag 'standalone/selectize' %>
@@ -204,7 +202,8 @@
   </script>
   <script>
   NProgress.start()
-  var loadedClient;
+  var currentUser = <%= current_user.id %>
+  var $currentClient;
   var food1;
   var lat;
   var lng;
@@ -393,18 +392,18 @@
   },
   });
       function processingView() {
-  $("#processingViewModal").iziModal('open');
+  // $("#processingViewModal").iziModal('open');
   }
   function loadClient(clientId) {
   assign(clientId);
   // VALIDATES clientId 
-  // IF INVALID
+  // IF INVALID RETURN
   if (clientId == undefined || clientId == null) {
   toast("Load/create client first")
   return
   };
   // IF ALREADY LOADED
-  if (clientId === loadedClient) {
+  if (clientId === $currentClient) {
   top.$('#landing').iziModal('fadeOut');
   toast("Already Loaded")
   return
@@ -433,8 +432,8 @@
   });
   })
   NProgress.inc();
-  // LOADEDCLIENT VARIABLE TO COMPARE WITH NEW CLIENT BEING LOADED. IF SAME RETURN FUNCTION AND CLOSE MODAL
-  loadedClient = clientId
+  // $currentClient VARIABLE TO COMPARE WITH NEW CLIENT BEING LOADED. IF SAME RETURN FUNCTION AND CLOSE MODAL
+  $currentClient = clientId
   }
   //////////////////////////////////////////////////
   //AUTOCOMPLETE FROM CLIENTS DATABASE END
@@ -632,9 +631,6 @@
   </script>
   <script>
   // var $parentElement= document <-- COMMENTED OUT MAY 3 6:01AM... ERASE IF NO IMPACT ON APP
-  //Waves effect on buttons
-  Waves.attach('.waves', ['waves-float']);
-  Waves.init();
   function submit() {
   var x = $('#newClient');
   x.ajaxSubmit(options = {
@@ -644,7 +640,10 @@
   });
   }
   // MISCELLANEOUS TOAST
-  function toast(ttl, color="#ca7842") {
+  function toast(ttl, color) {
+    if(color == undefined){
+      color = "#ca7842";
+    }
   iziToast.show({
   color: color,
   icon: 'ico-check',
@@ -673,21 +672,17 @@
     // INIT PROCESSING VIEW JS
   $("#processingViewModal").iziModal({
   title: 'Processing View...',
-  icon: 'ico-check',
   iconColor: '#00af66',
   headerColor: '#374B89',
   autoOpen: 0, // Boolean, Number
   attached: 'center', // bottom, top
   width: 300,
-  timeoutProgressbar: true,
-  transitionIn: 'fadeIn',
   overlay: true,
   pauseOnHover: true,
   timeoutProgressbarColor: '#CABC42',
   });
 
-  var currentUser = <%= current_user.id %>
-  var $currentClient;
+
 
     // DOCUMENT READY
   $(document).ready(function(){

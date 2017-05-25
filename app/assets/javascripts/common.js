@@ -65,11 +65,6 @@ $(function () {
 
   //Smooth scrolling for body
 
-
-  //Waves effect on buttons
-  Waves.attach('.waves', ['waves-float']);
-  Waves.init();
-
   //Current Date
   var dt = new Date(),
       year = dt.getFullYear(),

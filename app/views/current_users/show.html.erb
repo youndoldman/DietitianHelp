@@ -1,17 +1,4 @@
   <div id="main-wrapper" class="main-wrapper">
-    <!--Preloader-->
-    <div id="preloader" class="preloader table-wrapper">
-      <div class="table-row">
-        <div class="table-cell">
-          <div class="la-ball-scale-multiple la-3x">
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!--Content-->
     <div id="content" class="content">
       <div class="row">
@@ -70,10 +57,10 @@
               <div class="tab-pane big-box fade in active" id="tab-1">
                 <form class="content-form">
                   <div class="form-group">
-                    <input type="text" class="form-control material" id="username" placeholder="Change username">
+                    <input type="text" class="form-control material" id="username" placeholder="Change username" value="<%= current_user.username %>">
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control material" id="email" placeholder="Choose email">
+                    <input type="email" class="form-control material" id="email" placeholder="Choose email" value="<%= current_user.email ? current_user.email : '' %>">
                   </div>
                   <div class="form-group">
                     <input type="password" class="form-control material" id="password" placeholder="Change password">
@@ -81,6 +68,8 @@
                   <div class="form-group">
                     <input type="password" class="form-control material" id="password2" placeholder="Confirm password">
                   </div>
+
+
                   <div class="form-group">
                     <button type="submit" class="btn btn-warning text-uppercase waves">Save</button>
                   </div>
@@ -92,4 +81,3 @@
       </div>
 
   </div>
-  
