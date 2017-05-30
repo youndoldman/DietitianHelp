@@ -44,15 +44,35 @@
           </div>
           <div class="tab-pane big-box  fade in" id="tab-2">
             <ul class="cbp_tmtimeline" style=''>
+
+
+              <% if !Progressnote.where(client_id: @client.id).any? %>
+            <li style="width: 90%; height: 80px; background-color: #f1f4f5; color: black;text-align: center; margin-left: 55px">
+              <div>
+                <h3 style="position: absolute; top: 15%; left: 28%">Progress notes saved on Assessments will be display here.</h3>
+              </div>
+            </li>
+            <% else %>
               <% Progressnote.where(client_id: @client.id).all.reverse.map do |progressnote| %>
                 <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><h2>#{progressnote.created_at} by #{current_user.id}</h2><p style='font-size:18px;line-height:1.1'>#{progressnote.pnote}</p></div></li>" %>
                 <% end %>
+            <% end%>
+                
             </ul>
           </div>
           <div class="tab-pane big-box  fade in" id="tab-3">
             <ul class="cbp_tmtimeline" style=''>
+<% if !Monitoringnote.where(client_id: @client.id).any? %>
+            <li style="width: 90%; height: 80px; background-color: #f1f4f5; color: black;text-align: center; margin-left: 55px">
+              <div>
+                <h3 style="position: absolute; top: 15%; left: 28%">Monitoring notes saved on Assessments be will display here.</h3>
+              </div>
+            </li>
+            <% else %>
+
               <% Monitoringnote.where(client_id: @client.id).all.reverse.map do |monitoringnote| %>
                 <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><h2>Amet laboriosam saepe</h2><p style='font-size:18px;line-height:1.1'>#{monitoringnote.mnote}</p></div></li>" %>
+                <% end %>
                 <% end %>
             </ul>
           </div>

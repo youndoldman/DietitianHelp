@@ -1,6 +1,7 @@
     <%= stylesheet_link_tag 'iziToast' %>
     <%= stylesheet_link_tag 'iziModal' %>
     <%= stylesheet_link_tag 'animate.min' %>
+
     
 
     <div id="content" class="content">
@@ -46,14 +47,13 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Next Assessment Date</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
               <% Client.where(user_id: current_user.id).all.each_with_index do |x, i| %>
               <% if x.id != nil%>
               <!-- CREATES CLIENT TABLE IN DB // GRAY AND WHITE TABLES -->
-              <tr id=<%="#{x.id}"%> class=<%= i.odd? ? "active clientsOnTable" : "clientsOnTable" %> onclick="top.loadClient(<%=x.id%>)">
+              <tr id=<%="#{x.id}"%> class=<%= i.odd? ? "active clientsOnTable" : "clientsOnTable" %> onclick="top.loadClient(<%=x.id%>)" style="cursor: pointer">
                 <th scope="row"><%=x.id%></th>
                 <td><%=x.firstname%></td>
                 <td><%=x.lastname%></td>
@@ -62,7 +62,6 @@
                 <% else %>
                 <td>- -</td>
                 <%end %>
-                <td><%= link_to 'Show', @client %></td>
               </tr>
               <% else %>
               <% end %>
@@ -88,10 +87,14 @@
 
   <%= javascript_include_tag 'iziToast' %>
   <%= javascript_include_tag 'iziModal' %>
+
       <!-- INITIALIZE CALENDAR () -->
     <script>
-    
-    <% to_do_today = {} %>
+
+$(document).ready(function() {
+
+
+  <% to_do_today = {} %>
 
     $(function () {
 
@@ -216,6 +219,8 @@
         }
       });
     });
+  
+})  
 //UltraWidget
   function widgetUsed(id, number, string) {
   $("#" + id).prop('Counter',0).animate({
@@ -239,9 +244,10 @@
 
  widgetUsed("dueTodayCnt", <%=to_do_today.count %>);
 $(document).ready(function() {
-  top.$("#processingViewModal").iziModal('close');
+  top.NProgress.done();
   top.$('#clientload').fadeIn();
   top.$('#preloader').fadeOut();
+
 })
 
 // FOR CLIENTS DATATABLE TO WORK

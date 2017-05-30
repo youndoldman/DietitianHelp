@@ -23,10 +23,8 @@
           <a id="assessmentTool" aria-expanded="false">Assessment Tool<span id="isClientLoaded" class="badge badge-danger" style="margin-left: 20px">Load Client</span></a>
         </li>
                 <li>
-          <a type="button"id="historyfrommenu" aria-expanded="false">Client History</a>
+          <a type="button"id="historyfrommenu" aria-expanded="false">History</a>
         </li>
-
-                  <li><a href="dashboard_3.html">Dashboard v3</a></li>
                 </ul>
               </li>
 
@@ -51,8 +49,12 @@
     </li>
     <% else %>
     <% end %>
-    <li class="pull-left">
-      <a id="logoHeader" class="logo">DIETITIAN.HELP<i class="fa fa-heartbeat"></i></a>
+    <li id="logoOnHeader" class="animated" style="position: absolute;<%= current_user ? 'display: block;' : 'display: none;' %>;left: 70px;top: -4px;width:3%;left: 80px">
+      <a 
+       style="background-image: url('<%= asset_path('Logo SOS.png') %>');background-size: cover;height: 80px;width: 100%;background-position-x: -40px;background-repeat: no-repeat">
+      <!-- <%= image_tag 'Logo SOS.png', style: "position: absolute; display: block; height: 70px; top: -6px;left: 55px;"%> -->
+      </a>
+      <!-- <a class="logo">DIETITIAN.HELP<i class="fa fa-heartbeat"></i></a> -->
     </li>
     <li class="top-clock">
       <span class="current-time"></span>
@@ -62,40 +64,21 @@
       <ul class="nav navbar-right right-menu">
         <div class="empty"></div>
           <% if !current_user %>
-          <li class="form-inline">
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {class: ""}) do |f| %>
-          <%= devise_error_messages! %>
-            <%= f.text_field :username, class: "form-control material", placeholder: "Username", id: "login", type: "text", value: "iamaguest", autofocus: true%>
-            <%= f.password_field :password, class: "form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off", value: "samplepassw0rd"%>
-          <div class="btn text-uppercase" style="background-color: #374b89;margin-left: 10px">
-            <%= f.submit "Sign in", name:"submit", style:"border:none;background: transparent;text-transform:uppercase;color: #FFFFFF"%>
-          </div>
-          <div class="btn btn-warning text-uppercase">
-          <button id="registerBtn" style="border:none;background:transparent;text-transform:uppercase">Register</button>
-        </div>
-          <% end %>
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class: "", :id => "sign_up_user", :style => "display: none"}) do |f| %>
-          <%= devise_error_messages! %>
-            <%= f.text_field :username, class: "input-container form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%>
-            <%= f.password_field :password, class: "input-container form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>
-            <%= f.password_field :password_confirmation, class: "input-container form-control material", placeholder: "Password Confirmation", id: "passwordconfirm", autocomplete: "off" %>
-          <div class="btn btn-warning text-uppercase">
-            <%= f.submit "Register", name:"submit", style:"border:none;background:transparent;text-transform:uppercase"%>
-          </div>
-          <div class="btn btn-success text-uppercase" style="background-color: #374b89;margin-left: 10px">
-          <button id="logInBtn" style="border:none;background:transparent;background-color: transparent !important;text-transform:uppercase">Log In</button>
-        </div>
-        </li>
-          <% end %>
+            <li>
+              <a id="aboutFromNav">About</a>
+            </li>
+            <li>
+              
+            </li>
           <% else %>
           <li class="">
           <a id="searchHeaderIcon">
-            <i class="fa fa-search"></i>
+            <i class="fa fa-search-plus"></i>
           </a>
         </li>
         <li class="">
           <a href='users/sign_out' class='logo' rel="nofollow" data-method="delete" data-confirm="Are you sure?">
-            <i class="fa fa-toggle-on"></i>
+            <i class="fa fa-sign-out"></i>
           </a>
         </li>
           <% end %>
@@ -116,9 +99,8 @@
   });
   })
   // ONCLICK CALENDAR HEADER
-  $('#calendarFromMenu, #logoHeader').click(function(){
-  top.NProgress.start();
-  top.processingView();
+  $('#calendarFromMenu, #logoOnHeader').click(function(){
+  // top.NProgress.start();
   top.$('#clientload').fadeOut()
   top.$('#clientload').attr('src', '/calendar')
   })
@@ -127,16 +109,6 @@
 
   top.$('#searchAddModal').iziModal('open');
 });
-$('#registerBtn').click(function(e){
-  e.preventDefault();
-  $('#new_user').hide('fast');
-  $('#sign_up_user').show('fast');
-})
-$('#logInBtn').click(function(e){
-  e.preventDefault();
-  $('#new_user').show('fast');
-  $('#sign_up_user').hide('fast');
-})
 $('#assessmentTool').click(function() {
   // $('#clientload').fadeOut()
 })
@@ -147,11 +119,13 @@ $('#pinHeader').click(function() {
 })
 
   $('#accountFromMenu').click(function(){
-top.NProgress.start();
+// top.NProgress.start();
 
-  top.processingView();
   top.$('#clientload').fadeOut()
+  <% if current_user %>
   top.$('#clientload').attr('src', '/current_users/' + <%= current_user ? current_user.id : "" %>)
+  <% else %>
+  <% end %>
   })
 
   </script>

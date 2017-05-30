@@ -8,17 +8,13 @@ class SessionsController < DeviseController
   def new
     self.resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)
-    yield resource if block_given?
-    respond_with(resource, serialize_options(resource))
   end
 
   # POST /resource/sign_in
-  def create
+  def create 
     self.resource = warden.authenticate!(auth_options)
-    set_flash_message!(:notice, :signed_in)
     sign_in(resource_name, resource)
-    yield resource if block_given?
-    respond_with resource, location: after_sign_in_path_for(resource)
+    redirect_to '/'
   end
 
   # DELETE /resource/sign_out
@@ -27,6 +23,10 @@ class SessionsController < DeviseController
     set_flash_message! :notice, :signed_out if signed_out
     yield if block_given?
     respond_to_on_destroy
+  end
+
+  def redirect
+    redirect_to '/'
   end
 
   protected

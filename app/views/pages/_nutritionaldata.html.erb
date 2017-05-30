@@ -1,5 +1,3 @@
-<%= stylesheet_link_tag 'cs-skin-underline' %>
-
 <div id="clientloadright" class="main-wrapper">
   <div class=""><div class="col-lg-9">
     <div class="tabbable tabs-with-bg">
@@ -89,7 +87,7 @@
           <h1>Weight History</h1>
           <div class="form-inline">
             <div class="field-container form-group" style="width:20%;margin:12px">
-              <%= f.number_field :thirtywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+              <%= f.number_field :thirtywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()", value: '0' %>
               <%= f.label :thirtywt, "-30", class: "inlabel" %>
               
             </div>
@@ -101,7 +99,7 @@
           </div>
           <div class="form-inline">
             <div class="field-container form-group" style="width:20%;margin:12px">
-              <%= f.number_field :ninetywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+              <%= f.number_field :ninetywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()",value: '0' %>
               <%= f.label :ninetywt, "-90" , class: "inlabel" %>
               
             </div>
@@ -113,7 +111,7 @@
           </div>
           <div class="form-inline">
             <div class="field-container form-group" style="width:20%;margin:12px">
-              <%= f.number_field :oneeightywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+              <%= f.number_field :oneeightywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()", value: '0' %>
               <%= f.label :oneeightywt, "-180" , class: "inlabel" %>
               
             </div>
@@ -163,7 +161,7 @@
               <div id="assessment" class="container">
                 <div id="assZone">
                   <p id="assval" class="w-amount" data-toggle="tooltip" data-placement="top" title="Click to edit...">
-                    <span id='agespan' class='w-amount'>- -</span>y/o <span>Client</span> currently on <span id='cdietspan' class='w-amount'>- - </span> Diet to manage Dx of <span id="dxspan" class='w-amount'>- -</span>. Average intake: <span id='intakefromspan', class='w-amount'>- -</span>  <span id='intaketospan', class='w-amount'></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class='w-amount'>- -</span> lbs puts <span>Client</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Client</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.
+                    <span id='agespan' class='w-amount'>- -</span>y/o <span>Client</span> on <span id='cdietspan' class='w-amount'>- - </span> Diet to manage Dx of <span id="dxspan" class='w-amount'>- -</span>. Average intake: <span id='intakefromspan', class='w-amount'>- -</span>  <span id='intaketospan', class='w-amount'></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class='w-amount'>- -</span> lbs puts <span>Client</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Client</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.
                   </p>
                 </div>
                 <button type="button" class="btn btn-lg" onclick="resetAssess()">Reset</button>
@@ -325,7 +323,7 @@
           <option value="0%">0%</option>
           <option value="1">Refuse</option>
         </select>
-        <select id="client_intaketo" class="cs-select cs-skin-border 1" onclick="intake()">
+        <select id="client_intaketo" class="cs-select cs-skin-border" onclick="intake()">
           <option value="" disabled>To</option>
           <option value="100%">100%</option>
           <option value="75%">75%</option>
@@ -336,7 +334,7 @@
         <h4><strong>Assistance Needed</strong></h4>
         <div id='' class="form-inline" onclick="intake()">
           <select id="client_intaketo" class="cs-select cs-skin-border" onclick="intake()">
-            <option value="" disabled>To</option>
+            <option value="" disabled>Assistance Needed</option>
             <option value="3">Total Dependece</option>
             <option value="2">Limited Assistance</option>
             <option value="1">Setup Supervision</option>
@@ -565,6 +563,39 @@ top.$currentClient = <%= @client.id %>
 top.$('#isClientLoaded').removeClass('badge-danger').addClass('badge-success').text('<%=@client.firstname[0].to_s +  @client.lastname[0].to_s %> Loaded');
 
 
+
+
+
+
+
+  /*c3.js*/ // NEEDED FOR THE CHART
+  var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+  var myLine = new Chart(ctx2).Line(lineChartData, {
+  responsive: true
+  });
+  $(function () {
+  //Tooltips for Flot Charts
+  if ($(".flot-chart")[0]) {
+  $(".flot-chart").bind("plothover", function (event, pos, item) {
+  if (item) {
+  var x = item.datapoint[0].toFixed(2),
+  y = item.datapoint[1].toFixed(2);
+  $(".flot-tooltip").html(x + " of " + y)
+  .css({top: item.pageY+5, left: item.pageX+5})
+  .fadeIn(200);
+  } else {
+  $(".flot-tooltip").hide();
+  }
+  });
+  $("<div class='flot-tooltip'></div>").appendTo("body");
+  }
+  });
+
+
+
+
+
 // END DOCUMENT READY
 });
 $('#updateClient').ajaxForm({
@@ -719,9 +750,15 @@ return
   // INITIALIZE WEIGHT HISTORY CHART
   /////////
 
-  /*c3.js*/ // NEEDED FOR THE CHART
+
+  function rchart0 () {
+
+  top.NProgress.start();
+
+
   var ctx2 = document.getElementById("chart-line").getContext("2d");
-  var myLine = new Chart(ctx2).Line(lineChartData, {
+
+    var myLine = new Chart(ctx2).Line(lineChartData, {
   responsive: true
   });
   $(function () {
@@ -741,10 +778,6 @@ return
   $("<div class='flot-tooltip'></div>").appendTo("body");
   }
   });
-
-  function rchart0 () {
-
-  top.NProgress.start();
 
   //resets all parameters in assess
   var loss1 = false;

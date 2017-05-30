@@ -10,6 +10,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, 
          :validatable, :authentication_keys => [:username]
+
+         after_commit do |x|
+        end
 def email_required?
    false
 end
