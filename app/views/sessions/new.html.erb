@@ -2,6 +2,26 @@
 
 </style>      
 
+<!-- MOBILE STOPPER -->
+    <div id="mobileStopper" class="preloader table-wrapper" style="background: white;display:none">
+      <div class="table-row">
+        <div id='contente'>
+          <div id=''>
+
+
+              <h2 style="text-align: center">Mobile Devices Not Supported Yet.</h2>
+                  <h4 style="text-align: center">Use a desktop to experience the new Medical Nutrition Therapy process.</h4>
+          
+
+
+           
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
       <%= render partial: 'pages/header' %>
       <div id="fade" class="center" style="display: none;height:100%">
         <div id="jumbotronnoblur" class="" style="width:100%;height:100%;position: absolute;sund-color: #FFFFFFF">
@@ -157,31 +177,6 @@ $('#logInBtn').click(function(e){
       $('#sign_up_user1').toggleClass('fadeInUp zoomOut');
 
 })
-$(window).scroll(function (event) {
-console.log('ran')
-})
-
-<% if !current_user %>
-
-// HIDES/SHOWS LOGO ON NAVBAR BEGINS 
-$(window).on( "scroll", function() {
-  console.log($(window).scrollTop())
-      if($(window).scrollTop() > 190 && $(window).width() > 970) {
-        console.log('over 208')
-        $('#logoOnHeader').addClass('fadeInUp');
-        $('#logoOnHeader').removeClass('fadeOutDownBig');
-        $('#logoOnHeader').show();
-
-      }
-      else if($(window).scrollTop() < 190){
-        $('#logoOnHeader').addClass('fadeOutDownBig')
-        $('#logoOnHeader').removeClass('fadeInUp');
-
-      }
-    });
-// HIDES/SHOWS LOGO ON NAVBAR ENDS
-<%else %>
-<% end %>
 
 // SCROLLS TO ABOUT
 $("#aboutFromNav").click(function() {

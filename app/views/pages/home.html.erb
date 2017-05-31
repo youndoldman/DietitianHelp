@@ -1,6 +1,7 @@
     <%= stylesheet_link_tag 'iziToast' %>
     <%= stylesheet_link_tag 'animate.min' %>
 
+
   <!-- PRELOADER/SLOGAN -->
     <div id="preloader" class="preloader table-wrapper" style="background: white;">
       <div class="table-row">
@@ -91,14 +92,18 @@
     </div>
     <!-- END SEARCH MODAL -->
 
+
     <!-- MODAL FOR "PROCESSING VIEW..."" LOADER -->
-    <div id="processingViewModal" class="iziModal" data-iziModal-group="alert" data-iziModal-loop></div>
+    <!-- <div id="processingViewModal" class="iziModal" data-iziModal-group="alert" data-iziModal-loop></div> -->
+
 
     <!-- BEGIN CONTENT -->
     <div id="mainwrapper"class="table-wrapper">
 
+
       <!-- HEADER -->
       <div><%= render partial: 'pages/header' %></div>
+
 
       <!-- IFRAME WHERE ALL ACTIONS FROM HEADER TAKE PLACE  -->
       <div style="height: 100%">
@@ -106,6 +111,8 @@
     </div>
     </div>
   <!-- END CONTENT -->
+
+
   <!--Scripts-->
   <%= javascript_include_tag 'jquery.min' %>
   <%= javascript_include_tag 'jquery-ui.min' %>
@@ -201,7 +208,6 @@
   var defaultAssessment = '<p id="note-editor-2" class="w-amount note-air-editor note-editable panel-body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Click to edit..." contenteditable="true"> <span id="agespan" class="w-amount">- -</span>y/o <span>Resident</span> currently on <span id="cdietspan" class="w-amount">- - </span> Diet to manage Dx of <span id="dxspan" ,="" class="w-amount">- -</span>. Average intake: <span id="intakefromspan" ,="" class="w-amount">- -</span> <span id="intaketospan" ,="" class="w-amount"></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class="w-amount">- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow" class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN. </p><div class="tooltip fade top in" role="tooltip" id="tooltip144344" style="top: 193.406px; left: 450.25px; display: block;"><div class="tooltip-arrow" style="left: 50%;"></div><div class="tooltip-inner">Click to edit...</div></div>';
   </script>
   <script>
-  NProgress.start()
   var currentUser = <%= current_user.id %>
   var $currentClient;
   var food1;
@@ -394,6 +400,7 @@
   // $("#processingViewModal").iziModal('open');
   }
   function loadClient(clientId) {
+  NProgress.start();
   assign(clientId);
   // VALIDATES clientId 
   // IF INVALID RETURN
@@ -417,7 +424,6 @@
   // PLOT DATA IF CLIENT EXIST
   /////////
   if(jQuery.isNumeric(clientId)) {
-  processingView();
   //MAKES THE CALL TO DATABASE BY ATTEMPTING TO LOAD URL "clients/<clientId> INTO IFRAME... CONTROLLER CHECKS IF USERNAME HAS ACCESS TO CLIENT THEN RESPONDS WITH CLIENT VIEW.
   $('#clientload').attr("src", "clients/" + clientId);
   };
@@ -430,7 +436,6 @@
   }
   });
   })
-  NProgress.inc();
   // $currentClient VARIABLE TO COMPARE WITH NEW CLIENT BEING LOADED. IF SAME RETURN FUNCTION AND CLOSE MODAL
   $currentClient = clientId
   }
@@ -686,7 +691,6 @@
     // DOCUMENT READY
   $(document).ready(function(){
   $("#hiddendob").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
-  top.NProgress.done()
   $(document).ajaxStart(function(){
   $("#wait").css("display", "block");
   });
@@ -701,10 +705,6 @@
   $('#select-beast-landsearch-selectized').css({opacity: 1, position: 'absolute', left: 0, width: '100%', paddingTop: '10px', paddingLeft: '9px'});
   $('.selectize-dropdown-content').attr('id', 'landsearch-dropdown');
   
-  top.$("#processingViewModal").iziModal('close')
-  $('#assessmentTool').on('click', function() {
-  window.$("#processingViewModal").iziModal('open');
-  });
   });
   document.onload = function() {
      if(document.body.contains($('#login')[0])) {

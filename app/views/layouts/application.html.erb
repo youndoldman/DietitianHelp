@@ -23,6 +23,8 @@
     <%= stylesheet_link_tag 'cs-skin-underline' %>
     <%= stylesheet_link_tag 'fullcalendar' %>
     <%= stylesheet_link_tag 'animate.min' %>
+    <%= stylesheet_link_tag 'nprogress' %>
+
 
 
 
@@ -35,6 +37,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+  
+
   <%= yield %>
         <footer>
         <div id="footer" class="col-lg-12" style="display: none;position: relative;background: #e23f3f;color: #FFFFFF; width: 100%;padding: 5em;text-align: center">
@@ -51,21 +55,56 @@
     <!--Selects-->
   <%= javascript_include_tag 'selectFx' %>
   <!-- PROGRESS BAR -->
+  <%= javascript_include_tag 'nprogress' %>
 
 
 
 
 
 <script>
-top.NProgress.start();
 
   $(document).ready(function(){
-top.NProgress.done();
+// top.NProgress.start();
+
+// top.NProgress.done();
 
 top.$('#clientload').fadeIn();
 
+// MOBILE DEVICES STOPPER
+  if($(window).width() < 1250) {
+    $('#mobileStopper').show();
+    return
+  }
+    $('#mobileStopper').hide();
+    return
 
   })
+
+
+
+
+
+    <% if !current_user %>
+
+// HIDES/SHOWS LOGO ON NAVBAR BEGINS 
+$(window).on( "scroll", function() {
+  console.log($(window).scrollTop())
+      if($(window).scrollTop() > 190 && $(window).width() > 970) {
+        $('#logoOnHeader').addClass('fadeInUp');
+        $('#logoOnHeader').removeClass('fadeOutDownBig');
+        $('#logoOnHeader').show();
+
+      }
+      else if($(window).scrollTop() < 190){
+        $('#logoOnHeader').addClass('fadeOutDownBig')
+        $('#logoOnHeader').removeClass('fadeInUp');
+
+      }
+    });
+// HIDES/SHOWS LOGO ON NAVBAR ENDS
+<%else %>
+<% end %>
+
 </script>
 
   </body>
