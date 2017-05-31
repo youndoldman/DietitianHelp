@@ -37,8 +37,17 @@
         <div class="tab-content">
           <div class="tab-pane big-box  fade in active" id="tab-1">
             <ul class="cbp_tmtimeline" style=''>
+              <% if !Fullassessment.where(client_id: @client.id).any? %>
+              <li style="width: 90%; height: 80px; background-color: #f1f4f5; color: black;text-align: center; margin-left: 55px">
+              <div>
+                <h3 style="position: absolute; top: 15%; left: 28%">Full Assessmentes will be displayed here.</h3>
+              </div>
+            </li>
+            <% else %>
+  
               <% Fullassessment.where(client_id: @client.id).all.reverse.map do |fullassessment| %>
                 <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><p style='font-size:18px;line-height:1.1'><h1>#{fullassessment.fassess.split(" -44044- ")[0]} - #{fullassessment.fassess.split(" -44044- ")[1]}</h1><h2>#{fullassessment.fassess.split(" -44044- ")[2]}</h2> <h1>Diagnosis</h1><h2>#{fullassessment.fassess.split(" -44044- ")[3]}</h2><h1>Intervention</h1><h2>#{fullassessment.fassess.split(" -44044- ")[4]}</h2><h1>Monitoring/Evaluation - #{@client.nextevaluationnotes.last == nil ? "___Please include date on 'Next Evaluation Note'" : "Next due on #{@client.nextevaluationnotes.last.nnote_date}"}</h1><h2>#{fullassessment.fassess.split(" -44044- ")[5]}</h2></p></div></li>" %>
+                <% end %>
                 <% end %>
             </ul>
           </div>
@@ -49,7 +58,7 @@
               <% if !Progressnote.where(client_id: @client.id).any? %>
             <li style="width: 90%; height: 80px; background-color: #f1f4f5; color: black;text-align: center; margin-left: 55px">
               <div>
-                <h3 style="position: absolute; top: 15%; left: 28%">Progress notes saved on Assessments will be display here.</h3>
+                <h3 style="position: absolute; top: 15%; left: 28%">Progress notes saved on Assessments will be displayed here.</h3>
               </div>
             </li>
             <% else %>
@@ -65,7 +74,7 @@
 <% if !Monitoringnote.where(client_id: @client.id).any? %>
             <li style="width: 90%; height: 80px; background-color: #f1f4f5; color: black;text-align: center; margin-left: 55px">
               <div>
-                <h3 style="position: absolute; top: 15%; left: 28%">Monitoring notes saved on Assessments be will display here.</h3>
+                <h3 style="position: absolute; top: 15%; left: 28%">Monitoring notes saved on Assessments be will displayed here.</h3>
               </div>
             </li>
             <% else %>
