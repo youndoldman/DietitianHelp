@@ -30,12 +30,8 @@ gem 'json', '~> 1.8', '>= 1.8.3'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt'
-# COOL MODALS AND ALERTS
-gem 'izimodal'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'material_design_icons_rails'
-gem 'material_icons'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

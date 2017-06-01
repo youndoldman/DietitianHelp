@@ -3,13 +3,13 @@
 </style>      
 
 <!-- MOBILE STOPPER -->
-    <div id="mobileStopper" class="preloader table-wrapper" style="background: white;display:none">
+    <div id="mobileStopper" class="preloader table-wrapper" style="background: #b2d5d6;display:none">
       <div class="table-row">
-        <div id='contente'>
-          <div id=''>
+        <div id='contente' style="height: 100%; width: 90%; position: absolute; top: 80%">
+          <div>
 
 
-              <h2 style="text-align: center">Mobile Devices Not Supported Yet.</h2>
+              <h2 style="text-align: center">Mobile Devices Not Yet Supported.</h2>
                   <h4 style="text-align: center">Use a desktop to experience the new Medical Nutrition Therapy process.</h4>
           
 
@@ -108,13 +108,16 @@
       // $('body').attr('style', "background: #a7bec5")
 
       $(document).ready(function(){
-        $('#fade').delay(200).show('fast');
         $('#slogan').delay(1300).fadeIn(580);
         $('#jumbotronlogo').delay(1000).fadeIn(100);
+  if($(window).width() > 1250) {
+        $('#fade').delay(200).show('fast');
+
         $('#divider1').delay(1000).fadeIn(100);
         $('#divider2').delay(1000).fadeIn(100);
         $('#footer').delay(1000).fadeIn(100);
         setTimeout(inviter, 2000);
+      }
         //$('#jumbotronblur').delay(1000).fadeOut(5000);
         //$('#divider2').foggy({
           //  blurRadius: 1,          // In pixels.

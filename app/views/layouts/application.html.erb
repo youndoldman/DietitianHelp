@@ -72,6 +72,9 @@ top.$('#clientload').fadeIn();
 
 // MOBILE DEVICES STOPPER
   if($(window).width() < 1250) {
+    top.$('#fade').hide();
+    top.$('#divider1').hide();
+    top.$('#divider2').hide();
     $('#mobileStopper').show();
     return
   }
@@ -88,7 +91,6 @@ top.$('#clientload').fadeIn();
 
 // HIDES/SHOWS LOGO ON NAVBAR BEGINS 
 $(window).on( "scroll", function() {
-  console.log($(window).scrollTop())
       if($(window).scrollTop() > 190 && $(window).width() > 970) {
         $('#logoOnHeader').addClass('fadeInUp');
         $('#logoOnHeader').removeClass('fadeOutDownBig');
