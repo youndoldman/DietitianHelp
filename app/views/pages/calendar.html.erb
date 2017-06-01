@@ -3,8 +3,8 @@
     <%= stylesheet_link_tag 'animate.min' %>
 
     
-
-    <div id="content" class="content">
+<div id="dashboard">
+    <div class="content">
         <div class="col-lg-7">
           <div id="calendar" class="fc-calendar box-shadow"></div>
         </div>
@@ -71,7 +71,7 @@
         </div>
       </div>
       </div>
-
+</div>
 
     <%= javascript_include_tag 'jquery.flot' %>
       <%= javascript_include_tag 'jquery.flot.resize' %>
@@ -91,6 +91,7 @@
       <!-- INITIALIZE CALENDAR () -->
     <script>
 
+// DOCUMENT READY
 $(document).ready(function() {
 
 
@@ -220,6 +221,72 @@ $(document).ready(function() {
       });
     });
 
+
+  top.$('#preloader').fadeIn('slow');
+  var preloader = top.$('#contente');
+  var preloaderUL = top.$('#visiblee');
+
+  preloader.addClass('contente')
+
+  preloaderUL.addClass('preloader-animate')
+
+
+  preloader.show()
+
+
+  // ON PRELOADER (SLOGAN) FADEIN END
+
+
+
+    top.pbar.set(0.4)
+
+
+// TIMEOUT FOR PROGRESS BAR TO FINSIH AND DELAY DONE ANIMATION FOR UX
+setTimeout(function() {
+
+  top.pbar.inc(0.67)
+
+
+  }, 3000);
+
+var animationCount = 1
+// TIMEOUT TO WAIT FOR PRELOADER TO STAY IN LAST POSITION FOR A FEW SECONDS (AFTER top.PBAR DONE)
+function aniCount() {
+
+  if(animationCount < 100) {
+
+    setTimeout(function() {
+    top.pbar.inc()
+    animationCount ++
+    aniCount();
+  }, 500);
+
+  };
+  if(animationCount < 250 && animationCount > 100) {
+    top.pbar.done()
+    return
+  };
+
+
+};
+aniCount()
+
+
+        preloaderUL.one('webkitAnimationEnd oanimationend msAnimationEnd animationend',   
+    function() {
+
+      top.$('#preloader').fadeOut();
+animationCount += 100
+
+  });
+
+
+
+
+
+
+
+
 })  
 //UltraWidget
   function widgetUsed(id, number, string) {
@@ -243,11 +310,6 @@ $(document).ready(function() {
 });
 
  widgetUsed("dueTodayCnt", <%=to_do_today.count %>);
-$(document).ready(function() {
-  top.$('#clientload').fadeIn();
-  top.$('#preloader').fadeOut();
-
-})
 
 // FOR CLIENTS DATATABLE TO WORK
 

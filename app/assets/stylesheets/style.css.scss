@@ -73,7 +73,7 @@ transform-origin: 29% -1400%;
 /*
 CUSTOM PRELOADER
 */
-#contente {
+.contente {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -87,39 +87,39 @@ CUSTOM PRELOADER
   overflow: visible;
 }
 
-#visiblee {
+.preloader-animate {
   font-weight: 300;
   overflow: hidden;
   height: 40px;
   padding: 0 40px;
 }
-#visiblee:before {
+.preloader-animate:before {
   content: '[';
   left: 0;
   line-height: 40px;
 }
-#visiblee:after {
+.preloader-animate:after {
   content: ']';
   position: absolute;
   right: 0;
   line-height: 40px;
 }
-#visiblee:after, #visiblee:before {
+.preloader-animate:after, .preloader-animate:before {
   position: absolute;
   top: 0;
   color: black;
   font-size: 42px;
   -webkit-animation-name: opacity;
   -webkit-animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: 1;
   animation-name: opacity;
   animation-duration: 2s;
-  animation-iteration-count: infinite;
+  animation-iteration-count: 1;
   animation-delay: 1.5s;
   -webkit-animation-delay: 1.5s;
 }
 
-#visiblee p {
+.preloader-animate p {
   display: inline;
   float: left;
   margin: 0;
@@ -128,22 +128,22 @@ CUSTOM PRELOADER
   line-height: 40px;
 }
 
-#visiblee ul {
+.preloader-animate ul {
   margin-top: 0;
   padding-left: 110px;
   text-align: left;
   list-style: none;
   -webkit-animation-name: change;
   -webkit-animation-duration: 6s;
-  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: 1;
   animation-name: change;
   animation-duration: 6s;
-  animation-iteration-count: infinite;
+  animation-iteration-count: 1;
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
 }
 
-#visiblee ul li {
+.preloader-animate ul li {
   line-height: 40px;
   font-size: 42px;
   margin: 0;

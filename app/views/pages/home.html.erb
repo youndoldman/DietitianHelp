@@ -5,11 +5,11 @@
   <!-- PRELOADER/SLOGAN -->
     <div id="preloader" class="preloader table-wrapper" style="background: white;">
       <div class="table-row">
-        <div id='contente'>
-          <div id='visiblee'>
+        <div id="contente" class="" style="display: none">
+          <div id='visiblee' class="">
             <p>
             </p>
-            <ul>
+            <ul id="preloader-list" style="">
               <li >_Gather.</li>
               <li >_Assess.</li>
               <li>_Comply.</li>
@@ -22,8 +22,8 @@
 
 
     <!-- BEGIN SEARCH/ADD MODAL -->
-    <div id="searchAddModal" class="">
-      <div style="visibility:visible;z-index:900;position: fixed;left: 450px;right: -900;top: 150px;bottom: -200;width: 500px;height: 300px;" class="table-wrapper">
+    <div id="searchAddModal" class="" style="display: none">
+      <div style="visibility:visible;z-index:900;position: fixed; display: inline-block;top: 25%;left: 30%" class="table-wrapper">
         <div class="bgblur">
           <div class="table-cell text-center">
             <div class="landingfront pagenotfound">
@@ -188,26 +188,10 @@
   <!-- MASKED INPUT TO MATCH DATE, PHONE NUMBERS, ETC...-->
   <%= javascript_include_tag 'datedropper' %>
   <script>
-      // INIT PROGRESS BUTTON
-    [].slice.call( document.querySelectorAll( 'button.progress-button' ) ).forEach( function( bttn ) {
-    new ProgressButton( bttn, {
-    callback : function( instance ) {
-    var progress = 0,
-    interval = setInterval( function() {
-    progress = Math.min( progress + Math.random() * 0.1, 1 );
-    instance._setProgress( progress );
-    if( progress === 1 ) {
-    instance._stop(1);
-    clearInterval( interval );
-    }
-    });
-    }
-    } );
-    } );
+    var pbar = top.NProgress
+pbar.start();
   // PRESSING THE RESET BUTTON ON ADIME TAB APPENDS defaultAssessment TO DIV
   var defaultAssessment = '<p id="note-editor-2" class="w-amount note-air-editor note-editable panel-body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Click to edit..." contenteditable="true"> <span id="agespan" class="w-amount">- -</span>y/o <span>Resident</span> currently on <span id="cdietspan" class="w-amount">- - </span> Diet to manage Dx of <span id="dxspan" ,="" class="w-amount">- -</span>. Average intake: <span id="intakefromspan" ,="" class="w-amount">- -</span> <span id="intaketospan" ,="" class="w-amount"></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class="w-amount">- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow" class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN. </p><div class="tooltip fade top in" role="tooltip" id="tooltip144344" style="top: 193.406px; left: 450.25px; display: block;"><div class="tooltip-arrow" style="left: 50%;"></div><div class="tooltip-inner">Click to edit...</div></div>';
-  </script>
-  <script>
   var currentUser = <%= current_user.id %>
   var $currentClient;
   var food1;
@@ -295,9 +279,6 @@
   $('#intadime').html('yeah')
   $('#monevadime').html('yeah')
   } 
-  </script>
-
-  <script>
   var selectedClient;
   var clientId;
   function assign(param) {
@@ -491,8 +472,6 @@
   //////////////////////////////////////////////////
   //AUTOCOMPLETE FORM ELEMENTS, PREPOPULATED OPTIONS ENDS
   /////////////////////////////////////////////////
-  </script>
-  <script>
   ////////////////////
   // DATEPICKERS 'PICKADAY'
   ///////////////////
@@ -632,8 +611,6 @@
   $('.archive-todo span').text(archive);
   };
   });
-  </script>
-  <script>
   // var $parentElement= document <-- COMMENTED OUT MAY 3 6:01AM... ERASE IF NO IMPACT ON APP
   function submit() {
   var x = $('#newClient');
@@ -685,7 +662,6 @@
   pauseOnHover: true,
   timeoutProgressbarColor: '#CABC42',
   });
-
 
 
     // DOCUMENT READY
