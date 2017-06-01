@@ -23,7 +23,7 @@
 
     <!-- BEGIN SEARCH/ADD MODAL -->
     <div id="searchAddModal" class="" style="display: none">
-      <div style="visibility:visible;z-index:900;position: fixed; display: inline-block;top: 25%;left: 30%" class="table-wrapper">
+      <div style="visibility:visible;z-index:900;position: fixed; display: inline-block;top: 25%;left: 30%;height:auto;width:500px" class="table-wrapper">
         <div class="bgblur">
           <div class="table-cell text-center">
             <div class="landingfront pagenotfound">
@@ -681,12 +681,81 @@ pbar.start();
   $('#select-beast-landsearch-selectized').css({opacity: 1, position: 'absolute', left: 0, width: '100%', paddingTop: '10px', paddingLeft: '9px'});
   $('.selectize-dropdown-content').attr('id', 'landsearch-dropdown');
   
+
+
+
+
+
   });
-  document.onload = function() {
-     if(document.body.contains($('#login')[0])) {
-    $('#login').val('iamaguest');
-    $('#password').val('samplepassw0rd');
-  }
+  window.onload = function() {
+    // INITIAL PROMO TO BE SHOWN WHEN LOG IN
+    initialPromo();
+      function initialPromo() {
+
+  top.$('#preloader').fadeIn('slow');
+  var preloader = top.$('#contente');
+  var preloaderUL = top.$('#visiblee');
+
+  preloader.addClass('contente')
+
+  preloaderUL.addClass('preloader-animate')
+
+
+  preloader.show()
+
+
+  // ON PRELOADER (SLOGAN) FADEIN END
+
+
+
+    top.pbar.set(0.4)
+
+
+// TIMEOUT FOR PROGRESS BAR TO FINSIH AND DELAY DONE ANIMATION FOR UX
+setTimeout(function() {
+
+  top.pbar.inc(0.67)
+
+
+  }, 3000);
+
+var animationCount = 1
+// TIMEOUT TO WAIT FOR PRELOADER TO STAY IN LAST POSITION FOR A FEW SECONDS (AFTER top.PBAR DONE)
+function aniCount() {
+
+  // ANIMATION END FIRES TWICE. ANIMATION COUNT PREVENTS EXTRA PROGRESS BAR THAT WILL NEVER FINISH... SECOND PROGRESS BAR STOPPED BY CONDITION BASED ON animationCount
+  if(animationCount < 100) {
+
+    setTimeout(function() {
+    top.pbar.inc()
+    animationCount ++
+    aniCount();
+  }, 500);
+
+  };
+  if(animationCount < 250 && animationCount > 100) {
+    top.pbar.done()
+    return
+  };
+
+
+};
+aniCount()
+
+// ON ANIMATION END FADEOUT INTIALPROMO
+        preloaderUL.one('webkitAnimationEnd oanimationend msAnimationEnd animationend',   
+    function() {
+
+      top.$('#preloader').fadeOut();
+animationCount += 100
+
+  });
+
+
+
+}
+
+
   }
   </script>
 </html>

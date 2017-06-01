@@ -219,75 +219,9 @@ $(document).ready(function() {
           $event.focus();
         }
       });
-    });
-
-
-  top.$('#preloader').fadeIn('slow');
-  var preloader = top.$('#contente');
-  var preloaderUL = top.$('#visiblee');
-
-  preloader.addClass('contente')
-
-  preloaderUL.addClass('preloader-animate')
-
-
-  preloader.show()
-
-
-  // ON PRELOADER (SLOGAN) FADEIN END
-
-
-
-    top.pbar.set(0.4)
-
-
-// TIMEOUT FOR PROGRESS BAR TO FINSIH AND DELAY DONE ANIMATION FOR UX
-setTimeout(function() {
-
-  top.pbar.inc(0.67)
-
-
-  }, 3000);
-
-var animationCount = 1
-// TIMEOUT TO WAIT FOR PRELOADER TO STAY IN LAST POSITION FOR A FEW SECONDS (AFTER top.PBAR DONE)
-function aniCount() {
-
-  if(animationCount < 100) {
-
-    setTimeout(function() {
-    top.pbar.inc()
-    animationCount ++
-    aniCount();
-  }, 500);
-
-  };
-  if(animationCount < 250 && animationCount > 100) {
-    top.pbar.done()
-    return
-  };
-
-
-};
-aniCount()
-
-
-        preloaderUL.one('webkitAnimationEnd oanimationend msAnimationEnd animationend',   
-    function() {
-
-      top.$('#preloader').fadeOut();
-animationCount += 100
+    });  
 
   });
-
-
-
-
-
-
-
-
-})  
 //UltraWidget
   function widgetUsed(id, number, string) {
   $("#" + id).prop('Counter',0).animate({
@@ -327,4 +261,5 @@ $(function () {
     });
 
  toDoToday = <%= raw  to_do_today.to_a.flatten %>;
+
   </script>
