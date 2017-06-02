@@ -1,9 +1,9 @@
 
 # README
 
-Training ground to learn web development.
+Prototype of small CRUD app using Ruby on Rails.
 
-* No new users permitted yet.
+Functions as an Electronic Medical Record.
 
 ----------
 
