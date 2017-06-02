@@ -151,7 +151,7 @@
         <div id="tab-2" class="tab-pane big-box fade in">
           <div class="jumbotron">
             <div id="assessmentType" class="field-container form-group" style="width: 40%;display: inline-block; margin 0px;">
-              <select class="cs-select cs-skin-underline"style="">
+              <select class="cs-select cs-skin-underline"style="" size="3">
               <option value="full Assessment">Full Assessment - <%= Time.now.strftime("%b %d, %Y") %></option>
               <option value="quaterly Assessment">Quaterly Assessment - <%= Time.now.strftime("%b %d, %Y") %></option>
               <option value="initialAssessment">Initial Assessment - <%= Time.now.strftime("%b %d, %Y") %></option>
@@ -314,7 +314,7 @@
     <div id="prueba"class="col-lg-2 content-box big-box box-shadow">
       <h4><strong>Intake</strong></h4>
       <div id='parentofselect' class="form-inline" onclick="intake()">
-        <select id="client_intakefrom" class="cs-select cs-skin-border" onclick="intake()">
+        <select id="client_intakefrom" class="cs-select cs-skin-border" onclick="intake()" size="4">
           <option value="" disabled>From</option>
           <option value="100%">100%</option>
           <option value="75%">75%</option>
@@ -323,7 +323,7 @@
           <option value="0%">0%</option>
           <option value="1">Refuse</option>
         </select>
-        <select id="client_intaketo" class="cs-select cs-skin-border" onclick="intake()">
+        <select id="client_intaketo" class="cs-select cs-skin-border" onclick="intake()" size="4">
           <option value="" disabled>To</option>
           <option value="100%">100%</option>
           <option value="75%">75%</option>
@@ -333,7 +333,7 @@
         </select>
         <h4><strong>Assistance Needed</strong></h4>
         <div id='' class="form-inline" onclick="intake()">
-          <select id="client_intaketo" class="cs-select cs-skin-border" onclick="intake()">
+          <select id="client_intaketo" class="cs-select cs-skin-border" onclick="intake()" size="3">
             <option value="" disabled>Assistance Needed</option>
             <option value="3">Total Dependece</option>
             <option value="2">Limited Assistance</option>

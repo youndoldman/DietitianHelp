@@ -123,7 +123,7 @@ $(document).ready(function() {
         //Add Events
         // FETCHING FROM ALL USER'S CLIENTS --- ATOMATICALLY ADDS 5 DAYS TO NEXTEVALUATIONNOTE_DATE TO = ENDDATE IN CALENDAR
         // MONTHS FROM CALENDAR PLUGIN ARE AHEAD BY 1 WILL DO -1 ON ALL MONTHS TO MATCH CALENDAR OUTPUT -- SEE start_date[1]
-        events: [<% if Nextevaluationnote.where(user_id: current_user.id).all.count === 0 %>
+        events: [<% if Nextevaluationnote.where(user_id: current_user.id).none? %>
         <%= raw "" %>
         <% else %>
         <% Nextevaluationnote.where(user_id: current_user.id).map do |x| %>
@@ -140,6 +140,7 @@ $(document).ready(function() {
         <%= raw "title: '#{Client.find(x.client_id).firstname.to_s} #{Client.find(x.client_id).lastname.to_s}'," %>
         <%= raw "start:" + ' new Date(' + start_date.join(", ") + ")," %>
       <%= raw "end:" + ' new Date(' + end_date.join(", ") + ")," %>
+      <%= raw "time:" + "'4pm'," %>
       <%= raw "className:" + "'' 
             },"%>
         // compares if today's date is between nnote_date -- nnote_date + 5 and pushes to to_do_today as hash
@@ -147,11 +148,13 @@ $(document).ready(function() {
         // ASSESSMENT DATE RANGE
             <% Date.parse(Time.now.to_s).between?(Date.parse(start_date_range.join("-").to_s), Date.parse(start_date_range.join("-").to_s) +5) ? to_do_today["#{Client.where(id: x.client_id).first.id}"] = x.nnote_date.to_s : "" %>
 
-      <% end %>
-      <% end %>],
-        editable: true,
+<% end %>
+<% end %>      ],
+
+
+        editable: false,
         eventLimit: true,
-        droppable: true, // this allows things to be dropped onto the calendar
+        droppable: false, // this allows things to be dropped onto the calendar
         drop: function (date, allDay) { // this function is called when something is dropped
 
           // retrieve the dropped element's stored Event Object
