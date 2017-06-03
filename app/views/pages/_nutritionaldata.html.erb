@@ -87,7 +87,7 @@
           <h1>Weight History</h1>
           <div class="form-inline">
             <div class="field-container form-group" style="width:20%;margin:12px">
-              <%= f.number_field :thirtywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()", value: '0' %>
+              <%= f.number_field :thirtywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()", value: "#{@client.thirtywt.to_s ? @client.thirtywt : '0'}" %>
               <%= f.label :thirtywt, "-30", class: "inlabel" %>
               
             </div>
@@ -99,7 +99,7 @@
           </div>
           <div class="form-inline">
             <div class="field-container form-group" style="width:20%;margin:12px">
-              <%= f.number_field :ninetywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()",value: '0' %>
+              <%= f.number_field :ninetywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()",value: "#{@client.ninetywt ? @client.ninetywt.to_s : '0'}" %>
               <%= f.label :ninetywt, "-90" , class: "inlabel" %>
               
             </div>
@@ -111,7 +111,7 @@
           </div>
           <div class="form-inline">
             <div class="field-container form-group" style="width:20%;margin:12px">
-              <%= f.number_field :oneeightywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()", value: '0' %>
+              <%= f.number_field :oneeightywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()", value: "#{@client.oneeightywt.to_s ? @client.oneeightywt : '0'}" %>
               <%= f.label :oneeightywt, "-180" , class: "inlabel" %>
               
             </div>
