@@ -1,3 +1,4 @@
+<!-- ASSESSMENT TOOL -->
 <div id="clientloadright" class="main-wrapper">
   <div class=""><div class="col-lg-9">
     <div class="tabbable tabs-with-bg">
@@ -13,8 +14,10 @@
         </li>
       </ul>
     </div>
-    <!-- TABLE 1 -->
-    
+
+
+<!-- GATHER TAB -->
+    <!-- HIDDEN FORM -->
     <div class="tab-content">
       <div id="tab-1" class="tab-pane big-box fade active in">
         <div style="display:inline-block;vertical-align:top;margin:12px;width:30%"><h1>Current</h1>
@@ -52,9 +55,10 @@
           <div class="field-container form-group hidden">
             <%= f.number_field :flreq, type: "string", class: "inin form-control material input-lg", id: "hiddenflreq", required: true %>
             <%= f.label :flreq, class: "inlabel" %>
-            
           </div>
-          <!-- HIDDEN FORM -->
+
+
+        <!-- FIRST FORM -->
           <div class="field-container form-group">
             <%= f.text_field :cdiet, type: "string", class: "inin form-control material input-lg", required: true, onchange: "diet()"%>
             <%= f.label :cdiet, 'Current Diet', class: "inlabel" %>
@@ -97,6 +101,9 @@
               
             </div>
           </div>
+
+
+          <!-- SECOND FORM -->
           <div class="form-inline">
             <div class="field-container form-group" style="width:20%;margin:12px">
               <%= f.number_field :ninetywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()",value: "#{@client.ninetywt ? @client.ninetywt.to_s : '0'}" %>
@@ -122,6 +129,9 @@
             </div>
           </div>
         </div>
+
+
+        <!-- THIRD FORM - LABS FORM -->
         <div style="display:inline-block;margin:12px;vertical-align:top;width:30%">
           <div style="display:inline-block"><h1 style="display:inline-block">Labs</h1></div>
           <div class="trigger" data-izimodal-open="labsform" cursor="pointer">
@@ -147,9 +157,12 @@
             <% end %>
           </div>
         </div>
-        <!-- TAB 2 -->
+
+
+        <!-- ASSEESS TAB -->
         <div id="tab-2" class="tab-pane big-box fade in">
           <div class="jumbotron">
+            <!-- ASSESSMENT TYPE -->
             <div id="assessmentType" class="field-container form-group" style="width: 40%;display: inline-block; margin 0px;">
               <select class="cs-select cs-skin-underline"style="" size="3">
               <option value="full Assessment">Full Assessment - <%= Time.now.strftime("%b %d, %Y") %></option>
@@ -175,7 +188,9 @@
               </div>
             </div>
           </div>
-          <!-- TAB 3/datatable -->
+
+
+          <!-- COMPLY TAB -->
           <div id="comply" class="tab-pane big-box fade in">
             <div class="tab-content">
               <!-- COMPLY-->
@@ -213,6 +228,8 @@
                     </div>
                     <% end %>
                     <div id="notesAndNextEvaluationButtons" style="margin-top: 2em;float: right">
+
+
                       <!-- EVENTLISTENER THAT SUBMITS ALL FORMS ONCLICK -->
                       <button id="doneBtn" class="btn btn-success" type="button"  data-toggle="tooltip" data-placement="top" title="Will save assement and all notes to client's history database">DONE</button>
                     </div>
@@ -224,6 +241,9 @@
         </div>
       </div>
     </div>
+
+
+    <!-- LABS FORM MODAL -->
     <div id="labsform" class="iziModal" role="dialog">
       <div class="modal-dialog">
         <!-- Modal content-->
@@ -293,6 +313,9 @@
         
       </div>
     </div>
+
+
+<!-- WEIGHT CHART -->
     <div class="col-lg-3 content-box">
       <div class="content-title big-box i-block">
         <h4 class="zero-m">Weight History</h4>
@@ -310,6 +333,8 @@
         </div>
       </div>
     </div>
+
+
     <!-- INTAKE-->
     <div id="prueba"class="col-lg-2 content-box big-box box-shadow">
       <h4><strong>Intake</strong></h4>
@@ -343,7 +368,9 @@
         </div>
       </div>
     </div>
-    <!-- WEIGHT GOAL -->
+
+
+    <!-- PRESSURE ULCERS -->
     <div class="col-lg-3 content-box big-box box-shadow">
       <div class="form-inline">
         <h4><strong>Pressure Ulcer</strong></h4>
@@ -361,8 +388,9 @@
     <div id="modal-alert3" class="iziModal" data-iziModal-group="alert" data-iziModal-loop></div>
     <div id="modal-alert4" class="iziModal" data-iziModal-group="alert" data-iziModal-loop></div>
   </div>
-<script>
 
+
+<script>
 //DATATABLE FUNCTION TO LIMIT AMOUNT OF RESULTS DISPLAYED IN SUPPOSEDLY WT HISTORY FROM PANEL TABS
 var parent = document.getElementById("assessment")
 $(function () {
@@ -594,6 +622,8 @@ window.$('#complyTopTab').trigger('click')
 $("#modal-alert2").iziModal('open');
 }
 })
+
+
 // INITIALIZE CHAIN OF FORM SUBMISSION
 $('#new_progressnote').ajaxForm({
 success: function() {
@@ -610,6 +640,7 @@ success: function() {
 }
 })
 $('[data-toggle="tooltip"]').tooltip();
+
 
 // HAD TO MAKE FORM SUBMISSIONS INTO FUNCTIONS TO FOLLOW CHAIN OF FORM SUBMISSION
 function submitPNote() {
@@ -642,12 +673,16 @@ console.log('hey')
 }
 else { return }
 }
+
+
 // SETU AJAX TO AUTOMATICALLY SEND AUTHENTICITY TOKEN WITH ALL AJAX REQUESTS
 $.ajaxSetup({
 headers: {
 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
 }
 });
+
+
 // SUBMIT COMPLY NOTES 
 $("#doneBtn").on("click", function() {
 // DONE NOTIFICATION AFTER ALL COMPLY FORMS SUBMITTED
@@ -678,6 +713,8 @@ instance.hide();
 ],
 });
 // DONE NOTIFICATION END
+
+
 if($('#progressnote_pnote').val().length > 0) {
 submitPNote();
 return
@@ -691,7 +728,9 @@ submitNNote();
 return
 }
 });
-// show the notification
+
+
+// MOVE TO COMPLY TAB AFTER SUCCESS FROM ASSESSMENT SUBMIT
     function moveToComply() {
     $.ajax({
   type: "POST",
@@ -726,6 +765,7 @@ return
   /////////
 
 
+// MAIN FUNCTION FOR WEIGHT CHART RESPONSIVENESS AND SIGNIFICANT WEIGHT CHANGES
   function rchart0 () {
 
   top.NProgress.start();
@@ -865,6 +905,9 @@ return
   //setTimeout(noti, 1000);
   top.NProgress.done();
   }
+
+
+  // TYPE DIET ON ASSESSMENT
   function diet() {
   $("#cdietspan")[0].innerText = $('#client_cdiet').val();
   $(function(){
@@ -875,6 +918,7 @@ return
   });
   };
   
+  // TODO: INTAKE FUNCTION TO TYPE IN ASSESSMENT
   function intake() {
   if($('#client_intakefrom').val() === "1"){
   $("#intakefromspan").html('Refuse');
@@ -901,6 +945,9 @@ return
   });}
   };
   */
+
+
+// IDEAL BODY WEIGHT ON CLIENT INFO
   function ibw() {
   var ibwval;
   
@@ -927,6 +974,9 @@ return
   //WILL RUN ASSESSMENT() FROM HERE TO NOT ADD ANOTHER ONCHANGE
   assessment();
   }
+
+
+  // CALORIC REQUIREMENTS ON CLIENT INFO
   function cal() {
   var x = document.getElementById("client_cbw").value;
   var y = x/2.2
@@ -949,6 +999,9 @@ return
   $('#hiddencalreq').val(parseInt(z - z + 1 * y * 25));
   }
   }
+
+
+  // TYPE DIAGNOSIS ON ASSESSMENT
   function dx() {
   $("#dxspan")[0].innerHTML = document.getElementById("client_dx").value;
   $(function(){
@@ -958,6 +1011,8 @@ return
   });
   });
   }
+
+  // BMI ON CLIENT INFO
   function bmi() {
   var x = document.getElementById("client_cbw").value;
   var y = document.getElementById("client_ht").value;
@@ -978,6 +1033,9 @@ return
   bmiused("bmispan", b.toFixed(1));
   $('#hiddenbmi').val(b.toFixed(1));
   };
+
+
+  // PROTEIN REQUIREMENTS ON CLIENT INFO
   function pro() {
   var x = document.getElementById("client_cbw").value;
   var y = x/2.2
@@ -985,6 +1043,9 @@ return
   widgetUsed("prorequirement", Math.round(z));
   $('#hiddenproreq').val(Math.round(z));
   }
+
+
+  // FLUID REQUIREMENTS ON CLIENT INFO
   function fl() {
   var x = document.getElementById("client_cbw").value;
   var y = x/2.2
@@ -992,44 +1053,13 @@ return
   widgetUsed("flrequirement", Math.round(z));
   $('#hiddenflreq').val(Math.round(z));
   }
+
   function assessment() {
   $('#hiddenfassess').val(document.getElementById('assessment').innerText)
   NProgress.done();
   }
-  // chart0() COMMENTED OUT MAY 25 8:05AM
-  function chart0() {
-  // if(document.getElementById("client_date0").value.length == '') {
-  // return;
-  // }
-  
-  // myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
-  // if (myLine.datasets[1].points[3].value > 0) {
-  // myLine.datasets[1].points[3].value = document.getElementById("client_cbw").value;
-  // }
-  // if(document.getElementById("client_date1").value.length == '') {
-  // return;
-  // }
-  
-  // myLine.datasets[1].points[2].value = document.getElementById("client_thirtywt").value;
-  // if (myLine.datasets[1].points[2].value > 0) {
-  // myLine.datasets[1].points[2].value = document.getElementById("client_thirtywt").value;
-  // }
-  // if(document.getElementById("client_date2").value.length == '') {
-  // return;
-  // }
-  // myLine.datasets[1].points[1].value = document.getElementById("client_ninetywt").value;
-  // if (myLine.datasets[1].points[1].value > 0) {
-  // myLine.datasets[1].points[1].value = document.getElementById("client_ninetywt").value;
-  // }
-  // if(document.getElementById("client_date3").value.length == '') {
-  // return;
-  // }
-  // myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
-  // if (myLine.datasets[1].points[0].value > 0) {
-  // myLine.datasets[1].points[0].value = document.getElementById("client_oneeightywt").value;
-  // }
-  // myLine.update();
-  };
+
+
   //UltraWidget
   function widgetUsed(id, number, string) {
   $("#" + id).prop('Counter',0).animate({

@@ -1,9 +1,14 @@
+
+
 <!-- START CLIENT INFO -->
 <div id="clienloadleft" class="col-lg-3" style="max-width: 350px">
   <div id="infoContainer" class="content-box profile-sidebar box-shadow">
     <div class="profile-usertitle">
       <div class="profile-usertitle-name">
         <div class="field-container form-group">
+
+
+          <!-- CLIENT INFO FORM HIDDEN -->
           <%= form_for @client, html: {class: "content-form", id: "updateClientInfo", style: "display: none;"} do |f| %>
           <div>
             <%= f.text_field :firstname, type: "string", class: "inin form-control material input-lg", id: "hiddenfirstnameinfo", required: true %>
@@ -24,6 +29,9 @@
           <%= f.submit 'Save', class: "actions btn waves waves-effect waves-float", id: "saveClientInfoBtn", style: "background: #5F9EA0; color: #FFFFFF;"%>
           <% end %>
           </div>
+<!-- CLIENT INFO FORM HIDDEN -->
+
+          <!-- CLIENT INFO SHOW -->
           <div id="spanInfoDiv" style="">
             <div class="profile-usertitle-name">
             <span id="client_firstnamespan" style="font-size:28px;font-weight:150;float:left"><%= @client.firstname.capitalize %></span>
@@ -42,7 +50,8 @@
           <button id="clienteditbut" type="button" class="btn waves waves-effect waves-float" data-fadeToggle="modal" data-target="#clienteditmodal" style="background: #374B89; color: #FFFFFF;">Edit</button>
           <button id="clientCancelEditBtn" type="button" class="btn waves waves-effect waves-float" data-fadeToggle="modal" data-target="#clienteditmodal" style="background: #374B89; color: #FFFFFF;display: none">Cancel</button>
         </div>
-          <!-- END CLIENT INFO -->
+          <!-- END CLIENT INFO SHOW-->
+
 
           <!-- START CLIENT NUTRITION PARAMS -->
         <div id="currentHealthParams" class="profile-usermenu" style="display: block">
@@ -78,6 +87,7 @@
   </div>
 <!-- END CLIENT NUTRITION PARAMS-->
 
+
   <!-- START CLIENT GOALS -->
   <div class="content-box box-shadow big-box todo-list">
             <div class="sort-todo">
@@ -111,6 +121,7 @@
           </div>
 </div>
 <!-- END CLIENT GOAL -->
+
 
 </div>
   <!--Scripts-->
@@ -175,7 +186,7 @@
   
   <script>
   ///////
-  //SPAN TO INPUT FOR CLIENT INFO UPDATE
+  //SHOWS HIDDEN FORM TO UPDATE CLIENT INFO
   //////
   $('#clienteditbut').click(function() {
   $('#updateClientInfo').fadeToggle('fast')
@@ -369,6 +380,8 @@ cal();
 });
 
 
+// START CRUD GOALS
+
 function submitGoal() {
 $.ajax({
 type: "POST",
@@ -445,5 +458,6 @@ function archiveGoals(){
   updateGoal(parseInt($(value).find("[type='checkbox']").attr('id')), 'archived')
 })
 };
+// END CRUD GOALS
 
   </script>
