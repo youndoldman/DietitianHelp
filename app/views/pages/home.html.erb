@@ -392,7 +392,7 @@ pbar.start();
   // IF ALREADY LOADED
   if (clientId === $currentClient) {
   top.$('#landing').iziModal('fadeOut');
-  toast("Already Loaded")
+  top.$('#assessmentTool').trigger('click')
   return
   }
   // clearOptions FORCES selectize TO RELOAD CLIENTS EVERYTIME FUNCTION IS CALLED ---- NEEDED TO REFLECT ANY CHANGES TO THE DATABASE DURING THIS USER SESSION
@@ -611,7 +611,6 @@ pbar.start();
   $('.archive-todo span').text(archive);
   };
   });
-  // var $parentElement= document <-- COMMENTED OUT MAY 3 6:01AM... ERASE IF NO IMPACT ON APP
   function submit() {
   var x = $('#newClient');
   x.ajaxSubmit(options = {
@@ -757,5 +756,17 @@ animationCount += 100
 
 
   }
+
+  // QUERY TO CLIENT HISTORY WHEN ONCLICK FROM GN-MENU
+
+function getHistory() {
+
+$.ajax({
+url: "/client_info/" + clientId,
+type: 'GET',
+success: function(data){ top.document.getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data; 
+}
+});
+}
   </script>
 </html>

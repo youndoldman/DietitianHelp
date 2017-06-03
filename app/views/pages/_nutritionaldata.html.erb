@@ -576,9 +576,9 @@ top.$('#isClientLoaded').removeClass('badge-danger').addClass('badge-success').t
   }
   });
 
-
-
-
+if(top.$('#historyFromMenu').length == 0) {
+top.$('.gn-submenu').append("<li id='historyFromMenu' onclick='getHistory()'><a type='button' aria-expanded='false'>History</a></li>");
+}
 
 // END DOCUMENT READY
 });
@@ -610,15 +610,7 @@ success: function() {
 }
 })
 $('[data-toggle="tooltip"]').tooltip();
-// QUERY TO CLIENT HISTORY WHEN ONCLICK FROM GN-MENU
-top.$('#historyfrommenu').click(function(){
-$.ajax({
-url: "/client_info/" + <%= @client.id %>,
-type: 'GET',
-success: function(data){ top.document.getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data; 
-}
-});
-})
+
 // HAD TO MAKE FORM SUBMISSIONS INTO FUNCTIONS TO FOLLOW CHAIN OF FORM SUBMISSION
 function submitPNote() {
 $("#new_progressnote").submit();

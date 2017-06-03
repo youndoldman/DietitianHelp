@@ -89,180 +89,153 @@
   <%= javascript_include_tag 'iziModal' %>
 
       <!-- INITIALIZE CALENDAR () -->
-    <script>
-
+<script>
 // DOCUMENT READY
 $(document).ready(function() {
 
 
-  <% to_do_today = {} %>
-
-    $(function () {
-
-      $(".event-tag span").click(function () {
-        $(".event-tag span").removeClass("selected");
-        $(this).addClass("selected");
-      });
-
-      $(document).on('click', '.remove-event', function (e) {
-        $(this).parent().remove();
-      });
-
-
-      /* initialize the calendar */
-      var date = new Date();
-      var d = date.getDate();
-      var m = date.getMonth();
-      var y = date.getFullYear();
-      $('#calendar').fullCalendar({
-        header: {
-          left: 'prev, next',
-          center: 'title',
-          right: 'today, month,agendaWeek,agendaDay'
-        },
-        //Add Events
-        // FETCHING FROM ALL USER'S CLIENTS --- ATOMATICALLY ADDS 5 DAYS TO NEXTEVALUATIONNOTE_DATE TO = ENDDATE IN CALENDAR
-        // MONTHS FROM CALENDAR PLUGIN ARE AHEAD BY 1 WILL DO -1 ON ALL MONTHS TO MATCH CALENDAR OUTPUT -- SEE start_date[1]
-        events: [<% if Nextevaluationnote.where(user_id: current_user.id).none? %>
-        <%= raw "" %>
-        <% else %>
-        <% Nextevaluationnote.where(user_id: current_user.id).map do |x| %>
-        // start_date = original next evaluation date - 1 month
-        <% start_date = x.nnote_date.to_s.split("-").map(&:to_i) %>
-        <% start_date[1] = start_date[1] - 1 %>
-        // end_date = original next evaluation date = - 1 month and + 5 days
-        <% end_date = x.nnote_date.to_s.split("-").map(&:to_i)%>
-        <% end_date[2], end_date[1] = (end_date[2] + 5), (end_date[1] - 1) %>
-        // start_date_range = original next evaluation date (no modification, used to push to due_today)
-        <% start_date_range = x.nnote_date.to_s.split("-") %>
-
-        <%= raw "{" %>
-        <%= raw "title: '#{Client.find(x.client_id).firstname.to_s} #{Client.find(x.client_id).lastname.to_s}'," %>
-        <%= raw "start:" + ' new Date(' + start_date.join(", ") + ")," %>
-      <%= raw "end:" + ' new Date(' + end_date.join(", ") + ")," %>
-      <%= raw "time:" + "'4pm'," %>
-      <%= raw "className:" + "'' 
-            },"%>
-        // compares if today's date is between nnote_date -- nnote_date + 5 and pushes to to_do_today as hash
-
-        // ASSESSMENT DATE RANGE
-            <% Date.parse(Time.now.to_s).between?(Date.parse(start_date_range.join("-").to_s), Date.parse(start_date_range.join("-").to_s) +5) ? to_do_today["#{Client.where(id: x.client_id).first.id}"] = x.nnote_date.to_s : "" %>
-
+<% to_do_today = {} %>
+$(function () {
+$(".event-tag span").click(function () {
+$(".event-tag span").removeClass("selected");
+$(this).addClass("selected");
+});
+$(document).on('click', '.remove-event', function (e) {
+$(this).parent().remove();
+});
+/* initialize the calendar */
+var date = new Date();
+var d = date.getDate();
+var m = date.getMonth();
+var y = date.getFullYear();
+$('#calendar').fullCalendar({
+header: {
+left: 'prev, next',
+center: 'title',
+right: 'today, month,agendaWeek,agendaDay'
+},
+//Add Events
+// FETCHING FROM ALL USER'S CLIENTS --- ATOMATICALLY ADDS 5 DAYS TO NEXTEVALUATIONNOTE_DATE TO = ENDDATE IN CALENDAR
+// MONTHS FROM CALENDAR PLUGIN ARE AHEAD BY 1 WILL DO -1 ON ALL MONTHS TO MATCH CALENDAR OUTPUT -- SEE start_date[1]
+events: [<% if Nextevaluationnote.where(user_id: current_user.id).none? %>
+<%= raw "" %>
+<% else %>
+<% Nextevaluationnote.where(user_id: current_user.id).map do |x| %>
+// start_date = original next evaluation date - 1 month
+<% start_date = x.nnote_date.to_s.split("-").map(&:to_i) %>
+<% start_date[1] = start_date[1] - 1 %>
+// end_date = original next evaluation date = - 1 month and + 5 days
+<% end_date = x.nnote_date.to_s.split("-").map(&:to_i)%>
+<% end_date[2], end_date[1] = (end_date[2] + 5), (end_date[1] - 1) %>
+// start_date_range = original next evaluation date (no modification, used to push to due_today)
+<% start_date_range = x.nnote_date.to_s.split("-") %>
+<%= raw "{" %>
+<%= raw "title: '#{Client.find(x.client_id).firstname.to_s} #{Client.find(x.client_id).lastname.to_s}'," %>
+<%= raw "start:" + ' new Date(' + start_date.join(", ") + ")," %>
+<%= raw "end:" + ' new Date(' + end_date.join(", ") + ")," %>
+<%= raw "time:" + "'4pm'," %>
+<%= raw "className:" + "''
+},"%>
+// compares if today's date is between nnote_date -- nnote_date + 5 and pushes to to_do_today as hash
+// ASSESSMENT DATE RANGE
+<% Date.parse(Time.now.to_s).between?(Date.parse(start_date_range.join("-").to_s), Date.parse(start_date_range.join("-").to_s) +5) ? to_do_today["#{Client.where(id: x.client_id).first.id}"] = x.nnote_date.to_s : "" %>
 <% end %>
 <% end %>      ],
-
-
-        editable: false,
-        eventLimit: true,
-        droppable: false, // this allows things to be dropped onto the calendar
-        drop: function (date, allDay) { // this function is called when something is dropped
-
-          // retrieve the dropped element's stored Event Object
-          var originalEventObject = $(this).data('eventObject');
-
-          // we need to copy it, so that multiple events don't have a reference to the same object
-          var copiedEventObject = $.extend({}, originalEventObject);
-
-          // assign it the date that was reported
-          copiedEventObject.start = date;
-          copiedEventObject.allDay = allDay;
-
-          // render the event on the calendar
-          // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-          $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-
-          // is the "remove after drop" checkbox checked?
-          if ($('#drop-remove').is(':checked')) {
-            // if so, remove the element from the "Draggable Events" list
-            $(this).remove();
-          }
-
-        }
-
-      });
-
-      /*Add new event*/
-      // Form to add new event
-
-      $("#add_event_form").on('submit', function (ev) {
-        ev.preventDefault();
-
-        var $event = $(this).find('.new-event-form'),
-          event_name = $event.val(),
-          tagColor = $('.event-tag  span.selected').attr('data-tag');
-
-        if (event_name.length >= 3) {
-
-          var newid = "new" + "" + Math.random().toString(36).substring(7);
-          // Create Event Entry
-          $("#external-events .checkbox").before(
-            '<div id="' + newid + '" class="fc-event ' + tagColor + '" data-bg="' + tagColor + '">' + event_name + '<span class="fa fa-close remove-event"></span></div>'
-          );
-
-
-          var eventObject = {
-            title: $.trim($("#" + newid).text()),
-            className: $("#" + newid).attr("data-bg"), // use the element's text as the event title
-            stick: true
-          };
-
-          // store the Event Object in the DOM element so we can get to it later
-          $("#" + newid).data('eventObject', eventObject);
-
-          // Reset draggable
-          $("#" + newid).draggable({
-            revert: true,
-            revertDuration: 0,
-            zIndex: 999
-          });
-
-          // Reset input
-          $event.val('').focus();
-        } else {
-          $event.focus();
-        }
-      });
-    });  
-
-  });
-//UltraWidget
-  function widgetUsed(id, number, string) {
-  $("#" + id).prop('Counter',0).animate({
-  Counter: number
-  }, {
-  duration: 800,
-  easing: 'swing',
-  step: function (now) {
-  $("#" + id).text(now.toFixed(0));
-  }
-  });
-  };
-  // HASH CONTAINING CLIENT ID AND NEXT EVALUATION DATE DUE TODAY
-  var dueToday = {<% to_do_today.map do |key, val| %><%= raw key + ":" + "'" + val.to_s + "'," %><% end -%>}
-  // CHANGES COLOR OF CLIENTS ON TABLE THAT ARE DUE TODAY BY COMPARING WITH CLIENTS IN dueToday 
-  $.makeArray($('.clientsOnTable')).forEach(function callback(currentValue, index, array) {
-    if(dueToday[currentValue.id]) {
-      document.getElementById(currentValue.id.toString()).className = "danger";
-    }
+editable: false,
+eventLimit: true,
+droppable: false, // this allows things to be dropped onto the calendar
+drop: function (date, allDay) { // this function is called when something is dropped
+// retrieve the dropped element's stored Event Object
+var originalEventObject = $(this).data('eventObject');
+// we need to copy it, so that multiple events don't have a reference to the same object
+var copiedEventObject = $.extend({}, originalEventObject);
+// assign it the date that was reported
+copiedEventObject.start = date;
+copiedEventObject.allDay = allDay;
+// render the event on the calendar
+// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+// is the "remove after drop" checkbox checked?
+if ($('#drop-remove').is(':checked')) {
+// if so, remove the element from the "Draggable Events" list
+$(this).remove();
+}
+}
+});
+/*Add new event*/
+// Form to add new event
+$("#add_event_form").on('submit', function (ev) {
+ev.preventDefault();
+var $event = $(this).find('.new-event-form'),
+event_name = $event.val(),
+tagColor = $('.event-tag  span.selected').attr('data-tag');
+if (event_name.length >= 3) {
+var newid = "new" + "" + Math.random().toString(36).substring(7);
+// Create Event Entry
+$("#external-events .checkbox").before(
+'<div id="' + newid + '" class="fc-event ' + tagColor + '" data-bg="' + tagColor + '">' + event_name + '<span class="fa fa-close remove-event"></span></div>'
+);
+var eventObject = {
+title: $.trim($("#" + newid).text()),
+className: $("#" + newid).attr("data-bg"), // use the element's text as the event title
+stick: true
+};
+// store the Event Object in the DOM element so we can get to it later
+$("#" + newid).data('eventObject', eventObject);
+// Reset draggable
+$("#" + newid).draggable({
+revert: true,
+revertDuration: 0,
+zIndex: 999
+});
+// Reset input
+$event.val('').focus();
+} else {
+$event.focus();
+}
+});
 });
 
- widgetUsed("dueTodayCnt", <%=to_do_today.count %>);
-
+});
+//UltraWidget
+function widgetUsed(id, number, string) {
+$("#" + id).prop('Counter',0).animate({
+Counter: number
+}, {
+duration: 800,
+easing: 'swing',
+step: function (now) {
+$("#" + id).text(now.toFixed(0));
+}
+});
+};
+// HASH CONTAINING CLIENT ID AND NEXT EVALUATION DATE DUE TODAY
+var dueToday = {<% to_do_today.map do |key, val| %><%= raw key + ":" + "'" + val.to_s + "'," %><% end -%>}
+// CHANGES COLOR OF CLIENTS ON TABLE THAT ARE DUE TODAY BY COMPARING WITH CLIENTS IN dueToday
+$.makeArray($('.clientsOnTable')).forEach(function callback(currentValue, index, array) {
+if(dueToday[currentValue.id]) {
+document.getElementById(currentValue.id.toString()).className = "danger";
+}
+});
+widgetUsed("dueTodayCnt", <%=to_do_today.count %>);
 // FOR CLIENTS DATATABLE TO WORK
-
 $(function () {
-      //Data Tables
-      $('#datatable').DataTable({
-        displayLength: 10,
-        dom: 'T<"clear">lfrtip',
-        tableTools: {
-          "sSwfPath": "datatables/copy_csv_xls_pdf.swf",
-          "aButtons": []
-        },
-        responsive: true
-      });
-    });
+//Data Tables
+$('#datatable').DataTable({
+displayLength: 10,
+dom: 'T<"clear">lfrtip',
+tableTools: {
+"sSwfPath": "datatables/copy_csv_xls_pdf.swf",
+"aButtons": []
+},
+responsive: true
+});
+});
+toDoToday = <%= raw  to_do_today.to_a.flatten %>;
 
- toDoToday = <%= raw  to_do_today.to_a.flatten %>;
 
-  </script>
+window.onload = function() {
+top.$('#historyFromMenu').remove();
+
+}
+</script>
