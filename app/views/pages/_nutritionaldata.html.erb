@@ -70,7 +70,7 @@
             
           </div>
           <div class="field-container form-group">
-            <%= f.number_field :cbw, type: "string", class: "inin form-control material input-lg", required: true, onchange: "cal(), bmi(), pro(), fl(), chart0()" %>
+            <%= f.number_field :cbw, type: "string", class: "inin form-control material input-lg", required: true, onchange: "cal(), bmi(), pro(), fl()" %>
             <%= f.label :cbw, 'Current Body Weight',class: "inlabel" %>
             
           </div>
@@ -81,7 +81,7 @@
               
             </div>
             <div class="field-container form-group" style="width:35%">
-              <%= f.text_field :date0, type: "text", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()" %>
+              <%= f.text_field :date0, type: "text", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "" %>
               <%= f.label :date0, 'Date', class: "inlabel" %>
               
             </div>
@@ -91,12 +91,12 @@
           <h1>Weight History</h1>
           <div class="form-inline">
             <div class="field-container form-group" style="width:20%;margin:12px">
-              <%= f.number_field :thirtywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()", value: "#{@client.thirtywt ? @client.thirtywt : '0'}" %>
+              <%= f.number_field :thirtywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "", value: "#{@client.thirtywt ? @client.thirtywt : '0'}" %>
               <%= f.label :thirtywt, "-30", class: "inlabel" %>
               
             </div>
             <div class="field-container form-group" style="width:35%">
-              <%= f.text_field :date1, type: "text", class: "inin form-control material input-lg", style:"width:150%", required: true, onchange: "chart0()" %>
+              <%= f.text_field :date1, type: "text", class: "inin form-control material input-lg", style:"width:150%", required: true, onchange: "" %>
               <%= f.label :date1, 'Date', class: "inlabel" %>
               
             </div>
@@ -106,24 +106,24 @@
           <!-- SECOND FORM -->
           <div class="form-inline">
             <div class="field-container form-group" style="width:20%;margin:12px">
-              <%= f.number_field :ninetywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()",value: "#{@client.ninetywt ? @client.ninetywt.to_s : '0'}" %>
+              <%= f.number_field :ninetywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "",value: "#{@client.ninetywt ? @client.ninetywt.to_s : '0'}" %>
               <%= f.label :ninetywt, "-90" , class: "inlabel" %>
               
             </div>
             <div class="field-container form-group" style="width:35%">
-              <%= f.text_field :date2, type: "text", class: "inin form-control material input-lg", style:"width:150%", required: true, onchange: "chart0()" %>
+              <%= f.text_field :date2, type: "text", class: "inin form-control material input-lg", style:"width:150%", required: true, onchange: "" %>
               <%= f.label :date2, 'Date', class: "inlabel" %>
               
             </div>
           </div>
           <div class="form-inline">
             <div class="field-container form-group" style="width:20%;margin:12px">
-              <%= f.number_field :oneeightywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "chart0()", value: "#{@client.oneeightywt ? @client.oneeightywt : '0'}" %>
+              <%= f.number_field :oneeightywt, type: "string", class: "inin form-control material input-lg", style: "width:100%", required: true, onchange: "", value: "#{@client.oneeightywt ? @client.oneeightywt : '0'}" %>
               <%= f.label :oneeightywt, "-180" , class: "inlabel" %>
               
             </div>
             <div class="field-container form-group" style="width:35%">
-              <%= f.text_field :date3, type: "text", class: "inin form-control material input-lg", style:"width:150%", required: true, onchange: "chart0()" %>
+              <%= f.text_field :date3, type: "text", class: "inin form-control material input-lg", style:"width:150%", required: true, onchange: "" %>
               <%= f.label :date3, 'Date', class: "inlabel" %>
               
             </div>
@@ -178,7 +178,7 @@
                   </p>
                 </div>
                 <button type="button" class="btn btn-lg" onclick="resetAssess()">Reset</button>
-                <div id="runAndSaveBtns" style="float: right"><button type="button" class="btn btn-danger btn-lg" onclick="setTimeout(chart0, 500), diet(), intake(), dx(), getAge(), adime(), setTimeout(assessment, 2000), rchart0()">Run</button>
+                <div id="runAndSaveBtns" style="float: right"><button type="button" class="btn btn-danger btn-lg" onclick="setTimeout(500), diet(), intake(), dx(), getAge(), adime(), setTimeout(assessment, 2000), rchart0()">Run</button>
                 <button class="btn btn-primary btn-lg", onclick="moveToComply()">Comply</button></div>
                 <h1>Diagnosis</h1>
                 <p id="dxadime"></p>
@@ -321,7 +321,7 @@
         <h4 class="zero-m">Weight History</h4>
         <div class="content-tools i-block pull-right">
           <span class="text-uppercase pull-right">Plot data</span>
-          <a id="expanding", class="repeat-btn", onclick="setTimeout(window.rchart0, 500)">
+          <a id="expanding", class="repeat-btn", onclick="setTimeout(window.r500)">
             <i class="fa fa-repeat"></i>
           </a>
         </div>
@@ -766,7 +766,7 @@ return
 
 
 // MAIN FUNCTION FOR WEIGHT CHART RESPONSIVENESS AND SIGNIFICANT WEIGHT CHANGES
-  function rchart0 () {
+  function rchart0() {
 
   top.NProgress.start();
 
@@ -833,7 +833,6 @@ return
   }
   if(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[1].value * 1000) >= 1075) {
   gain2 = true;
-  console.log(Math.ceil(myLine.datasets[1].points[3].value / myLine.datasets[1].points[1].value * 1000));
   }
 
   // 6 MO. SIGNIFICANT CHANGE
