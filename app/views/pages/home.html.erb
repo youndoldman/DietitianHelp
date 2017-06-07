@@ -93,7 +93,7 @@
     <!-- END SEARCH MODAL -->
 
     <!-- BEGIN CONTENT -->
-    <div id="mainwrapper"class="table-wrapper">
+    <div id="mainwrapper" class="table-wrapper">
 
 
       <!-- HEADER -->
@@ -102,7 +102,7 @@
 
       <!-- IFRAME WHERE ALL ACTIONS TAKE PLACE  -->
       <div style="height: 100%">
-      <iframe aria-hidden="true" id="clientload" visibility: 'visible' src="/calendar" frameborder="0" height="900px" width="100%" scrolling="no" ></iframe>
+      <iframe aria-hidden="true" id="clientload" src="/calendar" frameborder="0" height="900px" width="100%" scrolling="no" ></iframe>
     </div>
     </div>
   <!-- END CONTENT -->
@@ -140,12 +140,6 @@
   <!--C3.js-->
   <%= javascript_include_tag 'd3.min' %>
   <%= javascript_include_tag 'c3.min' %>
-  <!--EasyPieChart-->
-  <%= javascript_include_tag 'jquery.easypiechart.min' %>
-  <!--Zabuto Calendar-->
-  <!-- <%= javascript_include_tag 'zabuto_calendar.min' %> -->
-  <!--Simple Weather-->
-  <%= javascript_include_tag 'jquery.simpleWeather.min' %>
   <!-- DATA TABLES-->
   <%= javascript_include_tag 'jquery.dataTables' %>
   <%= javascript_include_tag 'dataTables.responsive' %>
@@ -168,8 +162,6 @@
   <!-- NOTIFICATIONS IZI-->
   <%= javascript_include_tag 'iziToast' %>
   <%= javascript_include_tag 'iziModal' %>
-  <!-- BLUR BACKGROUND COMMENTED OUT MAY 4 8:30AM
-  javascript_include_tag jquery.foggy.min -->
   <!-- PROGRESS BAR -->
   <%= javascript_include_tag 'nprogress' %>
   <!-- FULL CALENDAR JS -->
@@ -182,6 +174,7 @@
   <%= javascript_include_tag 'summernote' %>
   <!-- MASKED INPUT TO MATCH DATE, PHONE NUMBERS, ETC...-->
   <%= javascript_include_tag 'datedropper' %>
+
   <script>
     var pbar = top.NProgress
 pbar.start();
@@ -280,7 +273,7 @@ pbar.start();
   clientId = param
   }
   ////////
-  //DATABASE TO JSON
+  //DATABASE CLIENTS TO JSON
   ////////
   var jsona = $.getJSON('/clients', function(data) {  return JSON.stringify(data)});
   //data is the JSON string
@@ -360,7 +353,7 @@ pbar.start();
   },
   });
   },
-  onChange() {
+  onChange: function() {
   //ONCHANGE FROM SEARCH BAR TRIGGERS loadClient FUNCTION WITH ID FOUND IN ITEM SELECTED AS PARAMATER FOR THE FUNCTION...
   if(isNaN(parseInt($('#select-beast-landsearch').val()))) {
     // IF ITEM IN SEARCH BAR IS INVALID (NaN) EXIT FUNCTION

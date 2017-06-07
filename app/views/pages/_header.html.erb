@@ -1,3 +1,5 @@
+
+<!-- HEADER STARTS -->
 <ul id="gn-menu" class="gn-menu-main" style="z-index: 1200">
   <% if current_user %>
   <li class="gn-trigger">
@@ -15,63 +17,58 @@
     <nav class="gn-menu-wrapper">
       <div class="gn-scroller">
         <ul class="gn-menu metismenu">
+          <li>
+            <a href="index.html" aria-expanded="false"><i class="fa fa-user"></i>Client<span class="fa arrow"></span></a>
+            <ul class="gn-submenu collapse" aria-expanded="false">
+              <li>
+                <a id="assessmentTool" aria-expanded="false">Assessment Tool<span id="isClientLoaded" class="badge badge-danger" style="margin-left: 20px">Load Client</span></a>
+              </li>
+              <li id="historyFromMenu">
+                <a type="button" aria-expanded="false">History</a>
+              </li>
+            </ul>
+          </li>
+          
 
           <li>
-                <a href="index.html" aria-expanded="false"><i class="fa fa-user"></i>Client<span class="fa arrow"></span></a>
-                <ul class="gn-submenu collapse" aria-expanded="false">
-<li>
-          <a id="assessmentTool" aria-expanded="false">Assessment Tool<span id="isClientLoaded" class="badge badge-danger" style="margin-left: 20px">Load Client</span></a>
-        </li>
-                <li id="historyFromMenu">
-          <a type="button" aria-expanded="false">History</a>
-        </li>
-                </ul>
-              </li>
-
-        
-        <!-- <li>
-          <a id="clientsfrommenu" aria-expanded="false"><i class="fa fa-user"></i>Clients<span class="label label-info pull-right"><%= Client.where(user_id: current_user.id).count%></span></a>
-        </li> -->
-        <li>
-            <a id="calendarFromMenu"aria-expanded="false"><i class="fa fa-calendar-o"></i>Dashboard<span class="fa arrow"></span></a>
-              </li>
-
-
-        <li>
-          <a id="accountFromMenu" aria-expanded="false"><i class="fa fa-user-o"></i>Account<span class="fa arrow"></span></a>
-        </li>
+            <a id="calendarFromMenu" aria-expanded="false"><i class="fa fa-calendar-o"></i>Dashboard<span class="fa arrow"></span></a>
+          </li>
+          <li>
+            <a id="accountFromMenu" aria-expanded="false"><i class="fa fa-user-o"></i>Account<span class="fa arrow"></span></a>
+          </li>
+        </ul>
         </div>
-<div class="bottom-bnts">
-            <a id="pinHeader" class="fix-nav" href="#"><i class="mdi mdi-pin"></i></a>
-          </div>
+        <div class="bottom-bnts">
+          <a id="pinHeader" class="fix-nav" href="#"><i class="mdi mdi-pin"></i></a>
+        </div>
         <!-- /gn-scroller -->
       </nav>
     </li>
     <% else %>
     <% end %>
+    
     <li id="logoOnHeader" class="animated" style="position: absolute;<%= current_user ? 'display: block;' : 'display: none;' %>;left: 70px;top: -4px;width:3%;left: 80px">
-      <a 
-       style="background-image: url('<%= asset_path('Logo SOS.png') %>');background-size: cover;height: 80px;width: 100%;background-position-x: -40px;background-repeat: no-repeat">
-      <!-- <%= image_tag 'Logo SOS.png', style: "position: absolute; display: block; height: 70px; top: -6px;left: 55px;"%> -->
+      <a
+        style="background-image: url('<%= asset_path('Logo SOS.png') %>');background-size: cover;height: 80px;width: 100%;background-position-x: -40px;background-repeat: no-repeat">
+        <!-- <%= image_tag 'Logo SOS.png', style: "position: absolute; display: block; height: 70px; top: -6px;left: 55px;"%> -->
       </a>
       <!-- <a class="logo">DIETITIAN.HELP<i class="fa fa-heartbeat"></i></a> -->
     </li>
     <li class="top-clock">
       <span class="current-time"></span>
     </li>
-        </li>
-        <li class="pull-right">
+    <li class="pull-right">
       <ul class="nav navbar-right right-menu">
         <div class="empty"></div>
-          <% if !current_user %>
-            <li>
-              <a id="aboutFromNav">About</a>
-            </li>
-            <li>
-              
-            </li>
-          <% else %>
-          <li class="">
+        <% if !current_user %>
+        <li>
+          <a id="aboutFromNav">About</a>
+        </li>
+        <li>
+          
+        </li>
+        <% else %>
+        <li class="">
           <a id="searchHeaderIcon">
             <i class="fa fa-search-plus"></i>
           </a>
@@ -81,49 +78,42 @@
             <i class="fa fa-sign-out"></i>
           </a>
         </li>
-          <% end %>
+        <% end %>
       </ul>
     </li>
   </ul>
-  <!-- Modal Search -->
-  <!-- Modal Wt History-->
-  <!-- JAVASCRIPT BEGINS -->
-  <script>
-  var hist =
-  $('#clientsfrommenu').click(function(){
-  $.ajax({
-  url: "clients",
-  type: 'GET',
-  success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
-  window.removee();}
-  });
-  })
-  // ONCLICK CALENDAR HEADER
-  $('#calendarFromMenu, #logoOnHeader').click(function(){
-  // top.NProgress.start();
-  top.$('#clientload').fadeOut()
-  top.$('#clientload').attr('src', '/calendar')
-  })
+  <!-- HEADER ENDS -->
 
-  $('#searchHeaderIcon').click(function() {
 
-  top.$('#searchAddModal').iziModal('open');
+<!-- JAVASCRIPT FROM HEADER BEGINS -->
+<script>
+var hist =
+$('#clientsfrommenu').click(function(){
+$.ajax({
+url: "clients",
+type: 'GET',
+success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
+window.removee();}
+});
+})
+// ONCLICK CALENDAR HEADER
+$('#calendarFromMenu, #logoOnHeader').click(function(){
+top.$('#clientload').fadeOut()
+top.$('#clientload').attr('src', '/calendar')
+})
+$('#searchHeaderIcon').click(function() {
+top.$('#searchAddModal').iziModal('open');
 });
 $('#pinHeader').click(function() {
-  top.$('body').toggleClass('mini-nav')
-  top.$('body').animate({marginLeft: top.$('body').hasClass('mini-nav') ? '60px' : '0'}, 300)
-
+top.$('body').toggleClass('mini-nav')
+top.$('body').animate({marginLeft: top.$('body').hasClass('mini-nav') ? '60px' : '0'}, 300)
 })
-
-  $('#accountFromMenu').click(function(){
-// top.NProgress.start();
-
-  top.$('#clientload').fadeOut()
-  <% if current_user %>
-  top.$('#clientload').attr('src', '/current_users/' + <%= current_user ? current_user.id : "" %>)
-  <% else %>
-  <% end %>
-  })
-
-  </script>
-  <!-- JAVASCRIPT ENDS-->
+$('#accountFromMenu').click(function(){
+top.$('#clientload').fadeOut()
+<% if current_user %>
+top.$('#clientload').attr('src', '/current_users/' + <%= current_user ? current_user.id : "" %>)
+<% else %>
+<% end %>
+})
+</script>
+<!-- JAVASCRIPT FROM HEADER ENDS-->
