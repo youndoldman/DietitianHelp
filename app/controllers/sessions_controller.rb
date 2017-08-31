@@ -14,7 +14,7 @@ class SessionsController < DeviseController
   def create 
     self.resource = warden.authenticate!(auth_options)
     sign_in(resource_name, resource)
-    redirect_to '/'
+    redirect
   end
 
   # DELETE /resource/sign_out

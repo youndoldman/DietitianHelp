@@ -1,1 +1,0 @@
-json.array! @nextevaluationnotes, partial: 'nextevaluationnotes/nextevaluationnote', as: :nextevaluationnote

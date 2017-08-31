@@ -1,4 +1,5 @@
 class FullassessmentsController < ApplicationController
+  skip_before_action :client_loaded_same_as_params?, only: [:show, :index]
   before_action :set_fullassessment, only: [:show, :edit, :update, :destroy]
 
   # GET /fullassessments
@@ -25,7 +26,6 @@ class FullassessmentsController < ApplicationController
   # POST /fullassessments.json
   def create
     @fullassessment = Fullassessment.new(fullassessment_params)
-
     respond_to do |format|
       if @fullassessment.save
        format.js { render :js => "$('#modal-alert2').iziModal('open');"}
@@ -69,6 +69,6 @@ class FullassessmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fullassessment_params
-      params.require(:fullassessment).permit(:fassess, :client_id, :fullassessment)
+      params.require(:fullassessment).permit(:assessment, :date, :type, :diagnosis, :intervention, :monitoring_evaluation, :client_id)
     end
 end

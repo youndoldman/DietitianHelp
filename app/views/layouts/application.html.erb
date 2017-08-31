@@ -2,31 +2,18 @@
 <html>
   <head>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' -%>
+    <% renderFrom = controller_name + action_name %>
+    <%# javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "#{renderFrom}", 'data-turbolinks-track': 'reload' %>
 
     <title>DIETITIAN.HELP</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no" />
-    <%= stylesheet_link_tag 'font-awesome' %>
-    <%= stylesheet_link_tag 'materialdesignicons.min' %>
 
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <%= stylesheet_link_tag 'selectize' %>
-    <%= stylesheet_link_tag 'jquery.dataTables' %>
-    <%= stylesheet_link_tag 'selectize' %>
-    <%= stylesheet_link_tag 'iziToast' %>
-    <%= stylesheet_link_tag 'iziModal' %>
-    <%= stylesheet_link_tag 'cs-select' %>
-    <%= stylesheet_link_tag 'cs-skin-underline' %>
-    <%= stylesheet_link_tag 'fullcalendar' %>
-    <%= stylesheet_link_tag 'animate.min' %>
-    <%= stylesheet_link_tag 'nprogress' %>
-
-
-
 
     <!--[if IE 8]><script src="js/es5.js"></script><![endif]-->
     <%= favicon_link_tag 'favicon.ico' %>
@@ -34,7 +21,6 @@
     <script src="html5shiv.min.js"></script>
     <script src="respond.min.js"></script>
     <![endif]-->
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   </head>
   <body>

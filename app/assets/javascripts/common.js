@@ -14,10 +14,6 @@ var update = function () {
 };
 
 $(window).on('load', function(){
-    //Preloader
-    setTimeout(function(){
-        $('.preloader').fadeOut(400);
-    }, 600);
     //Scroll for menu
     $(".gn-scroller").mCustomScrollbar({
       theme:"minimal",

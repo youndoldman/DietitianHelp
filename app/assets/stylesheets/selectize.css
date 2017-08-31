@@ -126,8 +126,9 @@
   line-height: 18px;
   position: absolute;
   height: 18px;
-  padding: 0px 9px 9px 0;
   border: 0;
+  left: 0%;
+  width: 100%;
   -webkit-border-radius: 0;
           border-radius: 0;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#a94442), to(#a94442)), -webkit-gradient(linear, left top, left bottom, from(#d2d2d2), to(#d2d2d2));

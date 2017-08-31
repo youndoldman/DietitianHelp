@@ -1,0 +1,131 @@
+
+
+<!-- START CLIENT INFO -->
+<div id="clienloadleft" class="col-lg-3 box-holder">
+  <div id="client-info-container" class="content-box profile-sidebar box-shadow boxed-info">
+    <div class="profile-usertitle">
+
+        <!-- CLIENT INFO SHOW -->
+          <div class="profile-usertitle-name d-inline">
+          <span id="client-firstname" style="font-size:28px;font-weight:150;float:left" class="client-attribute"><%= @client.firstname.capitalize %></span>
+          <div style="float:left">&nbsp;</div>
+          <span id="client-lastname" style="float:left;font-size:28px;font-weight:150;" class="client-attribute"><%= @client.lastname.capitalize %></span><br>
+        </div>
+          <div id="client-dob" class="profile-usertitle-job client-attribute">
+            <%= @client.dob %>
+          </div>
+          <div id="client-gender" class="profile-usertitle-job client-attribute">
+            <%= @client.gender %>
+          </div>
+      <div class="">
+        <button id="client-edit-btn" type="button" class="btn waves waves-effect waves-float" data-fadeToggle="modal" data-target="#clienteditmodal" style="background: #374B89; color: #FFFFFF;">Edit</button>
+      </div>
+      <!-- END CLIENT INFO SHOW END -->
+
+
+      <!-- START CLIENT NUTRITION PARAMS -->
+      <div id="currentHealthParams" class="profile-usermenu" style="display: block">
+        <ul class="nav">
+          <div class="row">
+            <li class="" style="display: inline-block; float: left" data-toggle="tooltip" data-placement="top" title="BMI">
+              <span  id="bmispanin" class="green" style="font-size:30px"><%= @client.bmi %></span>
+              <span class="emptygray" style="font-size:12px">kg/m2</span>
+            </li>
+            <li style="display: inline-block;float: right" data-toggle="tooltip" data-placement="top" title="Daily Caloric Requirement">
+                <span id="calrequirement" class="black" style="font-size:30px;" ><%= @client.calreq %></span>
+                <span class="emptygray" style="font-size:12px;">cal/day</span>
+            </li>
+          </div>
+          <div class="row">
+            <li class="" style="display: inline-block; float: left;margin-right: 20px" data-toggle="tooltip" data-placement="right" title="Ideal Body Weight">
+                <span id="ibwspanin" class="black" style="font-size:30px"><%= @client.ibw %></span>
+                <span class="emptygray" style="font-size:12px">lbs</span>
+            </li>
+            <li style="display: inline-block;float: right;margin-left: 20px" data-toggle="tooltip" data-placement="right" title="Daily Protein Requirement">
+                <span  id="prorequirement" class="black" style="font-size:30px;"><%= @client.proreq %></span>
+                <span class="emptygray" style="font-size:12px">g/day</span>
+            </li>
+          </div>
+          <div class="row">
+            <li class="" style="display: inline-block; float: left;margin-right: 30px" data-toggle="tooltip" data-placement="right" title="Percentage Ideal Body Weight">
+              <span id="percentibw" class="yellow" style="font-size:30px">90</span>
+              <span class="emptygray" style="font-size:12px">%ibw</span>
+            </li>
+            <li style="display: inline-block;float: right" data-toggle="tooltip" data-placement="bottom" title="Daily Fluid Requirement">
+                <span id="flrequirement" class="black" style="font-size:30px;"><%= @client.flreq %></span>
+                <span class="emptygray" style="font-size:12px">oz/day</span>
+            </li>
+          </div>
+        </ul>
+      </div>
+      <!-- END CLIENT NUTRITION PARAMS END -->
+
+  </div>
+
+  <!-- CLIENT EDIT INFO FORM HIDDEN -->
+  <div id="client-edit-form-container" class="content-box profile-sidebar box-shadow boxed-form away">
+    <div class="profile-usertitle">
+      <div class="form-group d-inline">
+    <%= form_for @client, url: client_path, html: {class: "content-form", id: "client-edit-form"} do |f| %>
+      <div class="field-container info">
+        <%= f.text_field :firstname, class: "inin form-control material input-lg", id: "client-firstname-input", required: true %>
+        <%= f.label :firstname, 'First Name', class: "inlabel" %>
+      </div>
+      <div class="field-container form-group info">
+        <%= f.text_field :lastname, class: "inin form-control material input-lg", id: "client-lastname-input", required: true %>
+        <%= f.label :lastname, 'Last Name', class: "inlabel" %>
+      </div>
+      <div class="field-container form-group info">
+        <%= f.text_field :dob, class: "inin form-control material input-lg", id: "client-dob-input", required: true %>
+        <%= f.label :dob, 'Date of Birth', class: "inlabel" %>
+      </div>
+      <div class="field-container form-group info">
+        <%= f.text_field :gender, class: "inin form-control material input-lg", id: "client-gender-input", required: true %>
+        <%= f.label :gender, 'Gender', class: "inlabel" %>
+      </div>
+      <%= f.submit 'Save', class: "actions btn waves waves-effect waves-float", style: "background: #5F9EA0; color: #FFFFFF;"%>
+        <button id="client-cancel-edit-btn" type="button" class="btn waves waves-effect waves-float" data-fadeToggle="modal" data-target="#clienteditmodal" style="background: #374B89; color: #FFFFFF">Cancel</button>
+    <% end %>
+    <!-- CLIENT EDIT INFO FORM HIDDEN END -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- CLIENT GOALS -->
+  <div class="content-box box-shadow big-box todo-list" style="position: absolute">
+    <div class="sort-todo">
+      <a class="active-todo" href="#">Active <span class="badge green-bg"></span></a>
+      <a class="complete-todo" href="#">Completed <span class="badge yellow-bg"></span></a>
+      <a class="archive-todo" href="#">Archived <span class="badge blue-bg"></span></a>
+    </div>
+
+      <%= form_for @goal, url: client_goals_path(@client), html: {id: "add_todo"} do |f| %>
+      <div class="form-group add-todo">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-pencil green"></i></div>
+          <%= f.text_field :revision_date, id:"goalsDate", placeholder: "Revision Date", class: "form-control name-of-todo"%>
+          <%= f.text_field :goals, id:"goalsInput", placeholder: "Goal", class: "form-control name-of-todo"%>
+        </div>
+      </div>
+
+    <div class="">
+      <div class="panel-body todo">
+        <ul id="clientGoals" class="list-group" style="margin: 0px">
+
+          <%= render template: 'goals/show' %>
+
+        </ul>
+      </div>
+    </div>
+    <% end %>
+    <div class="checkbox clear-todo">
+      <button id="clear-comp" class="btn btn-warning waves text-uppercase">Archive Completed</button>
+
+    </div>
+  </div>
+<!-- CLIENT GOAL END -->
+
+</div>

@@ -1,12 +1,8 @@
-    <%= stylesheet_link_tag 'iziToast' %>
-    <%= stylesheet_link_tag 'animate.min' %>
-
-
-  <!-- PRELOADER/SLOGAN -->
+  <!-- PRELOADER/SLOGAN HIDDEN-->
     <div id="preloader" class="preloader table-wrapper" style="background: white;">
       <div class="table-row">
-        <div id="contente" class="" style="display: none">
-          <div id='visiblee' class="">
+        <div id="contente" class="contente" style="display: none">
+          <div id='visiblee' class="preloader-animate">
             <p>
             </p>
             <ul id="preloader-list" style="">
@@ -21,7 +17,7 @@
     </div>
 
 
-    <!-- BEGIN SEARCH/ADD MODAL -->
+    <!-- BEGIN SEARCH/ADD MODAL HIDDEN-->
     <div id="searchAddModal" class="" style="display: none">
       <div style="visibility:visible;z-index:900;position: fixed; display: inline-block;top: 25%;left: 30%;height:auto;width:500px" class="table-wrapper">
         <div class="bgblur">
@@ -45,18 +41,18 @@
                   </div>
                   <label for="select-beast-landsearch">Name</label>
                 </form>
-                <div id="hiddenform" class="hidden-form" style="display: none; margin-top: -30px">
-                  <%= form_for (Client.new), html: {id: "newClient", class: "content-form form-inline", remote: true} do |f| %>
+                <div id="new-client-form-container" class="hidden-form" style="display: none; margin-top: -30px">
+                  <%= form_for @client, url: clients_path, html: {id: "new-client-form", class: "content-form form-inline", remote: true} do |f| %>
                   <div  class="field-container form-group" style="dispaly: none;" >
-                    <%= f.text_field :firstname, id: "hiddenfirstname", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true%>
+                    <%= f.text_field :firstname, id: "new-firstname-input", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true%>
                     <%= f.label :firstName, "First Name", style: "margin: 0px;", class: "" %>
                   </div>
                   <div  class="field-container form-group" >
-                    <%= f.text_field :lastname, id: "hiddenlastname", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+                    <%= f.text_field :lastname, id: "new-lastname-input", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
                     <%= f.label :lastname, "Last Name", style: "margin: 0px;", class: "" %>
                   </div>
-                  <div  class="field-container form-group" >
-                    <%= f.text_field :user_id, type: "integer", value: current_user.id, readonly: 'readonly', id: "hiddenprovider", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
+                  <div  class="field-container form-group hidden" >
+                    <%= f.text_field :user_id, type: "integer", value: current_user.id, readonly: 'readonly', id: "provider-input", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
                     <%= f.label :provider, "Provider ID", style: "margin: 0px;", class: "" %>
                   </div>
                   <div  class="field-container form-group" >
@@ -68,10 +64,6 @@
                     <%= f.label :gender, "Gender", style: "margin: 0px;", class: "" %>
                   </div>
                   <div  class="field-container form-group" >
-                    <%= f.text_field :allergies, id: "hiddenallergies", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", required: true %>
-                    <%= f.label :Allergies, "Allergies", style: "margin: 0px;", class: "" %>
-                  </div>
-                  <div  class="field-container form-group" >
                     <%= f.text_field :cbw, id: "hiddencbw", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", placeholder: "lbs",required: true %>
                     <%= f.label :cbw, "CBW", style: "margin: 0px;", class: "" %>
                   </div>
@@ -79,8 +71,8 @@
                     <%= f.text_field :ht, id: "hiddenht", type: "string", class: "inin form-control material input-lg", style: "height: 33px;padding: 0px;margin: 0px;", placeholder: "inches", required: true %>
                     <%= f.label :ht, "Height", style: "margin: 0px;", class: "" %>
                   </div>
-                  <div  id="hiddensubmit" class="actions" style="display: none;">
-                    <button type="button" class="actions btn btn-lg" data-style="top-line" data-horizontal="" onclick="window.submit()">Add Client</button>
+                  <div  id="hiddensubmit">
+                    <%= f.submit "Create Client", class: "btn btn-lg" %>
                   </div>
                   <% end %>
                 </div>
@@ -90,671 +82,23 @@
         </div>
       </div>
     </div>
-    <!-- END SEARCH MODAL -->
-
-    <!-- BEGIN CONTENT -->
-    <div id="mainwrapper" class="table-wrapper">
-
-
       <!-- HEADER -->
       <div><%= render partial: 'pages/header' %></div>
-
-
       <!-- IFRAME WHERE ALL ACTIONS TAKE PLACE  -->
       <div style="height: 100%">
-      <iframe aria-hidden="true" id="clientload" src="/calendar" frameborder="0" height="900px" width="100%" scrolling="no" ></iframe>
+      <iframe name="clientload" aria-hidden="true" id="clientload" src="/dashboard" frameborder="0" height="900px" width="100%" scrolling="no" ></iframe>
     </div>
-    </div>
-  <!-- END CONTENT -->
-
-
-  <!--Scripts-->
-  <%= javascript_include_tag 'jquery.min' %>
-  <%= javascript_include_tag 'jquery-ui.min' %>
-  <%= javascript_include_tag 'jquery.bootstrap.wizard' %>
-  <%= javascript_include_tag 'jquery.flot' %>
-  <%= javascript_include_tag 'jquery.flot.resize' %>
-  <%= javascript_include_tag 'bootstrap.min' %>
-  <%= javascript_include_tag 'metisMenu.min' %>
-  <%= javascript_include_tag 'moment.min' %>
-  <%= javascript_include_tag 'jquery.mCustomScrollbar' %>
-  <%= javascript_include_tag 'cta.min' %>
-  <%= javascript_include_tag 'typed' %>
-  <%= javascript_include_tag 'ion.rangeSlider' %>  
-  <!-- AJAXFORM-->
-  <%= javascript_include_tag 'jquery.form.min' %>
-  <!-- MASKED INPUT TO MATCH DATE, PHONE NUMBERS, ETC...-->
-  <%= javascript_include_tag 'jquery.maskedinput' %>
-  <!--Menu-->
-  <%= javascript_include_tag 'classie' %>
-  <%= javascript_include_tag 'gnmenu' %>
-  <!--Selects-->
-  <%= javascript_include_tag 'selectFx' %>
-  <!--Flot-->
-  <%= javascript_include_tag 'jquery.flot' %>
-  <%= javascript_include_tag 'jquery.flot.resize' %>
-  <%= javascript_include_tag 'curvedLines' %>
-  <%= javascript_include_tag 'jquery.flot.orderBars' %>
-  <!--Custom Flot Charts-->
-  <%= javascript_include_tag 'Chart' %>
-  <!--C3.js-->
-  <%= javascript_include_tag 'd3.min' %>
-  <%= javascript_include_tag 'c3.min' %>
-  <!-- DATA TABLES-->
-  <%= javascript_include_tag 'jquery.dataTables' %>
-  <%= javascript_include_tag 'dataTables.responsive' %>
-  <%= javascript_include_tag 'dataTables.tableTools' %>
-  <!--Custom Scriptssasa-->
-  <%= javascript_include_tag 'common' %>
-  <%= javascript_include_tag 'pikaday' %>
-  <%= javascript_include_tag 'pikaday.jquery' %>
-  <%= javascript_include_tag 'example' %>
-  <!--Notification-->
-  <%= javascript_include_tag 'jsface' %>
-  <%= javascript_include_tag 'snap.svg-min' %>
-  <%= javascript_include_tag 'sweetalert.min' %>
-  <%= javascript_include_tag 'notificationFx' %>
-  <!--AUTOCOMPLETE -->
-  <%= javascript_include_tag 'standalone/selectize' %>
-  <!-- MODAL EFFECTS -->
-  <%= javascript_include_tag 'cssParser' %>
-  <%= javascript_include_tag 'modalEffects' %>
-  <!-- NOTIFICATIONS IZI-->
-  <%= javascript_include_tag 'iziToast' %>
-  <%= javascript_include_tag 'iziModal' %>
-  <!-- PROGRESS BAR -->
-  <%= javascript_include_tag 'nprogress' %>
-  <!-- FULL CALENDAR JS -->
-  <%= javascript_include_tag 'fullcalendar' %>
-  <!-- PROGRESS BUTTONS || CONSIDER DELETING -->
-  <%= javascript_include_tag 'modernizr.customPBUTTONS' %> 
-  <%= javascript_include_tag 'classiePBUTTONS' %>
-  <!-- javascript_include_tag 'progressButton' -->
-  <!-- NOTES INPUT FLIED-->
-  <%= javascript_include_tag 'summernote' %>
-  <!-- MASKED INPUT TO MATCH DATE, PHONE NUMBERS, ETC...-->
-  <%= javascript_include_tag 'datedropper' %>
-
   <script>
-    var pbar = top.NProgress
-pbar.start();
-  // PRESSING THE RESET BUTTON ON ADIME TAB APPENDS defaultAssessment TO DIV
-  var defaultAssessment = '<p id="note-editor-2" class="w-amount note-air-editor note-editable panel-body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Click to edit..." contenteditable="true"> <span id="agespan" class="w-amount">- -</span>y/o <span>Resident</span> currently on <span id="cdietspan" class="w-amount">- - </span> Diet to manage Dx of <span id="dxspan" ,="" class="w-amount">- -</span>. Average intake: <span id="intakefromspan" ,="" class="w-amount">- -</span> <span id="intaketospan" ,="" class="w-amount"></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class="w-amount">- -</span> lbs puts <span>RESIDENT</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow" class="w-amount"> Weight history shows</span> <span id="losshist" class="w-amount"></span><span id="loss1days" class="w-amount"></span><span id="loss2days" class="w-amount"></span><span id="loss3days" class="w-amount"></span><span id="lossdays" class="w-amount"></span><span id="and" class="w-amount"></span><span id="gainhist" class="w-amount"></span><span id="gain1days" class="w-amount"></span><span id="gain2days" class="w-amount"></span><span id="gain3days" class="w-amount"></span><span id="gaindays" class="w-amount"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Resident</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN. </p><div class="tooltip fade top in" role="tooltip" id="tooltip144344" style="top: 193.406px; left: 450.25px; display: block;"><div class="tooltip-arrow" style="left: 50%;"></div><div class="tooltip-inner">Click to edit...</div></div>';
-  var currentUser = <%= current_user.id %>
-  var $currentClient;
-  var food1;
-  var lat;
-  var lng;
-  var d1;
-  var parsed;
-  var ager;
-  var date = new Date();
-  function getAge(d1, d2){
-  var d1 = document.getElementById('client_dobspan').innerHTML;
-  var d2 = new Date();
-  var diff = d2.getTime() - parseDate($('#client_dobspan').text()).getTime();
-  ager = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25
-  ));$(function(){
-  $("#agespan").typed({
-  strings: [ager.toString()],
-  typeSpeed: 50
-  });
-  });
-  };
-  // parse a date in yyyy-mm-dd format
-  function parseDate(input) {
-  var parts = input.match(/(\d+)/g);
-  // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-  return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
-  }
-  // ///////////////////////
-  // FUNCTIONS FROM ALPHA VERSION GIVES LOCATION OF "CRAVING" NEAR YOU
-  // //////////////////////
-  // function loc() {
-  // var base = 'http://maps.googleapis.com/maps/api/geocode/json?address=';
-  // var food = document.getElementById("location").value;
-  // var url = base + food;
-  // $.getJSON(url, function(data) {
-  // lat = data.results[0].geometry.location.lat;
-  // lng = data.results[0].geometry.location.lng;
-  // console.log(data)
-  // });
-  // };
-  // function zomato() {
-  // document.getElementById("onefood").innerHTML = ''
-  // var base = 'https://developers.zomato.com/api/v2.1/search?apikey=8d0401fb02d07321de28693fa2a18355&'
-  // var food = 'q=' + document.getElementById("food").value;
-  // var radius = document.getElementById("radius").value;
-  // var location = '&lat=' + lat + '&lon=' + lng;
-  // var url = base + food + location + radius;
-  // $.getJSON(url, function(data)
-  // {
-  // for(var i = 0; i < data.restaurants.length; i++) {
-  // var obj = data.restaurants[i].restaurant;
-  // document.getElementById("onefood").innerHTML += '<span class="text-uppercase w-name emptygray">' + i  + ' ' + obj.name + '</span><br>';
-  
-  // }
-  
-  // });
-  // };
-  // function run() {
-  // document.getElementById("onefood1").innerHTML = ''
-  // var base = 'http://api.nal.usda.gov/ndb/search/?format=json&'
-  // var food = 'q=' + document.getElementById("food").value;
-  // var url = base + food + '&sort=r&ds=Standard Reference&max=8&offset=0&api_key=Dd2cDdK3zCP6teHFkZk06XRTq4bgC1kMo3NPnLxm'
-  // $.getJSON(url, function(data) {
-  // //data is the JSON string\
-  // for(var i = 0; i < data.list.item.length; i++) {
-  // var obj = data.list.item[i];
-  // document.getElementById("onefood1").innerHTML += '<span class="text-uppercase w-name emptygray">' + i  + ' ' + obj.name + '</span><br>';
-  
-  // function run1() {
-  // document.getElementById("onefood1").innerHTML = ''
-  // var base1 = 'http://api.nal.usda.gov/ndb/reports/?ndbno='
-  // var food1 = obj.ndbno
-  // var url1 = base1 + food1 + '&type=b&format=json&api_key=Dd2cDdK3zCP6teHFkZk06XRTq4bgC1kMo3NPnLxm'
-  // $.getJSON(url1, function(data1) {
-  // console.log(data1.report.food.nutrients[1].value)
-  // document.getElementById("onefood1").innerHTML += data1.report.food.nutrients[1].value + '<br>'
-  // });
-  // };
-  // }
-  // });
-  // };
-   function adime() {
-  $('#assessadime').html('yeah')
-  $('#dxadime').html('yeah')
-  $('#intadime').html('yeah')
-  $('#monevadime').html('yeah')
-  } 
-  var selectedClient;
-  var clientId;
-  function assign(param) {
-  clientId = param
-  }
-  ////////
-  //DATABASE CLIENTS TO JSON
-  ////////
-  var jsona = $.getJSON('/clients', function(data) {  return JSON.stringify(data)});
-  //data is the JSON string
-  var newClientName;
-  //////////////////////////////////////////////////
-  //AUTOCOMPLETE FROM CLIENTS DATABASE BEGINS
-  /////////////////////////////////////////////////
-  $("#searchAddModal").iziModal({
-  transitionIn: '',
-  transitionOut: '',
-  });
-  $("#searchAddModal").iziModal('open');
-  $('.gn-search').selectize({
-  theme: 'links',
-  maxItems: 1,
-  preload: 'focus',
-  valueField: 'id',
-  searchField: ['lastname', 'firstname'],
-  options: [],
-  create: true,
-  allowEmptyOption: false,
-  updatePlaceholder: true,
-  openOnFocus: true,
-  render: {
-  option: function(data, escape) {
-  if(data.firstname == undefined) {
-  newClientName = data.text
-  return '<div class="item">' + escape(data.text) +'</div>';
-  }
-  else {
-  return '<div class="item">' + escape(data.firstname) + ' ' + escape(data.lastname) + ' ' +
-  '</div>';
-  }
-  },
-  item: function(data, escape) {
-  if(data.firstname == undefined) {
-  newClientName = data.text
-  var newClientNameArr = newClientName.split(" ");
-  $('#hiddenfirstname').val(newClientNameArr[0]);
-  $('#hiddenlastname').val(newClientNameArr[1]);
-  $('#hiddenprovider').val('<%=current_user.id%>');
-  $( "#hiddenform" ).show( "fast", function() {
-  });
-  $( "#hiddensubmit" ).show( "fast");
-  return '<div class="item">' + escape(data.text) +'</div>';
-  }
-  else {
-  return '<div class="item">' + escape(data.firstname) + ' ' + escape(data.lastname) + ' ' +
-  '</div>';
-  }
-  }
-  },
-  load: function(query, callback) {
-  if (!query.length) return callback();
-  $.ajax({
-  url: '/clients',
-  type: 'GET',
-  dataType: 'json',
-  data: {
-  q: query,
-  },
-  error: function() {
-  callback();
-  },
-  success: function(res) {
-  callback(res);
-  $('#select-beast-landsearch-selectized').keyup(function() {
-  if($('#landsearch-dropdown:first-child div').attr('class') == 'create') {
-  $('#landsearchicon').attr('class','fa fa-search fa-stack-1x fa-inverse');
-  }
-  if($('#landsearch-dropdown:first-child div').attr('class') == 'create active') {
-  $('#landsearchicon').attr('class','fa fa-stack-1x fa-inverse fa-user-plus');
-  }
-  
-  });
-  
-  },
-  });
-  },
-  onChange: function() {
-  //ONCHANGE FROM SEARCH BAR TRIGGERS loadClient FUNCTION WITH ID FOUND IN ITEM SELECTED AS PARAMATER FOR THE FUNCTION...
-  if(isNaN(parseInt($('#select-beast-landsearch').val()))) {
-    // IF ITEM IN SEARCH BAR IS INVALID (NaN) EXIT FUNCTION
-  return false
-  }
-  else {
-    // ELSE loadClient(ValueOfItemInSearchBar aka Client ID)
-  loadClient(parseInt($('#select-beast-landsearch').val()))
-  }
-  },
-  });
-      function processingView() {
-  // $("#processingViewModal").iziModal('open');
-  }
-  function loadClient(clientId) {
-  NProgress.start();
-  assign(clientId);
-  // VALIDATES clientId 
-  // IF INVALID RETURN
-  if (clientId == undefined || clientId == null) {
-  toast("Load/create client first")
-  return
-  };
-  // IF ALREADY LOADED
-  if (clientId === $currentClient) {
-  top.$('#landing').iziModal('fadeOut');
-  top.$('#assessmentTool').trigger('click')
-  return
-  }
-  // clearOptions FORCES selectize TO RELOAD CLIENTS EVERYTIME FUNCTION IS CALLED ---- NEEDED TO REFLECT ANY CHANGES TO THE DATABASE DURING THIS USER SESSION
-  top.$('.gn-search')[0].selectize.clearOptions()
-  // FADE OUT DURING LOADING FOR SMOOTH VISUAL TRANSITION
-  $('#clientload').fadeOut()
-  NProgress.inc();
-  $('#selectinput').attr('class', 'selectize-input items has-options not-full');
-  //////////
-  // PLOT DATA IF CLIENT EXIST
-  /////////
-  if(jQuery.isNumeric(clientId)) {
-  //MAKES THE CALL TO DATABASE BY ATTEMPTING TO LOAD URL "clients/<clientId> INTO IFRAME... CONTROLLER CHECKS IF USERNAME HAS ACCESS TO CLIENT THEN RESPONDS WITH CLIENT VIEW.
-  $('#clientload').attr("src", "clients/" + clientId);
-  };
-  //ADDS EVENT AFTER CLIENT LOAD TO MAKE LINK ON HEADER WORK WITH LOADED CLIENT
-  $('#assessmentTool').click(function(){
-  $.ajax({
-  url: "clients/" + clientId,
-  type: 'GET',
-  success: function(data){ $('#clientload').attr("src", "clients/" + clientId);
-  }
-  });
-  })
-  // $currentClient VARIABLE TO COMPARE WITH NEW CLIENT BEING LOADED. IF SAME RETURN FUNCTION AND CLOSE MODAL
-  $currentClient = clientId
-  }
-  //////////////////////////////////////////////////
-  //AUTOCOMPLETE FROM CLIENTS DATABASE END
-  /////////////////////////////////////////////////
-  //////////////////////////////////////////////////
-  //AUTOCOMPLETE FORM ELEMENTS, PREPOPULATED OPTIONS FOR Dx's BEGINS
-  /////////////////////////////////////////////////
-  $('#client_dx').selectize({
-  maxItems: null,
-  valueField: 'abbrev',
-  labelField: 'abbrev',
-  searchField: ['commonName', 'medicalName', 'abbrev'],
-  preload: false,
-  options: [
-  {id: 1, commonName: 'high blood pressure', medicalName: 'Hypertension', abbrev: 'HTN', url: 'ce'},
-  {id: 2, commonName: 'Diabetes Type 1', medicalName: 'Diabetes Mellitus', abbrev: 'DM1', url: 'ce'},
-  {id: 3, commonName: 'Hypothyroidism', medicalName: 'Hypothyroidism', abbrev: 'HypoThy', url: 'ce'},
-  {id: 4, commonName: 'Chronic Kidney Disease', medicalName: 'Chronic Kidney Disease', abbrev: 'CKD', url: 'ce'},
-  ],
-  create: false
-  });
-  // jquery transit is used to handle the animation
-  $('#client_dx-selectized').focusin(function() {
-  $( "#dxlabel" ).animate({
-  opacity: 1,
-  top:'-17px',
-  left: '-14px',
-  fontsize: '14px',
-  color: '#999999',
-  });
-  //setTimeout needed for Chrome, for some reson there is no animation from left to right, the pen is immediately present. Slight delay to adding the animation class fixes it
-  
-  });
-  
-  $('#client_dx-selectized').blur(function() {
-  if($('#client_dx').val() == "") {
-  
-  $('#dxlabel').animate({
-  position: 'absolute',
-  pointerevents:'none',
-  top: '1px',
-  left:'-9px',
-  fontsize: '16px',
-  opacity:1,
-  backgroundcolor: 'rgba(0, 0, 0, 0)',
-  padding: '23px 9px',
-  webkittransition: '0.15s ease-in-out',
-  transition: '0.15s ease-in-out'}); }
-  else return
-  });
-  //////////////////////////////////////////////////
-  //AUTOCOMPLETE FORM ELEMENTS, PREPOPULATED OPTIONS ENDS
-  /////////////////////////////////////////////////
-  ////////////////////
-  // DATEPICKERS 'PICKADAY'
-  ///////////////////
-  $('.inin').prop('required',true);
-  $('#client_date0').pikaday({
-  field: document.getElementById('date0'),
-  format: 'M/D/YYYY',
-  defaultDate: '1/23/2014',
-  onStart: function ()
-  {
-  var date = new Date();
-  this.setDate( date.getDate(), date.getMonth() + 1, date.getFullYear())
-  },
-  });
-  window.onload = function() {
-  $('.selectize-dropdown').css('zIndex', '9999');
-  };
-  var acc = document.getElementsByClassName("accordion");
-  var i;
-  for (i = 0; i < acc.length; i++) {
-  acc[i].onclick = function(){
-  this.classList.toggle("active");
-  this.nextElementSibling.classList.toggle("show");
-  }
-  }
-  $(function () {
-  $(".todo ul").sortable();
-  $("#add_todo").on('submit', function (e) {
-  e.preventDefault();
-  var $toDo = $(this).find('.name-of-todo'),
-  toDo_name = $toDo.val(),
-  border = ['list-success', 'list-primary', 'list-warning', 'list-danger', 'list-info'],
-  randomClass = border[Math.floor(Math.random() * border.length)];
-  if (toDo_name.length >= 3) {
-  var newid = "new" + "" + Math.random().toString(36).substring(11);
-  // Create Event Entry
-  $(".todo ul").append(
-  '<li id="' + 'item-' + newid + '" class="list-group-item  ' + randomClass + ' list-item"><div class="checkbox"><input type="checkbox" id="' + newid + '" /><label for="' + newid + '">' + toDo_name + '</label></div><div class="pull-right action-btns"><a class="archive"><span class="fa fa-archive"></span></a><a class="trash"><span class="fa fa-close"></span></a></div></li>'
-  );
-  count();
-  var eventObject = {
-  title: $.trim($("#" + newid).text()),
-  className: $("#" + newid).attr("data-bg"), // use the element's text as the event title
-  stick: true
-  };
-  // store the Event Object in the DOM element so we can get to it later
-  $("#" + newid).data('eventObject', eventObject);
-  // Reset input
-  $toDo.val('').focus();
-  } else {
-  $toDo.focus();
-  }
-  });
-  //Checking items
-  $(document).on('mouseover', '.list-group .checkbox', function () {
-  $('.list-group input:checkbox').each(function () {
-  $(this).change(function () {
-  if ($(this).is(":checked")) {
-  $(this).closest(".list-group-item").addClass("checked-todo").removeClass("list-item");
-  } else {
-  $(this).closest(".list-group-item").removeClass("checked-todo");
-  }
-  count();
-  });
-  });
-  });
-  //Check archive items
-  $(document).on('click', '.action-btns .archive', function (e) {
-  $(this).closest(".list-group-item").removeClass("checked-todo list-item").addClass("archive-item").hide();
-  e.preventDefault();
-  count();
-  });
-  count();
-  $(".list-group-item").addClass("list-item");
-  $('.list-group li').each(function () {
-  if ($(this).hasClass("checked-todo")) {
-  $(this).removeClass("list-item");
-  };
-  });
-  //Show all items
-  $('.all-todo').click(function (e) {
-  $('.archive-item').hide();
-  $('.checked-todo, .list-item').show();
-  e.preventDefault();
-  });
-  //Show only active items
-  $('.active-todo').click(function (e) {
-  $('.checked-todo').hide();
-  $('.archive-item').hide();
-  $('.list-item').show();
-  e.preventDefault();
-  });
-  //Show only completed items
-  $('.complete-todo').click(function (e) {
-  $('.list-item').hide();
-  $('.archive-item').hide();
-  $('.checked-todo').show();
-  e.preventDefault();
-  });
-  //Show only archive items
-  $('.archive-todo').click(function (e) {
-  $('.list-item').hide();
-  $('.checked-todo').hide();
-  $('.archive-item').show();
-  e.preventDefault();
-  });
-  //Mark all as complete
-  $('#clear').change(function () {
-  if ($(this).is(":checked")) {
-  $(".list-group-item").addClass("checked-todo").removeClass("list-item");
-  $("input:checkbox").prop('checked', $(this).prop("checked"));
-  } else {
-  $(".list-group-item").removeClass("checked-todo").addClass("list-item");
-  $("input:checkbox").prop('checked', $(this).prop("checked"));
-  }
-  count();
-  });
-  //Remove all completed items
-  $('#clear-comp').click(function () {
-  var clearedComp = $('.checked-todo').remove();
-  count();
-  });
-  //Remove one completed item
-  $(document).on('click', '.trash', function (e) {
-  var clearedCompItem = $(this).closest(".list-group-item").remove();
-  e.preventDefault();
-  count();
-  });
-  //Count items
-  function count() {
-  var checked = $('.checked-todo').length,
-  archive = $('.archive-item').length,
-  all = $('.list-group-item').length - archive,
-  active = all - checked;
-  $('.complete-todo span').text(checked);
-  $('.active-todo span').text(active);
-  $('.archive-todo span').text(archive);
-  };
-  });
-  function submit() {
-  var x = $('#newClient');
-  x.ajaxSubmit(options = {
-  success: function() {
-  $('#select-beast-landsearch:first-child').val(jsona.responseJSON.length + 1479)
-  }
-  });
-  }
-  // MISCELLANEOUS TOAST
-  function toast(ttl, color) {
-    if(color == undefined){
-      color = "#ca7842";
-    }
-  iziToast.show({
-  color: color,
-  icon: 'ico-check',
-  titleColor: '#FFFFFF',
-  iconColor: '#FFFFFF',
-  title: ttl,
-  position: 'topCenter',
-  timeout: 2000,
-  position: 'topCenter', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
-  progressBarColor: '#cabc42',
-  });
-  }
-  // NOTIFICATION THAT SHOWS NAME OF CLIENT CREATED
-  function clientCreated(ttl) {
-  iziToast.show({
-  color: '#5F9EA0',
-  icon: 'ico-check',
-  titleColor: '#FFFFFF',
-  iconColor: '#FFFFFF',
-  title: ttl,
-  position: 'topCenter',
-  timeout: 2000,
-  progressBar: false,
-  });
-  }
-    // INIT PROCESSING VIEW JS
-  $("#processingViewModal").iziModal({
-  title: 'Processing View...',
-  iconColor: '#00af66',
-  headerColor: '#374B89',
-  autoOpen: 0, // Boolean, Number
-  attached: 'center', // bottom, top
-  width: 300,
-  overlay: true,
-  pauseOnHover: true,
-  timeoutProgressbarColor: '#CABC42',
-  });
+    var progressBar    = top.NProgress
 
+    var currentUser    = <%= current_user.id %>
+    var $currentClient = undefined // assigned on clientLoad (home-ux.js)
+    var clientsJSON    = $.getJSON('/clients', data => JSON.stringify(data))
 
-    // DOCUMENT READY
-  $(document).ready(function(){
-  $("#hiddendob").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
-  $(document).ajaxStart(function(){
-  $("#wait").css("display", "block");
-  });
-  $(document).ajaxComplete(function(){
-  $("#wait").css("display", "none");
-  });
-  $("button").click(function(){
-  $("#txt").load("demo_ajax_load.asp");
-  });
-  $('#select-beast-head-selectized').css({opacity: 1, position: 'absolute', left: 0, width: '100%', paddingTop: '10px', paddingLeft: '9px'});
-  $('#select-beast-modal-selectized').css({opacity: 1, position: 'absolute', left: 0, width: '100%', paddingTop: '10px', paddingLeft: '9px'});
-  $('#select-beast-landsearch-selectized').css({opacity: 1, position: 'absolute', left: 0, width: '100%', paddingTop: '10px', paddingLeft: '9px'});
-  $('.selectize-dropdown-content').attr('id', 'landsearch-dropdown');
-  
+    progressBar.start()
 
-
-
-
-
-  });
-  window.onload = function() {
-    // INITIAL PROMO TO BE SHOWN WHEN LOG IN
-    initialPromo();
-      function initialPromo() {
-
-  top.$('#preloader').fadeIn('slow');
-  var preloader = top.$('#contente');
-  var preloaderUL = top.$('#visiblee');
-
-  preloader.addClass('contente')
-
-  preloaderUL.addClass('preloader-animate')
-
-
-  preloader.show()
-
-
-  // ON PRELOADER (SLOGAN) FADEIN END
-
-
-
-    top.pbar.set(0.4)
-
-
-// TIMEOUT FOR PROGRESS BAR TO FINSIH AND DELAY DONE ANIMATION FOR UX
-setTimeout(function() {
-
-  top.pbar.inc(0.67)
-
-
-  }, 3000);
-
-var animationCount = 1
-// TIMEOUT TO WAIT FOR PRELOADER TO STAY IN LAST POSITION FOR A FEW SECONDS (AFTER top.PBAR DONE)
-function aniCount() {
-
-  // ANIMATION END FIRES TWICE. ANIMATION COUNT PREVENTS EXTRA PROGRESS BAR THAT WILL NEVER FINISH... SECOND PROGRESS BAR STOPPED BY CONDITION BASED ON animationCount
-  if(animationCount < 100) {
-
-    setTimeout(function() {
-    top.pbar.inc()
-    animationCount ++
-    aniCount();
-  }, 500);
-
-  };
-  if(animationCount < 250 && animationCount > 100) {
-    top.pbar.done()
-    return
-  };
-
-
-};
-aniCount()
-
-// ON ANIMATION END FADEOUT INTIALPROMO
-        preloaderUL.one('webkitAnimationEnd oanimationend msAnimationEnd animationend',   
-    function() {
-
-      top.$('#preloader').fadeOut();
-animationCount += 100
-
-  });
-
-
-
-}
-
-
-  }
-
-  // QUERY TO CLIENT HISTORY WHEN ONCLICK FROM GN-MENU
-
-function getHistory() {
-
-$.ajax({
-url: "/client_info/" + clientId,
-type: 'GET',
-success: function(data){ top.document.getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data; 
-}
-});
-}
+    <% if flash[:message].present? %>
+    toast('<%= raw flash[:message]["content"] %>', '#ab3737', '<%= raw flash[:message]["status"] %>')
+    <% end %>
   </script>
 </html>

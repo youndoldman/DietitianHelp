@@ -1,5 +1,6 @@
 class GoalsController < ApplicationController
   before_action :set_goal, only: [:show, :edit, :update, :destroy]
+  skip_before_action :client_loaded_same_as_params?, only: [:show, :index]
 
   # GET /goals
   # GET /goals.json
@@ -20,42 +21,40 @@ class GoalsController < ApplicationController
 
   # GET /goals/1/edit
   def edit
+    @goal = set_goal
   end
 
   # POST /goals
   # POST /goals.json
   def create
     @goal = Goal.new(goal_params)
+    @goal.client_id = params[:client_id]
     @goal.status = 'active'
-    respond_to do |format|
+
       if @goal.save
-        format.json { render :show, status: :created, location: @goal }
+        flash[:message] = "Goal saved"
+        render json: @goal.to_json
       else
-        format.html { render :new }
-        format.json { render json: @goal.errors, status: :unprocessable_entity }
       end
-    end
   end
 
   # PATCH/PUT /goals/1
   # PATCH/PUT /goals/1.json
   def update
-    respond_to do |format|
       if @goal.update(goal_params)
-        format.json { render :show, status: :ok, location: @goal }
+        flash[:message] = "Goal saved"
+        render json: @goal.to_json
       else
-        format.html { render :edit }
-        format.json { render json: @goal.errors, status: :unprocessable_entity }
+        render json: @goal.to_json
       end
-    end
   end
 
   # DELETE /goals/1
   # DELETE /goals/1.json
   def destroy
-    @goal.destroy
-    respond_to do |format|
-      format.json { head :no_content }
+    if @goal.destroy
+      flash[:message] = "Goal saved"
+      render json: @goal.to_json
     end
   end
 

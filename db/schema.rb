@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524022000) do
+ActiveRecord::Schema.define(version: 20170823010920) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
+    t.string   "gender"
     t.string   "dob"
     t.string   "allergies"
     t.string   "cdiet"
@@ -39,42 +40,56 @@ ActiveRecord::Schema.define(version: 20170524022000) do
     t.string   "pes0"
     t.string   "pes1"
     t.string   "pes2"
+    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "gender"
-    t.integer  "user_id"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
-  create_table "documents", force: :cascade do |t|
-    t.integer  "client_id"
-    t.integer  "fullassessment_id"
-    t.integer  "progressnote_id"
-    t.integer  "monitoringnote_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.index ["client_id"], name: "index_documents_on_client_id"
-    t.index ["fullassessment_id"], name: "index_documents_on_fullassessment_id"
-    t.index ["monitoringnote_id"], name: "index_documents_on_monitoringnote_id"
-    t.index ["progressnote_id"], name: "index_documents_on_progressnote_id"
-  end
-
   create_table "fullassessments", force: :cascade do |t|
-    t.text     "fassess"
+    t.text     "assessment"
     t.integer  "client_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "diagnosis"
+    t.string   "intervention"
+    t.string   "monitoring_evaluation"
+    t.string   "type"
+    t.string   "date"
     t.index ["client_id"], name: "index_fullassessments_on_client_id"
   end
 
   create_table "goals", force: :cascade do |t|
     t.integer  "client_id"
     t.string   "goals"
+    t.string   "status"
+    t.date     "revision_date"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.date     "revision_date"
-    t.string   "status"
     t.index ["client_id"], name: "index_goals_on_client_id"
+  end
+
+  create_table "labs", force: :cascade do |t|
+    t.date     "date"
+    t.integer  "alb"
+    t.integer  "bun"
+    t.integer  "creat"
+    t.integer  "chol"
+    t.integer  "glu"
+    t.integer  "hct"
+    t.integer  "hgb"
+    t.integer  "iron"
+    t.integer  "k"
+    t.integer  "na"
+    t.integer  "tprotein"
+    t.integer  "tlymph"
+    t.integer  "tsh"
+    t.integer  "gfr"
+    t.integer  "a1c"
+    t.integer  "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_labs_on_client_id"
   end
 
   create_table "monitoringnotes", force: :cascade do |t|
@@ -87,13 +102,11 @@ ActiveRecord::Schema.define(version: 20170524022000) do
 
   create_table "nextevaluationnotes", force: :cascade do |t|
     t.text     "nnote"
+    t.date     "nnote_date"
     t.integer  "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date     "nnote_date"
-    t.integer  "user_id"
     t.index ["client_id"], name: "index_nextevaluationnotes_on_client_id"
-    t.index ["user_id"], name: "index_nextevaluationnotes_on_user_id"
   end
 
   create_table "progressnotes", force: :cascade do |t|
@@ -121,7 +134,7 @@ ActiveRecord::Schema.define(version: 20170524022000) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "license"
-    t.string   "role"
+    t.string   "provider"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

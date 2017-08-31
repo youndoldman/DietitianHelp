@@ -1,1 +1,0 @@
-json.array! @monitoringnotes, partial: 'monitoringnotes/monitoringnote', as: :monitoringnote

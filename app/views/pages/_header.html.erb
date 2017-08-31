@@ -1,7 +1,6 @@
 
 <!-- HEADER STARTS -->
-<ul id="gn-menu" class="gn-menu-main" style="z-index: 1200">
-  <% if current_user %>
+<ul id="gn-menu" class="gn-menu-main" style="z-index: 9999">
   <li class="gn-trigger">
     <a id="menu-toggle" class="menu-toggle gn-icon gn-icon-menu">
       <div class="hamburger">
@@ -16,19 +15,32 @@
     </a>
     <nav class="gn-menu-wrapper">
       <div class="gn-scroller">
+  <% if current_user %>
         <ul class="gn-menu metismenu">
-          <li>
-            <a href="index.html" aria-expanded="false"><i class="fa fa-user"></i>Client<span class="fa arrow"></span></a>
-            <ul class="gn-submenu collapse" aria-expanded="false">
+          <li class="active">
+            <a href="#" aria-expanded="false">
+              <i class="fa fa-user"></i>Client<span class="fa arrow"></span></a>
+            <ul class="gn-submenu collapse active" aria-expanded="false">
               <li>
-                <a id="assessmentTool" aria-expanded="false">Assessment Tool<span id="isClientLoaded" class="badge badge-danger" style="margin-left: 20px">Load Client</span></a>
+                <a id="assessmentTool">Assessment Tool<span id="isClientLoaded" class="badge badge-danger" style="margin-left: 20px">Load Client</span></a>
               </li>
               <li id="historyFromMenu">
                 <a type="button" aria-expanded="false">History</a>
               </li>
             </ul>
           </li>
-          
+              <li>
+                <a href="mailbox.html" aria-expanded="false">
+                  <i class="fa fa-envelope-o"></i>Email
+                  <span class="fa arrow"></span>
+                </a>
+                <ul class="gn-submenu collapse" aria-expanded="false">
+                  <li><a href="mailbox.html">Mailbox</a></li>
+                  <li><a href="email-inbox.html">Inbox</a></li>
+                  <li><a href="email-compose.html">Email Compose</a></li>
+                  <li><a href="email-view.html">Email View</a></li>
+                </ul>
+              </li>
 
           <li>
             <a id="calendarFromMenu" aria-expanded="false"><i class="fa fa-calendar-o"></i>Dashboard<span class="fa arrow"></span></a>
@@ -40,23 +52,38 @@
         </div>
         <div class="bottom-bnts">
           <a id="pinHeader" class="fix-nav" href="#"><i class="mdi mdi-pin"></i></a>
+    <% else %>
+    <% end %>
         </div>
         <!-- /gn-scroller -->
       </nav>
     </li>
-    <% else %>
-    <% end %>
     
-    <li id="logoOnHeader" class="animated" style="position: absolute;<%= current_user ? 'display: block;' : 'display: none;' %>;left: 70px;top: -4px;width:3%;left: 80px">
-      <a
-        style="background-image: url('<%= asset_path('Logo SOS.png') %>');background-size: cover;height: 80px;width: 100%;background-position-x: -40px;background-repeat: no-repeat">
+    <li id="logoOnHeader" class="animated">
+      <a class="logo-on-header">
         <!-- <%= image_tag 'Logo SOS.png', style: "position: absolute; display: block; height: 70px; top: -6px;left: 55px;"%> -->
       </a>
       <!-- <a class="logo">DIETITIAN.HELP<i class="fa fa-heartbeat"></i></a> -->
     </li>
-    <li class="top-clock">
+    <% if current_user %>
+      <li class="col-lg-3 row text-left">
+        <div class="center-y-header">
+          <span>logged in as:</span>
+          <h3 class="d-inline"><%= link_to current_user.username, user_path(current_user), class: "name-on-header", style: "top: 11%;" %></h3>
+        </div>
+      </li>
+    <% end %>
+    <li class="row top-clock col-lg-2">
       <span class="current-time"></span>
     </li>
+    <% if @current_client %>
+      <li class="col-lg-3 row text-right">
+        <div class="center-y-header">
+          <span>On view:</span>
+          <h3 id="displayClientOnHeader" class="d-inline client-on-header"><a href="#"class="name-on-header", style="top: 11%;" ></a></h3>
+        </div>
+      </li>
+      <% end %>
     <li class="pull-right">
       <ul class="nav navbar-right right-menu">
         <div class="empty"></div>
@@ -74,46 +101,44 @@
           </a>
         </li>
         <li class="">
-          <a href='users/sign_out' class='logo' rel="nofollow" data-method="delete" data-confirm="Are you sure?">
+          <%= link_to destroy_user_session_path, :method => :delete, class: "logo" do %>
             <i class="fa fa-sign-out"></i>
+            <% end %>
           </a>
         </li>
         <% end %>
+        
       </ul>
     </li>
   </ul>
   <!-- HEADER ENDS -->
 
-
 <!-- JAVASCRIPT FROM HEADER BEGINS -->
 <script>
-var hist =
-$('#clientsfrommenu').click(function(){
-$.ajax({
-url: "clients",
-type: 'GET',
-success: function(data){ $(document)[0].getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
-window.removee();}
-});
-})
 // ONCLICK CALENDAR HEADER
-$('#calendarFromMenu, #logoOnHeader').click(function(){
-top.$('#clientload').fadeOut()
-top.$('#clientload').attr('src', '/calendar')
+$('#calendarFromMenu, #logoOnHeader').click(function() {
+  top.$('#clientload').fadeOut()
+  top.$('#clientload').attr('src', '/dashboard')
 })
+
 $('#searchHeaderIcon').click(function() {
-top.$('#searchAddModal').iziModal('open');
-});
+  top.$('#searchAddModal').iziModal('open');
+})
+
 $('#pinHeader').click(function() {
-top.$('body').toggleClass('mini-nav')
-top.$('body').animate({marginLeft: top.$('body').hasClass('mini-nav') ? '60px' : '0'}, 300)
+  top.$('body').toggleClass('mini-nav')
+  top.$('body').animate({
+    marginLeft: top.$('body').hasClass('mini-nav') ? '60px' : '0'
+  }, 300)
 })
-$('#accountFromMenu').click(function(){
-top.$('#clientload').fadeOut()
-<% if current_user %>
-top.$('#clientload').attr('src', '/current_users/' + <%= current_user ? current_user.id : "" %>)
-<% else %>
-<% end %>
+
+$('#accountFromMenu').click(function() {
+  top.$('#clientload').fadeOut()
+  <% if current_user %>
+  top.$('#clientload').attr('src', '/users/' + <%= current_user ? current_user.id : "" %>)
+  <% else %>
+  <% end %>
 })
+
 </script>
 <!-- JAVASCRIPT FROM HEADER ENDS-->

@@ -1,4 +1,5 @@
 class NextevaluationnotesController < ApplicationController
+  skip_before_action :client_loaded_same_as_params?, only: [:show, :index]
   before_action :set_nextevaluationnote, only: [:show, :edit, :update, :destroy]
 
   # GET /nextevaluationnotes

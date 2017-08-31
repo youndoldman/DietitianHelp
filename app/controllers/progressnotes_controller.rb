@@ -1,4 +1,5 @@
 class ProgressnotesController < ApplicationController
+  skip_before_action :client_loaded_same_as_params?, only: [:show, :index]
   before_action :set_progressnote, only: [:show, :edit, :update, :destroy]
 
   # GET /progressnotes
@@ -25,16 +26,11 @@ class ProgressnotesController < ApplicationController
   # POST /progressnotes.json
   def create
     @progressnote = Progressnote.new(progressnote_params)
-
-    respond_to do |format|
       if @progressnote.save
-        format.html { }
-        format.json { render :show, status: :created, location: @progressnote }
+        render json: @progressnote.to_json
       else
-        format.html { render :new }
-        format.json { render json: @progressnote.errors, status: :unprocessable_entity }
+        render json: @progressnote.to_json
       end
-    end
   end
 
   # PATCH/PUT /progressnotes/1

@@ -1,40 +1,26 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:assign_current_client, :show, :edit, :update, :destroy, :params, :client_params]
-  skip_before_action :verify_authenticity_token, only: [:update]  
-
+  skip_before_action :verify_authenticity_token, only: [:update]
+  before_action :client_belongs_to_user?
+  skip_before_action :client_belongs_to_user?, only: [:index, :new, :create]
+  # after_action :show, :client_belongs_to_user?
   # GET /clients
   # GET /clients.json
   def index
-    @clients = []
-    @getter = Client.all.each do |client|
-      if client.user_id === current_user.id
-        @clients << client
-      else 
-      end
-    end
+    @clients = current_user.clients
+    render json: @clients
   end
 
   # GET /clients/1
   # GET /clients/1.json
   def show
-    @client = Client.find(params[:id])
-    def will_show
-      Client.find(params[:id])
-      $current_client = Client.find(params[:id])
-    end
-    def will_not_show
-      redirect_to clients_path
-      respond_to do |format|
-        format.html { flash[:notice] = "NOPE" }
-      end
-    end
-    # EXTRA SECURITY CONDITION
-    if @client.user_id === current_user.id
-      will_show
+    if client_belongs_to_user?
+      @client = set_client
+      initialize_client_attributes # FIND METHOD IN application_controller
+      session[:current_client_id] = @client.id
     else
-      will_not_show
+      flash[:message] = "Client not found"
+      redirect_to '/dashboard'
     end
-
   end
 
   # GET /clients/new
@@ -42,29 +28,19 @@ class ClientsController < ApplicationController
     @client = Client.new
   end
 
-  # GET /clients/1/edit
-  def edit
-    @Clients = Client.find(params[:id])
-  end
-
   def nutritionaldata
-    @Client = Client.find(params[:id])
+    @client = set_client
   end
 
   # POST /clients
   # POST /clients.json
   def create
     @client = Client.new(client_params)
-    @client_attr = @client.attributes
-    respond_to do |format|
       if @client.save
-        format.js { render :js => "loadClient(" + @client.id.to_s + ");"}
-        format.json { render :show, status: :created, location: @client }
+        render :js => "loadClient(" + @client.id.to_s + ")"
       else
-        format.html { render :new }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
+        render :new
       end
-    end
   end
 
   def error(kind)
@@ -76,13 +52,26 @@ class ClientsController < ApplicationController
     end
   end
 
+  def medical_history
+    @client = set_client
+    @medical_history = @client.medical_history
+    @fullassessments = @medical_history[:fullassessments]
+    @progressnotes = @medical_history[:progressnotes]
+    @labs = @medical_history[:labs]
+    @monitoringnotes = @medical_history[:monitoringnotes]
+    @nextevaluationnotes = @medical_history[:nextevaluationnotes]
+    @goals = @medical_history[:goals]
+  end
+
   def client_params1
       
   end
   # PATCH/PUT /clients/1
   # PATCH/PUT /clients/1.json
   def update
-      @client.update(client_params)
+    @client = set_client
+    @client.update(client_params)
+    render json: @client
   end
 
   # DELETE /clients/1
@@ -104,5 +93,15 @@ class ClientsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
       params.require(:client).permit(:id, :firstname, :lastname, :dob, :gender, :allergies, :user_id, :cdiet, :dx, :ht, :cbw, :date0, :thirtywt, :ninetywt, :oneeightywt, :date1, :date2, :date3, :intakefrom, :intaketo, :bmi, :ibw, :calreq, :proreq, :flreq, :fassess, :fpes, :pes0, :pes1, :pes2)
+    end
+
+    def client_belongs_to_user?
+      if set_client.user_id != current_user.id
+        @client = Client.new
+        @client.errors.add(:user_id, "Client not found on your records")
+        flash[:message] = {status: 'error', content: "Client not found on your records"}
+        redirect_to root_path
+      else true
+      end
     end
 end

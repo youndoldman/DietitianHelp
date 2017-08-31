@@ -4221,10 +4221,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     border-bottom-color: #fff;
   }
 }
-.tab-content > .tab-pane {
+.tab-content > section > .tab-pane {
   display: none;
 }
-.tab-content > .active {
+.tab-content > section > .active {
   display: block;
 }
 .nav-tabs .dropdown-menu {

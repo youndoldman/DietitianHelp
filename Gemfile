@@ -3,8 +3,6 @@ ruby '2.2.3'
 
 gem 'rename'
 gem 'devise'
-# AUTOCOMPLETE
-# gem "selectize-rails"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '= 5.0.0'
 # Use sqlite3 as the database for Active Record
@@ -20,7 +18,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'omniauth'
 gem 'countupjs-rails'
 # Use jquery as the JavaScript library
-# gem 'jquery-rails'
+gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -51,10 +49,11 @@ group :development do
 end
 
 group :development, :test do
+	gem 'dotenv-rails'
   gem 'sqlite3'
 end
 
 #bourbon for activeform
-gem 'bourbon'
+# gem 'bourbon'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

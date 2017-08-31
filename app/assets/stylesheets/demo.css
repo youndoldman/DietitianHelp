@@ -97,18 +97,6 @@ a:hover, a:focus {
 	content: "\e004";
 }
 
-section {
-	padding: 5em 2em 10em;
-	background: #2dcb89;
-	text-align: center;
-}
-
-section.related {
-	padding: 3em 1em 4em;
-	background: #465650;
-	color: rgba(0,0,0,0.4);
-	font-size: 1.5em;
-}
 
 .related > a {
 	max-width: 80%;
@@ -144,14 +132,4 @@ section.related {
 	font-weight: 400;
 	font-size: 0.75em;
 	text-align: left;
-}
-
-@media screen and (max-width: 44.75em) {
-	section { padding: 1em 2em; }
-}
-
-@media screen and (max-width: 25em) {
-	.codrops-header { font-size: 0.8em; }
-	section.related { font-size: 1.2em; }
-	.codrops-icon span { display: none; }
 }

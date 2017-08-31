@@ -1,1 +1,0 @@
-json.array! @progressnotes, partial: 'progressnotes/progressnote', as: :progressnote

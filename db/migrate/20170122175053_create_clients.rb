@@ -3,6 +3,7 @@ class CreateClients < ActiveRecord::Migration[5.0]
     create_table :clients do |t|
       t.string :firstname
       t.string :lastname
+      t.string :gender
       t.string :dob
       t.string :allergies
       t.string :cdiet
@@ -27,6 +28,8 @@ class CreateClients < ActiveRecord::Migration[5.0]
       t.string :pes0
       t.string :pes1
       t.string :pes2
+
+      t.belongs_to :user, foreign_key: true
 
       t.timestamps
     end

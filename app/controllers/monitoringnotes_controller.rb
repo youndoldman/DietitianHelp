@@ -1,4 +1,5 @@
 class MonitoringnotesController < ApplicationController
+  skip_before_action :client_loaded_same_as_params?, only: [:show, :index]
   before_action :set_monitoringnote, only: [:show, :edit, :update, :destroy]
 
   # GET /monitoringnotes
@@ -25,16 +26,11 @@ class MonitoringnotesController < ApplicationController
   # POST /monitoringnotes.json
   def create
     @monitoringnote = Monitoringnote.new(monitoringnote_params)
-
-    respond_to do |format|
       if @monitoringnote.save
-        format.html { }
-        format.json { render :show, status: :created, location: @monitoringnote }
+        render json: @monitoringnote.to_json
       else
-        format.html { render :new }
-        format.json { render json: @monitoringnote.errors, status: :unprocessable_entity }
+        render json: @monitoringnote.to_json
       end
-    end
   end
 
   # PATCH/PUT /monitoringnotes/1

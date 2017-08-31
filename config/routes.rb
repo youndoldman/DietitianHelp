@@ -1,31 +1,29 @@
 Rails.application.routes.draw do
   
-  resources :current_users
-  resources :goals
-  resources :nextevaluationnotes
-  resources :documents
-  resources :fullassessments
-  resources :monitoringnotes
-  resources :progressnotes
-  resources :clients
-  resources :client_info
-  devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions"}
-  # devise_for :users, :controllers => {:sessions => "sessions"}
+  devise_for :users, :controllers => {:sessions => "sessions"}
 
-	devise_scope :user do get "/users/sign_out" => "devise/sessions#destroy" end
+  devise_scope :user do 
+    delete "/users/sign_out" => "devise/sessions#destroy" 
+  end
+
+  resources :users, only: [:show] do
+    resources :clients, only: [:show, :new, :edit] do
+    end
+  end
+  
+  resources :clients, only: [:show, :index, :create, :update, :delete] do
+      resources :history, :labs, :fullassessments, :progressnotes, :monitoringnotes, :nextevaluationnotes, :goals
+  end
+
 	
   root 'pages#home'
 
-	get 'client_info/key_info', to: "client_info#key_info"
-
-  get 'user/key_info', to: "current_users#show"
-
-
 	get '#processingViewModal', to: 'pages#home'
 
-  get 'calendar', to: 'pages#calendar'
+  get '/dashboard', to: 'pages#dashboard'
 
-	get 'clients/:id/nutritionaldata' => 'clients#nutritionaldata'
+  get '/clients/:id/medical_history', to: 'clients#medical_history'
+
 
  
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

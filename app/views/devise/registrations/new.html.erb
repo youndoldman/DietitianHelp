@@ -1,72 +1,191 @@
-<!DOCTYPE html>
-<html>
+<!-- MOBILE STOPPER -->
+    <div id="mobileStopper" class="preloader table-wrapper" style="background: #b2d5d6;display:none">
+      <div class="table-row">
+        <div id='contente' style="height: 100%;width: 90%;position: absolute;top: 30%;left:5%">
+          <div>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="msapplication-tap-highlight" content="no" />
+<p>
+              <h2 style="text-align: center">Mobile Devices Not Yet Supported.</h2>
+                  <h4 style="text-align: center">Use a desktop to experience the new Medical Nutrition Therapy process.</h4>
+          
 
 
-  <title>DIETITIAN.HELP | Login</title>
+           <div style="position: center; text-align: center;margin:80% 20% 0% 20%">
+             
+            <h1 style="font-size: 16px">© Carlos Almonte 2017</h1>
+</div>
+           </p>
 
- <%= stylesheet_link_tag 'bootstrap.min' %>
- <%= stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons' %>
- <%= stylesheet_link_tag 'waves.min' %>
- <%= stylesheet_link_tag 'style' %>
- <%= favicon_link_tag 'favicon.ico' %>
-
-  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-  <!--[if lt IE 9]>
-      <script src="html5shiv.min.js"></script>
-      <script src="respond.min.js"></script>
-    <![endif]-->
-</head>
-
-<body>
-
-  <div class="table-wrapper">
-    <div class="table-row">
-      <div class="table-cell text-center">
-        <div class="login i-block">
-          <div class="content-box">
-            <div class="light-blue-bg biggest-box">
-
-              <h1 class="zero-m text-uppercase">Welcome</h1>
-
-            </div>
-
-            <div class="big-box text-left login-form">
-              <div class="form-group"><h2>Sign up</h2>
-
-                <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:id => "sign_up_user"},
-           :format => :json,
-           :remote => true ) do |f| %>
-                <%= devise_error_messages! %>
-               <p> </br> 
-                  <%= f.text_field :username, class: "form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%> 
-                  </br>
-                  <%= f.password_field :password, class: "form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>  
-                  <br/>
-    <%= f.password_field :password_confirmation, class: "form-control material", placeholder: "Password", id: "password", autocomplete: "off" %>
-              </p>
- <div class="btn btn-block btn-info text-uppercase waves">
-    <%= f.submit "Sign up" %>
-  </div>
-                  <% end %>
-            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-<%= javascript_include_tag 'waves.min' %>
-  <script>
-    //Waves effect on buttons      
-    Waves.attach('.waves', ['waves-float']);
-    Waves.init();
-  </script>
 
-</body>
 
-</html>
+      <%= render partial: 'pages/header' %>
+      <div id="fade" class="center" style="display: block;height:100%">
+        <div id="jumbotronnoblur" class="" style="width:100%;height:100%;position: absolute;sund-color: #FFFFFFF">
+        </div>
+
+        <div class="table-cell text-center animated fadeIn" style="position: absolute;top: 20%; height:100%; width: 100%">
+
+
+<!-- SIGN UP BLOCK BEGINS -->
+                <div id="sign_up_user1" class="login i-block" style="position: absolute; display: block;width: 300px; height: 360px;left: 40%">
+          <div class="content-box" style="height: 360px">
+            <div class="" style="margin-left: 10%;width: 100%; height: 100%;background-image: url('<%= asset_path('Logo SOS w name.png') %>');background-repeat:no-repeat; background-size:contain; height:150px; left: 50%" >
+            </div>
+            <div class="big-box text-left login-form" style="padding: 0 50px 120px; margin: -13px 0 0 0">
+
+          <!-- SIGN UP FORM -->
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class: "", :id => "sign_up_user", :style => "display: block;position: absolute;"}) do |f| %>
+            <%= f.text_field :username, class: "input-container form-control material", placeholder: "Username", id: "login", type: "text", autofocus: true%>
+            <%= f.password_field :password, class: "input-container form-control material", placeholder: "Password", id: "password", type: "password", autocomplete: "off"%>
+            <%= f.password_field :password_confirmation, class: "input-container form-control material", placeholder: "Password Confirmation", id: "passwordconfirm", autocomplete: "off" %>
+          <div class="btn btn-warning text-uppercase" style="margin: 20px 0 10px 0; width: 100%">
+            <%= f.submit "Register", name:"submit", style:"border:none;background:transparent;text-transform:uppercase"%>
+          </div>
+          <a id="logInBtn" class="btn btn-block text-uppercase" style="background-color: #374b89 ;color: #FFFFFF">Log In</a>
+        </li>
+          <% end %>
+            </div>
+          </div>
+        </div>
+        <!-- SIGN UP BLOCK END -->
+      </div>
+        <!-- <div style="left: 35%;height: 40%;width: 30%;position: absolute; top: 150px;background-image: url('<%= image_path('Logo SOS w name.png')%>'); background-size: cover"> -->
+        </div>
+      <!-- <img class="animated fadeInUp" id="jumbotronlogo" src="<%= image_path('jumbotronlogo.png')%>" alt="" style="position: absolute;top: 6em;left: 1em;width: 60%;display: none"> -->
+      <div id="slogan" style="display: none;">
+      <!-- <img class="animated fadeInUp" id="sloganpng" src="<%= image_path('slogan.png')%>" alt="" style="position: absolute;display: block;width: 30%;top: 21em;right: 8em"> -->
+      </div>
+      </div>
+      <div id="divider1" class="col-lg-6" style="display: none;position: relative;background: #374b89;color:#FFFFFF; width:;height: 60%;padding: 3em 2em 3em 2em">
+        <h2>About</h2>
+          <h1>Dietitians Reinvented.</h1>
+          <h3>Dietitian.help is an EMR for Dietitians that has broken down the Medical Nutrition Therapy process (MNT) in a way that will ensure that your client will receive the most accurate assessment, allowing you as healthcare provider to determine the most appropiate intervention. All while complying with regulatory bodies, e.g. Medicaid, Medicare, etc...</h3>
+          <br>
+          <h1>From top to bottom, designed to fit your needs</h1>
+          <h3>Save notes in the format you were taught. Automatically perform a sample assessment to guide you in the right direction.</h3>
+        </div>
+        <div id="divider2" class="col-lg-6" style="display: none;height:60%;background-image: url('<%=image_path('egg.jpg')%>');background-position: 75% 75%;background-size: 100%">
+          <div style="float: right;position: relative; width:100%;height: 100%;padding: 3em 2em 3em 2em">
+        </div>
+        </div>
+      <!-- Pen Title-->
+      <script>
+      $('.toggle').on('click', function() {
+      $('.container').stop().addClass('active');
+      });
+      $('.close').on('click', function() {
+      $('.container').stop().removeClass('active');
+      });
+      $('body').attr('style', "background-image: url('<%= image_path('foodJumbo copy.jpg')%>');margin:0px;overflow: visible;background-size: cover")
+      // LOGO DOES NOT GO ON BODY WHILE FADEING IN/OUT
+      $('#gn-menu').attr('style', "overflow: hidden")
+
+      // $('body').attr('style', "background: #a7bec5")
+
+      $(document).ready(function(){
+        $('#slogan').delay(1300).fadeIn(580);
+        $('#jumbotronlogo').delay(1000).fadeIn(100);
+  if($(window).width() > 960) {
+        $('#fade').delay(200).show('fast');
+
+        $('#divider1').delay(1000).fadeIn(100);
+        $('#divider2').delay(1000).fadeIn(100);
+        $('#footer').delay(1000).fadeIn(100);
+        setTimeout(inviter, 2000);
+      }
+        //$('#jumbotronblur').delay(1000).fadeOut(5000);
+        //$('#divider2').foggy({
+          //  blurRadius: 1,          // In pixels.
+        //});
+
+
+
+
+
+
+
+        $('.top-clock').remove();
+
+      
+
+
+
+
+// FADE IN BODY
+$('body').show('fast');
+
+      })
+
+
+
+
+function inviter() {
+
+top.iziToast.show({
+color: '#374b89',
+icon: 'icon-person',
+titleColor: 'white',
+title: 'Invalid Sign Up please try again',
+position: 'topRight', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+progressBarColor: 'white',
+});
+
+}
+
+function errors(error) {
+
+top.iziToast.show({
+color: '#374b89',
+icon: 'icon-person',
+titleColor: 'white',
+title: error,
+position: 'topRight', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+progressBarColor: 'white',
+});
+
+}
+
+
+
+
+
+      $('#registerBtn').click(function(e){
+    
+    e.preventDefault();
+
+  $('#new_user1').toggleClass('fadeInUp zoomOut');
+      $('#sign_up_user1').toggleClass('fadeInUp zoomOut');
+    $('#sign_up_user1').show();
+    $('#sign_up_user').show();
+
+
+})
+$('#logInBtn').click(function(e){
+
+  e.preventDefault();
+
+  $('#new_user1').toggleClass('fadeInUp zoomOut');
+      $('#sign_up_user1').toggleClass('fadeInUp zoomOut');
+
+})
+
+// SCROLLS TO ABOUT
+$("#aboutFromNav").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#divider1").offset().top - 25
+    }, 400);
+});
+
+
+function fadeAway() {
+  $('html').fadeOut();
+}
+
+
+
+
+      </script>

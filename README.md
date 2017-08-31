@@ -1,9 +1,13 @@
 
 # README
 
-Training ground to learn web development.
+Electronic Medical Record keeping application with auto assessment functionality to help reduce MNT errors.
 
-* No new users permitted yet.
+
+V1 incoorporates:
+ 1- Dynamic Javascript files rendering in application.html.erb.
+ 2- JS files bundled up.
+ 3- Routes adjusted to allow users to share clients. user with id = 1 should be able to see users.id = 2 client/s if permitted by users 2... Functionality being considered.
 
 ----------
 
@@ -13,22 +17,17 @@ Training ground to learn web development.
 -Rails 5.0.0
 
 
--Devise
+-Devise for authentication
 
 
 -SQLite on Development, PostgreSQL on Production
-
-
--Built using "advantage-responsive-admin-theme". Can be found here for reference -> 
-	https://shapebootstrap.net/item/1525214-advantage-responsive-admin-theme
-
 
 ----------
 * Features:
 
 
 	* Create new Client --> 
-		Type "firstname lastname" on the "Search/Add" modal, hit ENTER or press "Add firstname lastname..." 
+		Type "<firstname> <lastname>" on the "Search/Add" modal, hit ENTER or press "Add firstname lastname..." 
 
 
 	* Search existing Client --> 
@@ -36,46 +35,31 @@ Training ground to learn web development.
 
 
 	* Create sample assessment based on information provided --> 
-		Fill as much information as possible on the "Gather" tab. (Labs are still a Work In Progress (WIP), please ignore).
-
-		BUG #1 --> after filling info on "Gather" tab, hitting "Next" will not advance to the next tab.
-
-		Workaround
-			1. manually click on the "Assess" tab and hit "Run" to run the assessment.
-				This will create a sample assessment and will indicate any potential diagnosis based on the information provided in the "Gather" tab.
-			2. Go back to "Gather" and click "Next" so all the info filled in "Gather" can be saved on the database.
-
+		Fill as much information as possible on the "Gather" tab. (Labs are still work in progress. Not implemented to be assessed during assessment).
 
 	* Add notes relevant to Medical Nutrition Therapy --> 
 		1. On the "Assess" tab click on the button "Comply" next to "Run" to move to the "Comply" tab. 
 		2. Add the necessary notes (and date for the case of Next Evaluation Notes) and click "Done".
-		3. A notification will appear "MNT Completed" asking what to do next. 
+		3. A notification will appear "MNT Completed" asking what to do next.
 		4. Click "Dashboard" to move on to calendar or "History" to see the notes that were saved for this current client.
-
 
 	* See all the assessments that are due for today displayed on the calendar "Dashboard".
 
 
 * Pending Work/Features
 
-
-	* Add goals functionality
-		e.g. "Client should show a 5% weight reduction by next visit."
-
-
 	* Integrate Labs to auto-assessment
 		e.g. relevant lab values that are not Within Normal Limits (WNL) should be mentioned in assessment.
 
-
 	* Billing
 
+	* User account should be able to update users information.
 
-	* Design and colors
+	* Clients should be able to send their Dietitians pictures of meals so Dietitians can keep track of MNT better.
 
+	* Clients should be able to communicate with Dietitian for online consults.
 
 	* Minify, compress and get rid of unecessary files and functions.
 
 
 _____________________________________
-
-Work two jobs. Time is scarce. 

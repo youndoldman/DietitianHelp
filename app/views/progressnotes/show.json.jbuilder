@@ -1,1 +1,0 @@
-json.partial! "progressnotes/progressnote", progressnote: @progressnote

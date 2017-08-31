@@ -1,0 +1,115 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+*/
+
+
+
+.logo-on-header {
+    background-image: url("<%= asset_path('Logo SOS.png') %>");
+  background-size: cover;
+  height: 80px !important;
+  width: 100%;
+  background-position-x: -46px;
+  background-position-y: -4px;
+  background-repeat: no-repeat;
+}
+.name-on-header {
+	text-decoration: underline !important;
+  color: #374b89 !important;
+  font-size: 1.4em !important;		
+  top: -5px;
+  position: relative;
+}
+
+.d-inline {
+	display: inline-block !important
+}
+
+.center-y-header {
+  bottom: 5px;
+  position: relative;	
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.client-on-header {
+  font-size: 27px;
+  color: #cbbd44;
+}
+.no-margin-bottom {
+  margin-bottom: -15px !important;
+}
+.loading{
+  -webkit-animation: blink 1s infinite; /* Safari 4+ */
+  -moz-animation:    blink 1s infinite; /* Fx 5+ */
+  -o-animation:      blink 1s infinite; /* Opera 12+ */
+  animation:         blink 1s infinite; /* IE 10+, Fx 29+ */
+}
+
+@-webkit-keyframes blink {
+  0%   { opacity: 0.5; }
+  25%   { opacity: 0.6; }
+  50%   { opacity: 0.7; }
+  75%   { opacity: 0.8; }
+  100% { opacity: 0.9; }
+}
+@-moz-keyframes blink {
+  0%   { opacity: 0.5; }
+  25%   { opacity: 0.6; }
+  50%   { opacity: 0.7; }
+  75%   { opacity: 0.8; }
+  100% { opacity: 0.9; }
+}
+@-o-keyframes blink {
+  0%   { opacity: 0.5; }
+  25%   { opacity: 0.6; }
+  50%   { opacity: 0.7; }
+  75%   { opacity: 0.8; }
+  100% { opacity: 0.9; }
+}
+@keyframes blink {
+  0%   { opacity: 0.5; }
+  25%   { opacity: 0.6; }
+  50%   { opacity: 0.7; }
+  75%   { opacity: 0.8; }
+  100% { opacity: 0.9; }
+}
+.fake-icon {
+  width: 16px;
+}
+.btn-as-link {
+       background:none!important;
+     color:inherit;
+     border:none; 
+     padding:0!important;
+     font: inherit;
+     /*border is optional*/
+     border-bottom:1px solid #444; 
+     cursor: pointer;
+}
+section {
+  background: white;
+}
+
+.box-chart {
+  opacity: 1;
+  padding: 10px;
+}

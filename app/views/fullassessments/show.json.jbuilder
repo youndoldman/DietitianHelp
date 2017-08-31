@@ -1,1 +1,0 @@
-json.partial! "fullassessments/fullassessment", fullassessment: @fullassessment
