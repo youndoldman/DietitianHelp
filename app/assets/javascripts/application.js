@@ -46,7 +46,6 @@
 //= require dataTables.tableTools
 //= require pikaday
 //= require pikaday.jquery
-//= require example
 //= require jsface
 //= require snap.svg-min
 //= require sweetalert.min
