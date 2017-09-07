@@ -5,6 +5,8 @@ Prototype of small CRUD app using Ruby on Rails.
 
 Functions as an Electronic Medical Record.
 
+I am solely responsible for this fullstack. Backend, data modeling, design, database, frontend, etc...
+
 ----------
 
 -ruby 2.2.3
