@@ -20,11 +20,6 @@ I am solely responsible for this fullstack. Backend, data modeling, design, data
 
 -SQLite on Development, PostgreSQL on Production
 
-
--Built using "advantage-responsive-admin-theme". Can be found here for reference -> 
-	https://shapebootstrap.net/item/1525214-advantage-responsive-admin-theme
-
-
 ----------
 * Features:
 
@@ -39,13 +34,6 @@ I am solely responsible for this fullstack. Backend, data modeling, design, data
 
 	* Create sample assessment based on information provided --> 
 		Fill as much information as possible on the "Gather" tab. (Labs are still a Work In Progress (WIP), please ignore).
-
-		BUG #1 --> after filling info on "Gather" tab, hitting "Next" will not advance to the next tab.
-
-		Workaround
-			1. manually click on the "Assess" tab and hit "Run" to run the assessment.
-				This will create a sample assessment and will indicate any potential diagnosis based on the information provided in the "Gather" tab.
-			2. Go back to "Gather" and click "Next" so all the info filled in "Gather" can be saved on the database.
 
 
 	* Add notes relevant to Medical Nutrition Therapy --> 
@@ -79,5 +67,3 @@ I am solely responsible for this fullstack. Backend, data modeling, design, data
 
 
 _____________________________________
-
-Work two jobs. Time is scarce. 
