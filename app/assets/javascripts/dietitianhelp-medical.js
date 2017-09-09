@@ -146,7 +146,7 @@ top.NProgress.start();
       lossesInDays.push('180')
     }
     
-    weightDifferenceMessage += `${losses.join("/")} days`
+    weightDifferenceMessage += `${lossesInDays.join("/")} days`
     
     significantWeightGain() ? weightDifferenceMessage += ' and ' : null
   }

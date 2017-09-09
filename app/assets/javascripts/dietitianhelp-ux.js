@@ -41,37 +41,36 @@
       // MOVE TO COMPLY TAB AFTER SUCCESS FROM ASSESSMENT SUBMIT
       $('#comply-btn').on('click', function moveToComply() {
 
-        const type = $('#assessmentType').find(":selected").text().split(" - ")[0]
-        const date = $('#assessmentType').find(":selected").text().split(" - ")[1]
-        const diagnosis = $('#note-editor-4').text()
-        const assessment = $('#note-editor-2').text()
-        const intervention = $('#note-editor-5').text()
-        const monitoringEval = $('#note-editor-6').text()
+        const type              = $('#assessmentType').find(":selected").text().split(" - ")[0]
+        const date              = $('#assessmentType').find(":selected").text().split(" - ")[1]
+        const diagnosis         = $('#note-editor-4').text()
+        const assessment        = $('#note-editor-2').text()
+        const intervention      = $('#note-editor-5').text()
+        const monitoringEval    = $('#note-editor-6').text()
         const authenticityToken = top.$('meta[name="csrf-token"]').attr('content')
 
         const fullassessmentRequestData = {
           method: 'POST',
-          credentials: 'include',
+          credentials: 'same-origin',
           headers: {
             'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
-            "authenticity_token": authenticityToken
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
           },
-          data: {
+          body: JSON.stringify({
             fullassessment: {
-              type: type,
+              assessment_type: type,
               date: date,
               assessment: assessment,
               diagnosis: assessment,
               intervention: intervention,
-              monitoring_evaluation: monitoringEval,
-              client_id: client.id
+              monitoring_evaluation: monitoringEval
             }
-          }
+          })
         }
         console.log(fullassessmentRequestData)
 
-
-        fetch(`/clients/${client.id}/fullassessments`, fullassessmentRequestData).then(res => console.log(res.url))
+        fetch(`/clients/${client.id}/fullassessments`, fullassessmentRequestData).then(res => console.log(res))
       })
 
       // INITIALIZE CHAIN OF FORM SUBMISSION

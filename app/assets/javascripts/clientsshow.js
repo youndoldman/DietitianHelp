@@ -20,7 +20,7 @@
 //= require bootstrap.min
 //= require moment.min
 //= require typed
-//= require ion.rangeSlider
+
 
 //= require dietitianhelp-ux
 //= require dietitianhelp-medical
@@ -37,7 +37,7 @@
 //= require pikaday.jquery
 //= require iziToast
 //= require iziModal
-//= require summernote
+//= require summernote.min
 //= require jquery.maskedinput
 //= require turbolinks
 //= require_self

@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   resources :clients, only: [:show, :index, :create, :update, :delete] do
       resources :history, :labs, :fullassessments, :progressnotes, :monitoringnotes, :nextevaluationnotes, :goals
   end
-
 	
   root 'pages#home'
 
