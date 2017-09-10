@@ -70,7 +70,7 @@
         }
         console.log(fullassessmentRequestData)
 
-        fetch(`/clients/${client.id}/fullassessments`, fullassessmentRequestData).then(res => console.log(res))
+        fetch("/clients/" +client.id + "/fullassessments", fullassessmentRequestData)
       })
 
       // INITIALIZE CHAIN OF FORM SUBMISSION
@@ -266,10 +266,6 @@
             $(".todo ul").append(
               '<li id="' + 'item-' + data["id"] + '" class="list-group-item  ' + randomClass + ' list-item" data-toggle="tooltip" data-placement="top" title="' + revision_date + '" "><div class="checkbox"' + ' onclick="updateGoal(' + "'/clients/" + data["client_id"] + "/goals/" + data["id"] + "'" + ', ' + data["id"] + ", 'complete'" + ')' + '"><input type="checkbox" id="' + data["id"] + '" /><label for="' + data["id"] + '">' + toDo_name + '</label></div><div class="pull-right action-btns"><a class="archive"><span class="fa fa-archive fa-inverse" onclick="updateGoal(' + "'/clients/" + data["client_id"] + "/goals/" + data["id"] + "'" + ', ' + data["id"] + ", 'archived'" + ')" style="cursor: pointer"></span></a><a id="trash-' + data["id"] + '"class="trash"><span class="fa fa-close fa-inverse" onclick="deleteGoal(' + "'/clients/" + data["client_id"] + "/goals/" + data["id"] + "'" + ', ' + data["id"] + ');" style="cursor: pointer"></span></a></div></li>'
             );
-            // $(document).on('click', `trash-${data["id"]}`, function() {
-            //   console.log('hello')
-            // } )
-            // $('#item' + newid).attr('onclick', `updateGoals(clients/${data["client_id"]}/goals/${data["id"]}`)
             count();
 
 
@@ -412,23 +408,23 @@
         goalID = response["id"]
         if (stat == 'archived') {
           $(':checkbox#' + goalID.toString()).prop('checked', false)
-          $($(`#item-${goalID}`).find('.checkbox')).attr("onclick", `updateGoal('${url}', ${goalID}, 'complete')`);
+          $($('#item-' + goalID).find('.checkbox')).attr("onclick", "updateGoal(" + url + ", " + goalID + ", " + "'complete')")
           $('#item-' + goalID.toString()).closest(".list-group-item").removeClass('animated tada loading checked-todo').addClass("archive-item")
-          $($(`#item-${goalID}`).find('.fa')[0]).removeClass('fa-archive').addClass('fa-check').attr("onclick", `updateGoal('${url}', ${goalID}, 'active')`);
+          $($('#item-' + goalID).find('.fa')[0]).removeClass('fa-archive').addClass('fa-check').attr("onclick", `updateGoal('${url}', ${goalID}, 'active')`);
           count()
         }
         if (stat == 'active') {
           $(':checkbox#' + goalID.toString()).prop('checked', false)
-          $($(`#item-${goalID}`).find('.checkbox')).attr("onclick", `updateGoal('${url}', ${goalID}, 'complete')`);
+          $($('#item-' + goalID).find('.checkbox')).attr("onclick", `updateGoal('${url}', ${goalID}, 'complete')`);
           $('#item-' + goalID.toString()).closest(".list-group-item").removeClass("archive-item checked-todo animated tada loading")
-          $($(`#item-${goalID}`).find('.fa')[0]).removeClass('fa-check').addClass('fa-archive').attr("onclick", `updateGoal('${url}', ${goalID}, 'archived')`);
+          $($('#item-' + goalID).find('.fa')[0]).removeClass('fa-check').addClass('fa-archive').attr("onclick", `updateGoal('${url}', ${goalID}, 'archived')`);
           count()
         }
         if (stat == 'complete') {
           $(':checkbox#' + goalID.toString()).prop('checked', 'checked')
-          $($(`#item-${goalID}`).find('.checkbox')).attr("onclick", `updateGoal('${url}', ${goalID}, 'active')`);
+          $($('#item-' + goalID).find('.checkbox')).attr("onclick", `updateGoal('${url}', ${goalID}, 'active')`);
           $('#item-' + goalID.toString()).closest(".list-group-item").removeClass('archive-item checked-todo animated tada loading').addClass("checked-todo")
-          $($(`#item-${goalID}`).find('.fa')[0]).removeClass('fa-check fa-archive').addClass('fake-icon').attr("onclick", `updateGoal('${url}', ${goalID}, 'active')`);
+          $($('#item-' + goalID).find('.fa')[0]).removeClass('fa-check fa-archive').addClass('fake-icon').attr("onclick", `updateGoal('${url}', ${goalID}, 'active')`);
           count()
         };
       },
@@ -448,7 +444,7 @@
       },
       success: function(data) {
         console.log(data)
-        $(`#item-${data["id"]}`).remove()
+        $('#item-' + data["id"]).remove()
       }
     });
   }
@@ -528,7 +524,7 @@
         ['<button>History</button>', function(instance, toast) {
           // instance.hide({ transitionOut: 'fadeOutUp' }, toast);
           $.ajax({
-            url: `/clients/${client.id}/history/`,
+            url: '/clients/' + client.id + '/history/',
             type: 'GET',
             success: function(data) {
               top.document.getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
