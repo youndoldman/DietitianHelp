@@ -130,7 +130,7 @@ function loadClient(clientId) {
     return
   }
   
-  clientFrame.attr("src", `/clients/${clientId}`)
+  clientFrame.attr("src", "/clients/" + clientId)
 
   // clearOptions FORCES selectize TO RELOAD CLIENTS EVERYTIME FUNCTION IS CALLED ---- NEEDED TO REFLECT ANY CHANGES TO THE DATABASE DURING THIS USER SESSION
   clientFrame.fadeOut()
@@ -141,7 +141,7 @@ function loadClient(clientId) {
   // ADDS EVENT AFTER CLIENT LOAD TO MAKE LINK ON HEADER WORK WITH LOADED CLIENT
   $('#assessmentTool').off('click')
   $('#assessmentTool').click(function() {
-      clientFrame.attr("src", `/clients/${clientId}`)
+      clientFrame.attr("src", "/clients/" + clientId})
     })
 
   top.$('.gn-search')[0].selectize.clearOptions()
