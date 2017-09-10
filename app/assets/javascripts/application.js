@@ -15,7 +15,6 @@
 //= require jquery.min
 //= require jquery-ui.min
 //= require jquery_ujs
-//= require jquery.bootstrap.wizard
 //= require jquery.flot
 //= require jquery.flot.resize
 //= require bootstrap.min
@@ -25,7 +24,7 @@
 //= require jquery.mCustomScrollbar
 //= require cta.min
 //= require typed
-//= require ion.rangeSlider
+
 
 
   
@@ -33,8 +32,6 @@
 
 //= require selectFx
 //= require nprogress
-//= require jquery.flot
-//= require jquery.flot.resize
 //= require curvedLines
 //= require jquery.flot.orderBars
 //= require jquery.form.min.js
@@ -42,26 +39,22 @@
 //= require d3.min
 //= require c3.min
 //= require jquery.dataTables
-//= require dataTables.responsive
-//= require dataTables.tableTools
+
+
 //= require pikaday
 //= require pikaday.jquery
-//= require example
-//= require jsface
-//= require snap.svg-min
-//= require sweetalert.min
-//= require notificationFx
+
+
 //= require standalone/selectize
-//= require auto-complete.min
-//= require cssParser
-//= require modalEffects
+
+
+
 //= require iziToast
 //= require iziModal
 //= require fullcalendar
-//= require modernizr.customPBUTTONS
-//= require classiePBUTTONS
-//= require summernote
-//= require datedropper
+
+//= require summernote.min
+
 //= require jquery.maskedinput
 //= require turbolinks
 //= require_self

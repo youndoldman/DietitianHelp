@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170823010920) do
+ActiveRecord::Schema.define(version: 20170906224416) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "firstname"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20170823010920) do
     t.string   "diagnosis"
     t.string   "intervention"
     t.string   "monitoring_evaluation"
-    t.string   "type"
+    t.string   "assessment_type"
     t.string   "date"
     t.index ["client_id"], name: "index_fullassessments_on_client_id"
   end

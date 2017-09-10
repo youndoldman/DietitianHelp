@@ -1,2 +1,0 @@
-json.extract! client, :id, :firstname, :lastname, :dob, :gender, :allergies, :user_id, :cdiet, :dx, :ht, :cbw, :date0, :thirtywt, :ninetywt, :oneeightywt, :date1, :date2, :date3, :intakefrom, :intaketo, :bmi, :ibw, :calreq, :proreq, :flreq, :fpes, :pes0, :pes1, :pes2, :created_at, :updated_at
-json.url client_url(client, format: :json)

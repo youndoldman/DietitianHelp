@@ -1,0 +1,164 @@
+@font-face {
+  font-family: "icomoon";
+  src: url("/assets/icomoon-133a83eff5f4a23983f1224bf250e53eb683f40c5ec10e9640986115e5fcaef6.eot");
+  src: url("/assets/icomoon-133a83eff5f4a23983f1224bf250e53eb683f40c5ec10e9640986115e5fcaef6.eot") format("eot"), url("/assets/icomoon-7fd8130ba1e403506c948c0644ac705816de8d1a36266b2b5aac89eb4c331207.woff") format("woff"), url("/assets/icomoon-e7f45b42dc0afdfca69646342e02165bb71ae9cc770c4f5fc2e4c5076f823dbd.ttf") format("truetype"), url("/assets/icomoon-5ceac4da9c2e1cae00469c2f6b33b4131a9ceac2ba259a22a05e9f186599e46b.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 9, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+div.cs-skin-underline {
+  background: transparent;
+  font-size: 1.8em;
+  max-width: 400px;
+}
+
+@media screen and (max-width: 30em) {
+  /* line 16, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+  div.cs-skin-underline {
+    font-size: 1.2em;
+  }
+}
+/* line 19, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline > span {
+  padding: 0.5em 3em 0.5em 0.5em;
+  border-bottom: 3px solid #000;
+  border-color: inherit;
+  font-weight: bold;
+}
+
+/* line 26, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline > span::after {
+  font-family: 'icomoon';
+  content: '\e003';
+  right: 0.25em;
+  -webkit-transform: translate3d(0, -50%, 0) rotate3d(0, 0, 1, 45deg);
+  transform: translate3d(0, -50%, 0) rotate3d(0, 0, 1, 45deg);
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+}
+
+/* line 36, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline.cs-active > span::after {
+  -webkit-transform: translate3d(0, -50%, 0) rotate3d(0, 0, 1, 270deg);
+  transform: translate3d(0, -50%, 0) rotate3d(0, 0, 1, 270deg);
+}
+
+/* line 41, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline .cs-options {
+  background: #bbc7c8;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s 0.4s, visibility 0s 0.7s;
+  transition: opacity 0.3s 0.4s, visibility 0s 0.7s;
+}
+
+/* line 48, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline.cs-active .cs-options {
+  opacity: 1;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+/* line 54, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline ul span {
+  position: relative;
+  text-transform: uppercase;
+  font-size: 66%;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 1.2em 0.8em;
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* line 68, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-select ul span::after {
+  content: '';
+  opacity: 0;
+}
+
+/* line 73, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-select .cs-selected span::after {
+  font-family: 'icomoon';
+  content: '\ea10';
+  opacity: 1;
+  -webkit-transition: opacity 0.3s 0.7s;
+  transition: opacity 0.3s 0.7s;
+}
+
+/* line 81, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline ul span::before {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #fff;
+  -webkit-transform: translate3d(200%, 0, 0);
+  transform: translate3d(200%, 0, 0);
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+/* line 95, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline.cs-active ul span,
+.cs-skin-underline.cs-active ul span::before {
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+/* line 102, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline li:nth-child(5) span,
+.cs-skin-underline li:nth-child(5) span::before,
+.cs-skin-underline.cs-active li:first-child span,
+.cs-skin-underline.cs-active li:first-child span::before {
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+
+/* line 110, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline li:nth-child(4) span,
+.cs-skin-underline li:nth-child(4) span::before,
+.cs-skin-underline.cs-active li:nth-child(2) span,
+.cs-skin-underline.cs-active li:nth-child(2) span::before {
+  -webkit-transition-delay: 0.05s;
+  transition-delay: 0.05s;
+}
+
+/* line 118, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline li:nth-child(3) span,
+.cs-skin-underline li:nth-child(3) span::before {
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+}
+
+/* line 124, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline li:nth-child(2) span,
+.cs-skin-underline li:nth-child(2) span::before,
+.cs-skin-underline.cs-active li:nth-child(4) span,
+.cs-skin-underline.cs-active li:nth-child(4) span::before {
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s;
+}
+
+/* line 132, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline li:first-child span,
+.cs-skin-underline li:first-child span::before,
+.cs-skin-underline.cs-active li:nth-child(5) span,
+.cs-skin-underline.cs-active li:nth-child(5) span::before {
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
+}
+
+/* more items require more delay declarations */
+/* line 140, /Users/CarlosAlmonte/Desktop/APPS/DietitianHelp/app/assets/stylesheets/cs-skin-underline.css.scss */
+.cs-skin-underline .cs-options li span:hover,
+.cs-skin-underline .cs-options li.cs-focus span,
+.cs-skin-underline li.cs-selected span {
+  color: #566473;
+  background: transparent;
+}

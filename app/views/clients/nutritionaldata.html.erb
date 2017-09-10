@@ -136,13 +136,11 @@
     <!-- ASSEESS TAB -->
     <section id="assess" class="tab-pane big-box fade in">
         <div class="jumbotron">
-          <%= form_for @fullassessment, url: client_fullassessments_path(client_id: @client.id), remote: true do |f| %>
           <!-- ASSESSMENT TYPE -->
           <div id="assessmentType" class="field-container form-group" style="width: 70%;display: inline-block; margin 0px;">
             <%= select_tag "Type", "<option value='full Assessment' selected='selected'>Full Assessment - #{Time.now.strftime('%b %d, %Y')}</option><option value='quaterly Assessment'>Quaterly Assessment - #{Time.now.strftime('%b %d, %Y')}</option><option value='initialAssessment'>Initial Assessment - #{Time.now.strftime('%b %d, %Y')}</option>".html_safe, class: "cs-select cs-skin-underline", style: "width: 120%" %>
           </div>
           <br>
-          <% end %>
           <!-- ASSESSMENT -->
           <div id="assessment" class="container">
             <div id="assZone">
