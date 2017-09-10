@@ -1,6 +1,7 @@
 
 # README
 
+
 Electronic Medical Record keeping application with auto assessment functionality to help reduce MNT errors.
 
 
@@ -9,7 +10,13 @@ V1 incoorporates:
  2- JS files bundled up.
  3- Routes adjusted to allow users to share clients. user with id = 1 should be able to see users.id = 2 client/s if permitted by users 2... Functionality being considered.
 
-----------
+Prototype of small CRUD app using Ruby on Rails.
+
+Functions as an Electronic Medical Record.
+
+I am solely responsible for this fullstack. Backend, data modeling, design, database, frontend, etc...
+
+## dependencies 
 
 -ruby 2.2.3
 
@@ -35,7 +42,9 @@ V1 incoorporates:
 
 
 	* Create sample assessment based on information provided --> 
-		Fill as much information as possible on the "Gather" tab. (Labs are still work in progress. Not implemented to be assessed during assessment).
+	
+		Fill as much information as possible on the "Gather" tab. (Labs are still a Work In Progress (WIP), please ignore).
+
 
 	* Add notes relevant to Medical Nutrition Therapy --> 
 		1. On the "Assess" tab click on the button "Comply" next to "Run" to move to the "Comply" tab. 
