@@ -49,7 +49,7 @@ group :development do
 end
 
 group :development, :test do
-	gem 'dotenv-rails'
+	# gem 'dotenv-rails'
   gem 'sqlite3'
 end
 
