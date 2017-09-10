@@ -146,7 +146,7 @@ top.NProgress.start();
       lossesInDays.push('180')
     }
     
-    weightDifferenceMessage += `${lossesInDays.join("/")} days`
+    weightDifferenceMessage += lossesInDays.join("/") + " days"
     
     significantWeightGain() ? weightDifferenceMessage += ' and ' : null
   }
@@ -164,11 +164,11 @@ top.NProgress.start();
     if (signficantGainSixMonths) {
       gains.push("180")
     }
-    weightDifferenceMessage += `${gains.join("/")} days`
+    weightDifferenceMessage += gains.join("/") + "days"
   }
 
   weightDifferenceMessageContainer.typed({
-      strings: [`${weightDifferenceMessage}`],
+      strings: [weightDifferenceMessage],
       typeSpeed: 1
     });
   // IF ANY SIGNIFICANT WEIGHT LOSS PUSH NOTIFICATION
@@ -189,7 +189,7 @@ function diet() {
   $("#cdietspan")[0].innerText = $('#current-diet-input').val();
   $(function() {
     $("#cdietspan").typed({
-      strings: [`${client.cdiet}`],
+      strings: [client.cdiet],
       typeSpeed: 4
     });
   });
@@ -254,7 +254,7 @@ function cal() {
     //TOOK AWAY ABILITY TO ADD CALORIES FOR WT GAIN/LOSS -CALORIC NEEDS FOR WT MAINTENANCE FOR NOW
   var goalselect;
   var goalselected = 'Maintain Weight'
-  $("#cbwspan").text(`client.cbw`)
+  $("#cbwspan").text(client.cbw)
 
   if (goalselected == 'Gain Weight') {
     animateCount("calrequirement", parseInt(z - z + 1 * y * 35));
