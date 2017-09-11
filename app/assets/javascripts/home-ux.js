@@ -124,7 +124,7 @@ function loadClient(clientId) {
   const clientFrame = top.$('#clientload')
 
   // IF ALREADY LOADED
-  if (clientId === localStorage.currentClient.id) {
+  if (clientId === $currentClient) {
     top.$('#landing').iziModal('fadeOut')
     clientFrame[0].contentWindow.location.reload(true) // reload existing user
     return
@@ -143,6 +143,8 @@ function loadClient(clientId) {
 
   // clearOptions FORCES selectize TO RELOAD CLIENTS EVERYTIME FUNCTION IS CALLED
   top.$('.gn-search')[0].selectize.clearOptions()
+
+  top.$currentCliet = clientId
 }
 
 
