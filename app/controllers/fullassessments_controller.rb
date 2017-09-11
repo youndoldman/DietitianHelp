@@ -28,8 +28,7 @@ class FullassessmentsController < ApplicationController
     @fullassessment = Fullassessment.new(fullassessment_params)
     respond_to do |format|
       if @fullassessment.save
-       format.js { render :js => "$('#modal-alert2').iziModal('open');"}
-        format.json { render :show, status: :created, location: @fullassessment }
+        format.json { render json: @fullassessment }
       else
         format.html { render :new }
         format.json { render json: @fullassessment.errors, status: :unprocessable_entity }
@@ -56,7 +55,6 @@ class FullassessmentsController < ApplicationController
   def destroy
     @fullassessment.destroy
     respond_to do |format|
-      format.html { redirect_to fullassessments_url, notice: 'Fullassessment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +67,6 @@ class FullassessmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fullassessment_params
-      params.require(:fullassessment).permit(:assessment, :date, :type, :diagnosis, :intervention, :monitoring_evaluation, :client_id)
+      params.require(:fullassessment).permit(:assessment, :date, :assessment_type, :diagnosis, :intervention, :monitoring_evaluation, :client_id)
     end
 end

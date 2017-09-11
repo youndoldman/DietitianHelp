@@ -95,35 +95,29 @@
   <!-- CLIENT GOALS -->
   <div class="content-box box-shadow big-box todo-list" style="position: absolute">
     <div class="sort-todo">
-      <a class="active-todo" href="#">Active <span class="badge green-bg"></span></a>
-      <a class="complete-todo" href="#">Completed <span class="badge yellow-bg"></span></a>
-      <a class="archive-todo" href="#">Archived <span class="badge blue-bg"></span></a>
+      <a class="active-todo">Active <span class="badge green-bg"></span></a>
+      <a class="complete-todo">Completed <span class="badge yellow-bg"></span></a>
+      <a class="archive-todo">Archived <span class="badge blue-bg"></span></a>
     </div>
 
-      <%= form_for @goal, url: client_goals_path(@client), html: {id: "add_todo"} do |f| %>
-      <div class="form-group add-todo">
-        <div class="input-group">
-          <div class="input-group-addon"><i class="fa fa-pencil green"></i></div>
-          <%= f.text_field :revision_date, id:"goal-revision-date", placeholder: "Revision Date", class: "form-control name-of-todo date", required: true%>
-          <%= f.text_field :name, id:"goal-input", placeholder: "Goal", class: "form-control name-of-todo", required: true%>
-          <%= f.submit 'Add Goal', class: 'btn text-uppercase', style:'background: #374B89;color: #FFFFFF;margin: 13px;float: right' %>
+      <%= form_for @goal, url: client_goals_path(@client), html: {id: "add-goal"} do |f| %>
+        <div class="form-group add-todo">
+          <div class="input-group">
+            <label style="text-align: center">New Goal</label>
+            <%= f.text_field :revision_date, id:"goal-revision-date", placeholder: "Revision Date", class: "form-control name-of-todo date", required: true%>
+            <%= f.text_field :name, id:"goal-input", placeholder: "Goal", class: "form-control name-of-todo", required: true%>
+            <%= f.submit 'Add Goal', class: 'btn text-uppercase', style:'background: #374B89;color: #FFFFFF;margin: 13px;float: right' %>
+          </div>
         </div>
-      </div>
+      <% end %>
 
-    <div class="">
       <div class="panel-body todo">
-        <ul id="clientGoals" class="list-group" style="margin: 0px">
+        <ul id="client-goals" class="list-group" style="margin: 0px">
 
           <%= render template: 'goals/show' %>
 
         </ul>
       </div>
-    </div>
-    <% end %>
-    <div class="checkbox clear-todo">
-      <button id="clear-comp" class="btn btn-warning waves text-uppercase">Archive Completed</button>
-
-    </div>
   </div>
 <!-- CLIENT GOAL END -->
 

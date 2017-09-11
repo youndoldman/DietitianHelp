@@ -17,9 +17,9 @@
             <span class="fa fa-archive fa-inverse" style="cursor: pointer"></span>
           </a>
 
-          <%= link_to client_goal_path(@client, goal), href: '#', onclick: "delete('#{client_goal_path(@client, goal)}', #{goal.id})", data: { confirm: "Goal will be deleted permanently. Are you Sure?" }  do %>
-            <span class="fa fa-close fa-inverse" style="cursor: pointer"></span>
-          <% end %>
+          <a class="delete-btn">
+            <span class="fa fa-close fa-inverse delete-btn" style="cursor: pointer"></span>
+          </a>
         </div>
       </li>
 
@@ -36,9 +36,9 @@
             <span class="fa fa-check fa-inverse" style="cursor: pointer"></span>
           </a>
 
-          <%= link_to client_goal_path(@client, goal), class: '', onclick: "delete('#{client_goal_path(@client, goal)}', #{goal.id})", data: { confirm: "Goal will be deleted permanently. Are you Sure?" }  do %>
-            <span class="fa fa-close fa-inverse" style="cursor: pointer"></span>
-          <% end %>
+          <a class="delete-btn">
+            <span class="fa fa-close fa-inverse delete-btn" style="cursor: pointer"></span>
+          </a>
         </div>
       </li>
 
@@ -54,9 +54,9 @@
             <span class="fa fa-check fa-inverse" style="cursor: pointer"></span>
           </a>
 
-          <%= link_to client_goal_path(@client, goal), class: '', onclick: "delete('#{client_goal_path(@client, goal)}', #{goal.id})", data: { confirm: "Goal will be deleted permanently. Are you Sure?" }  do %>
-            <span class="fa fa-close fa-inverse" style="cursor: pointer"></span>
-          <% end %>
+          <a class="delete-btn">
+            <span class="fa fa-close fa-inverse delete-btn" style="cursor: pointer"></span>
+          </a>
         </div>
       </li>
 

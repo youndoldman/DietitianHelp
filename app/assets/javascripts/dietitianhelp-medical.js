@@ -353,14 +353,14 @@ function animateBmiCount(id, number, string) {
 
 
 function adime() {
-  $('#fassessadime').html($('#assval').text())
-  $('#note-editor-3').html($('#client-dx-input').val())
-  $('#note-editor-4').html($('#current-diet-input').val())
-  $('#monevadime').html()
+  $('#assessment-adime').html($('#assessment-value').text())
+  $('#diagnosis-adime').html($('#client-dx-input').val())
+  $('#intervention-adime').html($('#client-currentdiet-input').val())
+  $('#monitoring-and-evaluation-adime').html()
 }
 
 function resetAssess() {
-  $('#assZone').html(top.defaultAssessment);
+  $('#assessment-container').html(top.defaultAssessment);
   $('#tooltip144344').hide()
 }
 // END MEDICAL JS 

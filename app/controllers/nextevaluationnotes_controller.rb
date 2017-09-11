@@ -95,6 +95,6 @@ class NextevaluationnotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def nextevaluationnote_params
-      params.require(:nextevaluationnote).permit(:nnote, :nnote_date, :client_id, :user_id)
+      params.require(:nextevaluationnote).permit(:nnote, :nnote_date, :client_id)
     end
 end

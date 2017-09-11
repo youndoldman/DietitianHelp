@@ -52,7 +52,7 @@ class ClientsController < ApplicationController
     end
   end
 
-  def medical_history
+  def history
     @client = set_client
     @medical_history = @client.medical_history
     @fullassessments = @medical_history[:fullassessments]

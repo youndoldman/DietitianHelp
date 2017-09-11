@@ -91,7 +91,7 @@
   <script>
     var progressBar    = top.NProgress
 
-    var currentUser    = <%= current_user.id %>
+    var $currentUser    = <%= current_user.id %>
     var $currentClient = undefined // assigned on clientLoad (home-ux.js)
     var clientsJSON    = $.getJSON('/clients', data => JSON.stringify(data))
 

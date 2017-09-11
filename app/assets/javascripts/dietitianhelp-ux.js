@@ -2,17 +2,7 @@
 //SHOWS HIDDEN FORM TO UPDATE CLIENT INFO
 //////
 $(document).ready(function() {
-
-  function getHistory() {
-    $.ajax({
-      url: "/clients/" + clientId + "/medical_history",
-      type: 'GET',
-      success: function(data) {
-        top.document.getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;
-      }
-    })
-  }
-
+  top.NProgress.done();
 
   $(function() {
     $.ajaxSetup({ // always pass csrf tokens on ajax calls
@@ -38,10 +28,10 @@ $(document).ready(function() {
 
     const type              = $('#assessmentType').find(":selected").text().split(" - ")[0]
     const date              = $('#assessmentType').find(":selected").text().split(" - ")[1]
-    const diagnosis         = $('#note-editor-4').text()
-    const assessment        = $('#note-editor-2').text()
-    const intervention      = $('#note-editor-5').text()
-    const monitoringEval    = $('#note-editor-6').text()
+    const diagnosis         = $('#diagnosis-adime').text()
+    const assessment        = $('#assessment-value').text()
+    const intervention      = $('#intervention-adime').text()
+    const monitoringEval    = $('#monitoring-and-evaluation-adime').text()
     const authenticityToken = top.$('meta[name="csrf-token"]').attr('content')
 
     const fullassessmentRequestData = {
@@ -59,12 +49,15 @@ $(document).ready(function() {
           assessment: assessment,
           diagnosis: assessment,
           intervention: intervention,
-          monitoring_evaluation: monitoringEval
+          monitoring_evaluation: monitoringEval,
+          client_id: client.id
         }
       })
     }
 
     fetch("/clients/" + client.id + "/fullassessments", fullassessmentRequestData)
+    .then(res => res.json())
+    .then(fullassessment => {$('#modal-alert2').iziModal('open');$('#complyTopTab').trigger('click')})
   })
 
   $('#new_progressnote').ajaxForm()
@@ -86,7 +79,7 @@ $(document).ready(function() {
   })
 
   // RESET ASSESSMENT BUTTON
-  $('#runBtn').on('click', function() {
+  $('#run-assessment-btn').on('click', function() {
     resetAssess()
     diet()
     intake()
@@ -132,7 +125,7 @@ $(document).ready(function() {
 
 
   if (top.$('#historyFromMenu').length == 0) {
-    top.$('.gn-submenu').append("<li id='historyFromMenu' onclick='getHistory()'><a type='button' aria-expanded='false'>History</a></li>");
+    top.$('.gn-submenu').append("<li id='historyFromMenu' data-clientId=" + "'" + top.$currentClient.id  + "'" + "onclick='getHistory()'><a type='button' aria-expanded='false'>History</a></li>");
   }
 
   $('#new_lab').ajaxForm({
@@ -170,7 +163,7 @@ $(document).ready(function() {
   })
   $("#modal-alert2").iziModal({
     title: 'ADIME Assessment Saved',
-    subtitle: '<%= @client.name %>',
+    subtitle: client.firstname + " " + client.lastname,
     icon: 'icon-check',
     iconColor: '#00af66',
     headerColor: '#374B89',
@@ -226,24 +219,24 @@ $(document).ready(function() {
     group: "labs"
   })
 
-  $('#client-edit-btn').click(function(e) {
+  $('#client-edit-btn').click(function(event) {
     toggleClientEditForm()
   })
-  $('#client-cancel-edit-btn').click(function(e) {
+  $('#client-cancel-edit-btn').click(function(event) {
     toggleClientEditForm()
   })
-  $('#client-edit-form').on('submit', function(e) {
-    e.preventDefault()
-    $(e.target).ajaxSubmit(options = {
+  $('#client-edit-form').on('submit', function(event) {
+    event.preventDefault()
+    $(event.target).ajaxSubmit(options = {
       success: function(response) {
-        updateClientDataOnViews(response)
+        updateClientInfoOnViews(response)
         toggleClientEditForm()
         $('#client-edit-form [type="submit"]').removeAttr('disabled')
       }
     })
   })
 
-  $('#add_todo').submit(event => {
+  $('#add-goal').submit(function(event) {
     event.preventDefault()
     const goalName         = $('#goal-input').val()
     const revisionDate = new Date($('#goal-revision-date')[0].value).toISOString().slice(0, 10).replace(/-/g, "/")
@@ -269,24 +262,49 @@ $(document).ready(function() {
       .then(res => res.json())
       .then(goal => { 
         $('.todo ul').append(
-          `<li id="' + 'item-' + data["id"] + '" class="list-group-item  ' + randomClass + ' list-item" data-toggle="tooltip" data-placement="top" title="' + revision_date + '" ">
-            <div class="checkbox"' + ' onclick="updateGoal(' + "'/clients/" + data["client_id"] + "/goals/" + data["id"] + "'" + ', ' + data["id"] + ", 'complete'" + ')' + '">
-              <input type="checkbox" id="' + data["id"] + '" />
-              <label for="' + data["id"] + '">' + toDo_name + '</label>
+          `<li id="item-${goal.id}" class="list-group-item list-item" data-toggle="tooltip" data-placement="top" title="${goal.revision_date}">
+            <div class="checkbox" onclick="updateGoal('/clients/${goal.client_id}/goals/${goal.id}', ${goal.id}, 'complete')">
+              <input type="checkbox" id="${goal.id}" />
+              <label for="${goal.id}">${goal.name}</label>
             </div>
             <div class="pull-right action-btns">
               <a class="archive">
-                <span class="fa fa-archive fa-inverse" onclick="fupdateGoal(' + "'/clients/" + data["client_id"] + "/goals/" + data["id"] + "'" + ', ' + data["id"] + ", 'archived'" + ')" style="cursor: pointer"></span>
+                <span class="fa fa-archive fa-inverse" onclick="updateGoal('/clients/${goal.client_id}/goals/${goal.id}', ${goal.id}, 'archived')" style="cursor: pointer"></span>
               </a>
-              <a id="trash-' + data["id"] + '"class="trash">
-                <span class="fa fa-close fa-inverse" onclick="deleteGoal(' + "'/clients/" + data["client_id"] + "/goals/" + data["id"] + "'," + data["id"] + ');" style="cursor: pointer"></span>
+              <a class="delete-btn">
+                <span class="fa fa-close fa-inverse delete-btn" style="cursor: pointer"></span>
               </a>
             </div>
           </li>`
           )
       })
+      .then(() => {$(event.target)[0].reset();$('[value="Add Goal"]').removeAttr('disabled');})
     }
   })
+
+    $('#client-goals').on('mousedown', function(event) {
+
+    if (event.target.classList.contains('delete-btn')) {
+      let timeoutId = 0
+      let opacity = 1
+      const interval = setInterval(function(event) {
+        opacity = opacity - 0.1
+        $(event.target).closest('li').css({opacity: opacity})
+      }.bind(this, event),100)
+      timeoutId = setTimeout(function() {
+        const goalId = $(event.target).closest('li').attr('id').split("-")[1]
+        deleteGoal(`/clients/${client.id}/goals/${goalId}`)
+      }, 1000);
+
+      $(event.target).one('mouseup mouseleave', function(event) {
+        clearTimeout(timeoutId);
+        clearInterval(interval)
+        $(event.target).closest('li').css({opacity: 1})
+      });
+
+    }
+  })
+
 
       // $('#add_todo')[0].reset()
       // var $toDo = $('#goalsInput')
@@ -459,13 +477,10 @@ function updateGoal(url, goalID, stat) {
 
 }
 
-function deleteGoal(url, goalID) {
+function deleteGoal(url) {
   $.ajax({
     type: "DELETE",
     url: url,
-    beforeSend: function() {
-      $('#item-' + goalID.toString()).css('background-color', 'white')
-    },
     success: function(data) {
       console.log(data)
       $('#item-' + data["id"]).remove()
@@ -489,7 +504,7 @@ function toggleClientEditForm() {
 }
 
 
-function updateClientDataOnViews(response) {
+function updateClientInfoOnViews(response) {
   $('#client').data(response) // <- updates single source of truth where variable 'client' feeds from
   const clientAttrOnView = $('.client-attribute')
 
@@ -502,7 +517,6 @@ function updateClientDataOnViews(response) {
 
       clientAttrOnView[key].innerHTML = value
     }
-
   }
 }
 
@@ -511,7 +525,7 @@ function submitNNote() {
   if ($('#note-editor-1').val().length > 0) {
     $.ajax({
       type: "POST",
-      url: '/nextevaluationnotes',
+      url: '/clients/' + client.id + '/nextevaluationnotes',
       beforeSend: function(xhr) {
         xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
       },
@@ -520,14 +534,13 @@ function submitNNote() {
           nnote: $('#nextevaluationnote_nnote')[0].value,
           nnote_date: new Date($('#note-editor-1')[0].value).toISOString().slice(0, 10).replace(/-/g, "/"),
           client_id: client.id,
-          user_id: current_user.id,
+          user_id: top.$currentUser,
         },
         commit: "Create Nextevaluationnote"
       }
     })
   }
 }
-
 
 function showDoneNotification() {
   // DONE NOTIFICATION AFTER ALL COMPLY FORMS SUBMITTED
