@@ -104,8 +104,9 @@
       <div class="form-group add-todo">
         <div class="input-group">
           <div class="input-group-addon"><i class="fa fa-pencil green"></i></div>
-          <%= f.text_field :revision_date, id:"goalsDate", placeholder: "Revision Date", class: "form-control name-of-todo"%>
-          <%= f.text_field :goals, id:"goalsInput", placeholder: "Goal", class: "form-control name-of-todo"%>
+          <%= f.text_field :revision_date, id:"goal-revision-date", placeholder: "Revision Date", class: "form-control name-of-todo date", required: true%>
+          <%= f.text_field :name, id:"goal-input", placeholder: "Goal", class: "form-control name-of-todo", required: true%>
+          <%= f.submit 'Add Goal', class: 'btn text-uppercase', style:'background: #374B89;color: #FFFFFF;margin: 13px;float: right' %>
         </div>
       </div>
 

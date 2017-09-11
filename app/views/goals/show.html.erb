@@ -3,78 +3,64 @@
 <% if @client.goals != nil %>
   <% @client.goals.each do |goal| %>
     <% status = goal.status %>
-      <% if status == 'active' %>
+      
+    <% if status == 'active' %>
+      <li id="item-<%= goal.id%>" class="list-group-item  list-info list-item" data-toggle="tooltip" data-placement="top" title="<%= goal.revision_date%>">
+
+        <div class="checkbox" onclick="updateGoal('<%= client_goal_path(@client, goal) %>', <%=goal.id%>, 'complete')">
+          <input type="checkbox" id="<%= goal.id%>" >
+          <label for="<%= goal.id%>"><%= goal.name%></label>
+        </div>
+
+        <div class="pull-right action-btns">
+          <a class="archive" onclick="updateGoal('<%= client_goal_path(@client, goal) %>', <%=goal.id%>, 'archived')">
+            <span class="fa fa-archive fa-inverse" style="cursor: pointer"></span>
+          </a>
+
+          <%= link_to client_goal_path(@client, goal), href: '#', onclick: "delete('#{client_goal_path(@client, goal)}', #{goal.id})", data: { confirm: "Goal will be deleted permanently. Are you Sure?" }  do %>
+            <span class="fa fa-close fa-inverse" style="cursor: pointer"></span>
+          <% end %>
+        </div>
+      </li>
+
+    <% elsif status == 'complete' %>
+      <li id="item-<%= goal.id%>" class="list-group-item  list-info ui-sortable-handle checked-todo" data-toggle="tooltip" data-placement="top" title="<%= goal.revision_date%>">
+
+        <div class="checkbox" onclick="updateGoal('<%= client_goal_path(@client, goal) %>', <%=goal.id%>, 'active')">
+          <input type="checkbox" id="<%= goal.id%>" checked=true>
+          <label for="<%= goal.id%>"><%= goal.name%></label>
+        </div>
+
+        <div class="pull-right action-btns">
+          <a class="activate" onclick="updateGoal('<%= client_goal_path(@client, goal)  %>', <%=goal.id%>, 'active')">
+            <span class="fa fa-check fa-inverse" style="cursor: pointer"></span>
+          </a>
+
+          <%= link_to client_goal_path(@client, goal), class: '', onclick: "delete('#{client_goal_path(@client, goal)}', #{goal.id})", data: { confirm: "Goal will be deleted permanently. Are you Sure?" }  do %>
+            <span class="fa fa-close fa-inverse" style="cursor: pointer"></span>
+          <% end %>
+        </div>
+      </li>
+
+    <% elsif status == 'archived' %>
+      <li id="item-<%= goal.id%>" class="list-group-item list-info archive-item" data-toggle="tooltip" data-placement="top" title="" data-original-title="<%= goal.revision_date%>" style="display: block;">
+        <div class="checkbox" onclick="updateGoal('<%= client_goal_path(@client, goal) %>', <%=goal.id%>, 'complete')">
+          <input type="checkbox" id="<%= goal.id%>">
+          <label for="<%= goal.id%>"><%= goal.name%></label>
+        </div>
+
+        <div class="pull-right action-btns">
+          <a class="e" onclick="updateGoal('<%= client_goal_path(@client, goal)  %>', <%= goal.id%>, 'active')">
+            <span class="fa fa-check fa-inverse" style="cursor: pointer"></span>
+          </a>
+
+          <%= link_to client_goal_path(@client, goal), class: '', onclick: "delete('#{client_goal_path(@client, goal)}', #{goal.id})", data: { confirm: "Goal will be deleted permanently. Are you Sure?" }  do %>
+            <span class="fa fa-close fa-inverse" style="cursor: pointer"></span>
+          <% end %>
+        </div>
+      </li>
 
 
-        <li id="item-<%= goal.id%>" class="list-group-item  list-info list-item" data-toggle="tooltip" data-placement="top" title="<%= goal.revision_date%>">
-
-          <div class="checkbox" onclick="updateGoal('<%= client_goal_path(@client, goal) %>', <%=goal.id%>, 'complete')">
-            <input type="checkbox" id="<%= goal.id%>" >
-            <label for="<%= goal.id%>"><%= goal.goals%></label>
-          </div>
-
-
-          <div class="pull-right action-btns">
-            <a class="archive" onclick="updateGoal('<%= client_goal_path(@client, goal) %>', <%=goal.id%>, 'archived')">
-              <span class="fa fa-archive fa-inverse" style="cursor: pointer"></span>
-            </a>
-
-            <%= link_to client_goal_path(@client, goal), href: '#', onclick: "delete(#{client_goal_path(@client, goal)}, #{goal.id}", data: { confirm: "Goal will be deleted permanently. Are you Sure?" }  do %>
-              <span class="fa fa-close fa-inverse" style="cursor: pointer"></span>
-            <% end %>
-          </div>
-
-
-        </li>
-
-
-
-      <% elsif status == 'complete' %>
-
-
-        <li id="item-<%= goal.id%>" class="list-group-item  list-info ui-sortable-handle checked-todo" data-toggle="tooltip" data-placement="top" title="<%= goal.revision_date%>">
-
-          <div class="checkbox" onclick="updateGoal('<%= client_goal_path(@client, goal) %>', <%=goal.id%>, 'active')">
-            <input type="checkbox" id="<%= goal.id%>" checked=true>
-            <label for="<%= goal.id%>"><%= goal.goals%></label>
-          </div>
-
-
-          <div class="pull-right action-btns">
-            <a class="activate" onclick="updateGoal('<%= client_goal_path(@client, goal)  %>', <%=goal.id%>, 'active')">
-              <span class="fa fa-check fa-inverse" style="cursor: pointer"></span>
-            </a>
-
-            <%= link_to client_goal_path(@client, goal), class: '', onclick: "delete(#{client_goal_path(@client, goal)}, #{goal.id}", data: { confirm: "Goal will be deleted permanently. Are you Sure?" }  do %>
-              <span class="fa fa-close fa-inverse" style="cursor: pointer"></span>
-            <% end %>
-          </div>
-
-
-        </li>
-
-
-      <% elsif status == 'archived' %>
-
-
-        <li id="item-<%= goal.id%>" class="list-group-item list-info archive-item" data-toggle="tooltip" data-placement="top" title="" data-original-title="<%= goal.revision_date%>" style="display: block;">
-          <div class="checkbox" onclick="updateGoal('<%= client_goal_path(@client, goal) %>', <%=goal.id%>, 'complete')">
-            <input type="checkbox" id="<%= goal.id%>">
-            <label for="<%= goal.id%>"><%= goal.goals%></label>
-          </div>
-
-          <div class="pull-right action-btns">
-            <a class="e" onclick="updateGoal('<%= client_goal_path(@client, goal)  %>', <%= goal.id%>, 'active')">
-              <span class="fa fa-check fa-inverse" style="cursor: pointer"></span>
-            </a>
-
-            <%= link_to client_goal_path(@client, goal), class: '', onclick: "delete(#{client_goal_path(@client, goal)}, #{goal.id}", data: { confirm: "Goal will be deleted permanently. Are you Sure?" }  do %>
-              <span class="fa fa-close fa-inverse" style="cursor: pointer"></span>
-            <% end %>
-          </div>
-        </li>
-
-
-      <% end %>
+    <% end %>
   <%end %>
 <% end %>

@@ -3,8 +3,8 @@
   <head>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' -%>
-    <% renderFrom = controller_name + action_name %>
-    <%= javascript_include_tag "#{renderFrom}", 'data-turbolinks-track': 'reload' %>
+    <% manifestName = controller_name + action_name %>
+    <%= javascript_include_tag "#{manifestName}", 'data-turbolinks-track': 'reload' %>
 
     <title>DIETITIAN.HELP</title>
     <meta charset="UTF-8">

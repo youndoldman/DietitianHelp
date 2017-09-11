@@ -8,6 +8,7 @@
  */
 
 $(document).ready(function(){
+
   window.client = (client => $('#client').data())()
 
   window.heightInput = $('#client-height-input')
@@ -65,18 +66,17 @@ function wtHistoryChart(labels, data) {
   });
 }
 
-
 function rchart0() {
 
 top.NProgress.start();
 
 
-  let significantLossOneMonth    = false;
-  let significantLossThreeMonths = false;
-  let significantLossSixMonths   = false;
-  let significantGainOneMonth    = false;
-  let significantGainThreeMonths = false;
-  let signficantGainSixMonths    = false;
+  let significantLossOneMonth    = false
+  let significantLossThreeMonths = false
+  let significantLossSixMonths   = false
+  let significantGainOneMonth    = false
+  let significantGainThreeMonths = false
+  let signficantGainSixMonths    = false
 
   const significantWeightLoss = (loss => significantLossOneMonth || significantLossThreeMonths || significantLossSixMonths)
   const significantWeightGain = (gain => significantGainOneMonth || significantGainThreeMonths || signficantGainSixMonths)
@@ -92,36 +92,36 @@ top.NProgress.start();
   const weightThreeMonthsAgo = $('#client-weight-threeMonths-ago-input').val()
   const weightSixMonthsAgo   = $('#client-weight-sixMonths-ago-input').val()
 
-  const data   = [cbw, weightOneMonthAgo, weightThreeMonthsAgo, weightSixMonthsAgo]
-  const labels = [cbwDate, oneMonthAgoDate, threeMonthAgoDate, sixMonthAgoDate]
+  const data   = [cbw, weightOneMonthAgo, weightThreeMonthsAgo, weightSixMonthsAgo] // for chart
+  const labels = [cbwDate, oneMonthAgoDate, threeMonthAgoDate, sixMonthAgoDate] // for chart
 
   wtHistoryChart(labels, data)
 
-  top.NProgress.inc();
+  top.NProgress.inc()
 
   function checkForSignificantDifferenceInWeight() {
     // 1 MO. SIGNIFICANT CHANGE
     if (Math.floor(cbw / weightOneMonthAgo * 100) <= 95) {
-      significantLossOneMonth = true;
+      significantLossOneMonth = true
     }
     if (Math.ceil(cbw / weightOneMonthAgo * 100) >= 105) {
-      significantGainOneMonth = true;
+      significantGainOneMonth = true
     }
 
     // 3 MO. SIGNIFICANT CHANGE
     if (Math.floor(cbw / weightThreeMonthsAgo * 100) <= 92.5) {
-      significantLossThreeMonths = true;
+      significantLossThreeMonths = true
     }
     if (Math.ceil(cbw / weightThreeMonthsAgo * 1000) >= 1075) {
-      significantGainThreeMonths = true;
+      significantGainThreeMonths = true
     }
 
     // 6 MO. SIGNIFICANT CHANGE
     if (Math.floor(cbw / weightSixMonthsAgo * 100) <= 90) {
-      significantLossSixMonths = true;
+      significantLossSixMonths = true
     }
     if (Math.ceil(cbw / weightSixMonthsAgo * 100) >= 110) {
-      signficantGainSixMonths = true;
+      signficantGainSixMonths = true
     }
   }
 
@@ -171,7 +171,7 @@ top.NProgress.start();
       strings: [weightDifferenceMessage],
       typeSpeed: 1
     });
-  // IF ANY SIGNIFICANT WEIGHT LOSS PUSH NOTIFICATION
+  // IF ANY SIGNIFICANT WEIGHT LOSS TRIGGER NOTIFICATION
   if (significantWeightLoss() || significantWeightGain() ) {
     iziToast.warning({
       title: 'Significant',
