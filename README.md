@@ -72,6 +72,6 @@ I am solely responsible for this fullstack. UX/UI, API calls, user authenticatio
 
 _____________________________________
 
-To preview this project please visit http://dietitian.help
+To preview this project please visit http://dietitian.help. Please allow a few extra seconds as this project is sitting on a free Heroku Dyno which might take a bit longer to serve the application.
 
 Thanks for stopping by!
