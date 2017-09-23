@@ -5,27 +5,25 @@
 Electronic Medical Record keeping application with auto assessment functionality to help reduce MNT errors.
 
 
-V1 incoorporates:
- 1- Dynamic Javascript files rendering in application.html.erb.
- 2- JS files bundled up.
- 3- Routes adjusted to allow users to share clients. user with id = 1 should be able to see users.id = 2 client/s if permitted by users 2... Functionality being considered.
+v1 incoorporates:
+ - Dynamic Javascript files rendering in application.html.erb.
+ - JS files bundled up.
+ - RESTful Routes adjusted to allow users to share clients with other users.
+ 	- from `/clients/1` to `/users/2/clients/1`
 
 Prototype of small CRUD app using Ruby on Rails.
 
 Functions as an Electronic Medical Record.
 
-I am solely responsible for this fullstack. Backend, data modeling, design, database, frontend, etc...
+I am solely responsible for this fullstack. UX/UI, API calls, user authentication, data modeling, version control, deployment, routing, design, etc...
 
 ## dependencies 
 
 -ruby 2.2.3
 
-
 -Rails 5.0.0
 
-
 -Devise for authentication
-
 
 -SQLite on Development, PostgreSQL on Production
 
@@ -56,6 +54,8 @@ I am solely responsible for this fullstack. Backend, data modeling, design, data
 
 
 * Pending Work/Features
+	
+	* Show saved data. -Enable History feature.
 
 	* Integrate Labs to auto-assessment
 		e.g. relevant lab values that are not Within Normal Limits (WNL) should be mentioned in assessment.
@@ -70,5 +70,8 @@ I am solely responsible for this fullstack. Backend, data modeling, design, data
 
 	* Minify, compress and get rid of unecessary files and functions.
 
-
 _____________________________________
+
+To preview this project please visit http://dietitian.help
+
+Thanks for stopping by!
