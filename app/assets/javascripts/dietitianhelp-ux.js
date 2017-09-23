@@ -453,21 +453,21 @@ function updateGoal(url, goalID, stat) {
       goalID = response["id"]
       if (stat == 'archived') {
         $(':checkbox#' + goalID.toString()).prop('checked', false)
-        $($('#item-' + goalID).find('.checkbox')).attr("onclick", "'updateGoal(" + url + ", " + goalID + ", " + "'complete')'")
+        $($('#item-' + goalID).find('.checkbox')).attr("onclick", "'updateGoal('" + url + "', " + goalID + ", " + "'complete')'")
         $('#item-' + goalID.toString()).closest(".list-group-item").removeClass('animated tada loading checked-todo').addClass("archive-item")
-        $($('#item-' + goalID).find('.fa')[0]).removeClass('fa-archive').addClass('fa-check').attr("onclick", "updateGoal(" + url + ", " + goalID + ", " + "'active')")
+        $($('#item-' + goalID).find('.fa')[0]).removeClass('fa-archive').addClass('fa-check').attr("onclick", "updateGoal('" + url + "', " + goalID + ", " + "'active')")
       }
       if (stat == 'active') {
         $(':checkbox#' + goalID.toString()).prop('checked', false)
-        $($('#item-' + goalID).find('.checkbox')).attr("onclick", "'updateGoal(" + url + ", " + goalID + ", " + "'complete')'")
+        $($('#item-' + goalID).find('.checkbox')).attr("onclick", "'updateGoal('" + url + "', " + goalID + ", " + "'complete')'")
         $('#item-' + goalID.toString()).closest(".list-group-item").removeClass("archive-item checked-todo animated tada loading")
-        $($('#item-' + goalID).find('.fa')[0]).removeClass('fa-check').addClass('fa-archive').attr("onclick", "updateGoal(" + url + ", " + goalID + ", " + "'archived')")
+        $($('#item-' + goalID).find('.fa')[0]).removeClass('fa-check').addClass('fa-archive').attr("onclick", "updateGoal('" + url + "', " + goalID + ", " + "'archived')")
       }
       if (stat == 'complete') {
         $(':checkbox#' + goalID.toString()).prop('checked', 'checked')
-        $($('#item-' + goalID).find('.checkbox')).attr("onclick", "'updateGoal(" + url + ", " + goalID + ", " + "'active')'")
+        $($('#item-' + goalID).find('.checkbox')).attr("onclick", "'updateGoal('" + url + "', " + goalID + ", " + "'active')'")
         $('#item-' + goalID.toString()).closest(".list-group-item").removeClass('archive-item checked-todo animated tada loading').addClass("checked-todo")
-        $($('#item-' + goalID).find('.fa')[0]).removeClass('fa-check fa-archive').addClass('fake-icon').attr("onclick", "'updateGoal(" + url + ", " + goalID + ", " + "'active')'")
+        $($('#item-' + goalID).find('.fa')[0]).removeClass('fa-check fa-archive').addClass('fake-icon').attr("onclick", "'updateGoal('" + url + "', " + goalID + ", " + "'active')'")
       };
     },
     error: function(response) {
