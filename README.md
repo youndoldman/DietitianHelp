@@ -32,7 +32,7 @@ I am solely responsible for this fullstack. UX/UI, API calls, user authenticatio
 
 
 	* Create new Client --> 
-		Type "<firstname> <lastname>" on the "Search/Add" modal, hit ENTER or press "Add firstname lastname..." 
+		Type "firstname, lastname" on the "Search/Add" modal, hit ENTER or press "Add firstname lastname..." 
 
 
 	* Search existing Client --> 
