@@ -117,7 +117,11 @@
         $('#divider1').delay(1000).fadeIn(100);
         $('#divider2').delay(1000).fadeIn(100);
         $('#footer').delay(1000).fadeIn(100);
-        setTimeout(inviter, 2000);
+        <% if flash[:notice] %>
+          error()
+        <% else%>
+          setTimeout(inviter, 2000);
+        <% end %>
       }
         //$('#jumbotronblur').delay(1000).fadeOut(5000);
         //$('#divider2').foggy({
@@ -144,20 +148,32 @@ $('body').show('fast');
       })
 
 
+function error() {
 
+  top.iziToast.show({
+    color: '#374b89',
+    icon: 'icon-person',
+    titleColor: 'white',
+    title: '<%= flash[:notice] %>',
+    position: 'topRight', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+    progressBarColor: 'white',
+  });
+
+}
 
 function inviter() {
 
-top.iziToast.show({
-color: '#374b89',
-icon: 'icon-person',
-titleColor: 'white',
-title: 'Log In to Demo the App!',
-position: 'topRight', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
-progressBarColor: 'white',
-});
+  top.iziToast.show({
+    color: '#374b89',
+    icon: 'icon-person',
+    titleColor: 'white',
+    title: 'Log In to Demo the App!',
+    position: 'topRight', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+    progressBarColor: 'white',
+  });
 
 }
+
 
 
 
@@ -167,7 +183,7 @@ progressBarColor: 'white',
     e.preventDefault();
 
   $('#new_user1').toggleClass('fadeInUp zoomOut');
-      $('#sign_up_user1').toggleClass('fadeInUp zoomOut');
+    $('#sign_up_user1').toggleClass('fadeInUp zoomOut');
     $('#sign_up_user1').show();
     $('#sign_up_user').show();
 

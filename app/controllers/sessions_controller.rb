@@ -12,8 +12,13 @@ class SessionsController < DeviseController
 
   # POST /resource/sign_in
   def create 
-    self.resource = warden.authenticate!(auth_options)
-    sign_in(resource_name, resource)
+    user = User.find_for_authentication(username: params[:user][:username])
+    if user.valid_password?(params[:user][:password])
+      self.resource = warden.authenticate!(auth_options)
+      sign_in(resource_name, resource)
+    else
+      flash[:notice] = 'invalid credentials'
+    end
     redirect
   end
 
