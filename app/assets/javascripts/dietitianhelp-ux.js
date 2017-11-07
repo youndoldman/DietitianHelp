@@ -93,6 +93,10 @@ $(document).ready(function() {
     rchart0()
   })
 
+  $('#reset-assessment-btn').on('click', function() {
+    resetAssess()
+  })
+
   const csSelects = (function() {
     [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function(el) {
       new SelectFx(el);
