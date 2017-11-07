@@ -17,13 +17,18 @@
 
 
 .logo-on-header {
-    background-image: url("<%= asset_path('Logo SOS.png') %>");
-  background-size: cover;
-  height: 80px !important;
-  width: 100%;
-  background-position-x: -46px;
-  background-position-y: -4px;
+  background-image: url("<%= asset_path('Logo SOS.png') %>");
+  background-size: contain;
+  background-position-y: -1px;
   background-repeat: no-repeat;
+  transform: scale(0.7) translateX(-19px);
+}
+.logo-on-header:hover {
+  background-image: url("<%= asset_path('Logo SOS.png') %>") !important;
+  background-size: contain !important;
+  background-position-y: -1px !important;
+  background-repeat: no-repeat;
+  transform: scale(0.7) translateX(-19px) !important;
 }
 .name-on-header {
 	text-decoration: underline !important;
