@@ -29,7 +29,7 @@ $(document).ready(function() {
     const type              = $('#assessmentType').find(":selected").text().split(" - ")[0]
     const date              = $('#assessmentType').find(":selected").text().split(" - ")[1]
     const diagnosis         = $('#diagnosis-adime').text()
-    const assessment        = $('#assessment-value').text()
+    const assessment        = $('#assessment-container')[0].innerText
     const intervention      = $('#intervention-adime').text()
     const monitoringEval    = $('#monitoring-and-evaluation-adime').text()
     const authenticityToken = top.$('meta[name="csrf-token"]').attr('content')
@@ -81,11 +81,14 @@ $(document).ready(function() {
   // RESET ASSESSMENT BUTTON
   $('#run-assessment-btn').on('click', function() {
     resetAssess()
+    adime()
     diet()
     intake()
+    cal()
+    getBmi()
     dx()
     getAge()
-    adime()
+    getIbw()
     setTimeout(assessment, 2000)
     rchart0()
   })
@@ -102,19 +105,19 @@ $(document).ready(function() {
   $('.summernote4').summernote({
     airMode: true,
   })
-  $('#assval').summernote({
+  $('#note-editor-3').summernote({
     airMode: true,
     textareaAutoSync: false,
   })
-  $('#dxadime').summernote({
+  $('#diagnosis-adime').summernote({
     airMode: true,
     textareaAutoSync: false,
   })
-  $('#intadime').summernote({
+  $('#intervention-adime').summernote({
     airMode: true,
     textareaAutoSync: false,
   })
-  $('#monevadime').summernote({
+  $('#monitoring-and-evaluation-adime').summernote({
     airMode: true,
     textareaAutoSync: false,
   })
@@ -125,7 +128,7 @@ $(document).ready(function() {
 
 
   if (top.$('#historyFromMenu').length == 0) {
-    top.$('.gn-submenu').append("<li id='historyFromMenu' data-clientId=" + "'" + top.$currentClient.id  + "'" + "onclick='getHistory()'><a type='button' aria-expanded='false'>History</a></li>");
+    top.$('.gn-submenu').append("<li id='historyFromMenu' data-clientId=" + "'" + client.dataset.id  + "'" + "onclick='getHistory(" + client.dataset.id + ")'><a type='button' aria-expanded='false'>History</a></li>");
   }
 
   $('#new_lab').ajaxForm({
@@ -138,12 +141,11 @@ $(document).ready(function() {
   //MASKS DATE INPUT TO TAKE WITH HUMAN DATE FORMAT ADDING PLACE HOLDER + MASK
   const allDateInputs = $('.date')
 
+  allDateInputs.pikaday()
+
   allDateInputs.mask("99/99/9999", {
     placeholder: "mm/dd/yyyy"
   })
-
-  //CALENDAR POPDOWN FROM DATE INPUTS
-  allDateInputs.pikaday()
 
   top.$('#searchAddModal').iziModal('close')
 
@@ -209,7 +211,15 @@ $(document).ready(function() {
     closeButton: true,
     navigateCaption: true,
     navigateArrows: true,
-    group: "labs"
+    group: "labs",
+    focusInput: false,
+    onOpened: function() {
+      const labsDateInput = $('.summernote4.date')
+      labsDateInput.pikaday()
+      labsDateInput.mask("99/99/9999", {
+        placeholder: "mm/dd/yyyy"
+      })
+    }
   })
 
   $("#labsform-2").iziModal({

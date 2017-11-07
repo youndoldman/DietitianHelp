@@ -26,7 +26,8 @@
             <% else %>
   
               <% @fullassessments.reverse.map do |fullassessment| %>
-                <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><p style='font-size:18px;line-height:1.1'><h1>#{fullassessment.fassess.split(" -44044- ")[0]} - #{fullassessment.fassess.split(" -44044- ")[1]}</h1><h2>#{fullassessment.fassess.split(" -44044- ")[2]}</h2> <h1>Diagnosis</h1><h2>#{fullassessment.fassess.split(" -44044- ")[3]}</h2><h1>Intervention</h1><h2>#{fullassessment.fassess.split(" -44044- ")[4]}</h2><h1>Monitoring/Evaluation - #{@client.nextevaluationnotes.last == nil ? "___Please include date on 'Next Evaluation Note'" : "Next due on #{@client.nextevaluationnotes.last.nnote_date}"}</h1><h2>#{fullassessment.fassess.split(" -44044- ")[5]}</h2></p></div></li>" %>
+              <% fullassessment_parts = fullassessment.assessment.split(" -44044- ") %>
+                <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><p style='font-size:18px;line-height:1.1'><h1>#{fullassessment_parts[0]} - #{fullassessment_parts[1]}</h1><h2>#{fullassessment_parts[2]}</h2> <h1>Diagnosis</h1><h2>#{fullassessment_parts[3]}</h2><h1>Intervention</h1><h2>#{fullassessment_parts[4]}</h2><h1>Monitoring/Evaluation - #{@client.nextevaluationnotes.last == nil ? "___Please include date on 'Next Evaluation Note'" : "Next due on #{@client.nextevaluationnotes.last.nnote_date}"}</h1><h2>#{fullassessment_parts[5]}</h2></p></div></li>" %>
                 <% end %>
                 <% end %>
             </ul>
@@ -65,7 +66,8 @@
                 <% end %>
             </ul>
           </div>
-            </ul><% if @lab.id.present? %>
+            </ul>
+    <% if @labs.any? %>
     <!-- LABS FORM MODAL FOR LABS#EDIT-->
       <div id="labsform-2" class="iziModal" role="dialog">
         <div class="modal-dialog">
@@ -109,7 +111,7 @@
           
         </div>
       </div>
-    <% end %>
+    <% end %> -->
           </div>
         </div>
       </div>

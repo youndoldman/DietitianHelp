@@ -144,7 +144,7 @@
           <!-- ASSESSMENT -->
           <div id="assessment" class="container">
             <div id="assessment-container">
-              <p id="assessment-value" class="w-amount" data-toggle="tooltip" data-placement="top" title="Click to edit...">
+              <p id="note-editor-3" class="w-amount" data-toggle="tooltip" data-placement="top" title="Click to edit...">
                 <span id='agespan' class='w-amount'>- -</span>y/o <span>Client</span> on <span id='cdietspan' class='w-amount'>- - </span> Diet to manage Dx of <span id="dxspan" class='w-amount'>- -</span>. Average intake: <span id='intakefromspan', class='w-amount'>- -</span>  <span id='intaketospan', class='w-amount'></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class='w-amount'>- -</span> lbs puts <span>Client</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="weight-difference-message"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Client</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.
               </p>
             </div>
@@ -157,13 +157,13 @@
             <!-- DIAGNOSIS -->
             <div>
               <h1>Diagnosis</h1>
-              <p id="diagnosis-adime"></p>
+              <p id="diagnosis-adime" class="diagnosis-adime"></p>
             </div>
             <!-- INTERVENTION -->
             <hr>
             <div>
               <h1>Intervention </h1>
-              <p id="intervention-adime"></p>
+              <p id="intervention-adime" class="intervention-adime"></p>
             </div>
             <!-- MONITORING EVALUATION -->
             <hr>
@@ -200,7 +200,7 @@
               <h2 style="display: inline-block">Next Evaluation on</h2>
               <div class="" style="display: inline-block">
                 <!-- V.LOG 1482 -->
-                <div style=""><%= f.text_field :nnote_date, class: "summernote3 date", style: "border: 0; padding: 0 0 0 0.2em; font-size: 34px" %>
+                <div style=""><%= f.text_field :nnote_date, class: "summernote3 date", placeholder: 'mm/dd/yyyy', style: "border: 0; padding: 0 0 0 0.2em; font-size: 34px" %>
                 </div>
               </div>
               <div style="margin-left: 1em;height: 122px; width: 100%">
@@ -220,16 +220,15 @@
   </div>
     <!-- LABS FORM MODAL FOR LABS#NEW-->
     <div id="labsform" class="iziModal" role="dialog">
-      <div class="modal-dialog">
         <!-- Modal content-->
-        <div class="content-box box-shadow big-box todo-list">
+        <div class="content-box box-shadow big-box">
           <%= form_for @labs, url: client_labs_path(client_id: @client.id), remote: true do |f| %>
           <%= f.text_area :client_id, value: "#{@client.id}", readonly: true, style: "display: none" %>
           <div style="">
             <div style="display: inline-block; widht: 100%"><h1 style="font-size: 3em" >Labs - </h1></div>
             <div style="display: inline-block">
               <%= f.label :date, "Date", style: "margin-bottom: 0px;left: 9px;position: relative;top: 3px;"  %>
-              <%= f.text_field :date, class: "summernote4 date", style: "border: 0; padding: 0 0 0 0.2em; font-size: 34px" %>
+              <%= f.text_field :date, class: "summernote4 date", style: "border: 0; padding: 0 0 0 0.2em; font-size: 34px", placeholder: 'mm/dd/yyy', autofocus: false %>
             </div>
           </div>
           <div class="table-responsive">
@@ -258,7 +257,6 @@
           <br><br>
         </div>
         
-      </div>
     </div>
     <!-- WEIGHT HISTORY GRAPH -->
     <div class="col-lg-4 content-box"style="">

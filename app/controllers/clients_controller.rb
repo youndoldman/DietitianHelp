@@ -54,13 +54,14 @@ class ClientsController < ApplicationController
 
   def history
     @client = set_client
-    @medical_history = @client.medical_history
-    @fullassessments = @medical_history[:fullassessments]
-    @progressnotes = @medical_history[:progressnotes]
-    @labs = @medical_history[:labs]
-    @monitoringnotes = @medical_history[:monitoringnotes]
-    @nextevaluationnotes = @medical_history[:nextevaluationnotes]
-    @goals = @medical_history[:goals]
+    @medical_records = @client.medical_records
+    @fullassessments = @medical_records[:fullassessments]
+    @progressnotes = @medical_records[:progressnotes]
+    @labs = @medical_records[:labs]
+    @monitoringnotes = @medical_records[:monitoringnotes]
+    @nextevaluationnotes = @medical_records[:nextevaluationnotes]
+    @goals = @medical_records[:goals]
+    render :medical_history
   end
 
   def client_params1

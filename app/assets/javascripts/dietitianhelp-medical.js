@@ -164,7 +164,7 @@ top.NProgress.start();
     if (signficantGainSixMonths) {
       gains.push("180")
     }
-    weightDifferenceMessage += gains.join("/") + "days"
+    weightDifferenceMessage += gains.join("/") + " days"
   }
 
   weightDifferenceMessageContainer.typed({
@@ -273,7 +273,6 @@ function cal() {
 
 // TYPE DIAGNOSIS ON ASSESSMENT
 function dx() {
-  $("#dxspan")[0].innerHTML = document.getElementById("client-dx-input").value;
   $(function() {
     $("#dxspan").typed({
       strings: [document.getElementById('client-dx-input').value],
@@ -354,13 +353,17 @@ function animateBmiCount(id, number, string) {
 
 function adime() {
   $('#assessment-adime').html($('#assessment-value').text())
-  $('#diagnosis-adime').html($('#client-dx-input').val())
-  $('#intervention-adime').html($('#client-currentdiet-input').val())
+  $('.diagnosis-adime').html($('#client-dx-input').val())
+  $('.intervention-adime').html($('#client-currentdiet-input').val())
   $('#monitoring-and-evaluation-adime').html()
 }
 
 function resetAssess() {
   $('#assessment-container').html(top.defaultAssessment);
+    $('#note-editor-3').summernote({
+    airMode: true,
+    textareaAutoSync: false,
+  })
   $('#tooltip144344').hide()
 }
 // END MEDICAL JS 

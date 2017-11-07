@@ -93,7 +93,7 @@ $(document).ready(function() {
 })
 
 
-var defaultAssessment = '<p id="assessment-value" class="w-amount" data-toggle="tooltip" data-placement="top" title="Click to edit..."><span id="agespan" class="w-amount">- -</span>y/o <span>Client</span>on <span id="cdietspan" class="w-amount">- - </span> Diet to manage Dx of <span id="dxspan" class="w-amount">- -</span>. Average intake: <span id="intakefromspan", class="w-amount">- -</span>  <span id="intaketospan", class="w-amount"></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class="w-amount">- -</span> lbs puts <span>Client</span> at BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="weight-difference-message"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Client</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.</p>';
+var defaultAssessment = '<p id="note-editor-3" class="w-amount" data-toggle="tooltip" data-placement="top" title="Click to edit..."><span id="agespan" class="w-amount">- -</span>y/o <span>Client </span>on <span id="cdietspan" class="w-amount">- - </span> Diet to manage Dx of <span id="dxspan" class="w-amount">- -</span>. Average intake: <span id="intakefromspan", class="w-amount">- -</span>  <span id="intaketospan", class="w-amount"></span>with <span>assistance needed.</span> CBW of <span id="cbwspan" class="w-amount">- -</span> lbs brings <span>Client</span> to BMI of <span id="bmispan" class="w-amount">- -</span> kg/m2 and at <span id="percentibwfassess" class="w-amount">- -</span>% of IBW. <span id="wthistshow"class="w-amount"> Weight history shows</span> <span id="weight-difference-message"></span>. Abnormal lab values noted, MD/NP aware. <span>Pressure ulcer</span>. <span>Client</span> under <span>MED</span>increasing significantly the risk for <span>N/V/D</span>. Will continue to monitor all nutritional values and make changes as PRN.</p>';
 
 window.onload = function() {
   initialPromo()
@@ -172,9 +172,9 @@ function loadClient(clientId) {
       })
   }
 
-function getHistory() {
+function getHistory(clientId) {
   $.ajax({
-    url: "/clients/" + clientId + "/medical_history",
+    url: "/clients/" + clientId + "/history",
     type: 'GET',
     success: function(data) {
       top.document.getElementById('clientload').contentDocument.getElementById('clientloadright').innerHTML = data;

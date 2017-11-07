@@ -7,7 +7,7 @@ class Client < ApplicationRecord
 	has_many :goals
 	has_many :nextevaluationnotes
 
-	def medical_record
+	def medical_records
 		@all_docs = {
 			client: self,
 			fullassessments: self.fullassessments,
