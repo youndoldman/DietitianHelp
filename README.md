@@ -1,9 +1,10 @@
 
 # README
 
-
 Electronic Medical Record keeping application with auto assessment functionality to help reduce MNT errors.
 
+#### Disclaimer
+Efficient functionality. However, not the most maintainable code.
 
 v1 incoorporates:
  - Dynamic Javascript files rendering in application.html.erb.
@@ -54,6 +55,8 @@ I am solely responsible for this fullstack. UX/UI, API calls, user authenticatio
 
 
 * Pending Work/Features
+
+	* Separate stacks (backend/API from frontend)
 	
 	* Show saved data. -Enable History feature.
 
