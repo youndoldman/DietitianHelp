@@ -96,7 +96,7 @@ $(document).ready(function() {
         <% end %>
       ],
       editable: false,
-      eventLimit: true,
+      eventLimit: false,
       droppable: false, // this allows things to be dropped onto the calendar
       drop: function(date, allDay) { // this function is called when something is dropped
         // retrieve the dropped element's stored Event Object
@@ -114,38 +114,6 @@ $(document).ready(function() {
           // if so, remove the element from the "Draggable Events" list
           $(this).remove();
         }
-      }
-    });
-    /*Add new event*/
-    // Form to add new event
-    $("#add_event_form").on('submit', function(ev) {
-      ev.preventDefault();
-      var $event = $(this).find('.new-event-form'),
-        event_name = $event.val(),
-        tagColor = $('.event-tag  span.selected').attr('data-tag');
-      if (event_name.length >= 3) {
-        var newid = "new" + "" + Math.random().toString(36).substring(7);
-        // Create Event Entry
-        $("#external-events .checkbox").before(
-          '<div id="' + newid + '" class="fc-event ' + tagColor + '" data-bg="' + tagColor + '">' + event_name + '<span class="fa fa-close remove-event"></span></div>'
-        );
-        var eventObject = {
-          title: $.trim($("#" + newid).text()),
-          className: $("#" + newid).attr("data-bg"), // use the element's text as the event title
-          stick: true
-        };
-        // store the Event Object in the DOM element so we can get to it later
-        $("#" + newid).data('eventObject', eventObject);
-        // Reset draggable
-        $("#" + newid).draggable({
-          revert: true,
-          revertDuration: 0,
-          zIndex: 999
-        });
-        // Reset input
-        $event.val('').focus();
-      } else {
-        $event.focus();
       }
     });
   });
