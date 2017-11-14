@@ -11,7 +11,6 @@ $(document).ready(function() {
       }
     });
   });
-
   // SUBMIT COMPLY NOTES 
   $("#done-btn").on("click", function(e) {
     e.preventDefault()
