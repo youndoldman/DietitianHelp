@@ -10,7 +10,8 @@ Rails.application.routes.draw do
     resources :clients, only: [:show, :new, :edit] do
     end
   end
-  get '/clients/:id/history', to: 'clients#history'
+
+  get '/clients/:id/history', to: 'clients#history' # custom route
   
   resources :clients, only: [:show, :index, :create, :update, :delete] do
       resources :history, :labs, :fullassessments, :progressnotes, :monitoringnotes, :nextevaluationnotes, :goals
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
   
   root 'pages#home'
 
-  get '#processingViewModal', to: 'pages#home'
+  get '#processingViewModal', to: 'pages#home' # hack in the meantime
 
   get '/dashboard', to: 'pages#dashboard'
 

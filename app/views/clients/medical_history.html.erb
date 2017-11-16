@@ -1,118 +1,111 @@
+<div class="col-lg-9">
+  <div class="tabbable tabs-with-bg">
+    <ul class="nav nav-tabs nav-justified">
+      <li class="active">
+        <a href="#tab-1" data-toggle="tab">ADIME</a>
+      </li>
+      <li>
+        <a href="#tab-2" data-toggle="tab">Progress Notes</a>
+      </li>
+      <li>
+        <a href="#tab-3" data-toggle="tab">Monitoring Notes</a>
+      </li>
+    </ul>
+    <div class="tab-content">
 
-
-<!-- CLIENT INFO -->
-    <div class=""><div class="col-lg-9">
-      <div class="tabbable tabs-with-bg">
-        <ul class="nav nav-tabs nav-justified">
-          <li class="active">
-            <a href="#tab-1" data-toggle="tab">ADIME</a>
-          </li>
-          <li>
-            <a href="#tab-2" data-toggle="tab">Progress Notes</a>
-          </li>
-          <li>
-            <a href="#tab-3" data-toggle="tab">Monitoring Notes</a>
-          </li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane big-box  fade in active" id="tab-1">
-            <ul class="cbp_tmtimeline" style=''>
-              <% if !@fullassessments.any? %>
-              <li style="width: 90%; height: 80px; background-color: #f1f4f5; color: black;text-align: center; margin-left: 55px">
+      <div class="tab-pane big-box  fade in active" id="tab-1">
+        <ul class="cbp_tmtimeline" style=''>
+          <% if !@fullassessments.any? %>
+            <li style="width: 90%; height: 80px; background-color: #f1f4f5; color: black;text-align: center; margin-left: 55px">
               <div>
                 <h3 style="position: absolute; top: 15%; left: 28%">Full Assessmentes will be displayed here.</h3>
               </div>
             </li>
-            <% else %>
-  
-              <% @fullassessments.reverse.map do |fullassessment| %>
-              <% fullassessment_parts = fullassessment.assessment.split(" -44044- ") %>
-                <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><p style='font-size:18px;line-height:1.1'><h1>#{fullassessment_parts[0]} - #{fullassessment_parts[1]}</h1><h2>#{fullassessment_parts[2]}</h2> <h1>Diagnosis</h1><h2>#{fullassessment_parts[3]}</h2><h1>Intervention</h1><h2>#{fullassessment_parts[4]}</h2><h1>Monitoring/Evaluation - #{@client.nextevaluationnotes.last == nil ? "___Please include date on 'Next Evaluation Note'" : "Next due on #{@client.nextevaluationnotes.last.nnote_date}"}</h1><h2>#{fullassessment_parts[5]}</h2></p></div></li>" %>
-                <% end %>
-                <% end %>
-            </ul>
-          </div>
-          <div class="tab-pane big-box  fade in" id="tab-2">
-            <ul class="cbp_tmtimeline" style=''>
+          <% else %>
+            <% @fullassessments.reverse.map do |fullassessment| %>
+              <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><p style='font-size:18px;line-height:1.1'><h1>#{fullassessment.assessment_type} - #{fullassessment.created_at}</h1><h2>#{fullassessment.assessment}</h2> <h1>Diagnosis</h1><h2>#{fullassessment.diagnosis}</h2><h1>Intervention</h1><h2>#{fullassessment.intervention}</h2><h1>Monitoring/Evaluation - #{@client.nextevaluationnotes.last == nil ? "___Please include date on 'Next Evaluation Note'" : "Next due on #{@client.nextevaluationnotes.last.nnote_date}"}</h1><h2>#{fullassessment.monitoring_evaluation}</h2></p></div></li>" %>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
 
-
-              <% if !@progressnotes.any? %>
+      <div class="tab-pane big-box  fade in" id="tab-2">
+        <ul class="cbp_tmtimeline" style=''>
+          <% if !@progressnotes.any? %>
             <li style="width: 90%; height: 80px; background-color: #f1f4f5; color: black;text-align: center; margin-left: 55px">
               <div>
                 <h3 style="position: absolute; top: 15%; left: 28%">Progress notes saved on Assessments will be displayed here.</h3>
               </div>
             </li>
-            <% else %>
-              <% Progressnote.where(client_id: @client.id).all.reverse.map do |progressnote| %>
-                <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><h2>#{progressnote.created_at} by #{current_user.id}</h2><p style='font-size:18px;line-height:1.1'>#{progressnote.pnote}</p></div></li>" %>
-                <% end %>
-            <% end%>
-                
-            </ul>
-          </div>
-          <div class="tab-pane big-box  fade in" id="tab-3">
-            <ul class="cbp_tmtimeline" style=''>
-<% if !@monitoringnotes.any? %>
+          <% else %>
+            <% Progressnote.where(client_id: @client.id).all.reverse.map do |progressnote| %>
+              <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><h2>#{progressnote.created_at.to_s.split(" ")[0]}</h2><p style='font-size:18px;line-height:1.1'>#{progressnote.pnote}</p></div></li>" %>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="tab-pane big-box  fade in" id="tab-3">
+        <ul class="cbp_tmtimeline" style=''>
+          <% if !@monitoringnotes.any? %>
             <li style="width: 90%; height: 80px; background-color: #f1f4f5; color: black;text-align: center; margin-left: 55px">
               <div>
                 <h3 style="position: absolute; top: 15%; left: 28%">Monitoring notes saved on Assessments be will displayed here.</h3>
               </div>
             </li>
-            <% else %>
-
-              <% @monitoringnotes.reverse.map do |monitoringnote| %>
-                <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><h2>Amet laboriosam saepe</h2><p style='font-size:18px;line-height:1.1'>#{monitoringnote.mnote}</p></div></li>" %>
-                <% end %>
-                <% end %>
-            </ul>
-          </div>
-            </ul>
-    <% if @labs.any? %>
-    <!-- LABS FORM MODAL FOR LABS#EDIT-->
-      <div id="labsform-2" class="iziModal" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="content-box box-shadow big-box todo-list">
-            <div style="">
-              <div style="display: inline-block; widht: 100%"><h1 style="font-size: 3em" >Labs - </h1></div>
-              <div style="display: inline-block">
-                <%= label_tag :date, "Date", style: "margin-bottom: 0px;left: 9px;position: relative;top: 3px;"  %>
-                <%= text_field_tag :date,value = @lab.date.strftime("%m/%d/%Y"), class: "summernote5", style: "border: 0; padding: 0 0 0 0.2em; font-size: 34px", readonly: 'readonly' %>
-                </div>
-            </div>
-              <div class="table-responsive">
-                <table id="datatable" class="table">
-                  <thead>
-                    <tr>
-                      <th>Marker</th>
-                      <th>Values</th>
-                      <th>Ranges</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  <% @labs.attributes.each_with_index do |lab, idx| %>
-                    <% next if ["id", "client_id", "date", "created_at", "updated_at"].include?(lab[0]) %>
-                    <tr class=<%= idx.odd? ? "active" : "" %>>
-                      <th><%= lab[0].to_sym %></th>
-                      <th>
-                        <div class="form-group has-warning has-feedback">
-                          <%= text_field_tag lab[0], value = @lab[lab[0]].to_s, readonly: 'readonly', class: "form-control no-margin-bottom" %>
-                          <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
-                        </div>
-                      </th>  
-                      <th style="font-size: 16px;"><%= Lab.ranges[lab[0].to_sym][:normal_adults][@client.gender.to_sym].join('').gsub("..", " - ") + " " + Lab.ranges[lab[0].to_sym][:metric]%></th>  
-                    </tr>
-                  <% end %>
-                  </tbody>
-                </table>
-              </div>
-            <br><br>
-          </div>
-          
-        </div>
+          <% else %>
+            <% @monitoringnotes.reverse.map do |monitoringnote| %>
+              <%= raw "<li><div class='cbp_tmlabel' style='margin-left: 0px;'><h2>#{monitoringnote.created_at.to_s.split(" ")[0]}</h2><p style='font-size:18px;line-height:1.1'>#{monitoringnote.mnote}</p></div></li>" %>
+            <% end %>
+          <% end %>
+        </ul>
       </div>
-    <% end %> -->
+
+      <% if @labs.any? %>
+      <!-- LABS FORM MODAL FOR LABS#EDIT-->
+        <div id="labsform-2" class="iziModal" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="content-box box-shadow big-box todo-list">
+              <div style="">
+                <div style="display: inline-block; widht: 100%"><h1 style="font-size: 3em" >Labs - </h1></div>
+                <div style="display: inline-block">
+                  <%= label_tag :date, "Date", style: "margin-bottom: 0px;left: 9px;position: relative;top: 3px;"  %>
+                  <%= text_field_tag :date,value = @lab.date.strftime("%m/%d/%Y"), class: "summernote5", style: "border: 0; padding: 0 0 0 0.2em; font-size: 34px", readonly: 'readonly' %>
+                  </div>
+              </div>
+                <div class="table-responsive">
+                  <table id="datatable" class="table">
+                    <thead>
+                      <tr>
+                        <th>Marker</th>
+                        <th>Values</th>
+                        <th>Ranges</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <% @labs.attributes.each_with_index do |lab, idx| %>
+                      <% next if ["id", "client_id", "date", "created_at", "updated_at"].include?(lab[0]) %>
+                      <tr class=<%= idx.odd? ? "active" : "" %>>
+                        <th><%= lab[0].to_sym %></th>
+                        <th>
+                          <div class="form-group has-warning has-feedback">
+                            <%= text_field_tag lab[0], value = @lab[lab[0]].to_s, readonly: 'readonly', class: "form-control no-margin-bottom" %>
+                            <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+                          </div>
+                        </th>  
+                        <th style="font-size: 16px;"><%= Lab.ranges[lab[0].to_sym][:normal_adults][@client.gender.to_sym].join('').gsub("..", " - ") + " " + Lab.ranges[lab[0].to_sym][:metric]%></th>  
+                      </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              <br><br>
+            </div>
+            
           </div>
         </div>
+      <% end %> -->
       </div>
     </div>
+  </div>

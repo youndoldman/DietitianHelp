@@ -27,10 +27,10 @@ $(document).ready(function() {
 
     const type              = $('#assessmentType').find(":selected").text().split(" - ")[0]
     const date              = $('#assessmentType').find(":selected").text().split(" - ")[1]
-    const diagnosis         = $('#diagnosis-adime').text()
+    const diagnosis         = $('#note-editor-4').text()
     const assessment        = $('#assessment-container')[0].innerText
-    const intervention      = $('#intervention-adime').text()
-    const monitoringEval    = $('#monitoring-and-evaluation-adime').text()
+    const intervention      = $('#note-editor-5').text()
+    const monitoringEval    = $('#note-editor-6').text()
     const authenticityToken = top.$('meta[name="csrf-token"]').attr('content')
 
     const fullassessmentRequestData = {
@@ -44,10 +44,8 @@ $(document).ready(function() {
       body: JSON.stringify({
         fullassessment: {
           assessment_type: type,
-          date: date,
-          assessment: assessment,
-          diagnosis: assessment,
-          intervention: intervention,
+          date, assessment,
+          diagnosis, intervention,
           monitoring_evaluation: monitoringEval,
           client_id: client.id
         }

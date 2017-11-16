@@ -7,6 +7,7 @@
     <%= javascript_include_tag "#{manifestName}", 'data-turbolinks-track': 'reload' %>
 
     <title>DIETITIAN.HELP</title>
+    <meta name="description" content="Electronic Medical Record to ease the Medical Nutrition Therapy process."/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,68 +22,57 @@
     <script src="respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-  <% if session[:user_id] %>
   
-<% end %>
-  <%= yield %>
-        <footer style="display: block">
-        <div id="footer" class="col-lg-12" style="display: none;position: relative;background: #e23f3f;color: #FFFFFF; width: 100%;padding: 5em;text-align: center">
-          <div class="float-left">
-            <%= image_tag('CA Logo.png', style: "height: 100px")%>
-          </div>
-            <h4 style="position: center; text-align: center;margin:0% 20% 0% 20%">© Carlos Almonte 2017</h4>
+  <body>
+
+    <%= yield %>
+
+    <footer style="display: block">
+      <div id="footer" class="col-lg-12" style="display: none;position: relative;background: #e23f3f;color: #FFFFFF; width: 100%;padding: 5em;text-align: center">
+        <div class="float-left">
+          <%= image_tag('CA Logo.png', style: "height: 100px")%>
         </div>
-      </footer>
+          <h4 style="position: center; text-align: center;margin:0% 20% 0% 20%">© Carlos Almonte 2017</h4>
+    </div>
+    </footer>
 
+    <script>
 
+      $(document).ready(function(){
 
-<script>
+      top.$('#clientload').fadeIn();
 
-  $(document).ready(function(){
-// top.NProgress.start();
-
-// top.NProgress.done();
-
-top.$('#clientload').fadeIn();
-
-// MOBILE DEVICES STOPPER
-  if($(window).width() < 960) {
-    top.$('#fade').hide();
-    top.$('#divider1').hide();
-    top.$('#divider2').hide();
-    $('#mobileStopper').show();
-    return
-  }
-    $('#mobileStopper').hide();
-    return
-
-  })
-
-
-
-
-
-    <% if !current_user %>
-
-// HIDES/SHOWS LOGO ON NAVBAR BEGINS 
-$(window).on( "scroll", function() {
-      if($(window).scrollTop() > 190 && $(window).width() > 970) {
-        $('#logoOnHeader').addClass('fadeInUp');
-        $('#logoOnHeader').removeClass('fadeOutDownBig');
-        $('#logoOnHeader').show();
-
+      // MOBILE DEVICES STOPPER
+      if($(window).width() < 960) {
+        top.$('#fade').hide();
+        top.$('#divider1').hide();
+        top.$('#divider2').hide();
+        $('#mobileStopper').show();
+        return
       }
-      else if($(window).scrollTop() < 190){
-        $('#logoOnHeader').addClass('fadeOutDownBig')
-        $('#logoOnHeader').removeClass('fadeInUp');
+      $('#mobileStopper').hide();
+        return
+      })
 
-      }
-    });
-<%else %>
-<% end %>
+      <% if !current_user %>
 
-</script>
+        // HIDES/SHOWS LOGO ON NAVBAR BEGINS 
+        $(window).on( "scroll", function() {
+          if($(window).scrollTop() > 190 && $(window).width() > 970) {
+            $('#logoOnHeader').addClass('fadeInUp');
+            $('#logoOnHeader').removeClass('fadeOutDownBig');
+            $('#logoOnHeader').show();
+
+          }
+          else if($(window).scrollTop() < 190){
+            $('#logoOnHeader').addClass('fadeOutDownBig')
+            $('#logoOnHeader').removeClass('fadeInUp');
+
+          }
+        });
+      <% end %>
+
+    </script>
 
   </body>
 </html>

@@ -1,41 +1,18 @@
-<style>
-	.confirmation-modal{
-		height: 100px;
-		width: 100px;
-		z-index: 9999;
-	}
-</style>
-
 <!-- PAGE FOR CLIENT ID = <%= current_client %> -->
-<!-- CREATE JAVASCRIPT OBJECT TO SPREAD AROUND ALL JAVASCRIPT FILES -UNABLE TO RENDER RUBY INSTANCE ON JS FILES -->
+
+<!-- THIS HTML ELEMENT CONTAINS ALL CLIENT INFO -->
 <div id="client" <%= @client.attributes.map { |attribute, value| "data-#{attribute}=#{value}" }.join(" ") %> style="display: none">
 	
 </div>
+
+
 <!-- 
 FULL PAGE DIVIDED INTO:
-  1- SECTION 1:
+  1- SECTION 1 = Top Left Box (info) + Bottom Left Box (goals):
         CONTAINS CLIENT BASIC INFO (NAME, DOB, GENDER, AND NUTRITIONAL BASIC DATA)
-  2- SECTION 2:
-        DIV HOLDS PANEL WITH 'GATHER, ASSESS, COMPLY' TABS ALONG WITH WEIGHT HISTORY CHART AND INTAKE + FEEDING ASSISTANCE NEEDED
- -->
-<!-- 
-///////////////////////////
-//
-// SECTION 1
-//
-//////////////////////////
--->
-<%= render template: 'clients/info' %>
-<!--
-///////////////////////////
-//
-// SECTION 2
-//
-//////////////////////////
--->
-<%= render template: 'clients/nutritionaldata' %>
+  2- SECTION 2 = Top Right Box:
+        DIV HOLDS PANEL WITH 'GATHER, ASSESS, COMPLY' TABS ALONG WITH WEIGHT HISTORY CHART AND INTAKE + FEEDING ASSISTANCE NEEDED -->
 
+<!-- SECTION 1 ===> -->	<%= render template: 'clients/info' %>
 
-<div class="confirmation-modal">
-	
-</div>
+<!-- SECTION 2 ===> --> <%= render template: 'clients/assessment_tool' %>

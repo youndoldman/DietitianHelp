@@ -22,8 +22,8 @@
 //= require typed
 
 
-//= require dietitianhelp-ux
-//= require dietitianhelp-medical
+//= require userInterface
+//= require medical
 
 //= require jquery.flot.orderBars
 //= require jquery.form.min
